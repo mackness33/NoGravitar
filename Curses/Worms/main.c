@@ -16,7 +16,7 @@
 
 #include <signal.h>
 #include <sys/time.h>
-#include <ncurses.h>
+#include <curses.h>
 
 #include "worms.h"
 #include "helper.h"

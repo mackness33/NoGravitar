@@ -8,6 +8,7 @@ using namespace std;
 		-> https://docs.microsoft.com/en-us/windows/desktop/inputdev/keyboard-input
 */
 int main(){
+	int ciao;
 
 	char matrice [10][20];
 

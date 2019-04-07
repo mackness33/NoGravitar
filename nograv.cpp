@@ -1,7 +1,9 @@
-#include<iostream>
+#include <iostream>
+#include <thread>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include "spaceship.hpp"
 
 void inizializeText(sf::Text* t, sf::Font* f);
 
@@ -17,6 +19,9 @@ int main (void){
   sf::Font f;
   inizializeText(&t, &f);
 
+  spaceship *s1 = new spaceship(&t, &f);
+  spaceship *s2 = new spaceship(&f);
+
   // run the program as long as the window is open
   while (window.isOpen()){
       // check all the window's events that were triggered since the last iteration of the loop
@@ -30,10 +35,16 @@ int main (void){
           std::cout << "alt:" << event.key.alt << std::endl;
           std::cout << "shift:" << event.key.shift << std::endl;
           std::cout << "system:" << event.key.system << std::endl;
+          s2->movement(&event.key.code);
           t.move(10.f, 50.f);
+          s1->move(50.f, 10.f);
           //SETTEXT(text);
           std::cout << "Position x:" << t.getPosition().x << std::endl;
           std::cout << "Position y:" << t.getPosition().y << std::endl;
+          std::cout << "Position x:" << s1->getPosition().x << std::endl;
+          std::cout << "Position y:" << s1->getPosition().y << std::endl;
+          std::cout << "Position x:" << s2->getPosition().x << std::endl;
+          std::cout << "Position y:" << s2->getPosition().y << std::endl;
         }
 
         // "close requested" event: we close the window
@@ -49,6 +60,8 @@ int main (void){
 
       // draw everything here...
       window.draw(t);
+      window.draw(*s1);
+      window.draw(*s2);
 
       // end the current frame
       window.display();
@@ -60,7 +73,7 @@ int main (void){
 
 void inizializeText(sf::Text* t, sf::Font* f){
   //sf::Font font;
-  f->loadFromFile("Fonts/Aerovias_Brasil/AeroviasBrasilNF.ttf");
+  f->loadFromFile("Fonts/York_Whiteletter/yorkwhiteletter.ttf");
 
   //sf::Text *t;
   t->setFont(*f);

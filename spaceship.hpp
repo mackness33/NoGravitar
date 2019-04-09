@@ -1,5 +1,3 @@
-#include <iostream>
-
 class spaceship : public sf::Text{
 public:
 
@@ -36,4 +34,21 @@ public:
       default: std::cout << "Not a movementCommand" << std::endl;
     }
   }
+
+  /*void smooth_movement(sf::Keyboard::Key* k, sf::Event* e){
+    do{
+      float shift = 10;
+
+      switch (*k) {
+        case sf::Keyboard::Left : { this->move(-shift, 0); };break;           //LEFT
+        case sf::Keyboard::Right : { this->move(shift, 0); };break;           //RIGHT
+        case sf::Keyboard::Up : { this->move(0, -shift); };break;             //UP
+        case sf::Keyboard::Down : { this->move(0, shift); };break;            //DOWN
+        default: std::cout << "Not a movementCommand" << std::endl;
+      }
+
+    }while(e.type != sf::Event::KeyPressed)
+  }*/
+
+
 };

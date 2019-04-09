@@ -21,21 +21,77 @@ int main (void){
 
   spaceship *s1 = new spaceship(&t, &f);
   spaceship *s2 = new spaceship(&f);
+  bool pressed = false;
+  sf::Keyboard::Key key = sf::Keyboard::Unknown;
+  window.setKeyRepeatEnabled(false);
 
   // run the program as long as the window is open
   while (window.isOpen()){
       // check all the window's events that were triggered since the last iteration of the loop
       sf::Event event;
+      //thread thread(&spaceship::smooth_movement, s2, &e);
+
 
       while (window.pollEvent(event)){
+
+        switch (event.type) {
+
+          case sf::Event::KeyReleased :{
+            pressed = false;
+          };break;
+
+          case sf::Event::KeyPressed :{
+            pressed = true;
+
+            std::cout << "the key pressed is: " << event.key.code << std::endl;
+            std::cout << "control:" << event.key.control << std::endl;
+            std::cout << "alt:" << event.key.alt << std::endl;
+            std::cout << "shift:" << event.key.shift << std::endl;
+            std::cout << "system:" << event.key.system << std::endl;
+
+            t.move(10.f, 50.f);
+            s1->move(50.f, 10.f);
+            //SETTEXT(text);
+            std::cout << "Position x:" << t.getPosition().x << std::endl;
+            std::cout << "Position y:" << t.getPosition().y << std::endl;
+            std::cout << "Position x:" << s1->getPosition().x << std::endl;
+            std::cout << "Position y:" << s1->getPosition().y << std::endl;
+            std::cout << "Position x:" << s2->getPosition().x << std::endl;
+            std::cout << "Position y:" << s2->getPosition().y << std::endl;
+          }
+
+          case sf::Event::Closed :{
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && (event.key.code == 16 || event.key.code == 36)))
+              window.close();
+          };break;
+
+          default :
+            break;
+        }
+
+
         // if the event is a keypressed show me what type is it
+        /*if (event.type == sf::Event::KeyPressed && event.key.code != sf::Keyboard::Unknown){
+          pressed = true;
+          key = event.key.code;
+        }
+
+        if (event.type == sf::Event::KeyReleased)
+        pressed = false;
+
+        while(pressed){
+          s2->movement(&key);
+        }
+
+
         if (event.type == sf::Event::KeyPressed){
           std::cout << "the key pressed is: " << event.key.code << std::endl;
           std::cout << "control:" << event.key.control << std::endl;
           std::cout << "alt:" << event.key.alt << std::endl;
           std::cout << "shift:" << event.key.shift << std::endl;
           std::cout << "system:" << event.key.system << std::endl;
-          s2->movement(&event.key.code);
+
           t.move(10.f, 50.f);
           s1->move(50.f, 10.f);
           //SETTEXT(text);
@@ -49,10 +105,12 @@ int main (void){
 
         // "close requested" event: we close the window
         if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && (event.key.code == 16 || event.key.code == 36)))
-          window.close();
+          window.close();*/
 
       }
 
+      if(pressed)
+      s2->movement(&event.key.code);
 
 
       // clear the window with black color

@@ -1,19 +1,24 @@
-#include "spaceship.hpp"
+//EVENTHANDLER
+//Class that handle events
 
 class eventHandler{
 public:
-  static void keyReleasedHandler (sf::Event::Event& e, bool* t, bool* r){
-    switch (event.key.code) {
+  //It handle KeyEvent::KeyReleased.
+  //It stops the movement
+  static void keyReleasedHandler (sf::Event& e/*vent*/, keyVector* t/*ranslation*/, keyVector* r/*otation*/){
+    switch (e.key.code) {
       case sf::Keyboard::Left : { }                                      //LEFT
-      case sf::Keyboard::Right : { *r/*otation*/ = false; };break;            //RIGHT
+      case sf::Keyboard::Right : { r->setTransformation(false); };break;            //RIGHT
       case sf::Keyboard::Up : { }                                        //UP
-      case sf::Keyboard::Down : { *t/*ranslation*/ = false; };break;            //DOWN
+      case sf::Keyboard::Down : { t->setTransformation(false); };break;            //DOWN
       default:
         break;
     }
   }
 
-  static void keyPressedHandler (){
+  //It handle KeyEvent::KeyPressed
+  //It gives information bout transformation of the spaceship
+  static void keyPressedHandler (spaceship* s/*paceship*/){
     /*pressed = true;
 
     switch (event.key.code) {                                             //LEFT
@@ -52,16 +57,18 @@ public:
     std::cout << "Position y:" << t.getPosition().y << std::endl;
     std::cout << "Position x:" << s1->getPosition().x << std::endl;
     std::cout << "Position y:" << s1->getPosition().y << std::endl;*/
-    std::cout << "Position x:" << s2->GetPosition().x << std::endl;
-    std::cout << "Position y:" << s2->GetPosition().y << std::endl;
-    std::cout << "Rotation:" << s2->getRotation() << std::endl;
-    std::cout << "Sin :" << sin(s2->getRotation() * PI / 180.0) << std::endl;
-    std::cout << "Cos :" << cos(s2->getRotation() * PI / 180.0) << std::endl;
+    std::cout << "Position x:" << s->getPosition().x << std::endl;
+    std::cout << "Position y:" << s->getPosition().y << std::endl;
+    std::cout << "Rotation:" << s->getRotation() << std::endl;
+    std::cout << "Sin :" << sin(s->getRotation() * PI / 180.0) << std::endl;
+    std::cout << "Cos :" << cos(s->getRotation() * PI / 180.0) << std::endl;
   }
 
-  static void windowClosedHandler (sf::Event::Event& e, sf::RenderTarget& target){
+  //It handle Event::Closed
+  //it close the window if pressed 'Q', 'ESC' or close button
+  static void windowClosedHandler (sf::Event& e/*vent*/, sf::RenderWindow& w/*indow*/){
     // "close requested" event: we close the window
-    if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && (event.key.code == 16 || event.key.code == 36)))
-      target.close();
+    if (e.type == sf::Event::Closed || (e.type == sf::Event::KeyPressed && (e.key.code == 16 || e.key.code == 36)))
+      w.close();
   }
-}
+};

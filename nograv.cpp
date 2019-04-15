@@ -6,226 +6,85 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "spaceship.hpp"
+#include "keyVector.hpp"
 #include "eventHandler.hpp"
-
-#define PI 3.14159265
 
 /*
 Optimization:
-  -> struct => bool trasformation, sf::Keyboard::Key k;
-  -> eventHandler
+  -> struct => bool trasformation, sf::Keyboard::Key k;   DONE
+  -> eventHandler         DONE
 */
-
-void inizializeText(sf::Text* t, sf::Font* f);
 
 int main (void){
   // Create a window with the same pixel depth as the desktop
-  //std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
   sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
   sf::RenderWindow window(sf::VideoMode(desktop.height, desktop.width, desktop.bitsPerPixel), "NoGravitar");
 
+  //TODO: make a function that it makes it automaticaly
   window.setFramerateLimit(60);
-
-  sf::Text t;
-  sf::Font f;
-  //sf::Transform translation;
-  //sf::Transform rotatation;
-  inizializeText(&t, &f);
-
-  spaceship *s1 = new spaceship(&t, &f);
-  spaceship *s2 = new spaceship(&f);
-  bool rotation = false;
-  bool translation = false;
-  sf::Keyboard::Key module = sf::Keyboard::Unknown;
-  sf::Keyboard::Key direction = sf::Keyboard::Unknown;
   window.setKeyRepeatEnabled(false);
+
+  sf::Font f;
+  f.loadFromFile("Fonts/York_Whiteletter/yorkwhiteletter.ttf");
+
+  //Create of the spaceship
+  spaceship *s2 = new spaceship(&f);
+  //classes to handle input commands in smooth trasformations of object
+  keyVector rotation;
+  keyVector translation;
 
   // run the program as long as the window is open
   while (window.isOpen()){
     // check all the window's events that were triggered since the last iteration of the loop
     sf::Event event;
-    //thread thread(&spaceship::smooth_movement, s2, &e);
-
 
     while (window.pollEvent(event)){
 
       switch (event.type) {
+        //KEYRELEASED
         case sf::Event::KeyReleased :{
-          keyReleasedHandler(&translation, &rotation);
+          eventHandler::keyReleasedHandler(event, &translation, &rotation);
         };break;
 
+        //KEYPRESSED
         case sf::Event::KeyPressed :{
-          /*pressed = true;
-
-          switch (event.key.code) {                                             //LEFT
-            case sf::Keyboard::Left : {
-              s2->Rotate(s2->getRotationVersor());
-            };break;
-
-            case sf::Keyboard::Right : {                                        //RIGHT
-              s2->Rotate(-s2->getRotationVersor());
-            };break;
-
-            case sf::Keyboard::Up : {                                           //UP
-              s2->Move(s2->getSpatialVersor(), 0);
-            };break;
-
-            case sf::Keyboard::Down : {                                         //DOWN
-              s2->Move(-s2->getSpatialVersor(), 0);
-            };break;
-
-            default:{
-              std::cout << "the key pressed is: " << event.key.code << std::endl;
-              pressed = false;
-            }
-          }
-
-          std::cout << "the key pressed is: " << event.key.code << std::endl;
-          std::cout << "control:" << event.key.control << std::endl;
-          std::cout << "alt:" << event.key.alt << std::endl;
-          std::cout << "shift:" << event.key.shift << std::endl;
-          std::cout << "system:" << event.key.system << std::endl;
-
-          t.move(10.f, 50.f);
-          s1->move(50.f, 10.f);
-          //SETTEXT(text);
-          std::cout << "Position x:" << t.getPosition().x << std::endl;
-          std::cout << "Position y:" << t.getPosition().y << std::endl;
-          std::cout << "Position x:" << s1->getPosition().x << std::endl;
-          std::cout << "Position y:" << s1->getPosition().y << std::endl;*/
-          std::cout << "Position x:" << s2->GetPosition().x << std::endl;
-          std::cout << "Position y:" << s2->GetPosition().y << std::endl;
-          std::cout << "Rotation:" << s2->getRotation() << std::endl;
-          std::cout << "Sin :" << sin(s2->getRotation() * PI / 180.0) << std::endl;
-          std::cout << "Cos :" << cos(s2->getRotation() * PI / 180.0) << std::endl;
+          eventHandler::keyPressedHandler(s2);
         }
 
+        //WINDOWCLOSED
         case sf::Event::Closed :{
-          // "close requested" event: we close the window
-          if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && (event.key.code == 16 || event.key.code == 36)))
-            window.close();
+          eventHandler::windowClosedHandler(event, window);
         };break;
 
         default :
           break;
       }
 
-
-      // if the event is a keypressed show me what type is it
-      /*if (event.type == sf::Event::KeyPressed && event.key.code != sf::Keyboard::Unknown){
-        pressed = true;
-        key = event.key.code;
-      }
-
-      if (event.type == sf::Event::KeyReleased)
-      pressed = false;
-
-      while(pressed){
-        s2->movement(&key);
-      }
-
-
-      if (event.type == sf::Event::KeyPressed){
-        std::cout << "the key pressed is: " << event.key.code << std::endl;
-        std::cout << "control:" << event.key.control << std::endl;
-        std::cout << "alt:" << event.key.alt << std::endl;
-        std::cout << "shift:" << event.key.shift << std::endl;
-        std::cout << "system:" << event.key.system << std::endl;
-
-        t.move(10.f, 50.f);
-        s1->move(50.f, 10.f);
-        //SETTEXT(text);
-        std::cout << "Position x:" << t.getPosition().x << std::endl;
-        std::cout << "Position y:" << t.getPosition().y << std::endl;
-        std::cout << "Position x:" << s1->getPosition().x << std::endl;
-        std::cout << "Position y:" << s1->getPosition().y << std::endl;
-        std::cout << "Position x:" << s2->getPosition().x << std::endl;
-        std::cout << "Position y:" << s2->getPosition().y << std::endl;
-      }
-
-      // "close requested" event: we close the window
-      if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && (event.key.code == 16 || event.key.code == 36)))
-        window.close();*/
-
     }
 
+    //module keys
+    translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //it return which key has been pressed
+    if(translation.getTransformation())                         //if pressed make a transformation of the object
+      s2->movement(translation.getKey());
 
 
-    /*if(!translate)
-      translation.translate(0, 0);
+    //direction keys
+    rotation.isUsed(sf::Keyboard::Right, sf::Keyboard::Left);   //it return which key has been pressed
+    if(rotation.getTransformation())                            //if pressed make a transformation of the object
+      s2->movement(rotation.getKey());
 
-
-    if(!rotate)
-      rotatation.rotate(0);
-    */
-    // clear the window with black color
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
-      translation  = true;
-
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        module = sf::Keyboard::Up;            //UP
-      else
-        module = sf::Keyboard::Down;            //DOWN
-    }
-
-    if(translation)
-      s2->movement(&module);
-
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-      rotation  = true;
-
-      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        direction = sf::Keyboard::Left;            //LEFT
-      else
-        direction = sf::Keyboard::Right;            //RIGHT
-    }
-
-    if(rotation)
-      s2->movement(&direction);
-
+    //
     window.clear();
 
-    // draw everything here...
-    window.draw(t);
-    window.draw(*s1);
+    //for now we write all here
+    //TODO: create a function that draw everything
+    // draw the object (spaceship for now)
     window.draw(*s2);
 
-    //s2->Draw(window);
-
-    /*
-    if(pressed){
-      if(rotate)
-        window.draw(*s2, translation);
-      else
-        window.draw(*s2, rotatation);
-    }
-    else
-      window.draw(*s2);
-    */
     // end the current frame
     window.display();
 
   }
 
   return 0;
-}
-
-void inizializeText(sf::Text* t, sf::Font* f){
-  //sf::Font font;
-  f->loadFromFile("Fonts/York_Whiteletter/yorkwhiteletter.ttf");
-
-  //sf::Text *t;
-  t->setFont(*f);
-
-  t->setString("Hello world");
-
-  // set the character size
-  t->setCharacterSize(24); // in pixels, not points!
-
-  // set the color
-  t->setFillColor(sf::Color::Red);
-
-  // set the text style
-  t->setStyle(sf::Text::Bold | sf::Text::Underlined);
 }

@@ -1,14 +1,13 @@
+//SPACESHIP
+//Class that handle everything that concerne a spaceship
 #define PI 3.14159265
 
-
-class spaceship : public sf::Text{
+class spaceship : public sf::Text/*, public sf::Transformable*/{
 private:
-  float spatial_Versor;
-  float rotation_Versor;
-  sf::Transformable myTransform;
+  float spatial_Versor;                   //used for constant movement
+  float rotation_Versor;                  //used for constant rotation
 
 public:
-
   //CONSTRUCTORS
   spaceship(sf::Text* t, sf::Font* f, float sv, float rv) : sf::Text(*t){
     this->setFont(*f);
@@ -42,26 +41,33 @@ public:
     rotation_Versor = 0;
   }
 
+  //GETS
+  float getSpatialVersor(){ return this->spatial_Versor;}
+  float getRotationVersor(){ return this->rotation_Versor;}
+
   //SETS
+  void setSpatialVersor(float sv) { this->spatial_Versor = sv;}
+  void setRotationVersor(float rv) { this->rotation_Versor = rv;}
 
   //METHODS
-  void movement(sf::Keyboard::Key* k){
-    switch (*k) {
-      case sf::Keyboard::Left : {
-        this->rotate(1);
-      };break;           //LEFT
+  //It let the spaceship move or rotate based on the key pressed
+  void movement(sf::Keyboard::Key k){
+    switch (k) {
+      case sf::Keyboard::Left : {                 //LEFT
+        this->rotate(-3);
+      };break;
 
-      case sf::Keyboard::Right : {
-        this->rotate(-1);
-      };break;           //RIGHT
+      case sf::Keyboard::Right : {                //RIGHT
+        this->rotate(3);
+      };break;
 
-      case sf::Keyboard::Up : {
+      case sf::Keyboard::Up : {                   //UP
         this->move(cos(this->getRotation() * PI / 180.0) * (10), sin(this->getRotation() * PI / 180.0) * (10));
-      };break;             //UP
+      };break;
 
-      case sf::Keyboard::Down : {
+      case sf::Keyboard::Down : {                 //DOWN
         this->move(cos(this->getRotation() * PI / 180.0) * -10, sin(this->getRotation() * PI / 180.0) * -10);
-      };break;            //DOWN
+      };break;
 
       default: std::cout << "Not a movementCommand" << std::endl;
     }

@@ -1,5 +1,10 @@
 //SPACESHIP
 //Class that handle everything that concerne a spaceship
+
+/*
+  ISSUE:
+    -> nella costruzione immagine ruotata di 90°
+*/
 #define PI 3.14159265
 
 class spaceship : public sf::ConvexShape/*, public sf::Transformable*/{

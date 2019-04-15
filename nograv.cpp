@@ -24,11 +24,13 @@ int main (void){
   window.setFramerateLimit(60);
   window.setKeyRepeatEnabled(false);
 
+  /*
   sf::Font f;
   f.loadFromFile("Fonts/York_Whiteletter/yorkwhiteletter.ttf");
+  */
 
   //Create of the spaceship
-  spaceship *s2 = new spaceship(&f);
+  spaceship *s2 = new spaceship();
   //classes to handle input commands in smooth trasformations of object
   keyVector rotation;
   keyVector translation;

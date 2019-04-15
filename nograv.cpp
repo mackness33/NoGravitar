@@ -6,9 +6,15 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "spaceship.hpp"
+#include "eventHandler.hpp"
 
 #define PI 3.14159265
 
+/*
+Optimization:
+  -> struct => bool trasformation, sf::Keyboard::Key k;
+  -> eventHandler
+*/
 
 void inizializeText(sf::Text* t, sf::Font* f);
 
@@ -44,16 +50,8 @@ int main (void){
     while (window.pollEvent(event)){
 
       switch (event.type) {
-
         case sf::Event::KeyReleased :{
-          switch (event.key.code) {
-            case sf::Keyboard::Left : { }                                      //LEFT
-            case sf::Keyboard::Right : { rotation = false; };break;            //RIGHT
-            case sf::Keyboard::Up : { }                                        //UP
-            case sf::Keyboard::Down : { translation = false; };break;            //DOWN
-            default:
-              break;
-          }
+          keyReleasedHandler(&translation, &rotation);
         };break;
 
         case sf::Event::KeyPressed :{
@@ -191,8 +189,9 @@ int main (void){
     // draw everything here...
     window.draw(t);
     window.draw(*s1);
+    window.draw(*s2);
 
-    s2->Draw(window);
+    //s2->Draw(window);
 
     /*
     if(pressed){

@@ -10,8 +10,8 @@ int main()
     convex.setPoint(0, sf::Vector2f(30.f, 0.f));
     convex.setPoint(1, sf::Vector2f(40.f, 0.f));
     convex.setPoint(2, sf::Vector2f(40.f, 10.f));
-    convex.setPoint(3, sf::Vector2f(50.f, 40.f));
-    convex.setPoint(4, sf::Vector2f(20.f, 40.f));
+    convex.setPoint(3, sf::Vector2f(60.f, 30.f));
+    convex.setPoint(4, sf::Vector2f(10.f, 30.f));
     convex.setPoint(5, sf::Vector2f(30.f, 10.f));
 
     convex.setFillColor(sf::Color(000, 032, 128));

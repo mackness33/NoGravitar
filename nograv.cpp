@@ -5,9 +5,9 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "spaceship.hpp"
-#include "keyVector.hpp"
-#include "eventHandler.hpp"
+#include "Classes/spaceship.hpp"
+#include "Classes/keyVector.hpp"
+#include "Handlers/eventHandler.hpp"
 
 /*
 Optimization:

@@ -24,13 +24,9 @@ int main (void){
   window.setFramerateLimit(60);
   window.setKeyRepeatEnabled(false);
 
-  /*
-  sf::Font f;
-  f.loadFromFile("Fonts/York_Whiteletter/yorkwhiteletter.ttf");
-  */
-
-  //Create of the spaceship
+  //Create the spaceship
   spaceship *s2 = new spaceship();
+
   //classes to handle input commands in smooth trasformations of object
   keyVector rotation;
   keyVector translation;
@@ -75,7 +71,6 @@ int main (void){
     if(rotation.getTransformation())                            //if pressed make a transformation of the object
       s2->movement(rotation.getKey());
 
-    //
     window.clear();
 
     //for now we write all here

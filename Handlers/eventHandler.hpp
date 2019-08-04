@@ -62,6 +62,14 @@ public:
     std::cout << "Rotation:" << s->getRotation() << std::endl;
     std::cout << "Sin :" << sin(s->getRotation() * PI / 180.0) << std::endl;
     std::cout << "Cos :" << cos(s->getRotation() * PI / 180.0) << std::endl;
+    std::cout << "Sin ModuleUp:" << sin(s->getRotation() * PI / 180.0) * 10<< std::endl;
+    std::cout << "Cos ModuleUp:" << cos(s->getRotation() * PI / 180.0) * 10<< std::endl;
+    std::cout << "Sin ModuleDown:" << sin(s->getRotation() * PI / 180.0) * -10<< std::endl;
+    std::cout << "Cos ModuleDown:" << cos(s->getRotation() * PI / 180.0) * -10<< std::endl;
+    std::cout << "LeftOOB:" << s->getLeftOutOfBounds() << std::endl;
+    std::cout << "TopOOB:" << s->getTopOutOfBounds() << std::endl;
+    std::cout << "xOutOfBound:" << s->getXOutOfBounds() << std::endl;
+    std::cout << "yOutOfBound:" << s->getYOutOfBounds() << std::endl;
   }
 
   //It handle Event::Closed

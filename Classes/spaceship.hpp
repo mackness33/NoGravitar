@@ -9,40 +9,32 @@
 
 class spaceship : public sf::ConvexShape/*, public sf::Transformable*/{
 private:
-  bool bottomOOB;                   //BottomOutOfBounds
-  bool leftOOB;                   //LeftOutOfBounds
-  bool topOOB;                   //TopOutOfBounds
-  bool rightOOB;                   //RightOutOfBounds
+  bool xOutOfBound;                   //XOutOfBounds
+  bool yOutOfBound;                   //YOutOfBounds
   float spatial_Versor;
   float rotation_Versor;
 
 public:
   //CONSTRUCTORS
-  spaceship(sf::ConvexShape* s, float sv, float rv, bool b/*ottomOutOfBounds*/, bool l/*eftOutOfBounds*/, bool t/*opOutOfBounds*/, bool r/*ightOutOfBounds*/) : sf::ConvexShape(*s){
-    this->bottomOOB = b;
-    this->leftOOB = l;
-    this->topOOB = t;
-    this->rightOOB = r;
+  spaceship(sf::ConvexShape* s, float sv, float rv, bool x/*ottomOutOfBounds*/, bool y/*ightOutOfBounds*/) : sf::ConvexShape(*s){
+    this->xOutOfBound = x;
+    this->yOutOfBound = y;
 
     this->spatial_Versor = sv;
     this->rotation_Versor = rv;
   }
 
   spaceship(sf::ConvexShape* s, float sv, float rv) : sf::ConvexShape(*s){
-    this->bottomOOB = false;
-    this->leftOOB = false;
-    this->topOOB = false;
-    this->rightOOB = false;
+    this->xOutOfBound = false;
+    this->yOutOfBound = false;
 
     this->spatial_Versor = sv;
     this->rotation_Versor = rv;
   }
 
-  spaceship(float sv, float rv, bool b/*ottomOutOfBounds*/, bool l/*eftOutOfBounds*/, bool t/*opOutOfBounds*/, bool r/*ightOutOfBounds*/){
-    this->bottomOOB = b;
-    this->leftOOB = l;
-    this->topOOB = t;
-    this->rightOOB = r;
+  spaceship(float sv, float rv, bool x/*ottomOutOfBounds*/, bool y/*ightOutOfBounds*/){
+    this->xOutOfBound = x;
+    this->yOutOfBound = y;
 
     this->spatial_Versor = sv;
     this->rotation_Versor = rv;
@@ -51,20 +43,16 @@ public:
   }
 
   spaceship(sf::ConvexShape* s) : sf::ConvexShape(*s){
-    this->bottomOOB = false;
-    this->leftOOB = false;
-    this->topOOB = false;
-    this->rightOOB = false;
+    this->xOutOfBound = false;
+    this->yOutOfBound = false;
 
     this->spatial_Versor = 10;
     this->rotation_Versor = 3;
   }
 
   spaceship(float sv, float rv){
-    this->bottomOOB = false;
-    this->leftOOB = false;
-    this->topOOB = false;
-    this->rightOOB = false;
+    this->xOutOfBound = false;
+    this->yOutOfBound = false;
 
     this->spatial_Versor = sv;
     this->rotation_Versor = rv;
@@ -72,11 +60,9 @@ public:
     this->build();
   }
 
-  spaceship(bool b/*ottomOutOfBounds*/, bool l/*eftOutOfBounds*/, bool t/*opOutOfBounds*/, bool r/*ightOutOfBounds*/){
-    this->bottomOOB = b;
-    this->leftOOB = l;
-    this->topOOB = t;
-    this->rightOOB = r;
+  spaceship(bool x/*OutOfBounds*/, bool y/*ightOutOfBounds*/){
+    this->xOutOfBound = x;
+    this->yOutOfBound = y;
 
     this->spatial_Versor = 10;
     this->rotation_Versor = 3;
@@ -85,10 +71,8 @@ public:
   }
 
   spaceship(){
-    this->bottomOOB = false;
-    this->leftOOB = false;
-    this->topOOB = false;
-    this->rightOOB = false;
+    this->xOutOfBound = false;
+    this->yOutOfBound = false;
 
     this->spatial_Versor = 10;
     this->rotation_Versor = 3;
@@ -104,39 +88,72 @@ public:
   }*/
 
   //GETS
-  bool getBottomOutOfBounds(){ return this->bottomOOB;}
-  bool getLeftOutOfBounds(){ return this->leftOOB;}
-  bool getTopOutOfBounds(){ return this->topOOB;}
-  bool getRightOutOfBounds(){ return this->rightOOB;}
+  bool getXOutOfBounds(){ return this->xOutOfBound;}
+  bool getYOutOfBounds(){ return this->yOutOfBound;}
   float getSpatialVersor(){ return this->spatial_Versor;}
   float getRotationVersor(){ return this->rotation_Versor;}
 
   //SETS
-  void setBottomOutOfBounds(bool b){ this->bottomOOB = b;}
-  void setLeftOutOfBounds(bool l){ this->leftOOB = l;}
-  void setTopOutOfBounds(bool t){ this->topOOB = t;}
-  void setRightOutOfBounds(bool r){ this->rightOOB = r;}
+  void setXOutOfBounds(bool x){ this->xOutOfBound = x;}
+  void setYOutOfBounds(bool y){ this->yOutOfBound = y;}
   void setSpatialVersor(float sv) { this->spatial_Versor = sv;}
   void setRotationVersor(float rv) { this->rotation_Versor = rv;}
 
   //METHODS
   //It let the spaceship move or rotate based on the key pressed
-  void movement(sf::Keyboard::Key k){
+  void movement(sf::Keyboard::Key k, sf::RectangleShape *Bound){
     switch (k) {
       case sf::Keyboard::Left : {                 //LEFT
         this->rotate(-this->rotation_Versor);
+        Bound->rotate(-this->rotation_Versor);
       };break;
 
       case sf::Keyboard::Right : {                //RIGHT
         this->rotate(this->rotation_Versor);
+        Bound->rotate(this->rotation_Versor);
       };break;
 
       case sf::Keyboard::Up : {                   //UP
-        this->move(cos(this->getRotation() * PI / 180.0) * this->spatial_Versor, sin(this->getRotation() * PI / 180.0) * this->spatial_Versor);
+        std::cout << "x origin: " << this->getOrigin().x << "y origin: " << this->getOrigin().y << std::endl;
+        if(xOutOfBound || yOutOfBound){
+          std::cout << "OutOfBounds!!!" << std::endl;
+          if(xOutOfBound && yOutOfBound){
+            this->move(0, 0);
+            Bound->move(0, 0);
+          }else if(xOutOfBound){
+            this->move(0, sin(this->getRotation() * PI / 180.0) * this->spatial_Versor);
+            Bound->move(0, sin(this->getRotation() * PI / 180.0) * this->spatial_Versor);
+          }else{
+            this->move(cos(this->getRotation() * PI / 180.0) * this->spatial_Versor, 0);
+            Bound->move(cos(this->getRotation() * PI / 180.0) * this->spatial_Versor, 0);
+          }
+        }
+        else{
+          this->move(cos(this->getRotation() * PI / 180.0) * this->spatial_Versor, sin(this->getRotation() * PI / 180.0) * this->spatial_Versor);
+          Bound->move(cos(this->getRotation() * PI / 180.0) * this->spatial_Versor, sin(this->getRotation() * PI / 180.0) * this->spatial_Versor);
+        }
       };break;
 
       case sf::Keyboard::Down : {                 //DOWN
-        this->move(cos(this->getRotation() * PI / 180.0) * -this->spatial_Versor, sin(this->getRotation() * PI / 180.0) * -this->spatial_Versor);
+        std::cout << "x origin: " << this->getOrigin().x << "y origin: " << this->getOrigin().y << std::endl;
+
+        if(xOutOfBound || yOutOfBound){
+          std::cout << "OutOfBounds!!!" << std::endl;
+          if(xOutOfBound && yOutOfBound){
+            this->move(0, 0);
+            Bound->move(0, 0);
+          }else if(xOutOfBound){
+            this->move(0, sin(this->getRotation() * PI / 180.0) * -this->spatial_Versor);
+            Bound->move(0, sin(this->getRotation() * PI / 180.0) * -this->spatial_Versor);
+          }else{
+            this->move(cos(this->getRotation() * PI / 180.0) * -this->spatial_Versor, 0);
+            Bound->move(cos(this->getRotation() * PI / 180.0) * -this->spatial_Versor, 0);
+          }
+        }
+        else{
+          this->move(cos(this->getRotation() * PI / 180.0) * -this->spatial_Versor, sin(this->getRotation() * PI / 180.0) * -this->spatial_Versor);
+          Bound->move(cos(this->getRotation() * PI / 180.0) * -this->spatial_Versor, sin(this->getRotation() * PI / 180.0) * -this->spatial_Versor);
+        }
       };break;
 
       default: std::cout << "Not a movementCommand" << std::endl;
@@ -156,6 +173,8 @@ public:
     //creo il contorno della navicella colorata
     this->setOutlineThickness(2.f);
     this->setOutlineColor(sf::Color(000, 255, 000));
+    this->setOrigin(30.f, 20.f);
+    this->setPosition(80.f, 70.f);
     this->rotate(90);
   }
 };

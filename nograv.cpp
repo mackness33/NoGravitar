@@ -20,9 +20,9 @@ Optimization:
 int main (void){
   // Display the list of all the video modes available for fullscreen
   std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
-
+  int mod_num = 1;
   // Create a window with the same pixel depth as the desktop
-  sf::RenderWindow window(sf::VideoMode(modes[23].width, modes[23].height, modes[23].bitsPerPixel), "NoGravitar");
+  sf::RenderWindow window(sf::VideoMode(modes[mod_num].width, modes[mod_num].height, modes[mod_num].bitsPerPixel), "NoGravitar");
 
   //TODO: make a function that it makes it automaticaly
   window.setFramerateLimit(60);
@@ -30,10 +30,10 @@ int main (void){
 
   //Create the spaceship
   spaceship *s2 = new spaceship();
-  sf::FloatRect spaceshipBound = s2->getLocalBounds();
+  /*sf::FloatRect spaceshipBound = s2->getLocalBounds();        //for testing use
   sf::RectangleShape spaceshipBoundingBox(sf::Vector2f(spaceshipBound.width, spaceshipBound.height));
   spaceshipBoundingBox.setOrigin(30.f, 20.f);
-  spaceshipBoundingBox.setPosition(80.f, 70.f);
+  spaceshipBoundingBox.setPosition(80.f, 70.f);*/
 
   //classes to handle input commands in smooth trasformations of object
   keyVector rotation;
@@ -69,18 +69,18 @@ int main (void){
 
     }
 
-    c.checkOutOfBounds(s2, &modes[23]);
+    c.checkOutOfBounds(s2, &modes[mod_num]);
 
     //module keys
     translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //it return which key has been pressed
     if(translation.getTransformation())                         //if pressed make a transformation of the object
-    s2->movement(translation.getKey(), &spaceshipBoundingBox);
+    s2->movement(translation.getKey()/*, &spaceshipBoundingBox*/);
 
 
     //direction keys
     rotation.isUsed(sf::Keyboard::Right, sf::Keyboard::Left);   //it return which key has been pressed
     if(rotation.getTransformation())                            //if pressed make a transformation of the object
-    s2->movement(rotation.getKey(), &spaceshipBoundingBox);
+    s2->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
 
 
     /*translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //it return which key has been pressed
@@ -120,7 +120,7 @@ int main (void){
     //for now we write all here
     //TODO: create a function that draw everything
     // draw the object (spaceship for now)
-    window.draw(spaceshipBoundingBox);
+    //window.draw(spaceshipBoundingBox);
     window.draw(*s2);
 
     // end the current frame

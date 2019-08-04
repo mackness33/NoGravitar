@@ -14,20 +14,9 @@ class collisionHandler{
       // get the bounding box of the entity
       sf::FloatRect spaceshipBoundingBox = S->getGlobalBounds();
       sf::FloatRect desktopBoundingBox(0, 0, desktop->width, desktop->height);
-
+      
       // check collision with another box (like the bounding box of another entity)
-      if (!desktopBoundingBox.intersects(spaceshipBoundingBox, spaceshipBoundingBox)){
-        /*std::cout << "Desktop Left: " << typeid(desktopBoundingBox.left).name() << std::endl;
-        std::cout << "Desktop Right: " << desktopBoundingBox.left + desktopBoundingBox.width << std::endl;
-        std::cout << "Desktop Top: " << desktopBoundingBox.top << std::endl;
-        std::cout << "Desktop Buttom: " << desktopBoundingBox.top + desktopBoundingBox.height << std::endl;
-        std::cout << "Spaceship Left: " << spaceshipBoundingBox.left << std::endl;
-        std::cout << "Spaceship Right: " << spaceshipBoundingBox.left + spaceshipBoundingBox.width << std::endl;
-        std::cout << "Spaceship Top: " << spaceshipBoundingBox.top << std::endl;
-        std::cout << "Spaceship Buttom: " << spaceshipBoundingBox.top + spaceshipBoundingBox.height << std::endl;
-        */
-        //std::cout << "OutOfBounds!!!" << std::endl;
-      }
+      desktopBoundingBox.intersects(spaceshipBoundingBox, spaceshipBoundingBox);
 
       //Y OUT OF BOUNDS
       if(checkSide(spaceshipBoundingBox.top + spaceshipBoundingBox.height, desktopBoundingBox.top + desktopBoundingBox.height) || checkSide(spaceshipBoundingBox.top, desktopBoundingBox.top)){

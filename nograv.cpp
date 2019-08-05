@@ -8,7 +8,6 @@
 #include "Classes/spaceship.hpp"
 #include "Classes/keyVector.hpp"
 #include "Handlers/eventHandler.hpp"
-#include "Handlers/transformationHandler.hpp"
 #include "Handlers/collisionHandler.hpp"
 
 /*

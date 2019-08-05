@@ -4,14 +4,14 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 //how to include an external class
-//#include "spaceship.hpp"
+#include "Classes/object_test.hpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(900, 800), "la mia astronave!");
+    sf::RenderWindow window(sf::VideoMode(900, 800), "My object");
 
     //how to create an object
-    //object Obj = new object();
+    object Obj = new object();
 
     while (window.isOpen())
     {
@@ -25,7 +25,7 @@ int main()
         window.clear();
 
         //how to draw the object
-        //window.draw(Obj);
+        window.draw(Obj);
 
         window.display();
     }

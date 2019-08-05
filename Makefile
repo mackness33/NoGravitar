@@ -11,11 +11,11 @@ clean:
 
 #Your makefile should be like this:
 
-#test: test.o Classes/object_test.hpp
-#		g++ -g -Wall -o NoGravitar nograv.o $(LIBS)
-#
-#test.o: test.cpp Classes/object_test.hpp
-#		g++ -c nograv.cpp $(LIBS)
+test: test.o Classes/object_test.hpp
+		g++ -g -Wall -o Test test.o $(LIBS)
+
+test.o: test.cpp Classes/object_test.hpp
+		g++ -c test.cpp $(LIBS)
 
 
 #If you want you can write it in this Makefile

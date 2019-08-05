@@ -3,7 +3,7 @@ LIBS = -lsfml-window -lsfml-system -lsfml-graphics
 all: nograv.o Classes/spaceship.hpp Handlers/eventHandler.hpp
 		g++ -g -Wall -o NoGravitar nograv.o $(LIBS)
 
-nograv.o: nograv.cpp Classes/spaceship.hpp Handlers/eventHandler.hpp Classes/keyVector.hpp Handlers/transformationHandler.hpp Handlers/collisionHandler.hpp
+nograv.o: nograv.cpp Classes/spaceship.hpp Handlers/eventHandler.hpp Classes/keyVector.hpp Handlers/collisionHandler.hpp
 		g++ -c nograv.cpp $(LIBS)
 
 clean:

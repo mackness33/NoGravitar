@@ -120,7 +120,7 @@ int main (void){
     //TODO: create a function that draw everything
     // draw the object (spaceship for now)
     //window.draw(spaceshipBoundingBox);
-    window.draw(*s2);
+    s2->Draw(&window);
 
     // end the current frame
     window.display();

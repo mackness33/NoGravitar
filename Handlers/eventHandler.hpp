@@ -57,15 +57,15 @@ public:
     std::cout << "Position y:" << t.getPosition().y << std::endl;
     std::cout << "Position x:" << s1->getPosition().x << std::endl;
     std::cout << "Position y:" << s1->getPosition().y << std::endl;*/
-    std::cout << "Position x:" << s->getPosition().x << std::endl;
-    std::cout << "Position y:" << s->getPosition().y << std::endl;
-    std::cout << "Rotation:" << s->getRotation() << std::endl;
-    std::cout << "Sin :" << sin(s->getRotation() * PI / 180.0) << std::endl;
-    std::cout << "Cos :" << cos(s->getRotation() * PI / 180.0) << std::endl;
-    std::cout << "Sin ModuleUp:" << sin(s->getRotation() * PI / 180.0) * 10<< std::endl;
-    std::cout << "Cos ModuleUp:" << cos(s->getRotation() * PI / 180.0) * 10<< std::endl;
-    std::cout << "Sin ModuleDown:" << sin(s->getRotation() * PI / 180.0) * -10<< std::endl;
-    std::cout << "Cos ModuleDown:" << cos(s->getRotation() * PI / 180.0) * -10<< std::endl;
+    std::cout << "Position x:" << s->getBody().getPosition().x << std::endl;
+    std::cout << "Position y:" << s->getBody().getPosition().y << std::endl;
+    std::cout << "Rotation:" << s->getBody().getRotation() << std::endl;
+    std::cout << "Sin :" << sin(s->getBody().getRotation() * PI / 180.0) << std::endl;
+    std::cout << "Cos :" << cos(s->getBody().getRotation() * PI / 180.0) << std::endl;
+    std::cout << "Sin ModuleUp:" << sin(s->getBody().getRotation() * PI / 180.0) * 10<< std::endl;
+    std::cout << "Cos ModuleUp:" << cos(s->getBody().getRotation() * PI / 180.0) * 10<< std::endl;
+    std::cout << "Sin ModuleDown:" << sin(s->getBody().getRotation() * PI / 180.0) * -10<< std::endl;
+    std::cout << "Cos ModuleDown:" << cos(s->getBody().getRotation() * PI / 180.0) * -10<< std::endl;
     std::cout << "LeftOOB:" << s->getLeftOutOfBounds() << std::endl;
     std::cout << "TopOOB:" << s->getTopOutOfBounds() << std::endl;
     std::cout << "xOutOfBound:" << s->getXOutOfBounds() << std::endl;

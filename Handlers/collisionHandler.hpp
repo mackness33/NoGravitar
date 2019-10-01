@@ -12,9 +12,9 @@ class collisionHandler{
     //It let the spaceship move or rotate based on the key pressed
     void checkOutOfBounds(spaceship *S, sf::VideoMode *desktop){
       // get the bounding box of the entity
-      sf::FloatRect spaceshipBoundingBox = S->getGlobalBounds();
+      sf::FloatRect spaceshipBoundingBox = S->getBody().getGlobalBounds();
       sf::FloatRect desktopBoundingBox(0, 0, desktop->width, desktop->height);
-      
+
       // check collision with another box (like the bounding box of another entity)
       desktopBoundingBox.intersects(spaceshipBoundingBox, spaceshipBoundingBox);
 

@@ -13,7 +13,7 @@ class collisionHandler{
     void checkOutOfBounds(spaceship *S, sf::VideoMode *desktop){
       // get the bounding box of the entity
       sf::FloatRect spaceshipBoundingBox = S->getBody().getGlobalBounds();
-      sf::FloatRect desktopBoundingBox(0, 0, desktop->width, desktop->height);
+      sf::FloatRect desktopBoundingBox(0, 0, desktop->width, desktop->height-50);
 
       // check collision with another box (like the bounding box of another entity)
       desktopBoundingBox.intersects(spaceshipBoundingBox, spaceshipBoundingBox);

@@ -2,32 +2,32 @@
 //Class that handle everything that concerne a spaceship
 
 /*
-  BUG: change body into sprites
+  ISSUE:
+    -> nella costruzione immagine ruotata di 90°
 */
 #define PI 3.14159265
 
-class spaceship{
+class backView{
   private:
-    bool xOutOfBound;                   //XOutOfBounds
-    bool yOutOfBound;                   //YOutOfBounds
-    bool leftOOB;                   //leftOutOfBounds
-    bool topOOB;                   //topOutOfBounds
-    float spatial_Versor;
-    float rotation_Versor;
-    sf::ConvexShape body;
+    sf::View body;
 
   public:
     //CONSTRUCTORS
-    spaceship(){
-      this->xOutOfBound = false;
-      this->yOutOfBound = false;
-      this->topOOB = false;
-      this->leftOOB = false;
-
-      this->spatial_Versor = 10;
-      this->rotation_Versor = 3;
-
-      this->build();
+    backView(){
+      // Initialize the view to a rectangle located at (100, 100) and with a size of 400x200
+      view.reset(sf::FloatRect(100, 100, 400, 200));
+      // Rotate it by 45 degrees
+      view.rotate(45);
+      // Set its target viewport to be half of the window
+      view.setViewport(sf::FloatRect(0.f, 0.f, 0.5f, 1.f));
+      // Apply it
+      window.setView(view);
+      // Render stuff
+      window.draw(someSprite);
+      // Set the default view back
+      window.setView(window.getDefaultView());
+      // Render stuff not affected by the view
+      window.draw(someText);
     }
 
     /*spaceship(const spaceship& S){

@@ -5,6 +5,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include "Classes/header.hpp"
+#include "Classes/universe.hpp"
 #include "Classes/spaceship.hpp"
 #include "Classes/keyVector.hpp"
 #include "Handlers/eventHandler.hpp"
@@ -26,6 +28,9 @@ int main (void){
   //TODO: make a function that it makes it automaticaly
   window.setFramerateLimit(60);
   window.setKeyRepeatEnabled(false);
+
+  header *Header = new header(&window);
+  universe *Universe = new universe(&window);
 
   //Create the spaceship
   spaceship *s2 = new spaceship();
@@ -98,7 +103,7 @@ int main (void){
           up = cos(s2->getRotation() * PI / 180.0) * -10;
           down = sin(s2->getRotation() * PI / 180.0) * -10;
         }
-      }
+      }.
 
       if(sf::Keyboard::Left == rotation.getKey())
         direction = 3;
@@ -116,10 +121,12 @@ int main (void){
 
     window.clear();
 
-    //for now we write all here
+    //for now we write all here.
     //TODO: create a function that draw everything
     // draw the object (spaceship for now)
     //window.draw(spaceshipBoundingBox);
+    Header->Draw();
+    Universe->Draw();
     s2->Draw(&window);
 
     // end the current frame

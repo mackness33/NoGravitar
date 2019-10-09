@@ -7,10 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include "Classes/header.hpp"
 #include "Classes/universe.hpp"
-#include "Classes/spaceship.hpp"
-#include "Classes/keyVector.hpp"
 #include "Handlers/eventHandler.hpp"
-#include "Handlers/collisionHandler.hpp"
 
 /*
 Optimization:

@@ -17,7 +17,7 @@ spaceship::spaceship(){
   spatial_Versor = 10;
   rotation_Versor = 3;
 
-  this->build(body);
+  this->build();
 }
 
 /*spaceship(const spaceship& S){
@@ -163,7 +163,7 @@ void spaceship::Draw (sf::RenderWindow* window){
 
 //BUILD
 //It build up the spaceship shape
-void spaceship::build (sf::ConvexShape body){
+void spaceship::build (){
   //creo quattro punti per la spezzata chiusa dell'astronave
   body.setPointCount(4);
 

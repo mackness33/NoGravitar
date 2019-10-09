@@ -69,9 +69,7 @@ void header::setFont(sf::Font f){ this->font = f;}
 
 //DRAW
 void header::Draw (/*sf::RenderWindow* window*/){
-  std::cout << "Draw of Header" << std::endl;
   window->draw(bound);
   window->draw(points);
   window->draw(title);
-  std::cout << "END draw" << std::endl;
 }

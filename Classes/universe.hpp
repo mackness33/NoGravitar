@@ -9,13 +9,14 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include "spaceship.hpp"
 #define PI 3.14159265
 
 class universe{
   private:
     //sf::Texture texture;
     //sf::Sprite background;
-    //spaceship
+    spaceship *S;
     sf::RenderWindow *window;
     sf::FloatRect *boundingBox;
     sf::RectangleShape bound;       //FOR TESTING ONLY
@@ -24,7 +25,7 @@ class universe{
 
   public:
     //CONSTRUCTORS
-    universe(sf::RenderWindow* win);
+    universe(sf::RenderWindow* win, spaceship* spc);
 
     //GETS
     //sf::Texture getTexture(){ return this->background.getTexture();}

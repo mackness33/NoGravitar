@@ -8,8 +8,9 @@
 #define PI 3.14159265
 
 //CONSTRUCTORS
-universe::universe(sf::RenderWindow* win){
+universe::universe(sf::RenderWindow* win, spaceship* spc){
   window = win;
+  S = spc;
 
   // Setting bounding box
   size = new sf::Vector2f(win->getSize().x, win->getSize().y * 9/10);
@@ -47,8 +48,7 @@ universe::universe(sf::RenderWindow* win){
 
 //DRAW
 void universe::Draw (/*sf::RenderWindow* window*/){
-  std::cout << "Draw of Universe" << std::endl;
   window->draw(bound);
+  S->Draw(window);
   //window->draw(background);
-  std::cout << "END draw universe" << std::endl;
 }

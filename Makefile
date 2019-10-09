@@ -4,9 +4,16 @@ LIBS = -lsfml-window -lsfml-system -lsfml-graphics
 all: nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o
 		g++ -g -Wall -o NoGravitar nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o $(LIBS)
 
-nograv.o: nograv.cpp Classes/header.hpp Classes/universe.hpp Handlers/eventHandler.hpp Classes/keyVector.hpp
+nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
 
+
+#HANDLERS
+collisionHandler.o: Handlers/collisionHandler.hpp Handlers/collisionHandler.cpp Classes/universe.hpp
+		g++ -c Handlers/collisionHandler.cpp $(LIBS)
+
+eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Handlers/collisionHandler.hpp Classes/keyVector.hpp
+		g++ -c Handlers/eventHandler.cpp $(LIBS)
 
 #CLASSES
 spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp
@@ -15,18 +22,11 @@ spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp
 header.o: Classes/header.hpp Classes/header.cpp
 		g++ -c Classes/header.cpp $(LIBS)
 
-universe.o: Classes/universe.hpp Classes/universe.cpp
+universe.o: Classes/universe.hpp Classes/universe.cpp Classes/spaceship.hpp
 		g++ -c Classes/universe.cpp $(LIBS)
 
 keyVector.o: Classes/keyVector.hpp Classes/keyVector.cpp
 		g++ -c Classes/keyVector.cpp $(LIBS)
-
-#HANDLERS
-collisionHandler.o: Handlers/collisionHandler.hpp Handlers/collisionHandler.cpp Classes/spaceship.hpp
-		g++ -c Handlers/collisionHandler.cpp $(LIBS)
-
-eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Handlers/collisionHandler.hpp Classes/keyVector.hpp
-		g++ -c Handlers/eventHandler.cpp $(LIBS)
 
 
 #CLEANER

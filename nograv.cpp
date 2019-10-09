@@ -6,7 +6,6 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "Classes/header.hpp"
-#include "Classes/universe.hpp"
 #include "Handlers/eventHandler.hpp"
 
 /*
@@ -26,11 +25,11 @@ int main (void){
   window.setFramerateLimit(60);
   window.setKeyRepeatEnabled(false);
 
-  header *Header = new header(&window);
-  universe *Universe = new universe(&window);
 
   //Create the spaceship
-  spaceship *s2 = new spaceship();
+  spaceship *S = new spaceship();
+  header *Header = new header(&window);
+  universe *Universe = new universe(&window, S);
   /*sf::FloatRect spaceshipBound = s2->getLocalBounds();        //for testing use
   sf::RectangleShape spaceshipBoundingBox(sf::Vector2f(spaceshipBound.width, spaceshipBound.height));
   spaceshipBoundingBox.setOrigin(30.f, 20.f);
@@ -56,7 +55,7 @@ int main (void){
 
         //KEYPRESSED
         case sf::Event::KeyPressed :{
-          eventHandler::keyPressedHandler(s2);
+          eventHandler::keyPressedHandler(S);
         }
 
         //WINDOWCLOSED
@@ -70,18 +69,18 @@ int main (void){
 
     }
 
-    c.checkOutOfBounds(s2, &modes[mod_num]);
+    c.checkOutOfBounds(S, &modes[mod_num]);
 
     //module keys
     translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //it return which key has been pressed
     if(translation.getTransformation())                         //if pressed make a transformation of the object
-    s2->movement(translation.getKey()/*, &spaceshipBoundingBox*/);
+    S->movement(translation.getKey()/*, &spaceshipBoundingBox*/);
 
 
     //direction keys
     rotation.isUsed(sf::Keyboard::Right, sf::Keyboard::Left);   //it return which key has been pressed
     if(rotation.getTransformation())                            //if pressed make a transformation of the object
-    s2->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
+    S->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
 
 
     /*translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //it return which key has been pressed
@@ -124,7 +123,6 @@ int main (void){
     //window.draw(spaceshipBoundingBox);
     Header->Draw();
     Universe->Draw();
-    s2->Draw(&window);
 
     // end the current frame
     window.display();

@@ -69,5 +69,5 @@ class spaceship{
 
     //BUILD
     //It build up the spaceship shape
-    void build (sf::ConvexShape body);
+    void build ();
 };

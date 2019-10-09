@@ -8,7 +8,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "../Classes/spaceship.hpp"
+#include "../Classes/universe.hpp"
 
 class collisionHandler{
   public:

@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics
 
 # build an executable named windows from windows.c
-all: nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o
-		g++ -g -Wall -o NoGravitar nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o $(LIBS)
+all: nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o
+		g++ -g -Wall -o NoGravitar nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -16,7 +16,7 @@ eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Handlers/col
 		g++ -c Handlers/eventHandler.cpp $(LIBS)
 
 #CLASSES
-spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp
+spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp
 		g++ -c Classes/spaceship.cpp $(LIBS)
 
 header.o: Classes/header.hpp Classes/header.cpp
@@ -28,6 +28,11 @@ universe.o: Classes/universe.hpp Classes/universe.cpp Classes/spaceship.hpp
 keyVector.o: Classes/keyVector.hpp Classes/keyVector.cpp
 		g++ -c Classes/keyVector.cpp $(LIBS)
 
+bullet.o: Classes/bullet.hpp Classes/bullet.cpp
+		g++ -c Classes/bullet.cpp $(LIBS)
+
+settings.o: Classes/settings.hpp Classes/settings.cpp
+		g++ -c Classes/settings.cpp $(LIBS)
 
 #CLEANER
 clean:

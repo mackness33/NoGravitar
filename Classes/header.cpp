@@ -27,7 +27,7 @@ header::header(sf::RenderWindow* win){
   boundingBox = new sf::FloatRect(*position, *size);
   bound.setPosition(*position);
   bound.setSize(*size);
-  bound.setFillColor(sf::Color(255, 255, 000));
+  bound.setFillColor(sf::Color(0, 0, 0));
 
 
   // Setting point text
@@ -35,7 +35,7 @@ header::header(sf::RenderWindow* win){
   points.setString("0");
   points.setCharacterSize(30);
   points.setStyle(sf::Text::Regular);
-  points.setFillColor(sf::Color::White);
+  points.setFillColor(sf::Color::Green);
   points.setPosition((size->x-title.getLocalBounds().width)/2, (size->y-title.getLocalBounds().height)/2);
 
 
@@ -44,7 +44,7 @@ header::header(sf::RenderWindow* win){
   title.setString("NOGRAVITAR");
   title.setCharacterSize(30);
   title.setStyle(sf::Text::Bold);
-  title.setFillColor(sf::Color::White);
+  title.setFillColor(sf::Color::Green);
   title.setPosition((size->x-title.getLocalBounds().width)/2, 0);
 }
 

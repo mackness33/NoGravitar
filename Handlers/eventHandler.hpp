@@ -25,32 +25,16 @@ class eventHandler{
 
     //It handle KeyEvent::KeyPressed
     //It gives information bout transformation of the spaceship
-    static void keyPressedHandler (spaceship* s/*paceship*/){
-      /*pressed = true;
-
-      switch (event.key.code) {                                             //LEFT
-        case sf::Keyboard::Left : {
-          s2->Rotate(s2->getRotationVersor());
+    static void keyPressedHandler (spaceship* S/*paceship*/, sf:: Event& e){
+      switch (e.key.code) {                                             //LEFT
+        case sf::Keyboard::Space : {
+          S->Shoot();
         };break;
 
-        case sf::Keyboard::Right : {                                        //RIGHT
-          s2->Rotate(-s2->getRotationVersor());
-        };break;
-
-        case sf::Keyboard::Up : {                                           //UP
-          s2->Move(s2->getSpatialVersor(), 0);
-        };break;
-
-        case sf::Keyboard::Down : {                                         //DOWN
-          s2->Move(-s2->getSpatialVersor(), 0);
-        };break;
-
-        default:{
-          std::cout << "the key pressed is: " << event.key.code << std::endl;
-          pressed = false;
-        }
+        default: std::cout << "the key pressed is: " << e.key.code << std::endl;
       }
 
+      /*
       std::cout << "the key pressed is: " << event.key.code << std::endl;
       std::cout << "control:" << event.key.control << std::endl;
       std::cout << "alt:" << event.key.alt << std::endl;
@@ -63,20 +47,21 @@ class eventHandler{
       std::cout << "Position x:" << t.getPosition().x << std::endl;
       std::cout << "Position y:" << t.getPosition().y << std::endl;
       std::cout << "Position x:" << s1->getPosition().x << std::endl;
-      std::cout << "Position y:" << s1->getPosition().y << std::endl;*/
-      std::cout << "Position x:" << s->getBody().getPosition().x << std::endl;
-      std::cout << "Position y:" << s->getBody().getPosition().y << std::endl;
-      std::cout << "Rotation:" << s->getBody().getRotation() << std::endl;
-      std::cout << "Sin :" << sin(s->getBody().getRotation() * PI / 180.0) << std::endl;
-      std::cout << "Cos :" << cos(s->getBody().getRotation() * PI / 180.0) << std::endl;
-      std::cout << "Sin ModuleUp:" << sin(s->getBody().getRotation() * PI / 180.0) * 10<< std::endl;
-      std::cout << "Cos ModuleUp:" << cos(s->getBody().getRotation() * PI / 180.0) * 10<< std::endl;
-      std::cout << "Sin ModuleDown:" << sin(s->getBody().getRotation() * PI / 180.0) * -10<< std::endl;
-      std::cout << "Cos ModuleDown:" << cos(s->getBody().getRotation() * PI / 180.0) * -10<< std::endl;
-      std::cout << "LeftOOB:" << s->getLeftOutOfBounds() << std::endl;
-      std::cout << "TopOOB:" << s->getTopOutOfBounds() << std::endl;
-      std::cout << "xOutOfBound:" << s->getXOutOfBounds() << std::endl;
-      std::cout << "yOutOfBound:" << s->getYOutOfBounds() << std::endl;
+      std::cout << "Position y:" << s1->getPosition().y << std::endl;
+      */
+      std::cout << "Position x:" << S->getBody().getPosition().x << std::endl;
+      std::cout << "Position y:" << S->getBody().getPosition().y << std::endl;
+      std::cout << "Rotation:" << S->getBody().getRotation() << std::endl;
+      std::cout << "Sin :" << sin(S->getBody().getRotation() * PI / 180.0) << std::endl;
+      std::cout << "Cos :" << cos(S->getBody().getRotation() * PI / 180.0) << std::endl;
+      std::cout << "Sin ModuleUp:" << sin(S->getBody().getRotation() * PI / 180.0) * 10<< std::endl;
+      std::cout << "Cos ModuleUp:" << cos(S->getBody().getRotation() * PI / 180.0) * 10<< std::endl;
+      std::cout << "Sin ModuleDown:" << sin(S->getBody().getRotation() * PI / 180.0) * -10<< std::endl;
+      std::cout << "Cos ModuleDown:" << cos(S->getBody().getRotation() * PI / 180.0) * -10<< std::endl;
+      std::cout << "LeftOOB:" << S->getLeftOutOfBounds() << std::endl;
+      std::cout << "TopOOB:" << S->getTopOutOfBounds() << std::endl;
+      std::cout << "xOutOfBound:" << S->getXOutOfBounds() << std::endl;
+      std::cout << "yOutOfBound:" << S->getYOutOfBounds() << std::endl;
     }
 
     //It handle Event::Closed

@@ -7,7 +7,6 @@
 #include <SFML/Graphics.hpp>
 #include "Classes/header.hpp"
 #include "Handlers/eventHandler.hpp"
-
 /*
 Optimization:
   -> struct => bool trasformation, sf::Keyboard::Key k;   DONE
@@ -27,9 +26,10 @@ int main (void){
 
 
   //Create the spaceship
-  spaceship *S = new spaceship();
+  spaceship Spaceship;
   header *Header = new header(&window);
-  universe *Universe = new universe(&window, S);
+  settings *Settings = new settings(&window);
+  universe *Universe = new universe(&window, &Spaceship);
   /*sf::FloatRect spaceshipBound = s2->getLocalBounds();        //for testing use
   sf::RectangleShape spaceshipBoundingBox(sf::Vector2f(spaceshipBound.width, spaceshipBound.height));
   spaceshipBoundingBox.setOrigin(30.f, 20.f);
@@ -39,11 +39,14 @@ int main (void){
   keyVector rotation;
   keyVector translation;
 
+  settings::switchTime = 10.0f;
+
   collisionHandler c;
   // run the program as long as the window is open
   while (window.isOpen()){
     // check all the window's events that were triggered since the last iteration of the loop
     sf::Event event;
+    settings::deltaTime = Settings->getClock().restart().asSeconds() - settings::deltaTime;
 
     while (window.pollEvent(event)){
 
@@ -55,7 +58,7 @@ int main (void){
 
         //KEYPRESSED
         case sf::Event::KeyPressed :{
-          eventHandler::keyPressedHandler(S);
+          eventHandler::keyPressedHandler(&Spaceship, event);
         }
 
         //WINDOWCLOSED
@@ -69,18 +72,18 @@ int main (void){
 
     }
 
-    c.checkOutOfBounds(S, &modes[mod_num]);
+    c.checkOutOfBounds(&Spaceship, &modes[mod_num]);
 
     //module keys
     translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //it return which key has been pressed
     if(translation.getTransformation())                         //if pressed make a transformation of the object
-    S->movement(translation.getKey()/*, &spaceshipBoundingBox*/);
+    Spaceship.movement(translation.getKey()/*, &spaceshipBoundingBox*/);
 
 
     //direction keys
     rotation.isUsed(sf::Keyboard::Right, sf::Keyboard::Left);   //it return which key has been pressed
     if(rotation.getTransformation())                            //if pressed make a transformation of the object
-    S->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
+    Spaceship.movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
 
 
     /*translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //it return which key has been pressed

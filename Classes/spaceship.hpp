@@ -6,6 +6,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include <list>
+#include "bullet.hpp"
 
 /*
   BUG: change body into sprites
@@ -21,6 +23,8 @@ class spaceship{
     float spatial_Versor;
     float rotation_Versor;
     sf::ConvexShape body;
+    //bullet *b;
+    std::list <bullet*> bullets;
 
   public:
     //CONSTRUCTORS
@@ -70,4 +74,6 @@ class spaceship{
     //BUILD
     //It build up the spaceship shape
     void build ();
+
+    void Shoot();
 };

@@ -4,13 +4,15 @@
 /*
 
 */
-#include "universe.hpp"
+#include "settings.hpp"
 #define PI 3.14159265
 
+float settings::deltaTime ; // You MUST declare it in a CPP
+float settings::switchTime ; // You MUST declare it in a CPP
+
 //CONSTRUCTORS
-universe::universe(sf::RenderWindow* win, spaceship* spc){
+settings::settings(sf::RenderWindow* win){
   window = win;
-  S = spc;
 
   // Setting bounding box
   size = new sf::Vector2f(win->getSize().x, win->getSize().y * 9/10);
@@ -36,7 +38,7 @@ universe::universe(sf::RenderWindow* win, spaceship* spc){
   */
 }
 
-//GETS..................................................8
+//GETS
 //sf::Texture getTexture(){ return this->background.getTexture();}
 //sf::Sprite getBackground(){ return this->background;}
 
@@ -46,9 +48,9 @@ universe::universe(sf::RenderWindow* win, spaceship* spc){
 
 //---------------METHODS---------------
 
+
 //DRAW
-void universe::Draw (/*sf::RenderWindow* window*/){
+void settings::Draw (/*sf::RenderWindow* window*/){
   window->draw(bound);
-  S->Draw(window);
   //window->draw(background);
 }

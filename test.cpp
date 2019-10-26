@@ -4,7 +4,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 //how to include an external class
-#include "Classes/object_test.hpp"
+#include "object_test.hpp"
 
 int main(){
     sf::RenderWindow window(sf::VideoMode(900, 800), "My object");

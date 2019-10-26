@@ -15,6 +15,7 @@ collisionHandler.o: Handlers/collisionHandler.hpp Handlers/collisionHandler.cpp 
 eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Handlers/collisionHandler.hpp Classes/keyVector.hpp
 		g++ -c Handlers/eventHandler.cpp $(LIBS)
 
+
 #CLASSES
 spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp
 		g++ -c Classes/spaceship.cpp $(LIBS)
@@ -51,11 +52,19 @@ test.o: test.cpp Classes/object_test.hpp
 
 
 #If you want you can write it in this Makefile
-test2: test2.o bunker.o
-		g++ -g -Wall -o Test test2.o bunker.o $(LIBS)
+test2: test2.o object_test.o entity.o
+		g++ -g -Wall -o Test test2.o object_test.o entity.o $(LIBS)
 
-test2.o: test2.cpp Classes/bunker.hpp
+test2.o: test2.cpp
 		g++ -c test2.cpp $(LIBS)
 
 bunker.o: Classes/bunker.hpp Classes/bunker.cpp
 		g++ -c Classes/bunker.cpp $(LIBS)
+
+		#BASE
+
+object_test.o: object_test.hpp object_test.cpp Classes/entity.hpp
+		g++ -c object_test.cpp $(LIBS)
+
+entity.o: Classes/entity.hpp Classes/entity.cpp
+		g++ -c Classes/entity.cpp $(LIBS)

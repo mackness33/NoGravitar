@@ -8,6 +8,8 @@
 
 //CONSTRUCTORS
 bullet::bullet(){
+  body = new movable<sf::CircleShape>();
+
   speed = 12;
   direction = 0 * PI / 180.0f;
   totalTime = 0;
@@ -19,19 +21,21 @@ bullet::bullet(){
 }
 
 bullet::bullet(float s, float d, sf::Vector2f p){
+  body = new movable<sf::CircleShape>(40);
+
   speed = s;
   direction = d * PI / 180.0f;
   totalTime = 0;
 
+  body->SetPosition(p);
   this->build();
-  body.setPosition(p);
 }
 
 bullet::~bullet(){}
 
 
 //GETS
-sf::CircleShape bullet::getBody() { return body; }
+movable<sf::CircleShape>* bullet::getBody() { return body; }
 
 //SETS
 
@@ -39,8 +43,7 @@ sf::CircleShape bullet::getBody() { return body; }
 
 //DRAW
 void bullet::Draw (sf::RenderWindow* window){
-  //window->draw(bound);
-  window->draw(body);
+  body->DrawTest(window);
 }
 
 void bullet::Update(){
@@ -52,9 +55,10 @@ void bullet::Update(){
 
   if(totalTime >= settings::switchTime){
     totalTime -= settings::switchTime;
-    body.move(cos(direction) * speed, sin(direction) * speed);
-    std::cout << "Position x:" << body.getPosition().x << std::endl;
-    std::cout << "Position y:" << body.getPosition().y << std::endl;
+    body->Move(cos(direction) * speed, sin(direction) * speed);
+    sf::Vector2f pos = body->getBody()->getPosition();
+    std::cout << "Position x:" << pos.x << std::endl;
+    std::cout << "Position y:" << pos.y << std::endl;
     //std::cout << "switchTime:" << settings::switchTime << std::endl;
   }
 
@@ -63,6 +67,5 @@ void bullet::Update(){
 }
 
 void bullet::build(){
-  body.setRadius(10);
-  body.setFillColor(sf::Color::Red);
+  body->getBody()->setFillColor(sf::Color::Red);
 }

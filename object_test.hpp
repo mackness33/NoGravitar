@@ -46,5 +46,7 @@ template <class T> class object_test {
       this->rotate(90);
     }Classes*/
 
-    void Draw (sf::RenderWindow* window);
+    void Draw ();
 };
+
+#include "object_test.tpp"

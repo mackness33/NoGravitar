@@ -4,24 +4,53 @@
 /*
 
 */
-#include "entity.hpp"
+//#include "entity.hpp"
 #define PI 3.14159265
 
 //------------CONSTRUCTORS------------
-template <class T> entity<T>::entity(sf::RenderWindow* w, T* b){
-  window = w;
-  this->setBody(b);
+template <class T> entity<T>::entity(T* b){
+  if(!!b){
+    body = new T();
+    boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
+    bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
+  }
+  else
+    this->setBody(b);
+
+  //this->setBody(new T());
 }
 
-template <class T> entity<T>::entity(sf::RenderWindow* w){
+template <class T> entity<T>::entity(){
+  body = new T();
+  boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
+  bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
+}
+
+/*template <class T> entity<T>::entity(sf::RenderWindow* w){
   window = w;
   body = new sf::CircleShape();
-  boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
+  body->setRadius(10);
+  body->setFillColor(sf::Color::Red);
+  //boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
+  boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
   bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
   /*bound.setOrigin(body.getOrigin());
   bound.setPosition(body.getPosition());
   bound.setRotation(body.getRotation());
-  bound.setScale(body.getScale());*/
+  bound.setScale(body.getScale());
+}*/
+
+template <class T> entity<T>::entity(float radius, std::size_t pointCount){
+  body = new sf::CircleShape(radius);
+  //boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
+
+  boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
+
+  bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
+  bound.setOrigin(body->getOrigin());
+  bound.setPosition(body->getPosition());
+  bound.setRotation(body->getRotation());
+  bound.setScale(body->getScale());
 }
 
 
@@ -76,36 +105,11 @@ template <class T> void entity<T>::SetOrigin(const sf::Vector2f &origin){
   target.draw(, states);
 }*/
 
-template <class T> void entity<T>::Draw (){
+template <class T> void entity<T>::Draw (sf::RenderWindow* window){
   window->draw(body);
 }
 
-template <class T> void entity<T>::DrawTest (){
-  window->draw(body);
+template <class T> void entity<T>::DrawTest (sf::RenderWindow* window){
   window->draw(bound);
-}
-
-template <class T> void entity<T>::Move (float offsetX, float offsetY){
-  body->move(offsetX, offsetY);
-  bound.move(offsetX, offsetY);
-}
-
-template <class T> void entity<T>::Move (const sf::Vector2f &offset){
-  body->move(offset);
-  bound.move(offset);
-}
-
-template <class T> void entity<T>::Rotate (float angle){
-  body->rotate(angle);
-  bound.rotate(angle);
-}
-
-template <class T> void entity<T>::Scale (float factorY, float factorX){
-  body->move(factorX, factorY);
-  bound.move(factorX, factorY);
-}
-
-template <class T> void entity<T>::Scale (const sf::Vector2f &factor){
-  body->move(factor);
-  bound.move(factor);
+  window->draw(*body);
 }

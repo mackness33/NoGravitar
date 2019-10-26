@@ -1,5 +1,7 @@
 //SPACESHIP
 //Class that handle everything that concerne a spaceship
+#ifndef ENTITY_H
+#define ENTITY_H
 
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
@@ -18,7 +20,6 @@ template <class T> class entity{
     //void draw(sf::RenderTarget& target, sf::RenderStates states = RenderStates::Default) const;
 
   protected:
-    sf::RenderWindow* window;
     sf::FloatRect *boundBox;
     sf::RectangleShape bound;       //FOR TESTING ONLY
     T *body;
@@ -26,9 +27,12 @@ template <class T> class entity{
   public:
     //TODO: add all the constructors of sf::Shape sf::Sprite .. etc
     //----------CONSTRUCTORS----------
-    entity(sf::RenderWindow* w, T* b);
+    entity(T* b);
 
-    entity(sf::RenderWindow* w);
+    entity();
+
+    //CircleShape
+    entity(float radius, std::size_t pointCount = 30);
 
     //----------GETS----------
     T* getBody();
@@ -51,15 +55,9 @@ template <class T> class entity{
     void 	SetOrigin (const sf::Vector2f &origin);
 
     //----------METHODS------------
-    void Draw ();
-    void DrawTest ();
-
-    void 	Move (float offsetX, float offsetY);
-    void 	Move (const sf::Vector2f &offset);
-
-    void 	Rotate (float angle);
-
-    void 	Scale (float factorX, float factorY);
-    void 	Scale (const sf::Vector2f &factor);
-
+    void Draw (sf::RenderWindow* window);
+    void DrawTest (sf::RenderWindow* window);
 };
+
+#include "entity.tpp"
+#endif // ENTITY_H

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cmath>
 #include "settings.hpp"
+#include "movable.hpp"
 /*
 
 */
@@ -13,7 +14,7 @@
 
 class bullet{
   private:
-    sf::CircleShape body;
+    movable<sf::CircleShape>* body;
     //sf::FloatRect *boundingBox;
     //sf::RectangleShape bound;       //FOR TESTING ONLY
     //sf::Vector2f *position;
@@ -26,10 +27,11 @@ class bullet{
     //CONSTRUCTORS
     bullet();
     bullet(float s, float d, sf::Vector2f p);
+
     ~bullet();
 
     //GETS
-    sf::CircleShape getBody();
+    movable<sf::CircleShape>* getBody();
     //SETS
 
     //---------------METHODS---------------

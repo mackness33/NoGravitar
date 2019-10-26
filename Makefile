@@ -29,7 +29,7 @@ universe.o: Classes/universe.hpp Classes/universe.cpp Classes/spaceship.hpp
 keyVector.o: Classes/keyVector.hpp Classes/keyVector.cpp
 		g++ -c Classes/keyVector.cpp $(LIBS)
 
-bullet.o: Classes/bullet.hpp Classes/bullet.cpp
+bullet.o: Classes/bullet.hpp Classes/bullet.cpp Classes/entity.hpp Classes/entity.tpp Classes/movable.hpp Classes/movable.tpp
 		g++ -c Classes/bullet.cpp $(LIBS)
 
 settings.o: Classes/settings.hpp Classes/settings.cpp
@@ -52,11 +52,11 @@ test.o: test.cpp Classes/object_test.hpp
 
 
 #If you want you can write it in this Makefile
-test2: test2.o object_test.o entity.o
-		g++ -g -Wall -o Test test2.o object_test.o entity.o $(LIBS)
+test2: test2.o
+		g++ -g -Wall -o Test test2.o $(LIBS)
 
-test2.o: test2.cpp
-		g++ -c test2.cpp $(LIBS)
+test2.o: test2.cpp Classes/entity.hpp Classes/entity.tpp object_test.hpp object_test.tpp
+		g++ -c -Wall -pedantic -W test2.cpp $(LIBS)
 
 bunker.o: Classes/bunker.hpp Classes/bunker.cpp
 		g++ -c Classes/bunker.cpp $(LIBS)
@@ -64,7 +64,7 @@ bunker.o: Classes/bunker.hpp Classes/bunker.cpp
 		#BASE
 
 object_test.o: object_test.hpp object_test.cpp Classes/entity.hpp
-		g++ -c object_test.cpp $(LIBS)
+		g++ -c -c -Wall -pedantic -W object_test.cpp $(LIBS)
 
 entity.o: Classes/entity.hpp Classes/entity.cpp
 		g++ -c Classes/entity.cpp $(LIBS)

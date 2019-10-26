@@ -1,6 +1,6 @@
 //OBJECT
 //A prototype of a class
-#include "object_test.hpp"
+//#include "object_test.hpp"
 
 template <class T> object_test<T>::object_test(sf::RenderWindow* w){
   body = new entity<sf::CircleShape>(w);
@@ -33,6 +33,6 @@ template <class T> void object_test<T>::setFroperty(int p) { this->property = p;
     this->setPosition(80.f, 70.f);
     this->rotate(90);
   }*/
-template <class T> void object_test<T>::Draw (sf::RenderWindow* window){
+template <class T> void object_test<T>::Draw (){
   body->DrawTest();
 }

@@ -24,7 +24,7 @@ int main(){
         window.clear();
 
         //how to draw the object
-        cs->Draw(&window);
+        cs->Draw();
 
         window.display();
     }

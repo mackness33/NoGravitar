@@ -21,7 +21,7 @@ bullet::bullet(){
 }
 
 bullet::bullet(float s, float d, sf::Vector2f p){
-  body = new movable<sf::CircleShape>(40);
+  body = new movable<sf::CircleShape>(5);
 
   speed = s;
   direction = d * PI / 180.0f;
@@ -43,7 +43,7 @@ movable<sf::CircleShape>* bullet::getBody() { return body; }
 
 //DRAW
 void bullet::Draw (sf::RenderWindow* window){
-  body->DrawTest(window);
+  body->Draw(window);
 }
 
 void bullet::Update(){
@@ -57,15 +57,15 @@ void bullet::Update(){
     totalTime -= settings::switchTime;
     body->Move(cos(direction) * speed, sin(direction) * speed);
     sf::Vector2f pos = body->getBody()->getPosition();
-    std::cout << "Position x:" << pos.x << std::endl;
-    std::cout << "Position y:" << pos.y << std::endl;
+    //std::cout << "Position x:" << pos.x << std::endl;
+    //std::cout << "Position y:" << pos.y << std::endl;
     //std::cout << "switchTime:" << settings::switchTime << std::endl;
   }
 
-  std::cout << "totalTime:" << totalTime << std::endl;
+  //std::cout << "totalTime:" << totalTime << std::endl;
   //std::cout << "deltaTime:" << settings::deltaTime << std::endl;
 }
 
 void bullet::build(){
-  body->getBody()->setFillColor(sf::Color::Red);
+  body->getBody()->setFillColor(sf::Color::White);
 }

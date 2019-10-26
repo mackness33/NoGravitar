@@ -22,13 +22,15 @@ class spaceship{
     bool topOOB;                   //topOutOfBounds
     float spatial_Versor;
     float rotation_Versor;
-    sf::ConvexShape body;
+    movable<sf::Sprite>* body;
+    sf::Texture* image;
     //bullet *b;
     std::list <bullet*> bullets;
 
   public:
     //CONSTRUCTORS
     spaceship();
+    spaceship(sf::Texture* img);
     //spaceship(const spaceship& S);
 
     //GETS
@@ -38,7 +40,7 @@ class spaceship{
     bool getTopOutOfBounds();
     float getSpatialVersor();
     float getRotationVersor();
-    sf::ConvexShape getBody();
+    sf::Sprite* getBody();
 
     //SETS
     void setXOutOfBounds(bool x);
@@ -47,7 +49,8 @@ class spaceship{
     void setTopOutOfBounds(bool t);
     void setSpatialVersor(float sv);
     void setRotationVersor(float rv);
-    void setBody(sf::ConvexShape b);
+    void setBody(sf::Sprite* b);
+    //TODO: setTexture(sf::Texture* t);
 
     //----------METHODS------------
 

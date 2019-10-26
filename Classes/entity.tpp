@@ -24,6 +24,9 @@ template <class T> entity<T>::entity(){
   body = new T();
   boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
   bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
+  bound.setFillColor(sf::Color::Black);
+  bound.setOutlineColor(sf::Color::Black);
+  bound.setOutlineThickness(3);
 }
 
 /*template <class T> entity<T>::entity(sf::RenderWindow* w){
@@ -46,8 +49,28 @@ template <class T> entity<T>::entity(float radius, std::size_t pointCount){
 
   boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
 
+  bound.setFillColor(sf::Color::Black);
+  bound.setOutlineColor(sf::Color::Red);
+  bound.setOutlineThickness(3);
   bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
   bound.setOrigin(body->getOrigin());
+  bound.setPosition(body->getPosition());
+  bound.setRotation(body->getRotation());
+  bound.setScale(body->getScale());
+}
+
+template <class T> entity<T>::entity(sf::Texture* texture){
+  body = new sf::Sprite(*texture);
+  //boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
+
+  boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
+
+  this->SetOrigin(boundBox->width/2, boundBox->height/2);
+  bound.setFillColor(sf::Color::Black);
+  bound.setOutlineColor(sf::Color::Red);
+  bound.setOutlineThickness(3);
+  bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
+  //bound.setOrigin(body->getOrigin());
   bound.setPosition(body->getPosition());
   bound.setRotation(body->getRotation());
   bound.setScale(body->getScale());
@@ -69,7 +92,7 @@ template <class T> void entity<T>::setBody(T* b){
   else
     boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
 
-
+  body->SetOrigin(boundBox->width/4, boundBox->height/4);
   bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
 }
 
@@ -86,6 +109,16 @@ template <class T> void entity<T>::SetPosition(const sf::Vector2f &position){
 template <class T> void entity<T>::SetRotation(float angle){
   body->setRotation(angle);
   bound.setRotation(angle);
+}
+
+template <class T> void entity<T>::SetScale(float x, float y){
+  body->setScale(x, y);
+  bound.setScale(x, y);
+}
+
+template <class T> void entity<T>::SetScale(const sf::Vector2f &factor){
+  body->setScale(factor);
+  bound.setScale(factor);
 }
 
 template <class T> void entity<T>::SetOrigin(float x, float y){
@@ -106,7 +139,7 @@ template <class T> void entity<T>::SetOrigin(const sf::Vector2f &origin){
 }*/
 
 template <class T> void entity<T>::Draw (sf::RenderWindow* window){
-  window->draw(body);
+  window->draw(*body);
 }
 
 template <class T> void entity<T>::DrawTest (sf::RenderWindow* window){

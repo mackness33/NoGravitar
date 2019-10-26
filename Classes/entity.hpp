@@ -34,6 +34,9 @@ template <class T> class entity{
     //CircleShape
     entity(float radius, std::size_t pointCount = 30);
 
+    //Sprite
+    entity(sf::Texture* texture);
+
     //----------GETS----------
     T* getBody();
     //*sf::FloatRect getBoundBox();
@@ -49,7 +52,7 @@ template <class T> class entity{
     void 	SetRotation (float angle);
 
     void 	SetScale (float factorX, float factorY);
-    void 	SetScale (const sf::Vector2f &factors);
+    void 	SetScale (const sf::Vector2f &factor);
 
     void 	SetOrigin (float x, float y);
     void 	SetOrigin (const sf::Vector2f &origin);

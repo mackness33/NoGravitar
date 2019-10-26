@@ -26,7 +26,8 @@ int main (void){
 
 
   //Create the spaceship
-  spaceship Spaceship;
+  sf::Texture spaceshipImage;
+  spaceship Spaceship(&spaceshipImage);
   header *Header = new header(&window);
   settings *Settings = new settings(&window);
   universe *Universe = new universe(&window, &Spaceship);
@@ -39,6 +40,7 @@ int main (void){
   keyVector rotation;
   keyVector translation;
 
+  settings::deltaTime = 10.0f;
   settings::switchTime = 10.0f;
 
   collisionHandler c;
@@ -46,7 +48,6 @@ int main (void){
   while (window.isOpen()){
     // check all the window's events that were triggered since the last iteration of the loop
     sf::Event event;
-    settings::deltaTime = Settings->getClock().restart().asSeconds() - settings::deltaTime;
 
     while (window.pollEvent(event)){
 

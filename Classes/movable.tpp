@@ -1,11 +1,4 @@
-//UNIVERSE
-//Class that handle everything that concerne the top of the window
-
-/*
-
-*/
-//#include "movable.hpp"
-#define PI 3.14159265
+//MOVABLE
 
 //------------CONSTRUCTORS------------
 template <class T> movable<T>::movable(T* b) : entity<T>::entity(b) {}
@@ -27,6 +20,8 @@ template <class T> movable<T>::movable() : entity<T>::entity() {}
 }*/
 
 template <class T> movable<T>::movable(float radius, std::size_t pointCount) : entity<T>::entity(radius, pointCount) {}
+
+template <class T> movable<T>::movable(sf::Texture* texture) : entity<T>::entity(texture) {}
 
 template <class T> void movable<T>::Move (float offsetX, float offsetY){
   entity<T>::body->move(offsetX, offsetY);

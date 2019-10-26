@@ -1,5 +1,5 @@
-//SPACESHIP
-//Class that handle everything that concerne a spaceship
+//MOVABLE
+
 #ifndef MOVABLE_H
 #define MOVABLE_H
 
@@ -27,6 +27,9 @@ template <class T> class movable : public entity<T>{
 
     //CircleShape
     movable(float radius, std::size_t pointCount = 30);
+
+    //Sprite
+    movable(sf::Texture* texture);
 
     void 	Move (float offsetX, float offsetY);
     void 	Move (const sf::Vector2f &offset);

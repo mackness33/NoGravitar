@@ -20,7 +20,33 @@ spaceship::spaceship(){
   //b = NULL;
   bullets = {};
 
-  this->build();
+  image->loadFromFile("img/spaceship.png");
+  body = new movable<sf::Sprite>(image);
+
+  //this->build();
+}
+
+spaceship::spaceship(sf::Texture* img){
+  xOutOfBound = false;
+  yOutOfBound = false;
+  topOOB = false;
+  leftOOB = false;
+
+  spatial_Versor = 10;
+  rotation_Versor = 3;
+
+  //b = NULL;
+  bullets = {};
+
+  image = img;
+  image->loadFromFile("img/spaceship.png");
+
+  body = new movable<sf::Sprite>(image);
+  body->SetScale(0.25f, 0.25f);
+  body->SetPosition(80.f, 70.f);
+
+
+  //this->build();
 }
 
 /*spaceship(const spaceship& S){
@@ -37,7 +63,7 @@ bool spaceship::getLeftOutOfBounds(){ return leftOOB;}
 bool spaceship::getTopOutOfBounds(){ return topOOB;}
 float spaceship::getSpatialVersor(){ return spatial_Versor;}
 float spaceship::getRotationVersor(){ return rotation_Versor;}
-sf::ConvexShape spaceship::getBody(){ return body;}
+sf::Sprite* spaceship::getBody(){ return body->getBody();}
 
 //SETS
 void spaceship::setXOutOfBounds(bool x){ xOutOfBound = x;}
@@ -46,7 +72,7 @@ void spaceship::setLeftOutOfBounds(bool l){ leftOOB = l;}
 void spaceship::setTopOutOfBounds(bool t){ topOOB = t;}
 void spaceship::setSpatialVersor(float sv) { spatial_Versor = sv;}
 void spaceship::setRotationVersor(float rv) { rotation_Versor = rv;}
-void spaceship::setBody(sf::ConvexShape b) { body = b;}
+//void spaceship::setBody(sf::Sprite* b) { body = b;}
 
 //---------------METHODS--------------------
 
@@ -55,11 +81,11 @@ void spaceship::setBody(sf::ConvexShape b) { body = b;}
 void spaceship::movement(sf::Keyboard::Key k){
   switch (k) {
     case sf::Keyboard::Left : {                 //LEFT
-      body.rotate(-rotation_Versor);
+      body->Rotate(-rotation_Versor);
     };break;
 
     case sf::Keyboard::Right : {                //RIGHT
-      body.rotate(rotation_Versor);
+      body->Rotate(rotation_Versor);
     };break;
 
     case sf::Keyboard::Up : {                   //UP
@@ -78,12 +104,12 @@ void spaceship::movement(sf::Keyboard::Key k){
 void spaceship::movement(sf::Keyboard::Key k, sf::RectangleShape *Bound){
   switch (k) {
     case sf::Keyboard::Left : {                 //LEFT
-      body.rotate(-rotation_Versor);
+      body->Rotate(-rotation_Versor);
       Bound->rotate(-rotation_Versor);
     };break;
 
     case sf::Keyboard::Right : {                //RIGHT
-      body.rotate(rotation_Versor);
+      body->Rotate(rotation_Versor);
       Bound->rotate(rotation_Versor);
     };break;
 
@@ -101,7 +127,7 @@ void spaceship::movement(sf::Keyboard::Key k, sf::RectangleShape *Bound){
 
 //for testing use
 void spaceship::fly(float module, sf::RectangleShape *Bound){
-  float direction = body.getRotation() * PI / 180.0;
+  float direction = body->getBody()->getRotation() * PI / 180.0;
   int sin_module = sin(direction) * module;
   int cos_module = cos(direction) * module;
   bool y_opp_dir = opposite_direction(topOOB,  sin(direction) * module);
@@ -117,7 +143,7 @@ void spaceship::fly(float module, sf::RectangleShape *Bound){
     std::cout << "XOutOfBounds!!!" << std::endl;
   }
 
-  body.move(cos_module, sin_module);
+  body->Move(cos_module, sin_module);
   Bound->move(cos_module, sin_module);
 }
 
@@ -125,7 +151,7 @@ void spaceship::fly(float module, sf::RectangleShape *Bound){
 //FLY
 //It handle spaceship translation in the window
 void spaceship::fly(float module){
-  float direction = body.getRotation() * PI / 180.0;
+  float direction = body->getBody()->getRotation() * PI / 180.0;
   int sin_module = sin(direction) * module;
   int cos_module = cos(direction) * module;
   bool y_opp_dir = opposite_direction(topOOB,  sin(direction) * module);
@@ -141,7 +167,7 @@ void spaceship::fly(float module){
     std::cout << "XOutOfBounds!!!" << std::endl;
   }
 
-  body.move(cos_module, sin_module);
+  body->Move(cos_module, sin_module);
 }
 
 
@@ -186,11 +212,11 @@ void spaceship::Draw (sf::RenderWindow* window){
   std::list<bullet*>::iterator b = bullets.begin();
   //while( i != bullets.size()){
   for (/*std::list<bullet*>::iterator */b = bullets.begin(); b != bullets.end(); b++){
-    std::cout << "position i: " << i << std::endl;
+    //std::cout << "position i: " << i << std::endl;
     bul = *b;
-    std::cout << "Does the bullet exist: " << !!bul << std::endl;
+    //std::cout << "Does the bullet exist: " << !!bul << std::endl;
     if(!!bul){
-      std::cout << "real location of " << i << "^ bullet: " << bul << std::endl;
+      //std::cout << "real location of " << i << "^ bullet: " << bul << std::endl;
       bul->Update();
       bul->Draw(window);
     }//break;
@@ -199,7 +225,7 @@ void spaceship::Draw (sf::RenderWindow* window){
       //b++;
     //next(b, i);
   }
-  std::cout << "bullets size: " << bullets.size() << std::endl;
+  //std::cout << "bullets size: " << bullets.size() << std::endl;
 
 
   /*for (vector<int>::iterator b = bullets.cbegin(); b != bullets.cend(); b++){
@@ -220,16 +246,16 @@ void spaceship::Draw (sf::RenderWindow* window){
     bul->Draw(window);
   }*/
 
-  window->draw(body);
+  body->Draw(window);
 }
 
 //BUILD
 //It build up the spaceship shape
-void spaceship::build (){
+/*void spaceship::build (){
   //creo quattro punti per la spezzata chiusa dell'astronave
-  body.setPointCount(4);
+  body->setPointCount(4);
 
-  body.setPoint(2, sf::Vector2f(30.f, 0.f));
+  body->setPoint(2, sf::Vector2f(30.f, 0.f));
   body.setPoint(1, sf::Vector2f(0.f, 40.f));
   body.setPoint(3, sf::Vector2f(60.f, 40.f));
   body.setPoint(0, sf::Vector2f(30.f, 20.f));
@@ -242,11 +268,11 @@ void spaceship::build (){
   body.setScale(0.5f, 0.5f);
 
   //body.rotate(90);
-}
+}*/
 
 void spaceship::Shoot(){
 
-  bullet *bul = new bullet(spatial_Versor * 1.5f, body.getRotation(), body.getPosition());
-  std::cout << "real location c: " << bul << std::endl;
+  bullet *bul = new bullet(spatial_Versor * 1.5f, body->getBody()->getRotation(), body->getBody()->getPosition());
+  //std::cout << "real location c: " << bul << std::endl;
   bullets.push_back(bul);
 }

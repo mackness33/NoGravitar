@@ -27,10 +27,12 @@ int main (void){
 
   //Create the spaceship
   sf::Texture spaceshipImage;
+  spaceshipImage.setSmooth(true);
+
   spaceship Spaceship(&spaceshipImage);
   header *Header = new header(&window);
   settings *Settings = new settings(&window);
-  universe *Universe = new universe(&window, &Spaceship);
+  universe *Universe = new universe(&window, &Spaceship, 5);
   /*sf::FloatRect spaceshipBound = s2->getLocalBounds();        //for testing use
   sf::RectangleShape spaceshipBoundingBox(sf::Vector2f(spaceshipBound.width, spaceshipBound.height));
   spaceshipBoundingBox.setOrigin(30.f, 20.f);

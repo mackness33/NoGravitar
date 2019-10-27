@@ -10,7 +10,7 @@
 #include <iostream>
 #include <cmath>
 #include "spaceship.hpp"
-#define PI 3.14159265
+#include "planetObj.hpp"
 
 class universe{
   private:
@@ -22,10 +22,14 @@ class universe{
     sf::RectangleShape bound;       //FOR TESTING ONLY
     sf::Vector2f *position;
     sf::Vector2f *size;
+    std::list <planetObj*> planets;
+
+  private:
+    void DrawPlanets (/*sf::RenderWindow* window*/);
 
   public:
     //CONSTRUCTORS
-    universe(sf::RenderWindow* win, spaceship* spc);
+    universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets);
 
     //GETS
     //sf::Texture getTexture(){ return this->background.getTexture();}

@@ -8,7 +8,7 @@
 
 //CONSTRUCTORS
 bullet::bullet(){
-  body = new movable<sf::CircleShape>();
+  body = new movable<sf::CircleShape>(5);
 
   speed = 12;
   direction = 0 * PI / 180.0f;
@@ -43,7 +43,7 @@ movable<sf::CircleShape>* bullet::getBody() { return body; }
 
 //DRAW
 void bullet::Draw (sf::RenderWindow* window){
-  body->Draw(window);
+  body->DrawTest(window);
 }
 
 void bullet::Update(){
@@ -68,4 +68,5 @@ void bullet::Update(){
 
 void bullet::build(){
   body->getBody()->setFillColor(sf::Color::White);
+  //body->getBody()->setSmooth(true);
 }

@@ -8,7 +8,7 @@
 #define PI 3.14159265
 
 //CONSTRUCTORS
-universe::universe(sf::RenderWindow* win, spaceship* spc){
+universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets ){
   window = win;
   S = spc;
 
@@ -19,6 +19,17 @@ universe::universe(sf::RenderWindow* win, spaceship* spc){
   bound.setPosition(*position);
   bound.setSize(*size);
   bound.setFillColor(sf::Color(0, 0, 0));
+
+  srand (time(NULL));
+
+  sf::Vector2u playground = window->getSize();
+
+  planets = {};
+
+  for (int i = 0; i < numPlanets; i++){
+    planetObj *pln = new planetObj(40, sf::Vector2f(rand() % playground.x, rand() % playground.y));
+    planets.push_front(pln);
+  }
 
   /*
   //texture.create((unsigned int)size->x, (unsigned int)size->y);
@@ -36,7 +47,7 @@ universe::universe(sf::RenderWindow* win, spaceship* spc){
   */
 }
 
-//GETS..................................................8
+//GETS
 //sf::Texture getTexture(){ return this->background.getTexture();}
 //sf::Sprite getBackground(){ return this->background;}
 
@@ -44,11 +55,30 @@ universe::universe(sf::RenderWindow* win, spaceship* spc){
 //void setTexture(sf::Texture t){ this->background.setTexture(t);}
 //void setBackground(sf::Sprite b){ this->background = b;}
 
+
 //---------------METHODS---------------
+
 
 //DRAW
 void universe::Draw (/*sf::RenderWindow* window*/){
   window->draw(bound);
   S->Draw(window);
+  this->DrawPlanets();
   //window->draw(background);
 }
+
+void universe::DrawPlanets (/*sf::RenderWindow* window*/){
+  planetObj *pln;
+  for (std::list<planetObj*>::iterator p = planets.begin(); p != planets.end(); p++){
+    //std::cout << "position i: " << i << std::endl;
+    pln = *p;
+    //std::cout << "Does the bullet exist: " << !!bul << std::endl;
+    if(!!pln){
+      //std::cout << "real location of " << i << "^ bullet: " << bul << std::endl;
+      pln->Draw(window);
+    }
+  }
+}
+
+
+//

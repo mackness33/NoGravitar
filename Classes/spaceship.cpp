@@ -187,31 +187,8 @@ bool spaceship::opposite_direction(bool side, float direction){
 }
 
 void spaceship::Draw (sf::RenderWindow* window){
-  /*for (bullet b : bullets) {
-    b.Update();
-    b.Draw(window);
-    std::cout << "bullet printed" << '\n';
-  }*/
-  //std::cout << !!b << std::endl;
-  //bullet *b ;//= (* bullet) bullets.front();
-  /*if(!bullets.empty()){
-    bullet *bul;
-    bul = &(bullets.front());
-    //b = bul;
-    bul->Update();
-    bul->Draw(window);
-  }*/
-
-  //std::cout << "bullets size(): " << bullets.size() <<  '\n';
-
-  //for (bullet bul : bullets) {
   bullet *bul;
-  //bullet b = bullets.begin();
-  int i = 0;
-
-  std::list<bullet*>::iterator b = bullets.begin();
-  //while( i != bullets.size()){
-  for (/*std::list<bullet*>::iterator */b = bullets.begin(); b != bullets.end(); b++){
+  for (std::list<bullet*>::iterator b = bullets.begin(); b != bullets.end(); b++){
     //std::cout << "position i: " << i << std::endl;
     bul = *b;
     //std::cout << "Does the bullet exist: " << !!bul << std::endl;
@@ -219,34 +196,10 @@ void spaceship::Draw (sf::RenderWindow* window){
       //std::cout << "real location of " << i << "^ bullet: " << bul << std::endl;
       bul->Update();
       bul->Draw(window);
-    }//break;
-
-    //if(!!(b+1))
-      //b++;
-    //next(b, i);
+    }
   }
-  //std::cout << "bullets size: " << bullets.size() << std::endl;
 
-
-  /*for (vector<int>::iterator b = bullets.cbegin(); b != bullets.cend(); b++){
-    *bul = *b;
-    bul->Update();
-    bul->Draw(window);
-  }
-  /*while(i < bullets.size()){
-    std::cout << "bullet id: " << ++i << std::endl;
-  	b++;
-  }
-  /*for (int i = 0; i < bullets.size(); i++) {
-    //if(bul != NULL){
-    //}
-    bul = &(bullets.front());
-    //b = bul;
-    bul->Update();
-    bul->Draw(window);
-  }*/
-
-  body->Draw(window);
+  body->DrawTest(window);
 }
 
 //BUILD

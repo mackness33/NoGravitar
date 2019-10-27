@@ -23,3 +23,6 @@ utility::utility(){
 //void setTexture(sf::Texture t){ this->background.setTexture(t);}
 
 //---------------METHODS---------------
+sf::Vector2f utility::RandVector(int x, int y){ return sf::Vector2f(rand() % x, rand() % y); }
+
+int utility::Rand(int x, int y){ return rand() % x + y; }

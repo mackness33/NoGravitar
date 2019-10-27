@@ -11,6 +11,7 @@
 #include <cmath>
 #include "spaceship.hpp"
 #include "planetObj.hpp"
+#include "utility.hpp"
 
 class universe{
   private:
@@ -43,4 +44,6 @@ class universe{
 
     //DRAW
     void Draw (/*sf::RenderWindow* window*/);
+
+    bool checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos);
 };

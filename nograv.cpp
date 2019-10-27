@@ -24,6 +24,7 @@ int main (void){
   window.setFramerateLimit(60);
   window.setKeyRepeatEnabled(false);
 
+  srand (time(NULL));
 
   //Create the spaceship
   sf::Texture spaceshipImage;

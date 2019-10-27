@@ -20,15 +20,28 @@ universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanet
   bound.setSize(*size);
   bound.setFillColor(sf::Color(0, 0, 0));
 
-  srand (time(NULL));
-
-  sf::Vector2u playground = window->getSize();
+  sf::Vector2u playground = window->getSize() - sf::Vector2u(80, 80);
+  std::cout << "rand x: " << playground.x << std::endl;
+  std::cout << "rand y: " << playground.y << std::endl;
 
   planets = {};
 
+  std::list<sf::FloatRect> posPlanets = {};
+
   for (int i = 0; i < numPlanets; i++){
-    planetObj *pln = new planetObj(40, sf::Vector2f(rand() % playground.x, rand() % playground.y));
-    planets.push_front(pln);
+    sf::Vector2f pos = utility::RandVector(playground.x, playground.y);
+    std::cout << "pos x: " << pos.x << std::endl;
+    std::cout << "pos y: " << pos.y << std::endl;
+    if(this->checkPlanetPosition(&posPlanets, pos)){
+      planetObj *pln = new planetObj(utility::Rand(20, 30), pos);
+      //pln->getBody()->SetOrigin(pos);
+      planets.push_front(pln);
+      posPlanets.push_front(pln->getBody()->getBody()->getGlobalBounds());
+    }
+    else{
+      std::cout << "INTERSECTS!" << std::endl;
+      i--;
+    }
   }
 
   /*
@@ -65,6 +78,19 @@ void universe::Draw (/*sf::RenderWindow* window*/){
   S->Draw(window);
   this->DrawPlanets();
   //window->draw(background);
+}
+
+bool universe::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos){
+  sf::FloatRect newPlanetBound (pos, sf::Vector2f(80, 80));
+  sf::FloatRect planetsIntersection;
+  int i = 0;
+  for(std::list<sf::FloatRect>::iterator boundPlanet = posPlanets->begin(); boundPlanet != posPlanets->end(); boundPlanet++, i++){
+    std::cout << "intersects: " << newPlanetBound.intersects(*boundPlanet, planetsIntersection) << std::endl;
+    if(planetsIntersection != sf::FloatRect(0,0,0,0))
+      return false;
+  }
+
+  return true;
 }
 
 void universe::DrawPlanets (/*sf::RenderWindow* window*/){

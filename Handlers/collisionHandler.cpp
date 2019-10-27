@@ -16,6 +16,7 @@ void collisionHandler::checkOutOfBounds(spaceship *S, sf::VideoMode *desktop){
   // check collision with another box (like the bounding box of another entity)
   desktopBoundingBox.intersects(spaceshipBoundingBox, spaceshipBoundingBox);
 
+  //TODO: make methods to organize checkOutOfBounds spaceship
   //Y OUT OF BOUNDS
   if(checkSide(spaceshipBoundingBox.top + spaceshipBoundingBox.height, desktopBoundingBox.top + desktopBoundingBox.height) || checkSide(spaceshipBoundingBox.top, desktopBoundingBox.top)){
     S->setYOutOfBounds(true);

@@ -56,9 +56,9 @@ template <class T> void entity<T>::setBoundery(){
   if (!!body){
     boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
 
-    bound.setPosition(body->getPosition());
-    bound.setRotation(body->getRotation());
-    bound.setScale(body->getScale());
+    //bound.setPosition(body->getPosition());
+    //bound.setRotation(body->getRotation());
+    //bound.setScale(body->getScale());
   }
   else
     boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use

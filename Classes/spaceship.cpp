@@ -44,6 +44,8 @@ spaceship::spaceship(sf::Texture* img){
   body = new movable<sf::Sprite>(image);
   body->SetScale(0.25f, 0.25f);
   body->SetPosition(80.f, 70.f);
+  sf::FloatRect bounds = body->getBody()->getLocalBounds();
+  body->SetOrigin(bounds.width/2, bounds.height/2);
 
 
   //this->build();

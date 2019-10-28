@@ -10,8 +10,8 @@
 //------------CONSTRUCTORS------------
 viewer::viewer(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i){
   window = w;
-  sf::Vector2f default_size = sf::Vector2f(w->getSize().x-6, ((w->getSize().y-25) * 9/10)-6); //with the -3 I can see the bounderies
-  sf::Vector2f default_position = sf::Vector2f(w->getSize().x/2, w->getSize().y/2 + w->getSize().y/15);
+  sf::Vector2f default_size = sf::Vector2f(w->getSize().x-6, (w->getSize().y * 9/10)-6); //with the -3 I can see the bounderies
+  sf::Vector2f default_position = sf::Vector2f(3, w->getSize().y/10 + 3);
   if(s == sf::Vector2f(-1, -1) && p == sf::Vector2f(-1, -1)){
     background = new entity<sf::RectangleShape>(default_size, default_position);
     std::cout << "size x:" << w->getSize().x << std::endl;

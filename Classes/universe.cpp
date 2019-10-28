@@ -21,7 +21,7 @@ universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanet
   std::list<sf::FloatRect> posPlanets = {};
 
   for (int i = 0; i < 20; i++){
-    sf::Vector2f position = utility::RandVector(playground.x, playground.y, 0, win->getSize().y/10 + 100);
+    sf::Vector2f position = utility::RandVector(playground.x, playground.y, 0, win->getSize().y/10);
     //sf::Vector2f position = utility::RandVector(win->getSize().x, win->getSize().y);
     std::cout << "pos x: " << position.x << std::endl;
     std::cout << "pos y: " << position.y << std::endl;

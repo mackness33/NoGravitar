@@ -30,6 +30,6 @@ class utility{
     //void setTexture(sf::Texture t){ this->background.setTexture(t);}
 
     //---------------METHODS---------------
-    static sf::Vector2f RandVector(int x, int y);
+    static sf::Vector2f RandVector(int x, int y, int offsetX = 0, int offsetY = 0);
     static int Rand(int x, int y = 0);
 };

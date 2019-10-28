@@ -22,6 +22,8 @@ class universe : public viewer{
   private:
     void DrawPlanets (/*sf::RenderWindow* window*/);
 
+    bool checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos);
+
   public:
     //CONSTRUCTORS
     universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets);
@@ -38,6 +40,4 @@ class universe : public viewer{
 
     //DRAW
     void Draw (/*sf::RenderWindow* window*/);
-
-    bool checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos);
 };

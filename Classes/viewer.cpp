@@ -16,8 +16,8 @@ viewer::viewer(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture*
     background = new entity<sf::RectangleShape>(default_size, default_position);
     std::cout << "size x:" << w->getSize().x << std::endl;
     std::cout << "size y:" << w->getSize().y << std::endl;
-    std::cout << "pos x:" << -w->getSize().x/2 << std::endl;
-    std::cout << "pos y:" << w->getSize().y/2 + w->getSize().y/10 << std::endl;
+    std::cout << "pos win x:" << w->getSize().x/2 << std::endl;
+    std::cout << "pos win y:" << w->getSize().y/2 + w->getSize().y/10 << std::endl;
   }else
     background = new entity<sf::RectangleShape>(s, p);
 

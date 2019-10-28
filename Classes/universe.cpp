@@ -12,7 +12,7 @@ universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanet
   S = spc;
 
   // Setting bounding box
-  sf::Vector2f playground = background->getBody()->getSize() - sf::Vector2f(80, 80);
+  sf::Vector2f playground = background->getBody()->getSize() - sf::Vector2f(100, 100);
   std::cout << "rand x: " << playground.x << std::endl;
   std::cout << "rand y: " << playground.y << std::endl;
 
@@ -20,12 +20,13 @@ universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanet
 
   std::list<sf::FloatRect> posPlanets = {};
 
-  for (int i = 0; i < numPlanets; i++){
-    sf::Vector2f position = utility::RandVector(playground.x, playground.y, 0, win->getSize().y/10 + 80);
+  for (int i = 0; i < 20; i++){
+    //sf::Vector2f position = utility::RandVector(playground.x, playground.y, 0, win->getSize().y/10 + 100);
+    sf::Vector2f position = utility::RandVector(win->getSize().x, win->getSize().y);
     std::cout << "pos x: " << position.x << std::endl;
     std::cout << "pos y: " << position.y << std::endl;
     if(this->checkPlanetPosition(&posPlanets, position)){
-      planetObj *pln = new planetObj(utility::Rand(30, 20), position);
+      planetObj *pln = new planetObj(utility::Rand(20, 30), position);
       //pln->getBody()->SetOrigin(pos);
       planets.push_front(pln);
       posPlanets.push_front(pln->getBody()->getBody()->getGlobalBounds());
@@ -75,21 +76,13 @@ void universe::Draw (/*sf::RenderWindow* window*/){
 bool universe::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos){
   sf::FloatRect newPlanetBound (pos, sf::Vector2f(80, 80));
   sf::FloatRect planetsIntersection;
-  sf::FloatRect playground (background->getBody()->getGlobalBounds());
   int i = 0;
-  playground.intersects(newPlanetBound, planetsIntersection);
 
-  if(newPlanetBound == planetsIntersection){
-    for(std::list<sf::FloatRect>::iterator boundPlanet = posPlanets->begin(); boundPlanet != posPlanets->end(); boundPlanet++, i++){
+  for(std::list<sf::FloatRect>::iterator boundPlanet = posPlanets->begin(); boundPlanet != posPlanets->end(); boundPlanet++, i++){
       std::cout << "intersects: " << newPlanetBound.intersects(*boundPlanet, planetsIntersection) << std::endl;
       if(planetsIntersection != sf::FloatRect(0,0,0,0))
       return false;
-    }
   }
-  else
-    return false;
-    std::cout << "intersects with background bounds!" << std::endl;
-
 
   return true;
 }

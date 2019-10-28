@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics
 
 # build an executable named windows from windows.c
-all: nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o
-		g++ -g -Wall -o NoGravitar nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o $(LIBS)
+all: nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o
+		g++ -g -Wall -o NoGravitar nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -23,7 +23,7 @@ spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp
 header.o: Classes/header.hpp Classes/header.cpp
 		g++ -c Classes/header.cpp $(LIBS)
 
-universe.o: Classes/universe.hpp Classes/universe.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/utility.hpp
+universe.o: Classes/universe.hpp Classes/universe.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/utility.hpp Classes/viewer.hpp
 		g++ -c Classes/universe.cpp $(LIBS)
 
 keyVector.o: Classes/keyVector.hpp Classes/keyVector.cpp
@@ -40,6 +40,9 @@ planetObj.o: Classes/planetObj.hpp Classes/planetObj.cpp Classes/entity.hpp Clas
 
 utility.o: Classes/utility.hpp Classes/utility.cpp
 		g++ -c Classes/utility.cpp $(LIBS)
+
+viewer.o: Classes/viewer.hpp Classes/viewer.cpp
+		g++ -c Classes/viewer.cpp $(LIBS)
 
 #CLEANER
 clean:
@@ -58,10 +61,10 @@ test.o: test.cpp Classes/object_test.hpp
 
 
 #If you want you can write it in this Makefile
-test2: test2.o
-		g++ -g -Wall -o Test test2.o $(LIBS)
+test2: test2.o viewer.o
+		g++ -g -Wall -o Test test2.o viewer.o $(LIBS)
 
-test2.o: test2.cpp Classes/entity.hpp Classes/entity.tpp object_test.hpp object_test.tpp
+test2.o: test2.cpp
 		g++ -c -Wall -pedantic -W test2.cpp $(LIBS)
 
 bunker.o: Classes/bunker.hpp Classes/bunker.cpp
@@ -69,7 +72,7 @@ bunker.o: Classes/bunker.hpp Classes/bunker.cpp
 
 		#BASE
 
-object_test.o: object_test.hpp object_test.cpp Classes/entity.hpp
+object_test.o: object_test.hpp object_test.cpp Classes/viewer.hpp
 		g++ -c -c -Wall -pedantic -W object_test.cpp $(LIBS)
 
 entity.o: Classes/entity.hpp Classes/entity.cpp

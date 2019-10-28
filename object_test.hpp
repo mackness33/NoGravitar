@@ -7,17 +7,18 @@
 #include <iostream>
 #include <cmath>
 #include <list>
-#include "Classes/entity.hpp"
+#include "Classes/viewer.hpp"
 
-template <class T> class object_test {
+class object_test : public viewer {
   //if there are properties you must set and get them!!!
   private:
     int property;
-    entity<sf::CircleShape> *body;
 
   public:
     //CONSTRUCTORS
     object_test(sf::RenderWindow* w);
+
+    object_test(sf::RenderWindow* w, sf::Texture* image);
 
     //if there's no property, you don't need get and set!!!
     //GETS
@@ -49,4 +50,4 @@ template <class T> class object_test {
     void Draw ();
 };
 
-#include "object_test.tpp"
+//#include "object_test.tpp"

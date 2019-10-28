@@ -9,10 +9,19 @@
 //template class object_test<sf::CircleShape>;
 
 int main(){
-    sf::RenderWindow window(sf::VideoMode(900, 800), "My entity");
+    sf::RenderWindow window(sf::VideoMode(900, 713), "My entity");
 
+    std::cout << "window x: " << window.getSize().x << std::endl;
+    std::cout << "window y: " << window.getSize().y << std::endl;
     //how to create an object
-    object_test<sf::CircleShape> *cs = new object_test<sf::CircleShape>(&window);
+    sf::Texture spaceshipImage;
+    spaceshipImage.loadFromFile("img/spaceship.png", sf::IntRect(0, 0, 0, 0));
+    spaceshipImage.setSmooth(true);
+    viewer *cs = new viewer(&window, &spaceshipImage);
+
+    cs->getBackground()->SetPosition(cs->getBackground()->getBody()->getLocalBounds().width, cs->getBackground()->getBody()->getLocalBounds().height);
+    std::cout << "width: " << cs->getBackground()->getBody()->getLocalBounds().width << std::endl;
+    std::cout << "height: " << cs->getBackground()->getBody()->getLocalBounds().height << std::endl;
 
     while (window.isOpen()){
         sf::Event event;

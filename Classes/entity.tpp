@@ -9,90 +9,64 @@
 
 //------------CONSTRUCTORS------------
 template <class T> entity<T>::entity(T* b){
-  if(!!b){
-    body = new T();
-    boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
-    bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
-  }
-  else
-    this->setBody(b);
-
-  //this->setBody(new T());
+  body = new T(b);
+  this->setBoundery();
 }
 
 template <class T> entity<T>::entity(){
   body = new T();
-  boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
-  bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
-  bound.setFillColor(sf::Color::Black);
-  bound.setOutlineColor(sf::Color::Black);
-  bound.setOutlineThickness(3);
+  this->setBoundery();
 }
 
-/*template <class T> entity<T>::entity(sf::RenderWindow* w){
-  window = w;
-  body = new sf::CircleShape();
-  body->setRadius(10);
-  body->setFillColor(sf::Color::Red);
-  //boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
-  boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
-  bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
-  /*bound.setOrigin(body.getOrigin());
-  bound.setPosition(body.getPosition());
-  bound.setRotation(body.getRotation());
-  bound.setScale(body.getScale());
-}*/
-
-template <class T> entity<T>::entity(float radius, std::size_t pointCount){
-  body = new sf::CircleShape(radius);
-  //boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
-
-  boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
-
-  bound.setFillColor(sf::Color::Black);
-  bound.setOutlineColor(sf::Color::Red);
-  bound.setOutlineThickness(3);
-  bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
-  bound.setOrigin(body->getOrigin());
-  bound.setPosition(body->getPosition());
-  bound.setRotation(body->getRotation());
-  bound.setScale(body->getScale());
+template <class T> entity<T>::entity(float r, std::size_t pc){
+  body = new sf::CircleShape(r, pc);
+  this->setBoundery();
 }
 
-template <class T> entity<T>::entity(sf::Texture* texture){
-  body = new sf::Sprite(*texture);
-  //boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
+template <class T> entity<T>::entity(sf::Texture* i){
+  body = new sf::Sprite(*i);
+  this->setBoundery();
+}
 
-  boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
+template <class T> entity<T>::entity(sf::Vector2f s, sf::Vector2f p, sf::Texture* i){
+  body = new sf::RectangleShape(s);
+  this->SetPosition(p);
 
-  this->SetOrigin(boundBox->width/2, boundBox->height/2);
-  bound.setFillColor(sf::Color::Black);
-  bound.setOutlineColor(sf::Color::Red);
-  bound.setOutlineThickness(3);
-  bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
-  //bound.setOrigin(body->getOrigin());
-  bound.setPosition(body->getPosition());
-  bound.setRotation(body->getRotation());
-  bound.setScale(body->getScale());
+  if(!i)
+    body->setFillColor(sf::Color::Black);
+
+  this->setBoundery();
 }
 
 
 //------------GETS------------
 template <class T> T* entity<T>::getBody(){ return body; }
+template <class T> sf::RectangleShape* entity<T>::getBound(){ return &bound; }
 
 
 //------------SETS------------
 template <class T> void entity<T>::setBody(T* b){
   body = b;
 
-  //TODO: Add checks for VertexArray and VertexBuffer
+  this->setBoundery();
+}
 
-  if (!!body)
-    boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
-  else
+//TODO: Add checks for VertexArray and VertexBuffer
+template <class T> void entity<T>::setBoundery(){
+  if (!!body){
     boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
 
-  body->SetOrigin(boundBox->width/4, boundBox->height/4);
+    this->SetOrigin(boundBox->width/2, boundBox->height/2);
+    bound.setPosition(body->getPosition());
+    bound.setRotation(body->getRotation());
+    bound.setScale(body->getScale());
+  }
+  else
+    boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
+
+  bound.setFillColor(sf::Color::Black);
+  bound.setOutlineColor(sf::Color::Red);
+  bound.setOutlineThickness(3);
   bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
 }
 

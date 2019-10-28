@@ -8,19 +8,11 @@
 #define PI 3.14159265
 
 //CONSTRUCTORS
-universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets ){
-  window = win;
+universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) : viewer(win){
   S = spc;
 
   // Setting bounding box
-  size = new sf::Vector2f(win->getSize().x, win->getSize().y * 9/10);
-  position = new sf::Vector2f(0, win->getSize().y/10);
-  boundingBox = new sf::FloatRect(*position, *size);
-  bound.setPosition(*position);
-  bound.setSize(*size);
-  bound.setFillColor(sf::Color(0, 0, 0));
-
-  sf::Vector2u playground = window->getSize() - sf::Vector2u(80, 80);
+  sf::Vector2f playground = background->getBody()->getSize() - sf::Vector2f(80, 80);
   std::cout << "rand x: " << playground.x << std::endl;
   std::cout << "rand y: " << playground.y << std::endl;
 
@@ -29,11 +21,11 @@ universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanet
   std::list<sf::FloatRect> posPlanets = {};
 
   for (int i = 0; i < numPlanets; i++){
-    sf::Vector2f pos = utility::RandVector(playground.x, playground.y);
-    std::cout << "pos x: " << pos.x << std::endl;
-    std::cout << "pos y: " << pos.y << std::endl;
-    if(this->checkPlanetPosition(&posPlanets, pos)){
-      planetObj *pln = new planetObj(utility::Rand(20, 30), pos);
+    sf::Vector2f position = utility::RandVector(playground.x, playground.y);
+    std::cout << "pos x: " << position.x << std::endl;
+    std::cout << "pos y: " << position.y << std::endl;
+    if(this->checkPlanetPosition(&posPlanets, position)){
+      planetObj *pln = new planetObj(utility::Rand(20, 30), position);
       //pln->getBody()->SetOrigin(pos);
       planets.push_front(pln);
       posPlanets.push_front(pln->getBody()->getBody()->getGlobalBounds());
@@ -74,7 +66,7 @@ universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanet
 
 //DRAW
 void universe::Draw (/*sf::RenderWindow* window*/){
-  window->draw(bound);
+  viewer::Draw();
   S->Draw(window);
   this->DrawPlanets();
   //window->draw(background);

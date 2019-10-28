@@ -16,13 +16,13 @@
 #define PI 3.14159265
 
 template <class T> class entity{
-  private:
-    //void draw(sf::RenderTarget& target, sf::RenderStates states = RenderStates::Default) const;
-
   protected:
     sf::FloatRect *boundBox;
     sf::RectangleShape bound;       //FOR TESTING ONLY
     T *body;
+
+  protected:
+    void setBoundery();
 
   public:
     //TODO: add all the constructors of sf::Shape sf::Sprite .. etc
@@ -35,16 +35,16 @@ template <class T> class entity{
     entity(float radius, std::size_t pointCount = 30);
 
     //Sprite
-    entity(sf::Texture* texture);
+    entity(sf::Texture* image);
+
+    entity(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), sf::Texture* image = nullptr);
 
     //----------GETS----------
     T* getBody();
-    //*sf::FloatRect getBoundBox();
-    //*sf::RectangleShape getBound();
+    sf::RectangleShape* getBound();
 
     //----------SETS----------
     void setBody(T *b);
-    //TODO: void setBody(T b);
 
     void 	SetPosition (float x, float y);
     void 	SetPosition (const sf::Vector2f &position);

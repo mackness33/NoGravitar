@@ -12,17 +12,11 @@
 #include "spaceship.hpp"
 #include "planetObj.hpp"
 #include "utility.hpp"
+#include "viewer.hpp"
 
-class universe{
+class universe : public viewer{
   private:
-    //sf::Texture texture;
-    //sf::Sprite background;
     spaceship *S;
-    sf::RenderWindow *window;
-    sf::FloatRect *boundingBox;
-    sf::RectangleShape bound;       //FOR TESTING ONLY
-    sf::Vector2f *position;
-    sf::Vector2f *size;
     std::list <planetObj*> planets;
 
   private:

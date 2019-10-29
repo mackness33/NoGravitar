@@ -8,10 +8,12 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "../Classes/universe.hpp"
+#include "../Classes/galaxy.hpp"
 #include "../Classes/keyVector.hpp"
 
 class collisionHandler{
+  private:
+    //static
   private:
     static bool checkSide(float side1, float side2);
 
@@ -20,4 +22,7 @@ class collisionHandler{
     //It let the spaceship move or rotate based on the key pressed
     static void checkOutOfBounds(spaceship* Spaceship, viewer* Playground);
 
+    template <class A, class B> static void checkGalaxyCollision(movable<A>* first_object, entity<B>* second_object);
 };
+
+#include "collisionHandler.tpp"

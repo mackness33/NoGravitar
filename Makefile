@@ -1,15 +1,15 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics
 
 # build an executable named windows from windows.c
-all: nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o game.o
-		g++ -g -Wall -o NoGravitar nograv.o spaceship.o header.o universe.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o game.o $(LIBS)
+all: nograv.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o game.o
+		g++ -g -Wall -o NoGravitar nograv.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o game.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
 
 
 #HANDLERS
-collisionHandler.o: Handlers/collisionHandler.hpp Handlers/collisionHandler.cpp Classes/universe.hpp
+collisionHandler.o: Handlers/collisionHandler.hpp Handlers/collisionHandler.cpp Handlers/collisionHandler.tpp Classes/galaxy.hpp
 		g++ -c Handlers/collisionHandler.cpp $(LIBS)
 
 eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Handlers/collisionHandler.hpp Classes/keyVector.hpp
@@ -17,7 +17,7 @@ eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Handlers/col
 
 
 #CLASSES
-game.o: Classes/game.hpp Classes/game.cpp Classes/universe.hpp
+game.o: Classes/game.hpp Classes/game.cpp Classes/galaxy.hpp
 		g++ -c Classes/game.cpp $(LIBS)
 
 spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp
@@ -26,8 +26,8 @@ spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp
 header.o: Classes/header.hpp Classes/header.cpp
 		g++ -c Classes/header.cpp $(LIBS)
 
-universe.o: Classes/universe.hpp Classes/universe.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/utility.hpp Classes/viewer.hpp
-		g++ -c Classes/universe.cpp $(LIBS)
+galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/utility.hpp Classes/viewer.hpp
+		g++ -c Classes/galaxy.cpp $(LIBS)
 
 keyVector.o: Classes/keyVector.hpp Classes/keyVector.cpp
 		g++ -c Classes/keyVector.cpp $(LIBS)

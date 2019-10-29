@@ -14,7 +14,7 @@
 #include "utility.hpp"
 #include "viewer.hpp"
 
-class universe : public viewer{
+class galaxy : public viewer{
   private:
     spaceship *S;
     std::list <planetObj*> planets;
@@ -26,7 +26,7 @@ class universe : public viewer{
 
   public:
     //CONSTRUCTORS
-    universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets);
+    galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets);
 
     //GETS
     //sf::Texture getTexture(){ return this->background.getTexture();}

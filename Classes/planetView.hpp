@@ -9,32 +9,21 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
-#include <vector>
-#include "header.hpp"
-#include "../Handlers/eventHandler.hpp"
+#include "spaceship.hpp"
+#include "planetObj.hpp"
+#include "utility.hpp"
+#include "viewer.hpp"
 
-class game{
+class planetView : public viewer{
   private:
-    /*std::vector<*/sf::Texture spaceshipImage;
-
-    sf::RenderWindow *Window;
-    spaceship *Spaceship;
-    header *Header;
-    settings *Settings;
-    galaxy *Galaxy;
-
-    viewer *Playground;
-
-    //classes to handle input commands in smooth trasformations of object
-    keyVector rotation;
-    keyVector translation;
+    spaceship *S;
+    //TODO: add Ground class
 
   private:
-    void draw ();
 
   public:
     //CONSTRUCTORS
-    game(sf::RenderWindow* window);
+    planetView(sf::RenderWindow* win, spaceship* spc);
 
     //GETS
     //sf::Texture getTexture(){ return this->background.getTexture();}
@@ -47,5 +36,5 @@ class game{
     //---------------METHODS---------------
 
     //DRAW
-    void start ();
+    void Draw (/*sf::RenderWindow* window*/);
 };

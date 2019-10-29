@@ -4,11 +4,11 @@
 /*
 
 */
-#include "universe.hpp"
+#include "galaxy.hpp"
 #define PI 3.14159265
 
 //CONSTRUCTORS
-universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) : viewer(win){
+galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) : viewer(win){
   S = spc;
 
   // Setting bounding box
@@ -39,7 +39,7 @@ universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanet
 
   /*
   //texture.create((unsigned int)size->x, (unsigned int)size->y);
-  if(!texture.loadFromFile("img/universe.png"))
+  if(!texture.loadFromFile("img/galaxy.png"))
     std::cout << "Error in load images" << std::endl;
   else
     std::cout << "PERFECT!" << std::endl;
@@ -66,14 +66,14 @@ universe::universe(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanet
 
 
 //DRAW
-void universe::Draw (/*sf::RenderWindow* window*/){
+void galaxy::Draw (/*sf::RenderWindow* window*/){
   viewer::Draw();
   S->Draw(window);
   this->DrawPlanets();
   //window->draw(background);
 }
 
-bool universe::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos){
+bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos){
   sf::FloatRect newPlanetBound (pos, sf::Vector2f(100, 100));
   sf::FloatRect planetsIntersection;
   int i = 0;
@@ -87,7 +87,7 @@ bool universe::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vec
   return true;
 }
 
-void universe::DrawPlanets (/*sf::RenderWindow* window*/){
+void galaxy::DrawPlanets (/*sf::RenderWindow* window*/){
   planetObj *pln;
   for (std::list<planetObj*>::iterator p = planets.begin(); p != planets.end(); p++){
     //std::cout << "position i: " << i << std::endl;

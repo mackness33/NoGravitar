@@ -11,10 +11,12 @@
 #include "../Classes/universe.hpp"
 
 class collisionHandler{
+  private:
+    static bool checkSide(float side1, float side2);
+
   public:
     //------------METHODS-----------
     //It let the spaceship move or rotate based on the key pressed
-    void checkOutOfBounds(spaceship *S, sf::VideoMode *desktop);
+    static void checkOutOfBounds(spaceship* Spaceship, viewer* Playground);
 
-    bool checkSide(float side1, float side2);
 };

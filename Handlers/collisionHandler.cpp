@@ -8,40 +8,40 @@
 
 //-------------METHODS------------
 //It let the spaceship move or rotate based on the key pressed
-void collisionHandler::checkOutOfBounds(spaceship *S, sf::VideoMode *desktop){
+void collisionHandler::checkOutOfBounds(spaceship *spc, viewer* plg){
   // get the bounding box of the entity
-  sf::FloatRect spaceshipBoundingBox = S->getBody()->getGlobalBounds();
-  sf::FloatRect desktopBoundingBox(0, 0, desktop->width, desktop->height-50);
+  sf::FloatRect bbSpaceship = spc->getBody()->getGlobalBounds();     //bb => BoundBox
+  sf::FloatRect bbPlayground = plg->getBackground()->getBody()->getGlobalBounds();
 
   // check collision with another box (like the bounding box of another entity)
-  desktopBoundingBox.intersects(spaceshipBoundingBox, spaceshipBoundingBox);
+  bbPlayground.intersects(bbSpaceship, bbSpaceship);
 
   //TODO: make methods to organize checkOutOfBounds spaceship
   //Y OUT OF BOUNDS
-  if(checkSide(spaceshipBoundingBox.top + spaceshipBoundingBox.height, desktopBoundingBox.top + desktopBoundingBox.height) || checkSide(spaceshipBoundingBox.top, desktopBoundingBox.top)){
-    S->setYOutOfBounds(true);
+  if(checkSide(bbSpaceship.top + bbSpaceship.height, bbPlayground.top + bbPlayground.height) || checkSide(bbSpaceship.top, bbPlayground.top)){
+    spc->setYOutOfBounds(true);
 
-    if(checkSide(spaceshipBoundingBox.top, desktopBoundingBox.top))
-      S->setTopOutOfBounds(true);
+    if(checkSide(bbSpaceship.top, bbPlayground.top))
+      spc->setTopOutOfBounds(true);
     else
-      S->setTopOutOfBounds(false);
+      spc->setTopOutOfBounds(false);
 
   }
   else
-    S->setYOutOfBounds(false);
+    spc->setYOutOfBounds(false);
 
   //X OUT OF BOUNDS
-  if(checkSide(spaceshipBoundingBox.left + spaceshipBoundingBox.width, desktopBoundingBox.left + desktopBoundingBox.width) || checkSide(spaceshipBoundingBox.left, desktopBoundingBox.left)){
-    S->setXOutOfBounds(true);
+  if(checkSide(bbSpaceship.left + bbSpaceship.width, bbPlayground.left + bbPlayground.width) || checkSide(bbSpaceship.left, bbPlayground.left)){
+    spc->setXOutOfBounds(true);
 
-    if(checkSide(spaceshipBoundingBox.left, desktopBoundingBox.left))
-      S->setLeftOutOfBounds(true);
+    if(checkSide(bbSpaceship.left, bbPlayground.left))
+      spc->setLeftOutOfBounds(true);
     else
-      S->setLeftOutOfBounds(false);
+      spc->setLeftOutOfBounds(false);
 
   }
   else
-    S->setXOutOfBounds(false);
+    spc->setXOutOfBounds(false);
 
 }
 

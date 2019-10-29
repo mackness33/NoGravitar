@@ -46,7 +46,7 @@ int main (void){
   settings::deltaTime = 10.0f;
   settings::switchTime = 10.0f;
 
-  collisionHandler c;
+  //collisionHandler c;
   // run the program as long as the window is open
   while (window.isOpen()){
     // check all the window's events that were triggered since the last iteration of the loop
@@ -76,7 +76,7 @@ int main (void){
 
     }
 
-    c.checkOutOfBounds(&Spaceship, &modes[mod_num]);
+    collisionHandler::checkOutOfBounds(&Spaceship, Universe);
 
     //module keys
     translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //it return which key has been pressed

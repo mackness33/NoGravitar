@@ -5,8 +5,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "Classes/header.hpp"
-#include "Handlers/eventHandler.hpp"
+#include "Classes/game.hpp"
 /*
 Optimization:
   -> struct => bool trasformation, sf::Keyboard::Key k;   DONE
@@ -26,6 +25,10 @@ int main (void){
 
   srand (time(NULL));
 
+  game *currentGame = new game(&window);
+
+  currentGame->start();
+  /*
   //Create the spaceship
   sf::Texture spaceshipImage;
   spaceshipImage.setSmooth(true);
@@ -37,7 +40,7 @@ int main (void){
   /*sf::FloatRect spaceshipBound = s2->getLocalBounds();        //for testing use
   sf::RectangleShape spaceshipBoundingBox(sf::Vector2f(spaceshipBound.width, spaceshipBound.height));
   spaceshipBoundingBox.setOrigin(30.f, 20.f);
-  spaceshipBoundingBox.setPosition(80.f, 70.f);*/
+  spaceshipBoundingBox.setPosition(80.f, 70.f)
 
   //classes to handle input commands in smooth trasformations of object
   keyVector rotation;
@@ -81,13 +84,13 @@ int main (void){
     //module keys
     translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //it return which key has been pressed
     if(translation.getTransformation())                         //if pressed make a transformation of the object
-    Spaceship.movement(translation.getKey()/*, &spaceshipBoundingBox*/);
+    Spaceship.movement(translation.getKey()/*, &spaceshipBoundingBox);
 
 
     //direction keys
     rotation.isUsed(sf::Keyboard::Right, sf::Keyboard::Left);   //it return which key has been pressed
     if(rotation.getTransformation())                            //if pressed make a transformation of the object
-    Spaceship.movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
+    Spaceship.movement(rotation.getKey()/*, &spaceshipBoundingBox);
 
 
     /*translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //it return which key has been pressed
@@ -119,7 +122,7 @@ int main (void){
       sf::Vector2f module(up, down);
       sf::Transformable *t = dynamic_cast<sf::Transformable*>(s2);
       transformationHandler::movement(t, module, direction);
-    }*/
+    }
 
 
     window.clear();
@@ -134,7 +137,8 @@ int main (void){
     // end the current frame
     window.display();
 
-  }
 
+  }
+  */
   return 0;
 }

@@ -6,7 +6,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "collisionHandler.hpp"
-#include "../Classes/keyVector.hpp"
 
 class eventHandler{
   public:

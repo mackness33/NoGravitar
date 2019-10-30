@@ -32,7 +32,7 @@ galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/pl
 keyVector.o: Classes/keyVector.hpp Classes/keyVector.cpp
 		g++ -c Classes/keyVector.cpp $(LIBS)
 
-bullet.o: Classes/bullet.hpp Classes/bullet.cpp Classes/entity.hpp Classes/entity.tpp Classes/movable.hpp Classes/movable.tpp
+bullet.o: Classes/bullet.hpp Classes/bullet.cpp Classes/entity.hpp Classes/entity.tpp Classes/movable.hpp Classes/movable.tpp Classes/drawable.hpp Classes/drawable.tpp
 		g++ -c Classes/bullet.cpp $(LIBS)
 
 settings.o: Classes/settings.hpp Classes/settings.cpp

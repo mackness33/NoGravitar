@@ -41,6 +41,11 @@ class spaceship{
     float getSpatialVersor();
     float getRotationVersor();
     sf::Sprite* getBody();
+    movable<sf::Sprite>* getMovable();
+    entity<sf::Sprite>* getEntity();
+    sf::Sprite* getDrawable();
+    sf::FloatRect GetLocalBounds();
+    sf::FloatRect GetGlobalBounds();
 
     //SETS
     void setXOutOfBounds(bool x);
@@ -57,14 +62,8 @@ class spaceship{
     //MOVEMENT
     //It let the spaceship move or rotate based on the key pressed
     void movement(sf::Keyboard::Key k);
-
-    //for testing use
-    void movement(sf::Keyboard::Key k, sf::RectangleShape *Bound);
-
+    
     //FLY
-    //for testing use
-    void fly(float module, sf::RectangleShape *Bound);
-
     //It handle spaceship translation in the window
     void fly(float module);
 

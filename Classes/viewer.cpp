@@ -38,8 +38,11 @@ viewer::viewer(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture*
 
 
 //------------GETS------------
-entity<sf::RectangleShape>* viewer::getBackground(){ return background; }
-
+entity<sf::RectangleShape>* viewer::getEntity() { return background; }
+sf::RectangleShape* viewer::getDrawable() { return background->getBody(); }
+sf::FloatRect viewer::GetLocalBounds() { return background->getBody()->getLocalBounds(); }
+sf::FloatRect viewer::GetGlobalBounds() { return background->getBody()->getGlobalBounds(); }
+//sf::Texture* viewer::getBackground(){ return background; }
 
 //------------SETS------------
 void viewer::setBackground(sf::Texture* texture){}
@@ -49,3 +52,5 @@ void viewer::setBackground(sf::Texture* texture){}
 void viewer::Draw (){
   background->DrawTest(window);
 }
+
+void viewer::Draw (sf::RenderWindow* window){}

@@ -33,7 +33,10 @@ planetObj::planetObj(float radius, sf::Vector2f p){
 
 
 //GETS
-entity<sf::CircleShape>* planetObj::getBody() { return body; }
+entity<sf::CircleShape>* planetObj::getEntity() { return body; }
+sf::CircleShape* planetObj::getDrawable() { return body->getBody(); }
+sf::FloatRect planetObj::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
+sf::FloatRect planetObj::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
 
 //SETS
 

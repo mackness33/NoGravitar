@@ -5,13 +5,13 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
-#include "entity.hpp"
+#include "drawable.hpp"
 /*
 
 */
 #define PI 3.14159265
 
-class planetObj{
+class planetObj : public drawable{
   private:
     entity<sf::CircleShape>* body;
     bool life;
@@ -30,7 +30,10 @@ class planetObj{
     ~planetObj();
 
     //GETS
-    entity<sf::CircleShape>* getBody();
+    entity<sf::CircleShape>* getEntity();
+    sf::CircleShape* getDrawable();
+    sf::FloatRect GetLocalBounds();
+    sf::FloatRect GetGlobalBounds();
     bool isDead();
 
     //SETS

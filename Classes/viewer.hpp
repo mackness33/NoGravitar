@@ -9,14 +9,14 @@
 #include <iostream>
 #include <cmath>
 #include <list>
-#include "entity.hpp"
+#include "drawable.hpp"
 
 /*
   BUG: change body into sprites
 */
 #define PI 3.14159265
 
-class viewer{
+class viewer : drawable{
   protected:
     entity<sf::RectangleShape> *background;
     sf::RenderWindow *window;
@@ -30,7 +30,11 @@ class viewer{
     viewer(sf::RenderWindow *w/*indow*/, sf::Vector2f s/*ize*/ = sf::Vector2f(-1, -1), sf::Vector2f p/*osition*/ = sf::Vector2f(-1, -1), sf::Texture* i/*mage*/ = nullptr);
 
     //----------GETS----------
-    entity<sf::RectangleShape>* getBackground();
+    //entity<sf::RectangleShape>* getBackground();
+    entity<sf::RectangleShape>* getEntity();
+    sf::RectangleShape* getDrawable();
+    sf::FloatRect GetLocalBounds();
+    sf::FloatRect GetGlobalBounds();
     //*sf::FloatRect getBoundBox();
     //*sf::RectangleShape getBound();
 
@@ -39,6 +43,7 @@ class viewer{
 
     //----------METHODS------------
     virtual void Draw ();
+    void Draw (sf::RenderWindow* window);
 };
 
 //#include "viewer.tpp"

@@ -12,7 +12,7 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) :
   S = spc;
 
   // Setting bounding box
-  sf::Vector2f playground = background->getBody()->getSize() - sf::Vector2f(100, 100);
+  sf::Vector2f playground = this->getDrawable()->getSize() - sf::Vector2f(100, 100);
   std::cout << "rand x: " << playground.x << std::endl;
   std::cout << "rand y: " << playground.y << std::endl;
 
@@ -29,7 +29,7 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) :
       planetObj *pln = new planetObj(utility::Rand(20, 30), position);
       //pln->getBody()->SetOrigin(pos);
       planets.push_front(pln);
-      posPlanets.push_front(pln->getBody()->getBody()->getGlobalBounds());
+      posPlanets.push_front(pln->GetGlobalBounds());
     }
     else{
       std::cout << "INTERSECTS!" << std::endl;

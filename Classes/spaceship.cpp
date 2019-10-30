@@ -44,7 +44,7 @@ spaceship::spaceship(sf::Texture* img){
   body = new movable<sf::Sprite>(image);
   body->SetScale(0.25f, 0.25f);
   body->SetPosition(80.f, 70.f);
-  sf::FloatRect bounds = body->getBody()->getLocalBounds();
+  sf::FloatRect bounds = this->GetLocalBounds();
   body->SetOrigin(bounds.width/2, bounds.height/2);
 
 
@@ -65,7 +65,13 @@ bool spaceship::getLeftOutOfBounds(){ return leftOOB;}
 bool spaceship::getTopOutOfBounds(){ return topOOB;}
 float spaceship::getSpatialVersor(){ return spatial_Versor;}
 float spaceship::getRotationVersor(){ return rotation_Versor;}
-sf::Sprite* spaceship::getBody(){ return body->getBody();}
+movable<sf::Sprite>* spaceship::getMovable() { return body; }
+entity<sf::Sprite>* spaceship::getEntity() { return static_cast<entity<sf::Sprite>*> (body); }
+sf::Sprite* spaceship::getDrawable() { return body->getBody(); }
+sf::FloatRect spaceship::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
+sf::FloatRect spaceship::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
+//TODO: set texture to let the user change the spaceship image
+
 
 //SETS
 void spaceship::setXOutOfBounds(bool x){ xOutOfBound = x;}
@@ -102,58 +108,10 @@ void spaceship::movement(sf::Keyboard::Key k){
   }
 }
 
-//for testing use
-void spaceship::movement(sf::Keyboard::Key k, sf::RectangleShape *Bound){
-  switch (k) {
-    case sf::Keyboard::Left : {                 //LEFT
-      body->Rotate(-rotation_Versor);
-      Bound->rotate(-rotation_Versor);
-    };break;
-
-    case sf::Keyboard::Right : {                //RIGHT
-      body->Rotate(rotation_Versor);
-      Bound->rotate(rotation_Versor);
-    };break;
-
-    case sf::Keyboard::Up : {                   //UP
-      fly(spatial_Versor, Bound);
-    };break;
-
-    case sf::Keyboard::Down : {                 //DOWN
-      fly(-spatial_Versor, Bound);
-    };break;
-
-    default: std::cout << "Not a movementCommand" << std::endl;
-  }
-}
-
-//for testing use
-void spaceship::fly(float module, sf::RectangleShape *Bound){
-  float direction = body->getBody()->getRotation() * PI / 180.0;
-  int sin_module = sin(direction) * module;
-  int cos_module = cos(direction) * module;
-  bool y_opp_dir = opposite_direction(topOOB,  sin(direction) * module);
-  bool x_opp_dir = opposite_direction(leftOOB,  cos(direction) * module);
-
-  if((yOutOfBound && !y_opp_dir)){
-    sin_module = 0;
-    std::cout << "YOutOfBounds!!!" << std::endl;
-  }
-
-  if((xOutOfBound && !x_opp_dir)){
-    cos_module = 0;
-    std::cout << "XOutOfBounds!!!" << std::endl;
-  }
-
-  body->Move(cos_module, sin_module);
-  Bound->move(cos_module, sin_module);
-}
-
-
 //FLY
 //It handle spaceship translation in the window
 void spaceship::fly(float module){
-  float direction = body->getBody()->getRotation() * PI / 180.0;
+  float direction = this->getDrawable()->getRotation() * PI / 180.0;
   int sin_module = sin(direction) * module;
   int cos_module = cos(direction) * module;
   bool y_opp_dir = opposite_direction(topOOB,  sin(direction) * module);
@@ -227,7 +185,7 @@ void spaceship::Draw (sf::RenderWindow* window){
 
 void spaceship::Shoot(){
 
-  bullet *bul = new bullet(spatial_Versor * 1.5f, body->getBody()->getRotation(), body->getBody()->getPosition());
+  bullet *bul = new bullet(spatial_Versor * 1.5f, this->getDrawable()->getRotation(), body->getBody()->getPosition());
   //std::cout << "real location c: " << bul << std::endl;
   bullets.push_back(bul);
 }

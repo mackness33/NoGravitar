@@ -14,10 +14,6 @@ bullet::bullet(){
   direction = 0 * PI / 180.0f;
   totalTime = 0;
   this->build();
-  /**boundingBox = body.getLocalBounds();        //for testing use
-  bound.setSize(sf::Vector2f(boundingBox->width, boundingBox->height));
-  bound.setOrigin(body.getOrigin());
-  bound.setPosition(body.getPosition());*/
 }
 
 bullet::bullet(float s, float d, sf::Vector2f p){
@@ -35,7 +31,11 @@ bullet::~bullet(){}
 
 
 //GETS
-movable<sf::CircleShape>* bullet::getBody() { return body; }
+movable<sf::CircleShape>* bullet::getMovable() { return body; }
+entity<sf::CircleShape>* bullet::getEntity() { return static_cast<entity<sf::CircleShape>*> (body); }
+sf::CircleShape* bullet::getDrawable() { return body->getBody(); }
+sf::FloatRect bullet::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
+sf::FloatRect bullet::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
 
 //SETS
 
@@ -47,10 +47,6 @@ void bullet::Draw (sf::RenderWindow* window){
 }
 
 void bullet::Update(){
-  //distance++;
-  //body.setOrigin(body.getPosition() + sf::Vector2f(5, 6));
-  //body.setPosition(body.getPosition() + sf::Vector2f(1, 1));
-
   totalTime += settings::deltaTime;
 
   if(totalTime >= settings::switchTime){

@@ -10,8 +10,8 @@
 //It let the spaceship move or rotate based on the key pressed
 void collisionHandler::checkOutOfBounds(spaceship *spc, viewer* plg){
   // get the bounding box of the entity
-  sf::FloatRect bbSpaceship = spc->getBody()->getGlobalBounds();     //bb => BoundBox
-  sf::FloatRect bbPlayground = plg->getBackground()->getBody()->getGlobalBounds();
+  sf::FloatRect bbSpaceship = spc->GetGlobalBounds();     //bb => BoundBox
+  sf::FloatRect bbPlayground = plg->GetGlobalBounds();
 
   // check collision with another box (like the bounding box of another entity)
   bbPlayground.intersects(bbSpaceship, bbSpaceship);

@@ -6,13 +6,13 @@
 #include <iostream>
 #include <cmath>
 #include "settings.hpp"
-#include "movable.hpp"
+#include "drawable.hpp"
 /*
 
 */
 #define PI 3.14159265
 
-class bullet{
+class bullet : public drawable{
   private:
     movable<sf::CircleShape>* body;
     //sf::FloatRect *boundingBox;
@@ -31,7 +31,12 @@ class bullet{
     ~bullet();
 
     //GETS
-    movable<sf::CircleShape>* getBody();
+    movable<sf::CircleShape>* getMovable();
+    entity<sf::CircleShape>* getEntity();
+    sf::CircleShape* getDrawable();
+    sf::FloatRect GetLocalBounds();
+    sf::FloatRect GetGlobalBounds();
+
     //SETS
 
     //---------------METHODS---------------

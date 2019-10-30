@@ -20,6 +20,8 @@ class viewer : drawable{
   protected:
     entity<sf::RectangleShape> *background;
     sf::RenderWindow *window;
+    std::list<drawable*> allies;
+    std::list<drawable*> enemies;
 
   public:
     //TODO: add all the constructors of sf::Shape sf::RectangleShape .. etc
@@ -42,8 +44,13 @@ class viewer : drawable{
     void setBackground(sf::Texture* texture);
 
     //----------METHODS------------
-    virtual void Draw ();
     void Draw (sf::RenderWindow* window);
+    virtual void Draw ();
+
+    virtual void addAlly (drawable* ally);
+    virtual void addEnemy (drawable* enemy);
+
+    //virtual void checkCollision();
 };
 
 //#include "viewer.tpp"

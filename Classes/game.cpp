@@ -13,11 +13,11 @@ game::game(sf::RenderWindow* wnd){
 
   Window = wnd;
 
-  Spaceship = new spaceship(&spaceshipImage);
+  Spaceship = new spaceship(nullptr, &spaceshipImage);
   Header = new header(Window);
   Settings = new settings(Window);
   Galaxy = new galaxy(Window, Spaceship, 5);
-
+  Spaceship->setPlayground(Galaxy);
   Playground = Galaxy;
 
   settings::deltaTime = 10.0f;

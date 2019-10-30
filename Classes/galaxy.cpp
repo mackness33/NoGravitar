@@ -101,4 +101,6 @@ void galaxy::DrawPlanets (/*sf::RenderWindow* window*/){
 }
 
 
+void galaxy::checkCollision (){}
+
 //

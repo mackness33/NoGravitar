@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics
 
 # build an executable named windows from windows.c
-all: nograv.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o game.o
-		g++ -g -Wall -o NoGravitar nograv.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o game.o $(LIBS)
+all: nograv.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o game.o drawable.o
+		g++ -g -Wall -o NoGravitar nograv.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o game.o drawable.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -19,6 +19,9 @@ eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Handlers/col
 #CLASSES
 game.o: Classes/game.hpp Classes/game.cpp Classes/galaxy.hpp
 		g++ -c Classes/game.cpp $(LIBS)
+
+drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Classes/entity.hpp Classes/entity.tpp Classes/movable.hpp Classes/movable.tpp
+		g++ -c Classes/drawable.cpp $(LIBS)
 
 spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp
 		g++ -c Classes/spaceship.cpp $(LIBS)

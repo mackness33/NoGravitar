@@ -22,7 +22,7 @@ class collisionHandler{
     //It let the spaceship move or rotate based on the key pressed
     static void checkOutOfBounds(spaceship* Spaceship, viewer* Playground);
 
-    template <class A, class B> static void checkGalaxyCollision(movable<A>* first_object, entity<B>* second_object);
+    static bool checkCollision(drawable* first_object, drawable* second_object);
 };
 
 #include "collisionHandler.tpp"

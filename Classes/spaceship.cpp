@@ -8,7 +8,7 @@
 #include "spaceship.hpp"
 
 //CONSTRUCTORS
-spaceship::spaceship(){
+spaceship::spaceship(viewer* plg){
   xOutOfBound = false;
   yOutOfBound = false;
   topOOB = false;
@@ -26,7 +26,7 @@ spaceship::spaceship(){
   //this->build();
 }
 
-spaceship::spaceship(sf::Texture* img){
+spaceship::spaceship(viewer* plg, sf::Texture* img){
   xOutOfBound = false;
   yOutOfBound = false;
   topOOB = false;
@@ -47,7 +47,7 @@ spaceship::spaceship(sf::Texture* img){
   sf::FloatRect bounds = this->GetLocalBounds();
   body->SetOrigin(bounds.width/2, bounds.height/2);
 
-
+  playground = plg;
   //this->build();
 }
 
@@ -80,6 +80,7 @@ void spaceship::setLeftOutOfBounds(bool l){ leftOOB = l;}
 void spaceship::setTopOutOfBounds(bool t){ topOOB = t;}
 void spaceship::setSpatialVersor(float sv) { spatial_Versor = sv;}
 void spaceship::setRotationVersor(float rv) { rotation_Versor = rv;}
+void spaceship::setPlayground(viewer* pg) { playground = pg;}
 //void spaceship::setBody(sf::Sprite* b) { body = b;}
 
 //---------------METHODS--------------------
@@ -187,5 +188,6 @@ void spaceship::Shoot(){
 
   bullet *bul = new bullet(spatial_Versor * 1.5f, this->getDrawable()->getRotation(), body->getBody()->getPosition());
   //std::cout << "real location c: " << bul << std::endl;
+  playground->addAlly(bul);
   bullets.push_back(bul);
 }

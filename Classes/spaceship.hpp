@@ -1,6 +1,10 @@
 //SPACESHIP
 //Class that handle everything that concerne a spaceship
 
+
+#ifndef SPACESHIP_H
+#define SPACESHIP_H
+
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -8,6 +12,7 @@
 #include <cmath>
 #include <list>
 #include "bullet.hpp"
+#include "viewer.hpp"
 
 /*
   BUG: change body into sprites
@@ -26,11 +31,12 @@ class spaceship{
     sf::Texture* image;
     //bullet *b;
     std::list <bullet*> bullets;
+    viewer *playground;
 
   public:
     //CONSTRUCTORS
-    spaceship();
-    spaceship(sf::Texture* img);
+    spaceship(viewer* playground);
+    spaceship(viewer* playground, sf::Texture* img);
     //spaceship(const spaceship& S);
 
     //GETS
@@ -40,7 +46,6 @@ class spaceship{
     bool getTopOutOfBounds();
     float getSpatialVersor();
     float getRotationVersor();
-    sf::Sprite* getBody();
     movable<sf::Sprite>* getMovable();
     entity<sf::Sprite>* getEntity();
     sf::Sprite* getDrawable();
@@ -55,6 +60,7 @@ class spaceship{
     void setSpatialVersor(float sv);
     void setRotationVersor(float rv);
     void setBody(sf::Sprite* b);
+    void setPlayground(viewer* b);
     //TODO: setTexture(sf::Texture* t);
 
     //----------METHODS------------
@@ -62,7 +68,7 @@ class spaceship{
     //MOVEMENT
     //It let the spaceship move or rotate based on the key pressed
     void movement(sf::Keyboard::Key k);
-    
+
     //FLY
     //It handle spaceship translation in the window
     void fly(float module);
@@ -79,3 +85,5 @@ class spaceship{
 
     void Shoot();
 };
+
+#endif

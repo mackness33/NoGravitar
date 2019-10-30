@@ -26,6 +26,9 @@ viewer::viewer(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture*
 
   background->getBound()->setOutlineColor(sf::Color::Green);
   background->getBound()->setFillColor(sf::Color::Black);
+
+  allies = std::list<drawable*>();
+  enemies = std::list<drawable*>();
 }
 
 /*viewer::viewer(sf::RenderWindow* w){
@@ -51,6 +54,14 @@ void viewer::setBackground(sf::Texture* texture){}
 //------------METHODS------------
 void viewer::Draw (){
   background->DrawTest(window);
+}
+
+void viewer::addAlly (drawable* ally){
+  allies.push_front(ally);
+}
+
+void viewer::addEnemy (drawable* enemy){
+  enemies.push_front(enemy);
 }
 
 void viewer::Draw (sf::RenderWindow* window){}

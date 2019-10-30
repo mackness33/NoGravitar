@@ -4,6 +4,11 @@
 /*
 
 */
+
+
+#ifndef GALAXY_H
+#define GALAXY_H
+
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -40,4 +45,8 @@ class galaxy : public viewer{
 
     //DRAW
     void Draw (/*sf::RenderWindow* window*/);
+
+    void checkCollision();
 };
+
+#endif 

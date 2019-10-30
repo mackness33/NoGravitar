@@ -24,8 +24,8 @@ class drawable{
     template <typename T> movable<T>* getMovable();
     template <typename T> entity<T>* getEntity();
     template <typename T> T* getDrawable();
-    template <typename T> sf::FloatRect GetLocalBound();
-    template <typename T> sf::FloatRect GetGlobalBound();
+    sf::FloatRect GetLocalBounds();
+    sf::FloatRect GetGlobalBounds();
 
     //----------METHODS------------
     virtual void Draw (sf::RenderWindow* window) = 0;

@@ -45,6 +45,12 @@ void collisionHandler::checkOutOfBounds(spaceship *spc, viewer* plg){
 
 }
 
+bool collisionHandler::checkCollision(drawable* ally, drawable* enemy){
+  if(ally->GetGlobalBounds().intersects(enemy->GetGlobalBounds()))
+    return true;
+  return false;
+}
+
 bool collisionHandler::checkSide(float side1, float side2){
   if(side1 == side2)
     return true;

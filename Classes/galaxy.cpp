@@ -5,6 +5,7 @@
 
 */
 #include "galaxy.hpp"
+
 #define PI 3.14159265
 
 //CONSTRUCTORS
@@ -13,8 +14,8 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) :
 
   // Setting bounding box
   sf::Vector2f playground = this->getDrawable()->getSize() - sf::Vector2f(100, 100);
-  std::cout << "rand x: " << playground.x << std::endl;
-  std::cout << "rand y: " << playground.y << std::endl;
+  //std::cout << "rand x: " << playground.x << std::endl;
+  //std::cout << "rand y: " << playground.y << std::endl;
 
   planets = {};
 
@@ -23,16 +24,17 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) :
   for (int i = 0; i < 20; i++){
     sf::Vector2f position = utility::RandVector(playground.x, playground.y, 0, win->getSize().y/10);
     //sf::Vector2f position = utility::RandVector(win->getSize().x, win->getSize().y);
-    std::cout << "pos x: " << position.x << std::endl;
-    std::cout << "pos y: " << position.y << std::endl;
+    //std::cout << "pos x: " << position.x << std::endl;
+    //std::cout << "pos y: " << position.y << std::endl;
     if(this->checkPlanetPosition(&posPlanets, position)){
       planetObj *pln = new planetObj(utility::Rand(20, 30), position);
       //pln->getBody()->SetOrigin(pos);
       planets.push_front(pln);
+      viewer::addEnemy(pln);
       posPlanets.push_front(pln->GetGlobalBounds());
     }
     else{
-      std::cout << "INTERSECTS!" << std::endl;
+      //std::cout << "INTERSECTS!" << std::endl;
       i--;
     }
   }
@@ -79,8 +81,8 @@ bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vecto
   int i = 0;
 
   for(std::list<sf::FloatRect>::iterator boundPlanet = posPlanets->begin(); boundPlanet != posPlanets->end(); boundPlanet++, i++){
-      std::cout << "intersects: " << newPlanetBound.intersects(*boundPlanet, planetsIntersection) << std::endl;
-      if(planetsIntersection != sf::FloatRect(0,0,0,0))
+      //std::cout << "intersects: " << newPlanetBound.intersects(*boundPlanet, planetsIntersection) << std::endl;
+      if(newPlanetBound.intersects(*boundPlanet, planetsIntersection))
         return false;
   }
 
@@ -101,6 +103,21 @@ void galaxy::DrawPlanets (/*sf::RenderWindow* window*/){
 }
 
 
-void galaxy::checkCollision (){}
+void galaxy::checkCollision (){
+  int i = 0;
+  for (auto ally = allies.begin(); ally != allies.end(); ally++){
+    //std::cout << "Ally: " << i << std::endl;
+    int j = 0;
+    for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
+      //std::cout << "Enemy: " << j << std::endl;
+      if(!!*ally && !!*enemy){
+        if(collisionHandler::checkCollision(*ally, *enemy))
+          std::cout << "COLLISION!!" << std::endl;
+      }
+      j++;
+    }
+    i++;
+  }
+}
 
 //

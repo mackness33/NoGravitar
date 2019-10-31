@@ -96,6 +96,8 @@ void game::start (){
     if(rotation.getTransformation())                            //if pressed make a transformation of the object
       Spaceship->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
 
+    Playground->checkCollision();
+
     Window->clear();
 
     this->draw();

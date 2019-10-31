@@ -58,10 +58,14 @@ void viewer::Draw (){
 
 void viewer::addAlly (drawable* ally){
   allies.push_front(ally);
+  std::cout << "Allies size: " << allies.size()  << std::endl;
 }
 
 void viewer::addEnemy (drawable* enemy){
   enemies.push_front(enemy);
+  std::cout << "Enemies size: " << enemies.size() << std::endl;
 }
 
 void viewer::Draw (sf::RenderWindow* window){}
+
+void viewer::checkCollision (){}

@@ -19,13 +19,16 @@
 class drawable{
   public:
     //----------GETS----------
+    drawable(){}
+
+    //----------GETS----------
     //ugly solution, but it's the only thing that can be done
     //Templates can't also b e virtual!
     template <typename T> movable<T>* getMovable();
     template <typename T> entity<T>* getEntity();
     template <typename T> T* getDrawable();
-    sf::FloatRect GetLocalBounds();
-    sf::FloatRect GetGlobalBounds();
+    virtual sf::FloatRect GetLocalBounds();
+    virtual sf::FloatRect GetGlobalBounds();
 
     //----------METHODS------------
     virtual void Draw (sf::RenderWindow* window) = 0;

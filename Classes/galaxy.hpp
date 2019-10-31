@@ -14,10 +14,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include <list>
 #include "spaceship.hpp"
 #include "planetObj.hpp"
 #include "utility.hpp"
 #include "viewer.hpp"
+#include "../Handlers/collisionHandler.hpp"
 
 class galaxy : public viewer{
   private:
@@ -49,4 +51,4 @@ class galaxy : public viewer{
     void checkCollision();
 };
 
-#endif 
+#endif

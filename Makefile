@@ -29,7 +29,7 @@ spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp
 header.o: Classes/header.hpp Classes/header.cpp
 		g++ -c Classes/header.cpp $(LIBS)
 
-galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/utility.hpp Classes/viewer.hpp
+galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/utility.hpp Classes/viewer.hpp Classes/drawable.hpp
 		g++ -c Classes/galaxy.cpp $(LIBS)
 
 keyVector.o: Classes/keyVector.hpp Classes/keyVector.cpp
@@ -47,7 +47,7 @@ planetObj.o: Classes/planetObj.hpp Classes/planetObj.cpp Classes/entity.hpp Clas
 utility.o: Classes/utility.hpp Classes/utility.cpp
 		g++ -c Classes/utility.cpp $(LIBS)
 
-viewer.o: Classes/viewer.hpp Classes/viewer.cpp
+viewer.o: Classes/viewer.hpp Classes/viewer.cpp Classes/drawable.hpp Classes/drawable.tpp
 		g++ -c Classes/viewer.cpp $(LIBS)
 
 #CLEANER

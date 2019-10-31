@@ -5,7 +5,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "collisionHandler.hpp"
+#include "../Classes/galaxy.hpp"
 
 class eventHandler{
   public:

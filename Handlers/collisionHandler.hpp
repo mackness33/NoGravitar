@@ -4,12 +4,17 @@
 /*
 
 */
+
+
+#ifndef COLLISIONHANDLER_H
+#define COLLISIONHANDLER_H
+
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "../Classes/galaxy.hpp"
 #include "../Classes/keyVector.hpp"
+#include "../Classes/galaxy.hpp"
 
 class collisionHandler{
   private:
@@ -26,3 +31,5 @@ class collisionHandler{
 };
 
 #include "collisionHandler.tpp"
+
+#endif

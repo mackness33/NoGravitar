@@ -50,7 +50,7 @@ class viewer : drawable{
     virtual void addAlly (drawable* ally);
     virtual void addEnemy (drawable* enemy);
 
-    //virtual void checkCollision();
+    virtual void checkCollision ();
 };
 
 //#include "viewer.tpp"

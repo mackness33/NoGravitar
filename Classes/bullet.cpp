@@ -27,7 +27,11 @@ bullet::bullet(float s, float d, sf::Vector2f p){
   this->build();
 }
 
-bullet::~bullet(){}
+bullet::~bullet(){
+  std::cout << "DELETING BULLET" << std::endl;
+  delete body;
+  body = nullptr;
+}
 
 
 //GETS

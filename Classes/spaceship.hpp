@@ -38,6 +38,7 @@ class spaceship{
     spaceship(viewer* playground);
     spaceship(viewer* playground, sf::Texture* img);
     //spaceship(const spaceship& S);
+    ~spaceship();
 
     //GETS
     bool getXOutOfBounds();
@@ -51,6 +52,7 @@ class spaceship{
     sf::Sprite* getDrawable();
     sf::FloatRect GetLocalBounds();
     sf::FloatRect GetGlobalBounds();
+    std::list<bullet*>* getBullets();
 
     //SETS
     void setXOutOfBounds(bool x);

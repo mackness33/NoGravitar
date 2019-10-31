@@ -24,7 +24,8 @@
 class galaxy : public viewer{
   private:
     spaceship *S;
-    std::list <planetObj*> planets;
+    std::list<planetObj*> planets;
+    std::list<bullet*>* bullets;
 
   private:
     void DrawPlanets (/*sf::RenderWindow* window*/);

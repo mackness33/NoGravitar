@@ -70,6 +70,7 @@ entity<sf::Sprite>* spaceship::getEntity() { return static_cast<entity<sf::Sprit
 sf::Sprite* spaceship::getDrawable() { return body->getBody(); }
 sf::FloatRect spaceship::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
 sf::FloatRect spaceship::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
+std::list<bullet*>* spaceship::getBullets() { return &bullets; }
 //TODO: set texture to let the user change the spaceship image
 
 

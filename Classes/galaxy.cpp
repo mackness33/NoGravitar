@@ -10,7 +10,12 @@
 
 //CONSTRUCTORS
 galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) : viewer(win){
-  S = spc;
+  /*if(!!spc)
+    S = new spaceship(w);
+  else*/
+    S = spc;
+
+  bullets = S->getBullets();
 
   // Setting bounding box
   sf::Vector2f playground = this->getDrawable()->getSize() - sf::Vector2f(100, 100);
@@ -102,22 +107,50 @@ void galaxy::DrawPlanets (/*sf::RenderWindow* window*/){
   }
 }
 
-
+//TODO: Need to delete the object at the end of all the cicles!
+//TODO: consider to delete in a good way the mo'fucking pointers
 void galaxy::checkCollision (){
+  std::list<int> posDrawable;
   int i = 0;
-  for (auto ally = allies.begin(); ally != allies.end(); ally++){
+  bool collision = false;
+  //std::cout << "START!!" << std::endl;
+  for (auto ally = allies.begin(); ally != allies.end(); ){
     //std::cout << "Ally: " << i << std::endl;
     int j = 0;
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
       //std::cout << "Enemy: " << j << std::endl;
       if(!!*ally && !!*enemy){
-        if(collisionHandler::checkCollision(*ally, *enemy))
+        if(collisionHandler::checkCollision(*ally, *enemy)){
+          posDrawable.push_front(i);
           std::cout << "COLLISION!!" << std::endl;
+          collision = true;
+          //enemies.erase(enemy);
+        }
       }
+      //std::cout << "STILL WORKING!!" << std::endl;
       j++;
     }
-    i++;
+    //std::cout << "ALLY FOR!!" << std::endl;
+    if(collision){
+      auto bul = std::find(bullets->begin(), bullets->end(), *ally);
+      delete *bul;
+      *bul = nullptr;
+      ally = allies.erase(ally);
+      bullets->erase(bul);
+      collision = false;
+    }
+    else{
+      ally++;
+      i++;
+    }
   }
+
+  /*for (auto position = posDrawable.begin(); position != posDrawable.end(); position++){
+    auto a = ally;
+    delete *a;
+    *a = nullptr;
+    allies.erase(a);
+  }*/
 }
 
 //

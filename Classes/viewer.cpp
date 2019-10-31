@@ -31,6 +31,10 @@ viewer::viewer(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture*
   enemies = std::list<drawable*>();
 }
 
+viewer::~viewer(){
+  std::cout << "DELETING VIEWER" << std::endl;
+}
+
 /*viewer::viewer(sf::RenderWindow* w){
   window = w;
   background = new entity<sf::RectangleShape>(w->getSize().x, w->getSize().y * 9/10);

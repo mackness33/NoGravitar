@@ -16,7 +16,7 @@
 */
 #define PI 3.14159265
 
-class viewer : drawable{
+class viewer : public drawable{
   protected:
     entity<sf::RectangleShape> *background;
     sf::RenderWindow *window;
@@ -30,6 +30,8 @@ class viewer : drawable{
 
     //RectangleShape
     viewer(sf::RenderWindow *w/*indow*/, sf::Vector2f s/*ize*/ = sf::Vector2f(-1, -1), sf::Vector2f p/*osition*/ = sf::Vector2f(-1, -1), sf::Texture* i/*mage*/ = nullptr);
+
+    virtual ~viewer();
 
     //----------GETS----------
     //entity<sf::RectangleShape>* getBackground();

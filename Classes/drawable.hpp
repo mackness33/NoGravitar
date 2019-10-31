@@ -21,6 +21,8 @@ class drawable{
     //----------GETS----------
     drawable(){}
 
+    virtual ~drawable();
+
     //----------GETS----------
     //ugly solution, but it's the only thing that can be done
     //Templates can't also b e virtual!
@@ -32,6 +34,7 @@ class drawable{
 
     //----------METHODS------------
     virtual void Draw (sf::RenderWindow* window) = 0;
+
 };
 
 #include "drawable.tpp"

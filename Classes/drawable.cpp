@@ -8,6 +8,9 @@
 #define PI 3.14159265
 
 //drawable::drawable(){}
+drawable::~drawable(){
+  std::cout << "DELETING DRAWABLE" << std::endl;
+}
 
 //------------GETS------------
 sf::FloatRect drawable::GetLocalBounds(){ return sf::FloatRect(0, 0, 0, 0); }

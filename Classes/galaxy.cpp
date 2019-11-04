@@ -9,11 +9,12 @@
 #define PI 3.14159265
 
 //CONSTRUCTORS
-galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) : viewer(win){
+galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actGame) : viewer(win){
   /*if(!!spc)
     S = new spaceship(w);
   else*/
   S = spc;
+  currentGame = actGame;
   viewer::addAlly(spc);
   bullets = S->getBullets();
 
@@ -33,6 +34,7 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) :
     //std::cout << "pos y: " << position.y << std::endl;
     if(this->checkPlanetPosition(&posPlanets, position)){
       planetObj *pln = new planetObj(utility::Rand(20, 30), position);
+      pln->setPlanetView(new planetView(window, S));
       //pln->getBody()->SetOrigin(pos);
       planets.push_front(pln);
       viewer::addEnemy(pln);
@@ -150,11 +152,12 @@ void galaxy::checkCollision (){
         };break;
 
         case 's': {
-          //S->deleteBullets();     //delete all the bullets
-          //TODO: delete all the bullets from allies
+          S->deleteBullets();     //delete all the bullets
+          //delete all the bullets from allies
           allies.clear();
           viewer::addAlly(S);
           changeViewer = true;
+          currentGame->setMainViewer(planet->getPlanetView());
           S->getEntity()->SetPosition(100, 200);
         }; break;
 
@@ -168,9 +171,7 @@ void galaxy::checkCollision (){
       i++;
     }
 
-    if(changeViewer){
-      break;
-    }
+    if(changeViewer) {break;}
   }
 }
 

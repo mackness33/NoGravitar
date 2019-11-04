@@ -7,6 +7,8 @@
 #include "game.hpp"
 #define PI 3.14159265
 
+viewer game::*Playground = nullptr;
+
 //CONSTRUCTORS
 game::game(sf::RenderWindow* wnd){
   spaceshipImage.setSmooth(true);
@@ -16,7 +18,7 @@ game::game(sf::RenderWindow* wnd){
   Spaceship = new spaceship(nullptr, &spaceshipImage);
   Header = new header(Window);
   Settings = new settings(Window);
-  Galaxy = new galaxy(Window, Spaceship, 5);
+  Galaxy = new galaxy(Window, Spaceship, 5, this);
   Spaceship->setPlayground(Galaxy);
   Playground = Galaxy;
 
@@ -96,7 +98,7 @@ void game::start (){
     if(rotation.getTransformation())                            //if pressed make a transformation of the object
       Spaceship->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
 
-    Playground->checkCollision();
+    game::Playground->checkCollision();
 
     Window->clear();
 
@@ -110,5 +112,9 @@ void game::start (){
 
 void game::draw (){
   Header->Draw();
-  Playground->Draw();
+  this->Playground->Draw();
+}
+
+void game::setMainViewer(viewer* newViewer){
+  Playground = newViewer;
 }

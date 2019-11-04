@@ -1,23 +1,32 @@
 //EVENTHANDLER
 //Class that handle events
 
+
+#ifndef EVENTHANDLER_H
+#define EVENTHANDLER_H
+
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "../Classes/galaxy.hpp"
+#include "../Classes/keyVector.hpp"
+
 
 class eventHandler{
   public:
     //It handle KeyEvent::KeyReleased.
     //It stops the movement
-    static void keyReleasedHandler (sf::Event& e/*vent*/, keyVector* t/*ranslation*/, keyVector* r/*otation*/);
+    static void keyReleasedHandler (sf::Event& event, keyVector* translation, keyVector* rotation);
+
     //It handle KeyEvent::KeyPressed
     //It gives information bout transformation of the spaceship
-    static void keyPressedHandler (spaceship* S/*paceship*/, sf:: Event& e);
+    static void keyPressedHandler (spaceship* Spaceship, sf:: Event& event);
 
     //It handle Event::Closed
     //it close the window if pressed 'Q', 'ESC' or close button
-    static void windowClosedHandler (sf::Event& e/*vent*/, sf::RenderWindow& w/*indow*/);
+    static void windowClosedHandler (sf::Event& event, sf::RenderWindow& window);
 
 };
+
+#endif

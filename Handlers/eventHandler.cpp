@@ -31,28 +31,7 @@ void eventHandler::keyPressedHandler (spaceship* S/*paceship*/, sf:: Event& e){
   std::cout << "alt:" << event.key.alt << std::endl;
   std::cout << "shift:" << event.key.shift << std::endl;
   std::cout << "system:" << event.key.system << std::endl;
-
-  t.move(10.f, 50.f);
-  s1->move(50.f, 10.f);
-  //SETTEXT(text);
-  std::cout << "Position x:" << t.getPosition().x << std::endl;
-  std::cout << "Position y:" << t.getPosition().y << std::endl;
-  std::cout << "Position x:" << s1->getPosition().x << std::endl;
-  std::cout << "Position y:" << s1->getPosition().y << std::endl;
-
-  std::cout << "Position x:" << S->getBody()->getPosition().x << std::endl;
-  std::cout << "Position y:" << S->getBody()->getPosition().y << std::endl;
-  std::cout << "Rotation:" << S->getBody()->getRotation() << std::endl;
-  std::cout << "Sin :" << sin(S->getBody()->getRotation() * PI / 180.0) << std::endl;
-  std::cout << "Cos :" << cos(S->getBody()->getRotation() * PI / 180.0) << std::endl;
-  std::cout << "Sin ModuleUp:" << sin(S->getBody()->getRotation() * PI / 180.0) * 10<< std::endl;
-  std::cout << "Cos ModuleUp:" << cos(S->getBody()->getRotation() * PI / 180.0) * 10<< std::endl;
-  std::cout << "Sin ModuleDown:" << sin(S->getBody()->getRotation() * PI / 180.0) * -10<< std::endl;
-  std::cout << "Cos ModuleDown:" << cos(S->getBody()->getRotation() * PI / 180.0) * -10<< std::endl;
-  std::cout << "LeftOOB:" << S->getLeftOutOfBounds() << std::endl;
-  std::cout << "TopOOB:" << S->getTopOutOfBounds() << std::endl;
-  std::cout << "xOutOfBound:" << S->getXOutOfBounds() << std::endl;
-  std::cout << "yOutOfBound:" << S->getYOutOfBounds() << std::endl;*/
+  */
 }
 
 //It handle Event::Closed

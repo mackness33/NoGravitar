@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics
 
 # build an executable named windows from windows.c
-all: nograv.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o game.o drawable.o
-		g++ -g -Wall -o NoGravitar nograv.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o game.o drawable.o $(LIBS)
+all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o
+		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -43,6 +43,9 @@ settings.o: Classes/settings.hpp Classes/settings.cpp
 
 planetObj.o: Classes/planetObj.hpp Classes/planetObj.cpp Classes/entity.hpp Classes/entity.tpp
 		g++ -c Classes/planetObj.cpp $(LIBS)
+
+planetView.o: Classes/planetView.hpp Classes/planetView.cpp Classes/entity.hpp Classes/entity.tpp
+		g++ -c Classes/planetView.cpp $(LIBS)
 
 utility.o: Classes/utility.hpp Classes/utility.cpp
 		g++ -c Classes/utility.cpp $(LIBS)

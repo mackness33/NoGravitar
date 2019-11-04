@@ -219,7 +219,7 @@ void spaceship::Shoot(){
   bullet *bul = new bullet(spatial_Versor * 1.5f, this->getDrawable()->getRotation(), body->getBody()->getPosition());
   //std::cout << "real location c: " << bul << std::endl;
   playground->addAlly(bul);
-  bullets.push_back(bul);
+  bullets.push_front(bul);
 }
 
 std::string spaceship::Class(){

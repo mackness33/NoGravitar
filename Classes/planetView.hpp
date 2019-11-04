@@ -1,6 +1,10 @@
 //UNIVERSE
 //Class that handle everything that concerne the top of the window
 
+
+#ifndef PLANETVIEW_H
+#define PLANETVIEW_H
+
 /*
 
 */
@@ -10,8 +14,6 @@
 #include <iostream>
 #include <cmath>
 #include "spaceship.hpp"
-#include "planetObj.hpp"
-#include "utility.hpp"
 #include "viewer.hpp"
 
 class planetView : public viewer{
@@ -38,3 +40,5 @@ class planetView : public viewer{
     //DRAW
     void Draw (/*sf::RenderWindow* window*/);
 };
+
+#endif

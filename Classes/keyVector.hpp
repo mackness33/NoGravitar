@@ -1,6 +1,9 @@
 //KEYVECTOR
 //Class key
 
+#ifndef KEYVECTOR_H
+#define KEYVECTOR_H
+
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -36,3 +39,5 @@ class keyVector{
     void isUsed(sf::Keyboard::Key key1, sf::Keyboard::Key key2);
 
 };
+
+#endif

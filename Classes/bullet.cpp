@@ -70,3 +70,7 @@ void bullet::build(){
   body->getBody()->setFillColor(sf::Color::White);
   //body->getBody()->setSmooth(true);
 }
+
+std::string bullet::Class(){
+  return "bullet";
+}

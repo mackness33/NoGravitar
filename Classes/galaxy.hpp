@@ -14,6 +14,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include <exception>
 #include <list>
 #include "spaceship.hpp"
 #include "planetObj.hpp"
@@ -28,7 +29,7 @@ class galaxy : public viewer{
     std::list<bullet*>* bullets;
 
   private:
-    void DrawPlanets (/*sf::RenderWindow* window*/);
+    void DrawList (std::list<drawable*> objects);
 
     bool checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos);
 
@@ -50,6 +51,11 @@ class galaxy : public viewer{
     void Draw (/*sf::RenderWindow* window*/);
 
     void checkCollision();
+
+    void collision(bullet* bullet, planetObj* planet);
+
+    void collision(spaceship* spaceship, planetObj* planet);
+
 };
 
 #endif

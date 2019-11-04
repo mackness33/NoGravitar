@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include <string>
 #include "settings.hpp"
 #include "drawable.hpp"
 /*
@@ -47,4 +48,6 @@ class bullet : public drawable{
     void Update();
 
     void build();
+
+    std::string Class();
 };

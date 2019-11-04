@@ -11,6 +11,7 @@
 #include <iostream>
 #include <cmath>
 #include <list>
+#include <string>
 #include "bullet.hpp"
 #include "viewer.hpp"
 
@@ -19,7 +20,7 @@
 */
 #define PI 3.14159265
 
-class spaceship{
+class spaceship : public drawable{
   private:
     bool xOutOfBound;                   //XOutOfBounds
     bool yOutOfBound;                   //YOutOfBounds
@@ -57,13 +58,17 @@ class spaceship{
     //SETS
     void setXOutOfBounds(bool x);
     void setYOutOfBounds(bool y);
-    void setLeftOutOfBounds(bool l);
-    void setTopOutOfBounds(bool t);
-    void setSpatialVersor(float sv);
-    void setRotationVersor(float rv);
-    void setBody(sf::Sprite* b);
-    void setPlayground(viewer* b);
+    void setLeftOutOfBounds(bool left);
+    void setTopOutOfBounds(bool top);
+    void setSpatialVersor(float spatialVersor);
+    void setRotationVersor(float rotationVersor);
+    void setBody(sf::Sprite* body);
+    void setPlayground(viewer* playground);
     //TODO: setTexture(sf::Texture* t);
+
+    //DELETES
+    void deleteBullet(bullet* bullet);
+    void deleteBullets();
 
     //----------METHODS------------
 
@@ -86,6 +91,8 @@ class spaceship{
     void build ();
 
     void Shoot();
+
+    std::string Class();
 };
 
 #endif

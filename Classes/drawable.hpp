@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cmath>
 #include <list>
+#include <string>
 #include "movable.hpp"
 
 /*
@@ -34,6 +35,9 @@ class drawable{
 
     //----------METHODS------------
     virtual void Draw (sf::RenderWindow* window) = 0;
+    virtual void Update ();
+
+    virtual std::string Class();
 
 };
 

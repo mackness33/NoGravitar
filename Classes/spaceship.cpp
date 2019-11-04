@@ -51,6 +51,13 @@ spaceship::spaceship(viewer* plg, sf::Texture* img){
   //this->build();
 }
 
+
+spaceship::~spaceship(){
+  std::cout << "DELETING SPACESHIP" << std::endl;
+
+  this->deleteBullets();
+}
+
 /*spaceship(const spaceship& S){
   spatial_Versor = S.getSpatialVersor();
   rotation_Versor = S.getRotationVersor();
@@ -83,6 +90,28 @@ void spaceship::setSpatialVersor(float sv) { spatial_Versor = sv;}
 void spaceship::setRotationVersor(float rv) { rotation_Versor = rv;}
 void spaceship::setPlayground(viewer* pg) { playground = pg;}
 //void spaceship::setBody(sf::Sprite* b) { body = b;}
+
+
+//DELETES
+void spaceship::deleteBullet(bullet* b){
+  auto bul = std::find(bullets.begin(), bullets.end(), b);
+  delete *bul;
+  *bul = nullptr;
+  bullets.erase(bul);
+}
+
+void spaceship::deleteBullets(){
+  for (std::list<bullet*>::iterator bul = bullets.begin(); bul != bullets.end(); ){
+    //std::cout << "position i: " << i << std::endl;
+    //std::cout << "Does the bullet exist: " << !!bul << std::endl;
+    if(!!*bul){
+      //std::cout << "real location of " << i << "^ bullet: " << bul << std::endl;
+      delete *bul;
+    }
+    *bul = nullptr;
+    bul = bullets.erase(bul);
+  }
+}
 
 //---------------METHODS--------------------
 
@@ -149,7 +178,7 @@ bool spaceship::opposite_direction(bool side, float direction){
 }
 
 void spaceship::Draw (sf::RenderWindow* window){
-  bullet *bul;
+  /*bullet *bul;
   for (std::list<bullet*>::iterator b = bullets.begin(); b != bullets.end(); b++){
     //std::cout << "position i: " << i << std::endl;
     bul = *b;
@@ -159,7 +188,7 @@ void spaceship::Draw (sf::RenderWindow* window){
       bul->Update();
       bul->Draw(window);
     }
-  }
+  }*/
 
   body->DrawTest(window);
 }
@@ -191,4 +220,8 @@ void spaceship::Shoot(){
   //std::cout << "real location c: " << bul << std::endl;
   playground->addAlly(bul);
   bullets.push_back(bul);
+}
+
+std::string spaceship::Class(){
+  return "spaceship";
 }

@@ -15,6 +15,7 @@ class planetObj : public drawable{
   private:
     entity<sf::CircleShape>* body;
     bool life;
+    //planetView* view;
     //sf::Vector2f *size;
 
   public:
@@ -35,6 +36,7 @@ class planetObj : public drawable{
     sf::FloatRect GetLocalBounds();
     sf::FloatRect GetGlobalBounds();
     bool isDead();
+    //planetView* isDead();
 
     //SETS
     void setLife(bool l);

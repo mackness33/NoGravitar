@@ -13,8 +13,8 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) :
   /*if(!!spc)
     S = new spaceship(w);
   else*/
-    S = spc;
-
+  S = spc;
+  viewer::addAlly(spc);
   bullets = S->getBullets();
 
   // Setting bounding box
@@ -26,7 +26,7 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) :
 
   std::list<sf::FloatRect> posPlanets = {};
 
-  for (int i = 0; i < 20; i++){
+  for (int i = 0; i < numPlanets; i++){
     sf::Vector2f position = utility::RandVector(playground.x, playground.y, 0, win->getSize().y/10);
     //sf::Vector2f position = utility::RandVector(win->getSize().x, win->getSize().y);
     //std::cout << "pos x: " << position.x << std::endl;
@@ -75,8 +75,9 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets) :
 //DRAW
 void galaxy::Draw (/*sf::RenderWindow* window*/){
   viewer::Draw();
-  S->Draw(window);
-  this->DrawPlanets();
+  this->DrawList(allies);
+  this->DrawList(enemies);
+  //this->DrawPlanets();
   //window->draw(background);
 }
 
@@ -94,15 +95,11 @@ bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vecto
   return true;
 }
 
-void galaxy::DrawPlanets (/*sf::RenderWindow* window*/){
-  planetObj *pln;
-  for (std::list<planetObj*>::iterator p = planets.begin(); p != planets.end(); p++){
-    //std::cout << "position i: " << i << std::endl;
-    pln = *p;
-    //std::cout << "Does the bullet exist: " << !!bul << std::endl;
-    if(!!pln){
-      //std::cout << "real location of " << i << "^ bullet: " << bul << std::endl;
-      pln->Draw(window);
+void galaxy::DrawList (std::list<drawable*> objects){
+  for (std::list<drawable*>::iterator d = objects.begin(); d != objects.end(); d++){
+    if(!!*d){
+      (*d)->Update();
+      (*d)->Draw(window);
     }
   }
 }
@@ -110,47 +107,81 @@ void galaxy::DrawPlanets (/*sf::RenderWindow* window*/){
 //TODO: Need to delete the object at the end of all the cicles!
 //TODO: consider to delete in a good way the mo'fucking pointers
 void galaxy::checkCollision (){
-  std::list<int> posDrawable;
+  bool collision = false, changeViewer = false;
+  planetObj *planet = nullptr;
+  std::cout << "START!!" << std::endl;
   int i = 0;
-  bool collision = false;
-  //std::cout << "START!!" << std::endl;
-  for (auto ally = allies.begin(); ally != allies.end(); ){
-    //std::cout << "Ally: " << i << std::endl;
+  for (auto ally = allies.begin(); ally != allies.end();){
+    std::cout << "Ally: " << i << std::endl;
+    bool collision_planets = false;
     int j = 0;
-    for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
-      //std::cout << "Enemy: " << j << std::endl;
+    for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++, j++){
+      std::cout << "Enemy: " << j << std::endl;
       if(!!*ally && !!*enemy){
         if(collisionHandler::checkCollision(*ally, *enemy)){
-          posDrawable.push_front(i);
           std::cout << "COLLISION!!" << std::endl;
+          planet = static_cast<planetObj*>(*enemy);
           collision = true;
+          collision_planets = true;
           //enemies.erase(enemy);
         }
       }
+
+      /*if(collision && collision_planets){
+        auto pln = std::find(planets.begin(), planets.end(), *enemy);
+        delete *pln;
+        *pln = nullptr;
+        enemy = enemies.erase(enemy);
+        planets.erase(pln);
+        collision_planets = false;
+      }
+      else{
+        enemy++;
+        j++;
+      }*/
       //std::cout << "STILL WORKING!!" << std::endl;
-      j++;
     }
     //std::cout << "ALLY FOR!!" << std::endl;
     if(collision){
-      auto bul = std::find(bullets->begin(), bullets->end(), *ally);
-      delete *bul;
-      *bul = nullptr;
-      ally = allies.erase(ally);
-      bullets->erase(bul);
+      switch((*ally)->Class()[0]){
+        case 'b':{
+          S->deleteBullet(static_cast<bullet*>(*ally));
+          ally = allies.erase(ally);
+        };break;
+
+        case 's': {
+          //S->deleteBullets();     //delete all the bullets
+          //TODO: delete all the bullets from allies
+          allies.clear();
+          viewer::addAlly(S);
+          changeViewer = true;
+          S->getEntity()->SetPosition(100, 200);
+        }; break;
+
+        default: std::cout << "There's a " << (*ally)->Class() << " in allies, why?";
+      }
+
       collision = false;
     }
     else{
       ally++;
       i++;
     }
-  }
 
-  /*for (auto position = posDrawable.begin(); position != posDrawable.end(); position++){
-    auto a = ally;
-    delete *a;
-    *a = nullptr;
-    allies.erase(a);
-  }*/
+    if(changeViewer){
+      break;
+    }
+  }
+}
+
+
+void galaxy::collision(bullet* bullet, planetObj* planet){
+  S->deleteBullet(bullet);
+  //return allies.erase(&*bullet);
+}
+
+void galaxy::collision(spaceship* spaceship, planetObj* planet){
+  S->deleteBullets();     //delete all the bullets
 }
 
 //

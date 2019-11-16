@@ -8,6 +8,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <experimental/filesystem>
 #include <cmath>
 #define PI 3.14159265
 
@@ -25,6 +26,18 @@ class settings{
   public:
     static float deltaTime;
     static float switchTime;
+    static std::vector<sf::Texture*> images;
+
+  private:
+    /*static std::string getCurrentDirectory() {
+      char path[PATH_MAX];
+      if (getcwd(path, sizeof(path)) != NULL)
+        printf("Current working dir: %s\n", path);
+      else
+        strcpy(path, "\0");
+
+       return path;
+    }*/
 
   public:
     //CONSTRUCTORS
@@ -44,6 +57,15 @@ class settings{
     //---------------METHODS---------------
     static void default_settings(){
       switchTime = 60;
+    }
+
+    static void loadImages(){
+      std::string path = std::experimental::filesystem::current_path();
+      for (const auto & entry : std::experimental::filesystem::directory_iterator(path + "/img")){
+        sf::Texture *image = new sf::Texture();
+        if (image->loadFromFile(entry.path()))
+          settings::images.push_back(image);
+      }
     }
 
     //DRAW

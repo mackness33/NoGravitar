@@ -1,21 +1,9 @@
-//HEADER
-//Class that handle everything that concerne the top of the window
-#include "bullet.hpp"
-/*
+//BULLET
+//Class that draw and move a bullet
 
-*/
-#define PI 3.14159265
+#include "bullet.hpp"
 
 //CONSTRUCTORS
-bullet::bullet(){
-  body = new movable<sf::CircleShape>(5);
-
-  speed = 12;
-  direction = 0 * PI / 180.0f;
-  totalTime = 0;
-  this->build();
-}
-
 bullet::bullet(float s, float d, sf::Vector2f p){
   body = new movable<sf::CircleShape>(5);
 
@@ -29,6 +17,7 @@ bullet::bullet(float s, float d, sf::Vector2f p){
 
 bullet::~bullet(){
   std::cout << "DELETING BULLET" << std::endl;
+
   delete body;
   body = nullptr;
 }
@@ -57,13 +46,7 @@ void bullet::Update(){
     totalTime -= settings::switchTime;
     body->Move(cos(direction) * speed, sin(direction) * speed);
     sf::Vector2f pos = body->getBody()->getPosition();
-    //std::cout << "Position x:" << pos.x << std::endl;
-    //std::cout << "Position y:" << pos.y << std::endl;
-    //std::cout << "switchTime:" << settings::switchTime << std::endl;
   }
-
-  //std::cout << "totalTime:" << totalTime << std::endl;
-  //std::cout << "deltaTime:" << settings::deltaTime << std::endl;
 }
 
 void bullet::build(){

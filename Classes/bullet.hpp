@@ -1,5 +1,5 @@
-//HEADER
-//Class that handle everything that concerne the top of the window
+//BULLET
+//Class that draw and move a bullet
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
@@ -16,19 +16,15 @@
 class bullet : public drawable{
   private:
     movable<sf::CircleShape>* body;
-    //sf::FloatRect *boundingBox;
-    //sf::RectangleShape bound;       //FOR TESTING ONLY
-    //sf::Vector2f *position;
-    //sf::Vector2f *size;
     float speed;
     float direction;
     float totalTime;
 
   public:
     //CONSTRUCTORS
-    bullet();
-    bullet(float s, float d, sf::Vector2f p);
+    bullet(float speed = 12, float direction = 0, sf::Vector2f position = sf::Vector2f(0,0));
 
+    //DESTRUCTORS
     ~bullet();
 
     //GETS
@@ -41,13 +37,15 @@ class bullet : public drawable{
     //SETS
 
     //---------------METHODS---------------
-
-    //DRAW
+    //draw of the body of the object
     void Draw (sf::RenderWindow* window);
 
+    //update of the object's data for each time that it is draw
     void Update();
 
+    //build all the settings of object's body
     void build();
 
+    //return the class of the object
     std::string Class();
 };

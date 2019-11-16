@@ -110,6 +110,7 @@ void game::start (){
   }
 }
 
+
 void game::draw (){
   Header->Draw();
   this->Playground->Draw();

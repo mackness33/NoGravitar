@@ -1,48 +1,35 @@
-//HEADER
-//Class that handle everything that concerne the top of the window
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <cmath>
-#include <string>
+#ifndef BULLET_H
+#define BULLET_H
+
+#include "movable.hpp"
+#include "entity.hpp"
 #include "settings.hpp"
 #include "drawable.hpp"
-/*
-
-*/
-#define PI 3.14159265
 
 class bullet : public drawable{
-  private:
+  protected:
     movable<sf::CircleShape>* body;
-    //sf::FloatRect *boundingBox;
-    //sf::RectangleShape bound;       //FOR TESTING ONLY
-    //sf::Vector2f *position;
-    //sf::Vector2f *size;
     float speed;
     float direction;
     float totalTime;
 
   public:
-    //CONSTRUCTORS
-    bullet();
-    bullet(float s, float d, sf::Vector2f p);
+    //---------------CONSTRUCTORS---------------
+    bullet(float s = 12, float d = 0, sf::Vector2f p = sf::Vector2f(0, 0));
 
+    //---------------DESTRUCTORS---------------
     ~bullet();
 
-    //GETS
+    //---------------GETS---------------
     movable<sf::CircleShape>* getMovable();
     entity<sf::CircleShape>* getEntity();
     sf::CircleShape* getDrawable();
     sf::FloatRect GetLocalBounds();
     sf::FloatRect GetGlobalBounds();
 
-    //SETS
+    //---------------SETS---------------
 
     //---------------METHODS---------------
-
-    //DRAW
     void Draw (sf::RenderWindow* window);
 
     void Update();
@@ -51,3 +38,5 @@ class bullet : public drawable{
 
     std::string Class();
 };
+
+#endif

@@ -1,20 +1,6 @@
-//UNIVERSE
-//Class that handle everything that concerne the top of the window
-
-/*
-
-*/
-
-
 #ifndef GALAXY_H
 #define GALAXY_H
 
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <cmath>
-#include <exception>
 #include <list>
 #include "spaceship.hpp"
 #include "planetObj.hpp"
@@ -25,14 +11,15 @@
 #include "../Handlers/collisionHandler.hpp"
 
 class game;
+
 class galaxy : public viewer{
-  private:
+  protected:
     spaceship *S;
     std::list<planetObj*> planets;
     std::list<bullet*>* bullets;
     game *currentGame;
-    
-  private:
+
+  protected:
     void DrawList (std::list<drawable*> objects);
 
     bool checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos);
@@ -50,9 +37,7 @@ class galaxy : public viewer{
     //void setBackground(sf::Sprite b){ this->background = b;}
 
     //---------------METHODS---------------
-
-    //DRAW
-    void Draw (/*sf::RenderWindow* window*/);
+    void Draw ();
 
     void checkCollision();
 

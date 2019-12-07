@@ -1,20 +1,11 @@
-//UNIVERSE
-//Class that handle everything that concerne the top of the window
-
-/*
-
-*/
-//#include "entity.hpp"
-#define PI 3.14159265
-
 //------------CONSTRUCTORS------------
-template <class T> entity<T>::entity(T* b){
-  body = new T(b);
+template <class T> entity<T>::entity(){
+  body = new T();
   this->setBoundery();
 }
 
-template <class T> entity<T>::entity(){
-  body = new T();
+template <class T> entity<T>::entity(T* b){
+  body = new T(b);
   this->setBoundery();
 }
 
@@ -38,6 +29,12 @@ template <class T> entity<T>::entity(sf::Vector2f s, sf::Vector2f p, sf::Texture
   this->setBoundery();
 }
 
+template <class T> entity<T>::~entity(){
+  std::cout << "DELETING ENTITY" << std::endl;
+  delete body;
+  body = nullptr;
+}
+
 
 //------------GETS------------
 template <class T> T* entity<T>::getBody(){ return body; }
@@ -53,15 +50,9 @@ template <class T> void entity<T>::setBody(T* b){
 
 //TODO: Add checks for VertexArray and VertexBuffer
 template <class T> void entity<T>::setBoundery(){
-  if (!!body){
+  sf::FloatRect *boundBox = new sf::FloatRect(0, 0, 0, 0);
+  if (!!body)
     boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
-
-    //bound.setPosition(body->getPosition());
-    //bound.setRotation(body->getRotation());
-    //bound.setScale(body->getScale());
-  }
-  else
-    boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
 
   bound.setFillColor(sf::Color::Black);
   bound.setOutlineColor(sf::Color::Red);
@@ -106,11 +97,6 @@ template <class T> void entity<T>::SetOrigin(const sf::Vector2f &origin){
 
 
 //------------METHODS------------
-/*template <class T> void entity::draw(sf::RenderTarget& target, sf::RenderStates states = RenderStates::Default) const{
-  // You can draw other high-level objects
-  target.draw(, states);
-}*/
-
 template <class T> void entity<T>::Draw (sf::RenderWindow* window){
   window->draw(*body);
 }

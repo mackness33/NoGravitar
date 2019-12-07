@@ -1,21 +1,13 @@
-//HEADER
-//Class that handle everything that concerne the top of the window
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <cmath>
+#ifndef PLANETOBJ_H
+#define PLANETOBJ_H
+
 #include "drawable.hpp"
 #include "planetView.hpp"
-/*
-
-*/
-#define PI 3.14159265
 
 class planetObj : public drawable{
   private:
     entity<sf::CircleShape>* body;
-    bool life;
+    //bool life;
     planetView* view;
     //sf::Vector2f *size;
     sf::RenderWindow* window;
@@ -52,3 +44,5 @@ class planetObj : public drawable{
 
     void build();
 };
+
+#endif

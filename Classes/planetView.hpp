@@ -1,18 +1,6 @@
-//UNIVERSE
-//Class that handle everything that concerne the top of the window
-
-
 #ifndef PLANETVIEW_H
 #define PLANETVIEW_H
 
-/*
-
-*/
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <cmath>
 #include "spaceship.hpp"
 #include "viewer.hpp"
 

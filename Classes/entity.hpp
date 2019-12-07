@@ -1,5 +1,3 @@
-//SPACESHIP
-//Class that handle everything that concerne a spaceship
 #ifndef ENTITY_H
 #define ENTITY_H
 
@@ -7,17 +5,9 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <cmath>
-#include <list>
-
-/*
-  BUG: change body into sprites
-*/
-#define PI 3.14159265
 
 template <class T> class entity{
   protected:
-    sf::FloatRect *boundBox;
     sf::RectangleShape bound;       //FOR TESTING ONLY
     T *body;
 
@@ -27,21 +17,19 @@ template <class T> class entity{
   public:
     //TODO: add all the constructors of sf::Shape sf::Sprite .. etc
     //----------CONSTRUCTORS----------
-    entity(T* b);
-
     entity();
+    entity(T* b);
+    entity(float radius, std::size_t pointCount = 30);                          //CircleShape
+    entity(sf::Texture* image);                                                                               //Sprite
+    entity(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), sf::Texture* image = nullptr);      //RectangleShape
 
-    //CircleShape
-    entity(float radius, std::size_t pointCount = 30);
 
-    //Sprite
-    entity(sf::Texture* image);
-
-    entity(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), sf::Texture* image = nullptr);
+    ~entity();
 
     //----------GETS----------
     T* getBody();
     sf::RectangleShape* getBound();
+
 
     //----------SETS----------
     void setBody(T *b);
@@ -56,6 +44,7 @@ template <class T> class entity{
 
     void 	SetOrigin (float x, float y);
     void 	SetOrigin (const sf::Vector2f &origin);
+
 
     //----------METHODS------------
     void Draw (sf::RenderWindow* window);

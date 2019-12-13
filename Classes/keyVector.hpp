@@ -1,6 +1,3 @@
-//KEYVECTOR
-//Class key
-
 #ifndef KEYVECTOR_H
 #define KEYVECTOR_H
 
@@ -15,7 +12,7 @@ class keyVector{
     bool transformation;
 
   public:
-    //CONSTRUCTORS
+    //----------CONSTRUCTORS----------
     keyVector(sf::Keyboard::Key k/*ey*/, bool t/*ransfomation*/);
 
     keyVector();
@@ -23,18 +20,18 @@ class keyVector{
     //copy constructor
     keyVector(const keyVector& V);
 
-    //OPERATORS
+    //----------OPERATORS----------
     keyVector& operator=(const keyVector& V);
 
-    //GETS
+    //----------GETS----------
     sf::Keyboard::Key getKey();
     bool getTransformation();
 
-    //SETS
+    //----------SETS----------
     void setKey(sf::Keyboard::Key k);
     void setTransformation(bool t);
 
-    //METHODS
+    //----------METHODS----------
     //the method understand which key has been pressed and sets the boolean for the smoothness of the trasformation
     void isUsed(sf::Keyboard::Key key1, sf::Keyboard::Key key2);
 

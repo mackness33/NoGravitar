@@ -13,7 +13,7 @@ class planetObj : public drawable{
     sf::RenderWindow* window;
 
   public:
-    //CONSTRUCTORS
+    //----------CONSTRUCTORS----------
     planetObj();
 
     planetObj(float radius);
@@ -24,7 +24,7 @@ class planetObj : public drawable{
 
     ~planetObj();
 
-    //GETS
+    //----------GETS----------
     entity<sf::CircleShape>* getEntity();
     sf::CircleShape* getDrawable();
     sf::FloatRect GetLocalBounds();
@@ -33,13 +33,11 @@ class planetObj : public drawable{
     planetView* getPlanetView();
     //planetView* isDead();
 
-    //SETS
+    //----------SETS----------
     void setLife(bool l);
     void setPlanetView(planetView* newView);
 
-    //---------------METHODS---------------
-
-    //DRAW
+    //----------METHODS----------
     void Draw (sf::RenderWindow* window);
 
     void build();

@@ -18,7 +18,6 @@ class viewer : public drawable{
     virtual ~viewer();
 
     //----------GETS----------
-    //entity<sf::RectangleShape>* getBackground();
     entity<sf::RectangleShape>* getEntity();
     sf::RectangleShape* getDrawable();
     sf::FloatRect GetLocalBounds();

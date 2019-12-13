@@ -14,7 +14,7 @@ class game;
 
 class galaxy : public viewer{
   protected:
-    spaceship *S;
+    spaceship *Player;
     std::list<planetObj*> planets;
     std::list<bullet*>* bullets;
     game *currentGame;

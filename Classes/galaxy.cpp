@@ -1,19 +1,11 @@
-//UNIVERSE
-//Class that handle everything that concerne the top of the window
-
-/*
-
-*/
 #include "galaxy.hpp"
 
-#define PI 3.14159265
-
-//CONSTRUCTORS
+//----------CONSTRUCTORS----------
 galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actGame) : viewer(win){
-  S = spc;
+  Player = spc;
   currentGame = actGame;
   viewer::addAlly(spc);
-  bullets = S->getBullets();
+  bullets = Player->getBullets();
   planets = {};
   std::list<sf::FloatRect> posPlanets = {};
   sf::Vector2f playground = this->getDrawable()->getSize() - sf::Vector2f(100, 100);
@@ -25,7 +17,7 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, g
     //std::cout << "pos y: " << position.y << std::endl;
     if(this->checkPlanetPosition(&posPlanets, position)){
       planetObj *pln = new planetObj(utility::Rand(20, 30), position);
-      pln->setPlanetView(new planetView(window, S));
+      pln->setPlanetView(new planetView(window, Player));
       //pln->getBody()->SetOrigin(pos);
       planets.push_front(pln);
       viewer::addEnemy(pln);
@@ -36,16 +28,16 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, g
   }
 }
 
-//GETS
+//----------GETS----------
 //sf::Texture getTexture(){ return this->background.getTexture();}
 //sf::Sprite getBackground(){ return this->background;}
 
-//SETS
+//----------SETS----------
 //void setTexture(sf::Texture t){ this->background.setTexture(t);}
 //void setBackground(sf::Sprite b){ this->background = b;}
 
 
-//---------------METHODS---------------
+//----------METHODS----------
 void galaxy::Draw (){
   viewer::Draw();
   this->DrawList(allies);
@@ -116,18 +108,18 @@ void galaxy::checkCollision (){
     if(collision){
       switch((*ally)->Class()[0]){
         case 'b':{
-          S->deleteBullet(static_cast<bullet*>(*ally));
+          Player->deleteBullet(static_cast<bullet*>(*ally));
           ally = allies.erase(ally);
         };break;
 
         case 's': {
-          S->deleteBullets();     //delete all the bullets
+          Player->deleteBullets();     //delete all the bullets
           //delete all the bullets from allies
           allies.clear();
-          viewer::addAlly(S);
+          viewer::addAlly(Player);
           changeViewer = true;
           currentGame->setMainViewer(planet->getPlanetView());
-          S->getEntity()->SetPosition(100, 200);
+          Player->getEntity()->SetPosition(100, 200);
         }; break;
 
         default: std::cout << "There's a " << (*ally)->Class() << " in allies, why?";
@@ -146,9 +138,9 @@ void galaxy::checkCollision (){
 
 
 void galaxy::collision(bullet* bullet, planetObj* planet){
-  S->deleteBullet(bullet);
+  Player->deleteBullet(bullet);
 }
 
 void galaxy::collision(spaceship* spaceship, planetObj* planet){
-  S->deleteBullets();     //delete all the bullets
+  Player->deleteBullets();     //delete all the bullets
 }

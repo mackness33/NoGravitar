@@ -1,24 +1,10 @@
-//SPACESHIP
-//Class that handle everything that concerne a spaceship
-
-
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <cmath>
 #include <list>
 #include <string>
 #include "bullet.hpp"
 #include "viewer.hpp"
-
-/*
-  BUG: change body into sprites
-*/
-#define PI 3.14159265
 
 class spaceship : public drawable{
   private:
@@ -30,18 +16,22 @@ class spaceship : public drawable{
     float rotation_Versor;
     movable<sf::Sprite>* body;
     sf::Texture* image;
-    //bullet *b;
     std::list <bullet*> bullets;
     viewer *playground;
 
+  protected:
+    //BUILD
+    //It build up the spaceship shape
+    void build ();
+
   public:
-    //CONSTRUCTORS
+    //----------CONSTRUCTORS----------
     spaceship(viewer* playground);
     spaceship(viewer* playground, sf::Texture* img);
-    //spaceship(const spaceship& S);
+    //spaceship(const spaceship& Player);
     ~spaceship();
 
-    //GETS
+    //----------GETS----------
     bool getXOutOfBounds();
     bool getYOutOfBounds();
     bool getLeftOutOfBounds();
@@ -55,7 +45,7 @@ class spaceship : public drawable{
     sf::FloatRect GetGlobalBounds();
     std::list<bullet*>* getBullets();
 
-    //SETS
+    //----------SETS----------
     void setXOutOfBounds(bool x);
     void setYOutOfBounds(bool y);
     void setLeftOutOfBounds(bool left);
@@ -66,29 +56,21 @@ class spaceship : public drawable{
     void setPlayground(viewer* playground);
     //TODO: setTexture(sf::Texture* t);
 
-    //DELETES
+    //----------DELETES----------
     void deleteBullet(bullet* bullet);
     void deleteBullets();
 
     //----------METHODS------------
-
-    //MOVEMENT
     //It let the spaceship move or rotate based on the key pressed
     void movement(sf::Keyboard::Key k);
 
-    //FLY
     //It handle spaceship translation in the window
     void fly(float module);
 
-    //OPPOSITE_DIRECTION
     //It understand if the spaceship want o go OutOfBOunds
     bool opposite_direction(bool side, float direction);
 
     void Draw (sf::RenderWindow* window);
-
-    //BUILD
-    //It build up the spaceship shape
-    void build ();
 
     void Shoot();
 

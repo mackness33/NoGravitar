@@ -1,14 +1,10 @@
-//HEADER
-//Class that handle everything that concerne the top of the window
+#ifndef HEADER_H
+#define HEADER_H
+
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <cmath>
-/*
-
-*/
-#define PI 3.14159265
 
 class header{
   private:
@@ -22,21 +18,21 @@ class header{
     sf::Vector2f *size;
 
   public:
-    //CONSTRUCTORS
+    //----------CONSTRUCTORS----------
     header(sf::RenderWindow* win);
 
-    //GETS
+    //----------GETS----------
     sf::Text getPoints();
     sf::Text getTitle();
     sf::Font getFont();
 
-    //SETS
+    //----------SETS----------
     void setPoints(sf::Text p);
     void setTitle(sf::Text t);
     void setFont(sf::Font f);
 
     //---------------METHODS---------------
-
-    //DRAW
     void Draw (/*sf::RenderWindow* window*/);
 };
+
+#endif

@@ -1,9 +1,6 @@
-//KEYVECTOR
-//Class key
-
 #include "keyVector.hpp"
 
-//CONSTRUCTORS
+//----------CONSTRUCTORS----------
 keyVector::keyVector(sf::Keyboard::Key k/*ey*/, bool t/*ransfomation*/){
   key = k;
   transformation = t;
@@ -20,7 +17,7 @@ keyVector::keyVector(const keyVector& V){
   transformation = V.transformation;
 }
 
-//OPERATORS
+//----------OPERATORS----------
 keyVector& keyVector::operator= (const keyVector& V){
   key = V.key;
   transformation = V.transformation;
@@ -28,15 +25,15 @@ keyVector& keyVector::operator= (const keyVector& V){
   return *this;
 }
 
-//GETS
+//----------GETS----------
 sf::Keyboard::Key keyVector::getKey(){ return key;}
 bool keyVector::getTransformation(){ return transformation; }
 
-//SETS
+//----------SETS----------
 void keyVector::setKey(sf::Keyboard::Key k) { key = k;}
 void keyVector::setTransformation(bool t) { transformation = t;}
 
-//METHODS
+//----------METHODS----------
 //the method understand which key has been pressed and sets the boolean for the smoothness of the trasformation
 void keyVector::isUsed(sf::Keyboard::Key key1, sf::Keyboard::Key key2){
   if(sf::Keyboard::isKeyPressed(key1) || sf::Keyboard::isKeyPressed(key2)){

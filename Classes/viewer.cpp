@@ -57,7 +57,7 @@ void viewer::addEnemy (drawable* enemy){
   std::cout << "Enemies size: " << enemies.size() << std::endl;
 }
 
-std::string bullet::Class(){
+std::string viewer::Class(){
   return "viewer";
 }
 

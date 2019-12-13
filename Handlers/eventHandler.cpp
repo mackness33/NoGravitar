@@ -1,6 +1,3 @@
-//EVENTHANDLER
-//Class that handle events
-
 #include "eventHandler.hpp"
 
 void eventHandler::keyReleasedHandler (sf::Event& e/*vent*/, keyVector* t/*ranslation*/, keyVector* r/*otation*/){

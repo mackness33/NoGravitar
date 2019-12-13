@@ -1,9 +1,3 @@
-//COLLISIONHANDLER
-//Class that handle collision
-
-/*
-
-*/
 #include "collisionHandler.hpp"
 
 //-------------METHODS------------

@@ -1,5 +1,5 @@
-#ifndef VIEWER_H
-#define VIEWER_H
+#ifndef UTILITY_H
+#define UTILITY_H
 
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>

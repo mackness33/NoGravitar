@@ -1,6 +1,9 @@
 #ifndef BULLET_H
 #define BULLET_H
 
+#define PI 3.14159265
+
+
 #include "movable.hpp"
 #include "entity.hpp"
 #include "settings.hpp"

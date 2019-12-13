@@ -10,7 +10,7 @@ game::game(sf::RenderWindow* wnd){
 
   Player = new spaceship(nullptr, &spaceshipImage);
   Header = new header(Window);
-  Settings = new settings(Window);
+  //Settings = new settings(Window);
   Galaxy = new galaxy(Window, Player, 5, this);
   Player->setPlayground(Galaxy);
   Playground = Galaxy;

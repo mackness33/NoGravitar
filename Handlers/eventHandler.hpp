@@ -1,14 +1,6 @@
-//EVENTHANDLER
-//Class that handle events
-
-
 #ifndef EVENTHANDLER_H
 #define EVENTHANDLER_H
 
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
 #include "../Classes/galaxy.hpp"
 #include "../Classes/keyVector.hpp"
 

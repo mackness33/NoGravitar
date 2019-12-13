@@ -23,7 +23,7 @@ int main (void){
   window.setFramerateLimit(20);
   window.setKeyRepeatEnabled(false);
 
-  settings::loadImages();
+  //settings::loadImages();
 
   srand (time(NULL));
 

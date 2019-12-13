@@ -1,20 +1,12 @@
-//MOVABLE
-
 #ifndef MOVABLE_H
 #define MOVABLE_H
 
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <cmath>
 #include <list>
 #include "entity.hpp"
 
 /*
   BUG: change body into sprites
 */
-#define PI 3.14159265
 
 template <class T> class movable : public entity<T>{
 

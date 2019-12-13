@@ -1,14 +1,6 @@
-//HEADER
-//Class that handle everything that concerne the top of the window
-
-/*
-
-*/
 #include "header.hpp"
 
-#define PI 3.14159265
-
-//CONSTRUCTORS
+//----------CONSTRUCTORS----------
 header::header(sf::RenderWindow* win){
   window = win;
 
@@ -48,26 +40,25 @@ header::header(sf::RenderWindow* win){
   title.setPosition((size->x-title.getLocalBounds().width)/2, 0);
 }
 
-/*spaceship(const spaceship& S){
-this->spatial_Versor = S.getSpatialVersor();
-  this->rotation_Versor = S.getRotationVersor();
+/*spaceship(const spaceship& Player){
+this->spatial_Versor = Player.getSpatialVersor();
+  this->rotation_Versor = Player.getRotationVersor();
 
   this->build();
 }*/
 
-//GETS
+//----------GETS----------
 sf::Text header::getPoints(){ return this->points;}
 sf::Text header::getTitle(){ return this->title;}
 sf::Font header::getFont(){ return font;}
 
-//SETS
+//----------SETS----------
 void header::setPoints(sf::Text p){ this->points = p;}
 void header::setTitle(sf::Text t){ this->title = t;}
 void header::setFont(sf::Font f){ this->font = f;}
 
-//---------------METHODS---------------
+//----------METHODS----------
 
-//DRAW
 void header::Draw (/*sf::RenderWindow* window*/){
   window->draw(bound);
   window->draw(points);

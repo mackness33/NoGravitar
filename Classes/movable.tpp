@@ -1,5 +1,3 @@
-//MOVABLE
-
 //------------CONSTRUCTORS------------
 template <class T> movable<T>::movable(T* b) : entity<T>::entity(b) {}
 

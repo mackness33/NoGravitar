@@ -1,11 +1,4 @@
-//UNIVERSE
-//Class that handle everything that concerne the top of the window
-
-/*
-
-*/
 #include "game.hpp"
-#define PI 3.14159265
 
 viewer game::*Playground = nullptr;
 
@@ -15,32 +8,16 @@ game::game(sf::RenderWindow* wnd){
 
   Window = wnd;
 
-  Spaceship = new spaceship(nullptr, &spaceshipImage);
+  Player = new spaceship(nullptr, &spaceshipImage);
   Header = new header(Window);
   Settings = new settings(Window);
-  Galaxy = new galaxy(Window, Spaceship, 5, this);
-  Spaceship->setPlayground(Galaxy);
+  Galaxy = new galaxy(Window, Player, 5, this);
+  Player->setPlayground(Galaxy);
   Playground = Galaxy;
 
   settings::deltaTime = 10.0f;
   settings::switchTime = 10.0f;
 }
-
-  /*
-  //texture.create((unsigned int)size->x, (unsigned int)size->y);
-  if(!texture.loadFromFile("img/game.png"))
-    std::cout << "Error in load images" << std::endl;
-  else
-    std::cout << "PERFECT!" << std::endl;
-
-  background.setTexture(texture);
-  //background.setTextureRect(sf::IntRect(300, 300, 500, 300));
-  background.setColor(sf::Color::Blue);
-  background.setPosition(*position);
-  //background.scale(200, 200);
-  //sprite.setSize(0, 0);
-  */
-
 
 //GETS
 //sf::Texture getTexture(){ return this->background.getTexture();}
@@ -71,7 +48,7 @@ void game::start (){
 
         //KEYPRESSED
         case sf::Event::KeyPressed :{
-          eventHandler::keyPressedHandler(Spaceship, event);
+          eventHandler::keyPressedHandler(Player, event);
         }
 
         //WINDOWCLOSED
@@ -85,18 +62,18 @@ void game::start (){
 
     }
 
-    collisionHandler::checkOutOfBounds(Spaceship, Playground);
+    collisionHandler::checkOutOfBounds(Player, Playground);
 
     //module keys
     translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //which key has been pressed
     if(translation.getTransformation())                         //if pressed make a transformation of the object
-      Spaceship->movement(translation.getKey()/*, &spaceshipBoundingBox*/);
+      Player->movement(translation.getKey()/*, &spaceshipBoundingBox*/);
 
 
     //direction keys
     rotation.isUsed(sf::Keyboard::Right, sf::Keyboard::Left);   //which key has been pressed
     if(rotation.getTransformation())                            //if pressed make a transformation of the object
-      Spaceship->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
+      Player->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
 
     game::Playground->checkCollision();
 
@@ -113,7 +90,7 @@ void game::start (){
 
 void game::draw (){
   Header->Draw();
-  this->Playground->Draw();
+  Playground->Draw();
 }
 
 void game::setMainViewer(viewer* newViewer){

@@ -1,43 +1,35 @@
-//BULLET
-//Class that draw and move a bullet
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <cmath>
-#include <string>
+#ifndef BULLET_H
+#define BULLET_H
+
+#include "movable.hpp"
+#include "entity.hpp"
 #include "settings.hpp"
 #include "drawable.hpp"
-/*
-
-*/
-#define PI 3.14159265
 
 class bullet : public drawable{
-  private:
+  protected:
     movable<sf::CircleShape>* body;
     float speed;
     float direction;
     float totalTime;
 
   public:
-    //CONSTRUCTORS
-    bullet(float speed = 12, float direction = 0, sf::Vector2f position = sf::Vector2f(0,0));
+    //---------------CONSTRUCTORS---------------
+    bullet(float s = 12, float d = 0, sf::Vector2f p = sf::Vector2f(0, 0));
 
-    //DESTRUCTORS
+    //---------------DESTRUCTORS---------------
     ~bullet();
 
-    //GETS
+    //---------------GETS---------------
     movable<sf::CircleShape>* getMovable();
     entity<sf::CircleShape>* getEntity();
     sf::CircleShape* getDrawable();
     sf::FloatRect GetLocalBounds();
     sf::FloatRect GetGlobalBounds();
 
-    //SETS
+    //---------------SETS---------------
 
     //---------------METHODS---------------
-    //draw of the body of the object
     void Draw (sf::RenderWindow* window);
 
     //update of the object's data for each time that it is draw
@@ -49,3 +41,5 @@ class bullet : public drawable{
     //return the class of the object
     std::string Class();
 };
+
+#endif

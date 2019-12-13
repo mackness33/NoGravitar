@@ -1,13 +1,7 @@
-//SPACESHIP
-//Class that handle everything that concerne a spaceship
-
-/*
-  BUG: change body into sprites
-*/
 #define PI 3.14159265
 #include "spaceship.hpp"
 
-//CONSTRUCTORS
+//----------CONSTRUCTORS----------
 spaceship::spaceship(viewer* plg){
   xOutOfBound = false;
   yOutOfBound = false;
@@ -17,13 +11,10 @@ spaceship::spaceship(viewer* plg){
   spatial_Versor = 10;
   rotation_Versor = 3;
 
-  //b = NULL;
   bullets = {};
 
   image->loadFromFile("img/spaceship.png");
   body = new movable<sf::Sprite>(image);
-
-  //this->build();
 }
 
 spaceship::spaceship(viewer* plg, sf::Texture* img){
@@ -35,7 +26,6 @@ spaceship::spaceship(viewer* plg, sf::Texture* img){
   spatial_Versor = 10;
   rotation_Versor = 3;
 
-  //b = NULL;
   bullets = {};
 
   image = img;
@@ -58,14 +48,8 @@ spaceship::~spaceship(){
   this->deleteBullets();
 }
 
-/*spaceship(const spaceship& S){
-  spatial_Versor = S.getSpatialVersor();
-  rotation_Versor = S.getRotationVersor();
 
-  build();
-}*/
-
-//GETS
+//----------GETS----------
 bool spaceship::getXOutOfBounds(){ return xOutOfBound;}
 bool spaceship::getYOutOfBounds(){ return yOutOfBound;}
 bool spaceship::getLeftOutOfBounds(){ return leftOOB;}
@@ -81,7 +65,7 @@ std::list<bullet*>* spaceship::getBullets() { return &bullets; }
 //TODO: set texture to let the user change the spaceship image
 
 
-//SETS
+//----------SETS----------
 void spaceship::setXOutOfBounds(bool x){ xOutOfBound = x;}
 void spaceship::setYOutOfBounds(bool y){ yOutOfBound = y;}
 void spaceship::setLeftOutOfBounds(bool l){ leftOOB = l;}
@@ -92,7 +76,7 @@ void spaceship::setPlayground(viewer* pg) { playground = pg;}
 //void spaceship::setBody(sf::Sprite* b) { body = b;}
 
 
-//DELETES
+//----------DELETES----------
 void spaceship::deleteBullet(bullet* b){
   auto bul = std::find(bullets.begin(), bullets.end(), b);
   delete *bul;
@@ -113,8 +97,7 @@ void spaceship::deleteBullets(){
   }
 }
 
-//---------------METHODS--------------------
-
+//----------METHODS----------
 //MOVEMENT
 //It let the spaceship move or rotate based on the key pressed
 void spaceship::movement(sf::Keyboard::Key k){
@@ -215,7 +198,6 @@ void spaceship::Draw (sf::RenderWindow* window){
 }*/
 
 void spaceship::Shoot(){
-
   bullet *bul = new bullet(spatial_Versor * 1.5f, this->getDrawable()->getRotation(), body->getBody()->getPosition());
   //std::cout << "real location c: " << bul << std::endl;
   playground->addAlly(bul);

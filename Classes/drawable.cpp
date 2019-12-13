@@ -1,13 +1,9 @@
-//UNIVERSE
-//Class that handle everything that concerne the top of the window
-
-/*
-
-*/
 #include "drawable.hpp"
-#define PI 3.14159265
 
-//drawable::drawable(){}
+//------------CONSTRUCTORS------------
+drawable::drawable(){}
+
+//------------DESTRUCTORS------------
 drawable::~drawable(){
   std::cout << "DELETING DRAWABLE" << std::endl;
 }

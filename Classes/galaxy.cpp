@@ -1,31 +1,14 @@
-//UNIVERSE
-//Class that handle everything that concerne the top of the window
-
-/*
-
-*/
 #include "galaxy.hpp"
 
-#define PI 3.14159265
-
-//CONSTRUCTORS
+//----------CONSTRUCTORS----------
 galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actGame) : viewer(win){
-  /*if(!!spc)
-    S = new spaceship(w);
-  else*/
-  S = spc;
+  Player = spc;
   currentGame = actGame;
   viewer::addAlly(spc);
-  bullets = S->getBullets();
-
-  // Setting bounding box
-  sf::Vector2f playground = this->getDrawable()->getSize() - sf::Vector2f(100, 100);
-  //std::cout << "rand x: " << playground.x << std::endl;
-  //std::cout << "rand y: " << playground.y << std::endl;
-
+  bullets = Player->getBullets();
   planets = {};
-
   std::list<sf::FloatRect> posPlanets = {};
+  sf::Vector2f playground = this->getDrawable()->getSize() - sf::Vector2f(100, 100);
 
   for (int i = 0; i < numPlanets; i++){
     sf::Vector2f position = utility::RandVector(playground.x, playground.y, 0, win->getSize().y/10);
@@ -34,53 +17,31 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, g
     //std::cout << "pos y: " << position.y << std::endl;
     if(this->checkPlanetPosition(&posPlanets, position)){
       planetObj *pln = new planetObj(utility::Rand(20, 30), position);
-      pln->setPlanetView(new planetView(window, S));
+      pln->setPlanetView(new planetView(window, Player));
       //pln->getBody()->SetOrigin(pos);
       planets.push_front(pln);
       viewer::addEnemy(pln);
       posPlanets.push_front(pln->GetGlobalBounds());
     }
-    else{
-      //std::cout << "INTERSECTS!" << std::endl;
+    else
       i--;
-    }
   }
-
-  /*
-  //texture.create((unsigned int)size->x, (unsigned int)size->y);
-  if(!texture.loadFromFile("img/galaxy.png"))
-    std::cout << "Error in load images" << std::endl;
-  else
-    std::cout << "PERFECT!" << std::endl;
-
-  background.setTexture(texture);
-  //background.setTextureRect(sf::IntRect(300, 300, 500, 300));
-  background.setColor(sf::Color::Blue);
-  background.setPosition(*position);
-  //background.scale(200, 200);
-  //sprite.setSize(0, 0);
-  */
 }
 
-//GETS
+//----------GETS----------
 //sf::Texture getTexture(){ return this->background.getTexture();}
 //sf::Sprite getBackground(){ return this->background;}
 
-//SETS
+//----------SETS----------
 //void setTexture(sf::Texture t){ this->background.setTexture(t);}
 //void setBackground(sf::Sprite b){ this->background = b;}
 
 
-//---------------METHODS---------------
-
-
-//DRAW
-void galaxy::Draw (/*sf::RenderWindow* window*/){
+//----------METHODS----------
+void galaxy::Draw (){
   viewer::Draw();
   this->DrawList(allies);
   this->DrawList(enemies);
-  //this->DrawPlanets();
-  //window->draw(background);
 }
 
 bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos){
@@ -147,18 +108,18 @@ void galaxy::checkCollision (){
     if(collision){
       switch((*ally)->Class()[0]){
         case 'b':{
-          S->deleteBullet(static_cast<bullet*>(*ally));
+          Player->deleteBullet(static_cast<bullet*>(*ally));
           ally = allies.erase(ally);
         };break;
 
         case 's': {
-          S->deleteBullets();     //delete all the bullets
+          Player->deleteBullets();     //delete all the bullets
           //delete all the bullets from allies
           allies.clear();
-          viewer::addAlly(S);
+          viewer::addAlly(Player);
           changeViewer = true;
           currentGame->setMainViewer(planet->getPlanetView());
-          S->getEntity()->SetPosition(100, 200);
+          Player->getEntity()->SetPosition(100, 200);
         }; break;
 
         default: std::cout << "There's a " << (*ally)->Class() << " in allies, why?";
@@ -177,12 +138,9 @@ void galaxy::checkCollision (){
 
 
 void galaxy::collision(bullet* bullet, planetObj* planet){
-  S->deleteBullet(bullet);
-  //return allies.erase(&*bullet);
+  Player->deleteBullet(bullet);
 }
 
 void galaxy::collision(spaceship* spaceship, planetObj* planet){
-  S->deleteBullets();     //delete all the bullets
+  Player->deleteBullets();     //delete all the bullets
 }
-
-//

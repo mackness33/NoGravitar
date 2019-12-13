@@ -1,12 +1,6 @@
-//HEADER
-//Class that handle everything that concerne the top of the window
 #include "planetObj.hpp"
-/*
 
-*/
-#define PI 3.14159265
-
-//CONSTRUCTORS
+//----------CONSTRUCTORS----------
 planetObj::~planetObj(){
   body = new entity<sf::CircleShape>(100);
   view = nullptr;
@@ -35,23 +29,20 @@ planetObj::planetObj(float radius, sf::Vector2f p){
 }
 
 
-//GETS
+//----------GETS----------
 entity<sf::CircleShape>* planetObj::getEntity() { return body; }
 sf::CircleShape* planetObj::getDrawable() { return body->getBody(); }
 sf::FloatRect planetObj::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
 sf::FloatRect planetObj::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
 planetView* planetObj::getPlanetView() { return view; }
 
-//SETS
+//----------SETS----------
 void planetObj::setPlanetView(planetView* newView){ view = newView; }
 
-//---------------METHODS---------------
-
-//DRAW
+//----------METHODS----------
 void planetObj::Draw (sf::RenderWindow* window){
   body->DrawTest(window);
 }
-
 
 //TODO: randomize the color of the planets
 void planetObj::build(){

@@ -1,9 +1,6 @@
-//BULLET
-//Class that draw and move a bullet
-
 #include "bullet.hpp"
 
-//CONSTRUCTORS
+//---------------CONSTRUCTORS---------------
 bullet::bullet(float s, float d, sf::Vector2f p){
   body = new movable<sf::CircleShape>(5);
 
@@ -23,18 +20,19 @@ bullet::~bullet(){
 }
 
 
-//GETS
+//---------------GETS---------------
 movable<sf::CircleShape>* bullet::getMovable() { return body; }
 entity<sf::CircleShape>* bullet::getEntity() { return static_cast<entity<sf::CircleShape>*> (body); }
 sf::CircleShape* bullet::getDrawable() { return body->getBody(); }
 sf::FloatRect bullet::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
 sf::FloatRect bullet::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
 
-//SETS
+//---------------SETS---------------
+
+
 
 //---------------METHODS---------------
 
-//DRAW
 void bullet::Draw (sf::RenderWindow* window){
   body->DrawTest(window);
 }

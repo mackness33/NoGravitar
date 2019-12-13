@@ -1,16 +1,9 @@
-//UNIVERSE
-//Class that handle everything that concerne the top of the window
-
-/*
-
-*/
 #include "settings.hpp"
-#define PI 3.14159265
 
-float settings::deltaTime ; // You MUST declare it in a CPP
-float settings::switchTime ; // You MUST declare it in a CPP
+float settings::deltaTime; // You MUST declare it in a CPP
+float settings::switchTime; // You MUST declare it in a CPP
 
-//CONSTRUCTORS
+//----------CONSTRUCTORS----------
 settings::settings(sf::RenderWindow* win){
   window = win;
 
@@ -21,36 +14,17 @@ settings::settings(sf::RenderWindow* win){
   bound.setPosition(*position);
   bound.setSize(*size);
   bound.setFillColor(sf::Color(0, 0, 0));
-
-  /*
-  //texture.create((unsigned int)size->x, (unsigned int)size->y);
-  if(!texture.loadFromFile("img/universe.png"))
-    std::cout << "Error in load images" << std::endl;
-  else
-    std::cout << "PERFECT!" << std::endl;
-
-  background.setTexture(texture);
-  //background.setTextureRect(sf::IntRect(300, 300, 500, 300));
-  background.setColor(sf::Color::Blue);
-  background.setPosition(*position);
-  //background.scale(200, 200);
-  //sprite.setSize(0, 0);
-  */
 }
 
-//GETS
+//----------GETS----------
 //sf::Texture getTexture(){ return this->background.getTexture();}
 //sf::Sprite getBackground(){ return this->background;}
 
-//SETS
+//----------SETS----------
 //void setTexture(sf::Texture t){ this->background.setTexture(t);}
 //void setBackground(sf::Sprite b){ this->background = b;}
 
 //---------------METHODS---------------
-
-
-//DRAW
-void settings::Draw (/*sf::RenderWindow* window*/){
-  window->draw(bound);
-  //window->draw(background);
+void settings::default_settings(){
+  switchTime = 60;
 }

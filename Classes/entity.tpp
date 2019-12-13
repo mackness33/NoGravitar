@@ -29,6 +29,18 @@ template <class T> entity<T>::entity(sf::Vector2f s, sf::Vector2f p, sf::Texture
   this->setBoundery();
 }
 
+template <class T> entity<T>::entity(sf::PrimitiveType type, std::size_t vertexCount, sf::Vector2f* vertexPosition[]){
+  body = new sf::VertexArray(type, vertexCount);
+
+  for (int i = 0; i = vertexPosition.size(); i++){
+    body->append(vertexPosition[i]);
+  }
+
+  this->setBoundery();
+}
+
+
+
 template <class T> entity<T>::~entity(){
   std::cout << "DELETING ENTITY" << std::endl;
   delete body;
@@ -51,8 +63,14 @@ template <class T> void entity<T>::setBody(T* b){
 //TODO: Add checks for VertexArray and VertexBuffer
 template <class T> void entity<T>::setBoundery(){
   sf::FloatRect *boundBox = new sf::FloatRect(0, 0, 0, 0);
-  if (!!body)
-    boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
+  if (!!body){
+    try{
+      boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
+    }
+    catch(std::exception e){
+      boundBox = new sf::FloatRect(body->getBounds());        //for testing use
+    }
+  }
 
   bound.setFillColor(sf::Color::Black);
   bound.setOutlineColor(sf::Color::Red);

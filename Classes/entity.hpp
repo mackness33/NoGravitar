@@ -5,6 +5,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <exception>
 
 template <class T> class entity{
   protected:
@@ -19,9 +20,10 @@ template <class T> class entity{
     //----------CONSTRUCTORS----------
     entity();
     entity(T* b);
-    entity(float radius, std::size_t pointCount = 30);                          //CircleShape
-    entity(sf::Texture* image);                                                                               //Sprite
-    entity(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), sf::Texture* image = nullptr);      //RectangleShape
+    entity(float radius, std::size_t pointCount = 30);                                                                //CircleShape
+    entity(sf::Texture* image);                                                                                       //Sprite
+    entity(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), sf::Texture* image = nullptr);              //RectangleShape
+    entity(sf::PrimitiveType type, std::size_t vertexCount = 0, std::vector<sf::LineStrip> vertexPosition = {});      //VertexArray
 
 
     ~entity();

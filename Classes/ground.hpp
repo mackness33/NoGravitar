@@ -8,10 +8,8 @@
 
 class ground : public drawable{
   protected:
-    movable<sf::CircleShape>* body;
-    float speed;
-    float direction;
-    float totalTime;
+    movable<sf::VertexArray>* body;
+
 
   public:
     //---------------CONSTRUCTORS---------------
@@ -21,9 +19,8 @@ class ground : public drawable{
     ~ground();
 
     //---------------GETS---------------
-    movable<sf::CircleShape>* getMovable();
-    entity<sf::CircleShape>* getEntity();
-    sf::CircleShape* getDrawable();
+    entity<sf::VertexArray>* getEntity();
+    sf::VertexArray* getDrawable();
     sf::FloatRect GetLocalBounds();
     sf::FloatRect GetGlobalBounds();
 

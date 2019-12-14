@@ -1,7 +1,10 @@
 //------------CONSTRUCTORS------------
-template <class T> movable<T>::movable(T* b) : entity<T>::entity(b) {}
-
 template <class T> movable<T>::movable() : entity<T>::entity() {}
+template <class T> movable<T>::movable(T* b) : entity<T>::entity(b) {}
+template <class T> movable<T>::movable(float r, std::size_t pc) : entity<T>::entity(r, pc);                                                                                       //Sprite
+template <class T> movable<T>::movable(sf::Texture* i) : entity<T>::entity(i);                                                                //CircleShape
+template <class T> movable<T>::movable(sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : entity<T>::entity(s, p, i);              //RectangleShape
+template <class T> movable<T>::movable(std::size_t vertexCount, std::vector<sf::Vector2f*> vertexPosition, sf::PrimitiveType type) : entity<T>::entity(vertexCount, vertexPosition, type);      //VertexArray
 
 /*template <class T> movable<T>::movable(sf::RenderWindow* w){
   window = w;

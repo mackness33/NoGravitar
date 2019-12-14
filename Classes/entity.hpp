@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <exception>
+#include <vector>
 
 template <class T> class entity{
   protected:
@@ -23,7 +24,7 @@ template <class T> class entity{
     entity(float radius, std::size_t pointCount = 30);                                                                //CircleShape
     entity(sf::Texture* image);                                                                                       //Sprite
     entity(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), sf::Texture* image = nullptr);              //RectangleShape
-    entity(sf::PrimitiveType type, std::size_t vertexCount = 0, std::vector<sf::LineStrip> vertexPosition = {});      //VertexArray
+    entity(std::size_t vertexCount, std::vector<sf::Vector2f*> vertexPosition = {}, sf::PrimitiveType type = sf::LineStrip);      //VertexArray
 
 
     ~entity();

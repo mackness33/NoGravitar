@@ -29,11 +29,11 @@ template <class T> entity<T>::entity(sf::Vector2f s, sf::Vector2f p, sf::Texture
   this->setBoundery();
 }
 
-template <class T> entity<T>::entity(sf::PrimitiveType type, std::size_t vertexCount, sf::Vector2f* vertexPosition[]){
-  body = new sf::VertexArray(type, vertexCount);
+template <class T> entity<T>::entity(std::size_t vc, std::vector<sf::Vector2f*> vp, sf::PrimitiveType t){
+  body = new sf::VertexArray(t, vc);
 
-  for (int i = 0; i = vertexPosition.size(); i++){
-    body->append(vertexPosition[i]);
+  for (int i = 0; i = vp.size(); i++){
+    body->append(new sf::Vertex((vp[i])&, sf::Color::Green));
   }
 
   this->setBoundery();

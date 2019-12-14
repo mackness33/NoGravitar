@@ -1,19 +1,19 @@
-#include "bullet.hpp"
+#include "ground.hpp"
 
 //---------------CONSTRUCTORS---------------
-bullet::bullet(float s, float d, sf::Vector2f p){
-  body = new movable<sf::CircleShape>(5);
+ground::ground(float w, float h){
 
-  speed = s;
-  direction = d * PI / 180.0f;
-  totalTime = 0;
+  std::vector<sf::Vector2f*> vtxPosition = {};
 
-  body->SetPosition(p);
+  for(int)
+  sf::Vector2f position;
+
+  //body = new movable<sf::VertexArray>(5);
   this->build();
 }
 
-bullet::~bullet(){
-  std::cout << "DELETING BULLET" << std::endl;
+ground::~ground(){
+  std::cout << "DELETING GROUND" << std::endl;
 
   delete body;
   body = nullptr;
@@ -21,11 +21,10 @@ bullet::~bullet(){
 
 
 //---------------GETS---------------
-movable<sf::CircleShape>* bullet::getMovable() { return body; }
-entity<sf::CircleShape>* bullet::getEntity() { return static_cast<entity<sf::CircleShape>*> (body); }
-sf::CircleShape* bullet::getDrawable() { return body->getBody(); }
-sf::FloatRect bullet::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
-sf::FloatRect bullet::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
+entity<sf::VertexArray>* ground::getEntity() { return static_cast<entity<sf::VertexArray>*> (body); }
+sf::VertexArray* ground::getDrawable() { return body->getBody(); }
+sf::FloatRect ground::GetBounds() { return body->getBody()->getBounds(); }
+sf::FloatRect ground::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
 
 //---------------SETS---------------
 
@@ -33,25 +32,15 @@ sf::FloatRect bullet::GetGlobalBounds() { return body->getBody()->getGlobalBound
 
 //---------------METHODS---------------
 
-void bullet::Draw (sf::RenderWindow* window){
+void ground::Draw (sf::RenderWindow* window){
   body->DrawTest(window);
 }
 
-void bullet::Update(){
-  totalTime += settings::deltaTime;
-
-  if(totalTime >= settings::switchTime){
-    totalTime -= settings::switchTime;
-    body->Move(cos(direction) * speed, sin(direction) * speed);
-    sf::Vector2f pos = body->getBody()->getPosition();
-  }
-}
-
-void bullet::build(){
-  body->getBody()->setFillColor(sf::Color::White);
+void ground::build(){
+  body->getBody()->setFillColor(sf::Color::Green);
   //body->getBody()->setSmooth(true);
 }
 
-std::string bullet::Class(){
-  return "bullet";
+std::string ground::Class(){
+  return "ground";
 }

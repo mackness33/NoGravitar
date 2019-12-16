@@ -12,6 +12,7 @@ template <class T> class entity{
   protected:
     sf::RectangleShape bound;       //FOR TESTING ONLY
     T *body;
+    bool isVA;
 
   protected:
     void setBoundery();
@@ -24,7 +25,6 @@ template <class T> class entity{
     entity(float radius, std::size_t pointCount = 30);                                                                //CircleShape
     entity(sf::Texture* image);                                                                                       //Sprite
     entity(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), sf::Texture* image = nullptr);              //RectangleShape
-    entity(std::size_t vertexCount, std::vector<sf::Vector2f*> vertexPosition = {}, sf::PrimitiveType type = sf::LineStrip);      //VertexArray
 
 
     ~entity();
@@ -32,7 +32,7 @@ template <class T> class entity{
     //----------GETS----------
     T* getBody();
     sf::RectangleShape* getBound();
-
+    bool isVertexArray();
 
     //----------SETS----------
     void setBody(T *b);

@@ -3,6 +3,7 @@
 
 #include "movable.hpp"
 #include "entity.hpp"
+#include "line.hpp"
 
 class drawable{
   public:
@@ -15,6 +16,7 @@ class drawable{
     //Templates can't also be virtual!
     template <typename T> movable<T>* getMovable();
     template <typename T> entity<T>* getEntity();
+    template <typename T> line<T>* getLine();
     template <typename T> T* getDrawable();
     virtual sf::FloatRect GetLocalBounds();
     virtual sf::FloatRect GetGlobalBounds();

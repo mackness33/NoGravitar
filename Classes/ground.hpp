@@ -1,27 +1,28 @@
-#ifndef ground_H
-#define ground_H
+#ifndef GROUND_H
+#define GROUND_H
 
-#include "movable.hpp"
-#include "entity.hpp"
+#include "line.hpp"
 #include "drawable.hpp"
 #include "viewer.hpp"
+#include "settings.hpp"
+#include "utility.hpp"
 
 class ground : public drawable{
   protected:
-    movable<sf::VertexArray>* body;
+    line<sf::VertexArray>* body;
 
 
   public:
     //---------------CONSTRUCTORS---------------
-    ground(float s = 12, float d = 0, sf::Vector2f p = sf::Vector2f(0, 0));
+    ground(float width, float height, sf::Color color = sf::Color::Green);
 
     //---------------DESTRUCTORS---------------
     ~ground();
 
     //---------------GETS---------------
+    line<sf::VertexArray>* getLine();
     entity<sf::VertexArray>* getEntity();
     sf::VertexArray* getDrawable();
-    sf::FloatRect GetLocalBounds();
     sf::FloatRect GetGlobalBounds();
 
     //---------------SETS---------------

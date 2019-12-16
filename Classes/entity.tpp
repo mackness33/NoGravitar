@@ -1,21 +1,21 @@
 //------------CONSTRUCTORS------------
-template <class T> entity<T>::entity(){
-  body = new T();
-  this->setBoundery();
-}
+template <class T> entity<T>::entity(){}
 
 template <class T> entity<T>::entity(T* b){
   body = new T(b);
+  isVA = false;
   this->setBoundery();
 }
 
 template <class T> entity<T>::entity(float r, std::size_t pc){
   body = new sf::CircleShape(r, pc);
+  isVA = false;
   this->setBoundery();
 }
 
 template <class T> entity<T>::entity(sf::Texture* i){
   body = new sf::Sprite(*i);
+  isVA = false;
   this->setBoundery();
 }
 
@@ -26,16 +26,7 @@ template <class T> entity<T>::entity(sf::Vector2f s, sf::Vector2f p, sf::Texture
   if(!i)
     body->setFillColor(sf::Color::Black);
 
-  this->setBoundery();
-}
-
-template <class T> entity<T>::entity(std::size_t vc, std::vector<sf::Vector2f*> vp, sf::PrimitiveType t){
-  body = new sf::VertexArray(t, vc);
-
-  for (int i = 0; i = vp.size(); i++){
-    body->append(new sf::Vertex((vp[i])&, sf::Color::Green));
-  }
-
+  isVA = false;
   this->setBoundery();
 }
 
@@ -51,6 +42,7 @@ template <class T> entity<T>::~entity(){
 //------------GETS------------
 template <class T> T* entity<T>::getBody(){ return body; }
 template <class T> sf::RectangleShape* entity<T>::getBound(){ return &bound; }
+template <class T> bool entity<T>::isVertexArray(){ return isVA; }
 
 
 //------------SETS------------
@@ -64,12 +56,7 @@ template <class T> void entity<T>::setBody(T* b){
 template <class T> void entity<T>::setBoundery(){
   sf::FloatRect *boundBox = new sf::FloatRect(0, 0, 0, 0);
   if (!!body){
-    try{
       boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
-    }
-    catch(std::exception e){
-      boundBox = new sf::FloatRect(body->getBounds());        //for testing use
-    }
   }
 
   bound.setFillColor(sf::Color::Black);

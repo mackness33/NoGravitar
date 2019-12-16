@@ -1,20 +1,31 @@
 #include <iostream>
+#include <string>
 #include <cmath>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 //how to include an external class
-#include "object_test.hpp"
+//#include "object_test.hpp"
 
 //template class object_test<sf::CircleShape>;
 
 int main(){
     sf::RenderWindow window(sf::VideoMode(900, 713), "My entity");
-
+    int i = 10;
+    int cola = 10;
+    std::string str = "H";
+    char ca = 's';
+    sf::VertexArray vr;
     std::cout << "window x: " << window.getSize().x << std::endl;
     std::cout << "window y: " << window.getSize().y << std::endl;
+    std::cout << "typeid: " << typeid(window.getSize().y).name() << std::endl;
+    std::cout << "typeid: " << typeid(i).name() << std::endl;
+    std::cout << "typeid: " << typeid(cola).name() << std::endl;
+    std::cout << "typeid: " << typeid(str).name() << std::endl;
+    std::cout << "typeid: " << typeid(ca).name() << std::endl;
+    std::cout << "typeid: " << typeid(vr).name() << std::endl;
     //how to create an object
-    sf::Texture spaceshipImage;
+    /*sf::Texture spaceshipImage;
     spaceshipImage.loadFromFile("img/spaceship.png", sf::IntRect(0, 0, 0, 0));
     spaceshipImage.setSmooth(true);
     viewer *cs = new viewer(&window, &spaceshipImage);
@@ -37,6 +48,6 @@ int main(){
 
         window.display();
     }
-
+    */
     return 0;
 }

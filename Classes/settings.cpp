@@ -2,6 +2,8 @@
 
 float settings::deltaTime; // You MUST declare it in a CPP
 float settings::switchTime; // You MUST declare it in a CPP
+const float settings::MAX_GROUND_HEIGHT = 0.3;             //30%
+const float settings::MIN_GROUND_HEIGHT = 0.15;             //30%
 
 //----------CONSTRUCTORS----------
 

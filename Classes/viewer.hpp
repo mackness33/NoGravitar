@@ -1,15 +1,12 @@
 #ifndef VIEWER_H
 #define VIEWER_H
 
-#include <list>
 #include "drawable.hpp"
 
 class viewer : public drawable{
   protected:
     entity<sf::RectangleShape> *background;
     sf::RenderWindow *window;
-    std::list<drawable*> allies;
-    std::list<drawable*> enemies;
 
   public:
     //----------CONSTRUCTORS----------
@@ -30,10 +27,6 @@ class viewer : public drawable{
     void Draw (sf::RenderWindow* window);
     virtual void Draw ();
 
-    virtual void addAlly (drawable* ally);
-    virtual void addEnemy (drawable* enemy);
-
-    virtual void checkCollision ();
     std::string Class();
 };
 

@@ -2,18 +2,22 @@
 #define PLANETVIEW_H
 
 #include "spaceship.hpp"
-#include "viewer.hpp"
+#include "playground.hpp"
+#include "game.hpp"
 
-class planetView : public viewer{
+class game;
+
+class planetView : public playground{
   private:
     spaceship *Player;
-    //TODO: add Ground class
+    std::list<bullet*>* bullets;
+    game *currentGame;
 
   private:
 
   public:
     //----------CONSTRUCTORS----------
-    planetView(sf::RenderWindow* win, spaceship* spc);
+    planetView(sf::RenderWindow* win, spaceship* spc, game* actualGame);
 
     //----------GETS----------
     //sf::Texture getTexture(){ return this->background.getTexture();}
@@ -24,7 +28,6 @@ class planetView : public viewer{
     //void setBackground(sf::Sprite b){ this->background = b;}
 
     //----------METHODS----------
-    void Draw (/*sf::RenderWindow* window*/);
 };
 
 #endif

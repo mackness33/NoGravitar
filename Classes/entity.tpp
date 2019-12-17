@@ -29,7 +29,7 @@ template <class T> entity<T>::entity(sf::Vector2f s, sf::Vector2f p, sf::Texture
   this->setBoundery();
 }
 
-template <class T> entity<T>::entity(std::size_t vc, std::vector<sf::Vector2f*> vp, sf::PrimitiveType t){
+/*template <class T> entity<T>::entity(std::size_t vc, std::vector<sf::Vector2f*> vp, sf::PrimitiveType t){
   body = new sf::VertexArray(t, vc);
 
   for (int i = 0; i = vp.size(); i++){
@@ -37,7 +37,7 @@ template <class T> entity<T>::entity(std::size_t vc, std::vector<sf::Vector2f*> 
   }
 
   this->setBoundery();
-}
+}*/
 
 
 
@@ -64,12 +64,7 @@ template <class T> void entity<T>::setBody(T* b){
 template <class T> void entity<T>::setBoundery(){
   sf::FloatRect *boundBox = new sf::FloatRect(0, 0, 0, 0);
   if (!!body){
-    try{
-      boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
-    }
-    catch(std::exception e){
-      boundBox = new sf::FloatRect(body->getBounds());        //for testing use
-    }
+    boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
   }
 
   bound.setFillColor(sf::Color::Black);

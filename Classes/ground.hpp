@@ -1,5 +1,5 @@
-#ifndef ground_H
-#define ground_H
+#ifndef GROUND_H
+#define GROUND_H
 
 #include "movable.hpp"
 #include "entity.hpp"
@@ -8,12 +8,12 @@
 
 class ground : public drawable{
   protected:
-    movable<sf::VertexArray>* body;
+    entity<sf::VertexArray>* body;
 
 
   public:
     //---------------CONSTRUCTORS---------------
-    ground(float s = 12, float d = 0, sf::Vector2f p = sf::Vector2f(0, 0));
+    ground(float w, float h);
 
     //---------------DESTRUCTORS---------------
     ~ground();

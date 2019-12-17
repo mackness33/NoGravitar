@@ -2,14 +2,7 @@
 
 //---------------CONSTRUCTORS---------------
 ground::ground(float w, float h){
-
-  std::vector<sf::Vector2f*> vtxPosition = {};
-
-  for(int)
-  sf::Vector2f position;
-
-  //body = new movable<sf::VertexArray>(5);
-  this->build();
+  this->body = new VertexArray(sf::LineStrip, 0);
 }
 
 ground::~ground(){
@@ -34,11 +27,6 @@ sf::FloatRect ground::GetGlobalBounds() { return body->getBody()->getGlobalBound
 
 void ground::Draw (sf::RenderWindow* window){
   body->DrawTest(window);
-}
-
-void ground::build(){
-  body->getBody()->setFillColor(sf::Color::Green);
-  //body->getBody()->setSmooth(true);
 }
 
 std::string ground::Class(){

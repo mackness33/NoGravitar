@@ -21,10 +21,10 @@ template <class T> class entity{
     //----------CONSTRUCTORS----------
     entity();
     entity(T* b);
-    entity(float radius, std::size_t pointCount = 30);                                                                //CircleShape
     entity(sf::Texture* image);                                                                                       //Sprite
+    entity(float radius, std::size_t pointCount = 30);                                                                //CircleShape
     entity(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), sf::Texture* image = nullptr);              //RectangleShape
-    entity(std::size_t vertexCount, std::vector<sf::Vector2f*> vertexPosition = {}, sf::PrimitiveType type = sf::LineStrip);      //VertexArray
+    //entity(std::size_t vertexCount, std::vector<sf::Vector2f*> vertexPosition = {}, sf::PrimitiveType type = sf::LineStrip);      //VertexArray
 
 
     ~entity();

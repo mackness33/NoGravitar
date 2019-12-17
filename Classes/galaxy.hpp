@@ -6,13 +6,14 @@
 #include "planetObj.hpp"
 #include "planetView.hpp"
 #include "utility.hpp"
-#include "viewer.hpp"
+#include "playground.hpp"
 #include "game.hpp"
 #include "../Handlers/collisionHandler.hpp"
 
 class game;
+class planetObj;
 
-class galaxy : public viewer{
+class galaxy : public playground{
   protected:
     spaceship *Player;
     std::list<planetObj*> planets;
@@ -20,8 +21,6 @@ class galaxy : public viewer{
     game *currentGame;
 
   protected:
-    void DrawList (std::list<drawable*> objects);
-
     bool checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos);
 
   public:
@@ -37,10 +36,9 @@ class galaxy : public viewer{
     //void setBackground(sf::Sprite b){ this->background = b;}
 
     //---------------METHODS---------------
-    void Draw ();
-
     void checkCollision();
 
+    //TODO: create a .tpp and convert collision in template <typename T> void galaxy::collision(T* obj, planetObj* planet){ return nullptr; }
     void collision(bullet* bullet, planetObj* planet);
 
     void collision(spaceship* spaceship, planetObj* planet);

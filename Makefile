@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o
-		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o $(LIBS)
+all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o
+		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -38,8 +38,11 @@ keyVector.o: Classes/keyVector.hpp Classes/keyVector.cpp
 planetObj.o: Classes/planetObj.hpp Classes/planetObj.cpp Classes/drawable.hpp Classes/planetView.hpp
 		g++ -c Classes/planetObj.cpp $(LIBS)
 
-planetView.o: Classes/planetView.hpp Classes/planetView.cpp Classes/viewer.hpp Classes/spaceship.hpp
+planetView.o: Classes/planetView.hpp Classes/planetView.cpp Classes/playground.hpp Classes/spaceship.hpp
 		g++ -c Classes/planetView.cpp $(LIBS)
+
+playground.o: Classes/playground.hpp Classes/playground.cpp Classes/viewer.hpp
+		g++ -c Classes/playground.cpp $(LIBS)
 
 settings.o: Classes/settings.hpp Classes/settings.cpp
 		g++ -c Classes/settings.cpp $(LIBS)

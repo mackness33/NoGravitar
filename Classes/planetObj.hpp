@@ -4,6 +4,8 @@
 #include "drawable.hpp"
 #include "planetView.hpp"
 
+class planetView;
+
 class planetObj : public drawable{
   private:
     entity<sf::CircleShape>* body;

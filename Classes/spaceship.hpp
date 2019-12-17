@@ -4,7 +4,7 @@
 #include <list>
 #include <string>
 #include "bullet.hpp"
-#include "viewer.hpp"
+#include "playground.hpp"
 
 class spaceship : public drawable{
   private:
@@ -17,7 +17,7 @@ class spaceship : public drawable{
     movable<sf::Sprite>* body;
     sf::Texture* image;
     std::list <bullet*> bullets;
-    viewer *playground;
+    playground *Playground;
 
   protected:
     //BUILD
@@ -26,8 +26,8 @@ class spaceship : public drawable{
 
   public:
     //----------CONSTRUCTORS----------
-    spaceship(viewer* playground);
-    spaceship(viewer* playground, sf::Texture* img);
+    spaceship(playground* Playground);
+    spaceship(playground* Playground, sf::Texture* image);
     //spaceship(const spaceship& Player);
     ~spaceship();
 
@@ -53,7 +53,7 @@ class spaceship : public drawable{
     void setSpatialVersor(float spatialVersor);
     void setRotationVersor(float rotationVersor);
     void setBody(sf::Sprite* body);
-    void setPlayground(viewer* playground);
+    void setPlayground(playground* Playground);
     //TODO: setTexture(sf::Texture* t);
 
     //----------DELETES----------

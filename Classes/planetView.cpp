@@ -1,8 +1,12 @@
 #include "planetView.hpp"
 
 //----------CONSTRUCTORS----------
-planetView::planetView(sf::RenderWindow* win, spaceship* spc) : viewer(win){
+planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame) : playground(win){
   Player = spc;
+  currentGame = actGame;
+  playground::addAlly(spc);
+  bullets = Player->getBullets();
+  sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   Ground = new ground(win->getSize().x, win->getSize().y);
 }
 
@@ -15,8 +19,3 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc) : viewer(win){
 //void setBackground(sf::Sprite b){ this->background = b;}
 
 //----------METHODS---------------
-void planetView::Draw (/*sf::RenderWindow* window*/){
-  viewer::Draw();
-  Player->Draw(window);
-  Ground->Draw(window);
-}

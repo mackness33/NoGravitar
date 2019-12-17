@@ -1,17 +1,17 @@
 #include "galaxy.hpp"
 
 //----------CONSTRUCTORS----------
-galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actGame) : viewer(win){
+galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actGame) : playground(win){
   Player = spc;
   currentGame = actGame;
-  viewer::addAlly(spc);
+  playground::addAlly(spc);
   bullets = Player->getBullets();
   planets = {};
   std::list<sf::FloatRect> posPlanets = {};
-  sf::Vector2f playground = this->getDrawable()->getSize() - sf::Vector2f(100, 100);
+  sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
 
   for (int i = 0; i < numPlanets; i++){
-    sf::Vector2f position = utility::RandVector(playground.x, playground.y, 0, win->getSize().y/10);
+    sf::Vector2f position = utility::RandVector(plgBound.x, plgBound.y, 0, win->getSize().y/10);
     //sf::Vector2f position = utility::RandVector(win->getSize().x, win->getSize().y);
     //std::cout << "pos x: " << position.x << std::endl;
     //std::cout << "pos y: " << position.y << std::endl;
@@ -20,7 +20,7 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, g
       pln->setPlanetView(new planetView(window, Player));
       //pln->getBody()->SetOrigin(pos);
       planets.push_front(pln);
-      viewer::addEnemy(pln);
+      playground::addEnemy(pln);
       posPlanets.push_front(pln->GetGlobalBounds());
     }
     else
@@ -38,12 +38,6 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, g
 
 
 //----------METHODS----------
-void galaxy::Draw (){
-  viewer::Draw();
-  this->DrawList(allies);
-  this->DrawList(enemies);
-}
-
 bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos){
   sf::FloatRect newPlanetBound (pos, sf::Vector2f(100, 100));
   sf::FloatRect planetsIntersection;
@@ -56,15 +50,6 @@ bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vecto
   }
 
   return true;
-}
-
-void galaxy::DrawList (std::list<drawable*> objects){
-  for (std::list<drawable*>::iterator d = objects.begin(); d != objects.end(); d++){
-    if(!!*d){
-      (*d)->Update();
-      (*d)->Draw(window);
-    }
-  }
 }
 
 //TODO: Need to delete the object at the end of all the cicles!
@@ -116,7 +101,8 @@ void galaxy::checkCollision (){
           Player->deleteBullets();     //delete all the bullets
           //delete all the bullets from allies
           allies.clear();
-          viewer::addAlly(Player);
+          playground::addAlly(Player);
+          Player->setPlayground(planet->getPlanetView());
           changeViewer = true;
           currentGame->setMainViewer(planet->getPlanetView());
           Player->getEntity()->SetPosition(100, 200);
@@ -136,7 +122,7 @@ void galaxy::checkCollision (){
   }
 }
 
-
+//TODO: create a .tpp and convert collision in template <typename T> void galaxy::collision(T* obj, planetObj* planet){ return nullptr; }
 void galaxy::collision(bullet* bullet, planetObj* planet){
   Player->deleteBullet(bullet);
 }

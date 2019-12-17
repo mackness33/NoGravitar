@@ -13,7 +13,7 @@ class ground : public drawable{
 
   public:
     //---------------CONSTRUCTORS---------------
-    ground(int width, int height, sf::Color color = sf::Color::Green);
+    ground(float w, float h);
 
     //---------------DESTRUCTORS---------------
     ~ground();

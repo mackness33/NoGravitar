@@ -12,8 +12,8 @@ game::game(sf::RenderWindow* wnd){
   Header = new header(Window);
   //Settings = new settings(Window);
   Galaxy = new galaxy(Window, Player, 5, this);
-  Player->setPlayground(Galaxy);
   Playground = Galaxy;
+  Player->setPlayground(Galaxy);
 
   settings::deltaTime = 10.0f;
   settings::switchTime = 10.0f;
@@ -75,7 +75,7 @@ void game::start (){
     if(rotation.getTransformation())                            //if pressed make a transformation of the object
       Player->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
 
-    game::Playground->checkCollision();
+    //game::Playground->checkCollision();
 
     Window->clear();
 

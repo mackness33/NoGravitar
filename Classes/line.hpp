@@ -1,10 +1,11 @@
 #ifndef LINE_H
 #define LINE_H
 
-#include "entity.hpp"
+#include "essence.hpp"
 
-template <class T> class line : public entity<T>{
+template <class T> class line : public essence<T>{
   public:
+    line();
     line(int vertexCount, std::vector<sf::Vector2f*> vertexPosition, sf::PrimitiveType type = sf::LineStrip);      //VertexArray
 
     void setBoundery();

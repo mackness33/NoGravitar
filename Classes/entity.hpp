@@ -7,13 +7,9 @@
 #include <iostream>
 #include <exception>
 #include <vector>
+#include "essence.hpp"
 
-template <class T> class entity{
-  protected:
-    sf::RectangleShape bound;       //FOR TESTING ONLY
-    T *body;
-    bool isVA;
-
+template <class T> class entity : public essence<T>{
   protected:
     void setBoundery();
 
@@ -30,9 +26,6 @@ template <class T> class entity{
     ~entity();
 
     //----------GETS----------
-    T* getBody();
-    sf::RectangleShape* getBound();
-    bool isVertexArray();
 
     //----------SETS----------
     void setBody(T *b);
@@ -50,8 +43,6 @@ template <class T> class entity{
 
 
     //----------METHODS------------
-    void Draw (sf::RenderWindow* window);
-    void DrawTest (sf::RenderWindow* window);
 };
 
 #include "entity.tpp"

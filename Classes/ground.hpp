@@ -3,7 +3,6 @@
 
 #include "line.hpp"
 #include "drawable.hpp"
-#include "viewer.hpp"
 #include "settings.hpp"
 #include "utility.hpp"
 
@@ -14,14 +13,13 @@ class ground : public drawable{
 
   public:
     //---------------CONSTRUCTORS---------------
-    ground(float width, float height, sf::Color color = sf::Color::Green);
+    ground(int width, int height, sf::Color color = sf::Color::Green);
 
     //---------------DESTRUCTORS---------------
     ~ground();
 
     //---------------GETS---------------
     line<sf::VertexArray>* getLine();
-    entity<sf::VertexArray>* getEntity();
     sf::VertexArray* getDrawable();
     sf::FloatRect GetGlobalBounds();
 

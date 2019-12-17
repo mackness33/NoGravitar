@@ -1,13 +1,14 @@
 #ifndef PLANETVIEW_H
 #define PLANETVIEW_H
 
+#include "ground.hpp"
 #include "spaceship.hpp"
 #include "viewer.hpp"
 
 class planetView : public viewer{
   private:
     spaceship *Player;
-    //TODO: add Ground class
+    ground *Ground;
 
   private:
 

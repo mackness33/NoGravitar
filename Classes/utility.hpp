@@ -24,7 +24,8 @@ class utility{
 
     //----------METHODS----------
     static sf::Vector2f RandVector(int x, int y, int offsetX = 0, int offsetY = 0);
-    static int Rand(int x, int y = 0);
+    static int RandInt(int x, int y = 0);
+    static float RandFloat(int x, float y = 0);
 };
 
 #endif

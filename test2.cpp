@@ -4,6 +4,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include "Classes/ground.hpp"
 //how to include an external class
 //#include "object_test.hpp"
 
@@ -24,15 +25,19 @@ int main(){
     std::cout << "typeid: " << typeid(str).name() << std::endl;
     std::cout << "typeid: " << typeid(ca).name() << std::endl;
     std::cout << "typeid: " << typeid(vr).name() << std::endl;
-    //how to create an object
-    /*sf::Texture spaceshipImage;
-    spaceshipImage.loadFromFile("img/spaceship.png", sf::IntRect(0, 0, 0, 0));
-    spaceshipImage.setSmooth(true);
-    viewer *cs = new viewer(&window, &spaceshipImage);
 
-    cs->getBackground()->SetPosition(cs->getBackground()->getBody()->getLocalBounds().width, cs->getBackground()->getBody()->getLocalBounds().height);
-    std::cout << "width: " << cs->getBackground()->getBody()->getLocalBounds().width << std::endl;
-    std::cout << "height: " << cs->getBackground()->getBody()->getLocalBounds().height << std::endl;
+
+
+    ground *G = new ground(window.getSize().x, window.getSize().y);
+    //how to create an object
+    //sf::Texture spaceshipImage;
+    //spaceshipImage.loadFromFile("img/spaceship.png", sf::IntRect(0, 0, 0, 0));
+    //spaceshipImage.setSmooth(true);
+    //viewer *cs = new viewer(&window, &spaceshipImage);
+
+    //cs->getBackground()->SetPosition(cs->getBackground()->getBody()->getLocalBounds().width, cs->getBackground()->getBody()->getLocalBounds().height);
+    //std::cout << "width: " << cs->getBackground()->getBody()->getLocalBounds().width << std::endl;
+    //std::cout << "height: " << cs->getBackground()->getBody()->getLocalBounds().height << std::endl;
 
     while (window.isOpen()){
         sf::Event event;
@@ -44,10 +49,9 @@ int main(){
         window.clear();
 
         //how to draw the object
-        cs->Draw();
+        G->Draw(&window);
 
         window.display();
     }
-    */
     return 0;
 }

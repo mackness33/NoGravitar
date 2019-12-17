@@ -14,7 +14,7 @@ template <class T> movable<T>::movable(int vertexCount, std::vector<sf::Vector2f
   //boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
   boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
   bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
-  /*bound.setOrigin(body.getOrigin());
+  bound.setOrigin(body.getOrigin());
   bound.setPosition(body.getPosition());
   bound.setRotation(body.getRotation());
   bound.setScale(body.getScale());

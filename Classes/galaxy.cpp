@@ -16,7 +16,7 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, g
     //std::cout << "pos x: " << position.x << std::endl;
     //std::cout << "pos y: " << position.y << std::endl;
     if(this->checkPlanetPosition(&posPlanets, position)){
-      planetObj *pln = new planetObj(utility::Rand(20, 30), position);
+      planetObj *pln = new planetObj(utility::RandInt(20, 30), position);
       pln->setPlanetView(new planetView(window, Player));
       //pln->getBody()->SetOrigin(pos);
       planets.push_front(pln);

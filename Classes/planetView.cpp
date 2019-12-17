@@ -3,6 +3,7 @@
 //----------CONSTRUCTORS----------
 planetView::planetView(sf::RenderWindow* win, spaceship* spc) : viewer(win){
   Player = spc;
+  Ground = new ground(win->getSize().x, win->getSize().y);
 }
 
 //----------GETS----------
@@ -17,4 +18,5 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc) : viewer(win){
 void planetView::Draw (/*sf::RenderWindow* window*/){
   viewer::Draw();
   Player->Draw(window);
+  Ground->Draw(window);
 }

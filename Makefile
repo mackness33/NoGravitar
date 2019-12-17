@@ -29,7 +29,7 @@ galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/pl
 game.o: Classes/game.hpp Classes/game.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp
 		g++ -c Classes/game.cpp $(LIBS)
 
-ground.o: Classes/ground.hpp Classes/ground.cpp Classes/entity.hpp Classes/line.hpp
+ground.o: Classes/ground.hpp Classes/ground.cpp Classes/entity.hpp Classes/line.hpp Classes/drawable.hpp Classes/utility.hpp Classes/settings.hpp
 		g++ -c Classes/ground.cpp $(LIBS)
 
 header.o: Classes/header.hpp Classes/header.cpp
@@ -73,10 +73,10 @@ test.o: test.cpp Classes/object_test.hpp
 
 
 #If you want you can write it in this Makefile
-test2: test2.o
-		g++ -g -Wall -o Test test2.o $(LIBS)
+test2: test2.o ground.o drawable.o utility.o settings.o
+		g++ -g -Wall -o Test test2.o ground.o drawable.o utility.o settings.o $(LIBS)
 
-test2.o: test2.cpp
+test2.o: test2.cpp Classes/ground.hpp
 		g++ -c -Wall -pedantic -W test2.cpp $(LIBS)
 
 bunker.o: Classes/bunker.hpp Classes/bunker.cpp

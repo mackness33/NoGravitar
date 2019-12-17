@@ -21,7 +21,7 @@ template <class T> entity<T>::entity(sf::Vector2f s, sf::Vector2f p, sf::Texture
   this->SetPosition(p);
 
   if(!i)
-    body->setFillColor(sf::Color::Black);
+    this->body->setFillColor(sf::Color::Black);
 
   this->setBoundery();
 }

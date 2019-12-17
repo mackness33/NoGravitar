@@ -1,7 +1,7 @@
 #include "ground.hpp"
 
 //---------------CONSTRUCTORS---------------
-ground::ground(int w, int h, sf::Color c){
+ground::ground(float w, float h, sf::Color c){
   std::vector<sf::Vector2f*> vtxPosition = {};
   int numVertex = utility::RandInt(10, 5);
   int sectionY = h * (settings::MAX_GROUND_HEIGHT - settings::MIN_GROUND_HEIGHT);

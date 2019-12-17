@@ -8,6 +8,7 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame) : p
   bullets = Player->getBullets();
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   Ground = new ground(win->getSize().x, win->getSize().y);
+  playground::addEnemy(Ground);
 }
 
 //----------GETS----------

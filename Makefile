@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o
-		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o $(LIBS)
+all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o ground.o
+		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o ground.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -23,7 +23,7 @@ bullet.o: Classes/bullet.hpp Classes/bullet.cpp Classes/entity.hpp Classes/movab
 drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Classes/entity.hpp Classes/movable.hpp Classes/line.hpp
 	g++ -c Classes/drawable.cpp $(LIBS)
 
-galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/planetView.hpp Classes/utility.hpp Classes/viewer.hpp Classes/game.hpp Handlers/collisionHandler.hpp
+galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/planetView.hpp Classes/utility.hpp Classes/playground.hpp Classes/game.hpp Handlers/collisionHandler.hpp
 	g++ -c Classes/galaxy.cpp $(LIBS)
 
 game.o: Classes/game.hpp Classes/game.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp
@@ -50,7 +50,7 @@ playground.o: Classes/playground.hpp Classes/playground.cpp Classes/viewer.hpp
 settings.o: Classes/settings.hpp Classes/settings.cpp
 		g++ -c Classes/settings.cpp $(LIBS)
 
-spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp Classes/viewer.hpp
+spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp Classes/playground.hpp
 		g++ -c Classes/spaceship.cpp $(LIBS)
 
 utility.o: Classes/utility.hpp Classes/utility.cpp

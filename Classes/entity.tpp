@@ -105,3 +105,6 @@ template <class T> void entity<T>::SetOrigin(const sf::Vector2f &origin){
 
 
 //------------METHODS------------
+template <class T> std::string entity<T>::Class(){
+  return "entity";
+}

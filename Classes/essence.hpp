@@ -31,6 +31,7 @@ template <class T> class essence{
     //----------METHODS------------
     void Draw (sf::RenderWindow* window);
     void DrawTest (sf::RenderWindow* window);
+    virtual std::string Class();
 };
 
 #include "essence.tpp"

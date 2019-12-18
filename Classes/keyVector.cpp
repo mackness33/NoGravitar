@@ -45,3 +45,7 @@ void keyVector::isUsed(sf::Keyboard::Key key1, sf::Keyboard::Key key2){
       key = key2;            //KEY2
   }
 }
+
+std::string keyVector::Class(){
+  return "keyVector";
+}

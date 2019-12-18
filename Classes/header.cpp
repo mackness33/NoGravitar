@@ -64,3 +64,7 @@ void header::Draw (/*sf::RenderWindow* window*/){
   window->draw(points);
   window->draw(title);
 }
+
+std::string header::Class(){
+  return "header";
+}

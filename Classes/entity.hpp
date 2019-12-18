@@ -43,6 +43,7 @@ template <class T> class entity : public essence<T>{
 
 
     //----------METHODS------------
+    virtual std::string Class();
 };
 
 #include "entity.tpp"

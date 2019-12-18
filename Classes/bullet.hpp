@@ -42,7 +42,7 @@ class bullet : public drawable{
     void build();
 
     //return the class of the object
-    std::string Class();
+    virtual std::string Class();
 };
 
 #endif

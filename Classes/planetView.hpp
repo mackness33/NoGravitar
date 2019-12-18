@@ -30,6 +30,7 @@ class planetView : public playground{
     //void setBackground(sf::Sprite b){ this->background = b;}
 
     //----------METHODS----------
+    virtual std::string Class();
 };
 
 #endif

@@ -48,3 +48,7 @@ void planetObj::Draw (sf::RenderWindow* window){
 void planetObj::build(){
   body->getBody()->setFillColor(sf::Color::White);
 }
+
+std::string planetObj::Class(){
+  return "planetObj";
+}

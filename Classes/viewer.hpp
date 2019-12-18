@@ -27,7 +27,7 @@ class viewer : public drawable{
     void Draw (sf::RenderWindow* window);
     virtual void Draw ();
 
-    std::string Class();
+    virtual std::string Class();
 };
 
 #endif // VIEWER_H

@@ -74,7 +74,7 @@ class spaceship : public drawable{
 
     void Shoot();
 
-    std::string Class();
+    virtual std::string Class();
 };
 
 #endif

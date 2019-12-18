@@ -27,3 +27,7 @@ template <class T> void essence<T>::DrawTest (sf::RenderWindow* window){
   window->draw(bound);
   window->draw(*body);
 }
+
+template <class T> std::string essence<T>::Class(){
+  return "essence";
+}

@@ -96,3 +96,7 @@ void game::draw (){
 void game::setMainViewer(viewer* newViewer){
   Playground = newViewer;
 }
+
+std::string game::Class(){
+  return "game";
+}

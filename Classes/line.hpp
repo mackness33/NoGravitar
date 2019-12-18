@@ -9,6 +9,7 @@ template <class T> class line : public essence<T>{
     line(int vertexCount, std::vector<sf::Vector2f*> vertexPosition, sf::PrimitiveType type = sf::LineStrip);      //VertexArray
 
     void setBoundery();
+    virtual std::string Class();
 };
 
 #include "line.tpp"

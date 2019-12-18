@@ -29,7 +29,7 @@ class ground : public drawable{
     void Draw (sf::RenderWindow* window);
 
     //return the class of the object
-    std::string Class();
+    virtual std::string Class();
 };
 
 #endif

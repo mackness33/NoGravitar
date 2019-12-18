@@ -33,6 +33,7 @@ class header{
 
     //---------------METHODS---------------
     void Draw (/*sf::RenderWindow* window*/);
+    virtual std::string Class();
 };
 
 #endif

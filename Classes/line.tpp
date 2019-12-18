@@ -53,3 +53,7 @@ template <class T> void line<T>::setBoundery(){
   this->bound.setOutlineThickness(3);
   this->bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
 }
+
+template <class T> std::string line<T>::Class(){
+  return "line";
+}

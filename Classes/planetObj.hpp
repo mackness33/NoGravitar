@@ -43,6 +43,8 @@ class planetObj : public drawable{
     void Draw (sf::RenderWindow* window);
 
     void build();
+    
+    virtual std::string Class();
 };
 
 #endif

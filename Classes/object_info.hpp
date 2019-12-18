@@ -7,7 +7,7 @@
 class object_info{
   public:
     //----------METHODS------------
-    virtual std::String Class() = 0;
+    virtual std::string Class() = 0;
 
 };
 

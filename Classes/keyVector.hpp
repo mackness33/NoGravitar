@@ -35,6 +35,7 @@ class keyVector{
     //the method understand which key has been pressed and sets the boolean for the smoothness of the trasformation
     void isUsed(sf::Keyboard::Key key1, sf::Keyboard::Key key2);
 
+    virtual std::string Class();
 };
 
 #endif

@@ -44,6 +44,7 @@ class game{
     void start ();
 
     //friend void eventHandler::changePlaygroundHandler(); // Friend function
+    virtual std::string Class();
 
 };
 

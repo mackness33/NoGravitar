@@ -2,14 +2,18 @@
 #define GROUND_H
 
 #include "line.hpp"
+#include "shape.hpp"
+#include "utility.hpp"
 #include "drawable.hpp"
 #include "settings.hpp"
-#include "utility.hpp"
 
 class ground : public drawable{
   protected:
-    line<sf::VertexArray>* body;
-
+    float length;
+    float offsetY;
+    int numVertex;
+    shape<sf::VertexArray>* body;
+    std::vector<line*> lines;
 
   public:
     //---------------CONSTRUCTORS---------------
@@ -19,7 +23,8 @@ class ground : public drawable{
     ~ground();
 
     //---------------GETS---------------
-    line<sf::VertexArray>* getLine();
+    essence<sf::VertexArray>* getEssence();
+    shape<sf::VertexArray>* getLine();
     sf::VertexArray* getDrawable();
     sf::FloatRect GetGlobalBounds();
 
@@ -27,6 +32,9 @@ class ground : public drawable{
 
     //---------------METHODS---------------
     void Draw (sf::RenderWindow* window);
+
+    bool intersects(drawable* object);
+    bool intersectionPoint(sf::Vector2f* pnt, line* sect, bool monotony);
 
     //return the class of the object
     virtual std::string Class();

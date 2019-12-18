@@ -3,7 +3,7 @@
 
 #include "movable.hpp"
 #include "entity.hpp"
-#include "line.hpp"
+#include "shape.hpp"
 
 class drawable{
   public:
@@ -14,9 +14,10 @@ class drawable{
     //----------GETS----------
     //ugly solution, but it's the only thing that can be done
     //Templates can't also be virtual!
+    template <typename T> essence<T>* getEssence();
     template <typename T> movable<T>* getMovable();
     template <typename T> entity<T>* getEntity();
-    template <typename T> line<T>* getLine();
+    template <typename T> shape<T>* getLine();
     template <typename T> T* getDrawable();
     virtual sf::FloatRect GetLocalBounds();
     virtual sf::FloatRect GetGlobalBounds();

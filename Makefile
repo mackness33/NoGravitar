@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o ground.o
-		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o ground.o $(LIBS)
+all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o ground.o line.o
+		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o ground.o line.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -20,7 +20,7 @@ eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Classes/gala
 bullet.o: Classes/bullet.hpp Classes/bullet.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/settings.hpp
 	g++ -c Classes/bullet.cpp $(LIBS)
 
-drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Classes/entity.hpp Classes/movable.hpp Classes/line.hpp
+drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Classes/entity.hpp Classes/movable.hpp Classes/shape.hpp
 	g++ -c Classes/drawable.cpp $(LIBS)
 
 galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/planetView.hpp Classes/utility.hpp Classes/playground.hpp Classes/game.hpp Handlers/collisionHandler.hpp
@@ -29,7 +29,7 @@ galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/pl
 game.o: Classes/game.hpp Classes/game.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp
 		g++ -c Classes/game.cpp $(LIBS)
 
-ground.o: Classes/ground.hpp Classes/ground.cpp Classes/entity.hpp Classes/line.hpp Classes/drawable.hpp Classes/utility.hpp Classes/settings.hpp
+ground.o: Classes/ground.hpp Classes/ground.cpp Classes/entity.hpp Classes/shape.hpp Classes/drawable.hpp Classes/utility.hpp Classes/settings.hpp
 		g++ -c Classes/ground.cpp $(LIBS)
 
 header.o: Classes/header.hpp Classes/header.cpp
@@ -37,6 +37,9 @@ header.o: Classes/header.hpp Classes/header.cpp
 
 keyVector.o: Classes/keyVector.hpp Classes/keyVector.cpp
 		g++ -c Classes/keyVector.cpp $(LIBS)
+
+line.o: Classes/line.hpp Classes/line.cpp
+		g++ -c Classes/line.cpp $(LIBS)
 
 planetObj.o: Classes/planetObj.hpp Classes/planetObj.cpp Classes/drawable.hpp Classes/planetView.hpp
 		g++ -c Classes/planetObj.cpp $(LIBS)
@@ -76,8 +79,8 @@ test.o: test.cpp Classes/object_test.hpp
 
 
 #If you want you can write it in this Makefile
-test2: test2.o ground.o drawable.o utility.o settings.o
-		g++ -g -Wall -o Test test2.o ground.o drawable.o utility.o settings.o $(LIBS)
+test2: test2.o ground.o drawable.o utility.o settings.o line.o
+		g++ -g -Wall -o Test test2.o ground.o drawable.o utility.o settings.o line.o $(LIBS)
 
 test2.o: test2.cpp Classes/ground.hpp
 		g++ -c -Wall -pedantic -W test2.cpp $(LIBS)

@@ -33,7 +33,7 @@ class ground : public drawable{
     //---------------METHODS---------------
     void Draw (sf::RenderWindow* window);
 
-    bool intersects(drawable* object);
+    template <typename T> bool intersects(drawable* object);
     bool intersectionPoint(sf::Vector2f* pnt, line* sect, bool monotony);
 
     //return the class of the object

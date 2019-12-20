@@ -15,6 +15,9 @@ class ground : public drawable{
     shape<sf::VertexArray>* body;
     std::vector<line*> lines;
 
+  protected:
+    bool getMonotony(int section);          //if f(x(A)) < f(x(B))  -> crescente (true)     ELSE -> decrescente(false)
+
   public:
     //---------------CONSTRUCTORS---------------
     ground(float width, float height, sf::Color color = sf::Color::Green);

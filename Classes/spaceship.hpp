@@ -18,11 +18,17 @@ class spaceship : public drawable{
     sf::Texture* image;
     std::list <bullet*> bullets;
     playground *Playground;
+    sf::RectangleShape bound;       //FOR TESTING ONLY
+
 
   protected:
     //BUILD
     //It build up the spaceship shape
     void build ();
+
+    //It understands if the spaceship wants to go OutOfBOunds
+    bool opposite_direction(bool side, float direction);
+
 
   public:
     //----------CONSTRUCTORS----------
@@ -61,14 +67,11 @@ class spaceship : public drawable{
     void deleteBullets();
 
     //----------METHODS------------
-    //It let the spaceship move or rotate based on the key pressed
+    //It lets the spaceship moves or rotates based on the key pressed
     void movement(sf::Keyboard::Key k);
 
-    //It handle spaceship translation in the window
+    //It handles spaceship's translation in the window
     void fly(float module);
-
-    //It understand if the spaceship want o go OutOfBOunds
-    bool opposite_direction(bool side, float direction);
 
     void Draw (sf::RenderWindow* window);
 

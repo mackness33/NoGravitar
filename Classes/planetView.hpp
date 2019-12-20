@@ -11,9 +11,9 @@ class game;
 class planetView : public playground{
   private:
     spaceship *Player;
+    ground *Ground;
     std::list<bullet*>* bullets;
     game *currentGame;
-    ground *Ground;
 
   private:
 

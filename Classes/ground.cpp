@@ -52,8 +52,19 @@ sf::FloatRect ground::GetGlobalBounds() { return body->getBody()->getBounds(); }
 
 
 //---------------METHODS---------------
+bool ground::getMonotony(int sect){
+  //sf::Vector2f* A = lines[sect].getA();
+  //sf::Vector2f* B = lines[sect].getB();
 
-bool ground::intersectionPoint(sf::Vector2f* pnt, line* sect, bool monotony){}
+  //if(A.y <= B.y)
+    //return true;
+  return false;
+}
+
+bool ground::intersectionPoint(sf::Vector2f* pnt, line* sect, bool monotony){
+
+  //if(monotony)
+}
 
 void ground::Draw (sf::RenderWindow* window){
   body->Draw(window);

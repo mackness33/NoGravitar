@@ -88,6 +88,12 @@ test2.o: test2.cpp Classes/ground.hpp
 bunker.o: Classes/bunker.hpp Classes/bunker.cpp
 		g++ -c Classes/bunker.cpp $(LIBS)
 
+
+test3: test3.o line.o
+		g++ -g -Wall -o Test test3.o line.o $(LIBS)
+
+test3.o: test3.cpp Classes/line.hpp
+		g++ -c test3.cpp $(LIBS)
 		#BASE
 
 object_test.o: object_test.hpp object_test.cpp Classes/viewer.hpp

@@ -25,6 +25,10 @@ class drawable{
     //----------METHODS------------
     virtual void Draw (sf::RenderWindow* window) = 0;
     virtual void Update ();
+    virtual sf::Vector2f left();
+    virtual sf::Vector2f right();
+    virtual sf::Vector2f top();
+    virtual sf::Vector2f bottom();
 
     virtual std::string Class();
 

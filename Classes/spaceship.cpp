@@ -99,7 +99,7 @@ void spaceship::deleteBullets(){
 
 //----------METHODS----------
 //MOVEMENT
-//It let the spaceship move or rotate based on the key pressed
+//It lets the spaceship moves or rotates based on the key pressed
 void spaceship::movement(sf::Keyboard::Key k){
   switch (k) {
     case sf::Keyboard::Left : {                 //LEFT
@@ -123,7 +123,7 @@ void spaceship::movement(sf::Keyboard::Key k){
 }
 
 //FLY
-//It handle spaceship translation in the window
+//It handles spaceship's translation in the window
 void spaceship::fly(float module){
   float direction = this->getDrawable()->getRotation() * PI / 180.0;
   int sin_module = sin(direction) * module;
@@ -174,6 +174,20 @@ void spaceship::Draw (sf::RenderWindow* window){
   }*/
 
   body->DrawTest(window);
+  sf::FloatRect *boundBox = new sf::FloatRect(0, 0, 0, 0);
+  if (!!this->body){
+      boundBox = new sf::FloatRect(this->GetGlobalBounds());        //for testing use
+  }
+  std::cout << "spaceshiparea left: " << boundBox->left << std::endl;
+  std::cout << "spaceshiparea right: " << boundBox->left + boundBox->width << std::endl;
+  std::cout << "spaceshiparea top: " << boundBox->top << std::endl;
+  std::cout << "spaceshiparea bottom: " << boundBox->top + boundBox->height << std::endl;
+  this->bound.setFillColor(sf::Color::Black);
+  this->bound.setOutlineColor(sf::Color::Blue);
+  this->bound.setOutlineThickness(3);
+  this->bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
+
+  window->draw(bound);
 }
 
 //BUILD

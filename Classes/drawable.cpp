@@ -1,7 +1,8 @@
 #include "drawable.hpp"
 
 //------------CONSTRUCTORS------------
-drawable::drawable(){}
+drawable::drawable(){
+}
 
 //------------DESTRUCTORS------------
 drawable::~drawable(){
@@ -14,6 +15,8 @@ sf::FloatRect drawable::GetGlobalBounds(){ return sf::FloatRect(0, 0, 0, 0); }
 
 
 //------------METHODS------------
+
+
 std::string drawable::Class(){
   return "drawable";
 }

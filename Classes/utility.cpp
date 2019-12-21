@@ -16,7 +16,7 @@ utility::utility(){
 //void setTexture(sf::Texture t){ this->background.setTexture(t);}
 
 //----------METHODS----------
-sf::Vector2f utility::RandVector(int x, int y, int offsetX, int offsetY){ return sf::Vector2f(rand() % x + offsetX, rand() % y + offsetY); }
-
+int utility::Proportion(int a, int b, int c){ return c * b / a; }
 int utility::RandInt(int x, int y){ return rand() % x + y; }
 float utility::RandFloat(int x, float y){ return rand() % x + y; }
+sf::Vector2f utility::RandVector(int x, int y, int offsetX, int offsetY){ return sf::Vector2f(rand() % x + offsetX, rand() % y + offsetY); }

@@ -1,18 +1,38 @@
 //------------CONSTRUCTORS------------
-template <class T> entity<T>::entity(){}
+template <class T> entity<T>::entity(){
+  width = -1;
+  height = -1;
+}
 
 template <class T> entity<T>::entity(T* b){
   this->body = new T(b);
+
+  sf::FloatRect dynamicBoundBox = this->body->getLocalBounds();
+
+  width =  dynamicBoundBox.width;
+  height =  dynamicBoundBox.height;
   this->setBoundery();
 }
 
 template <class T> entity<T>::entity(float r, std::size_t pc){
   this->body = new sf::CircleShape(r, pc);
+
+  sf::FloatRect dynamicBoundBox = this->body->getLocalBounds();
+
+  width =  dynamicBoundBox.width;
+  height =  dynamicBoundBox.height;
+
   this->setBoundery();
 }
 
 template <class T> entity<T>::entity(sf::Texture* i){
   this->body = new sf::Sprite(*i);
+
+  sf::FloatRect dynamicBoundBox = this->body->getLocalBounds();
+
+  width =  dynamicBoundBox.width;
+  height =  dynamicBoundBox.height;
+
   this->setBoundery();
 }
 
@@ -22,6 +42,11 @@ template <class T> entity<T>::entity(sf::Vector2f s, sf::Vector2f p, sf::Texture
 
   if(!i)
     this->body->setFillColor(sf::Color::Black);
+
+  sf::FloatRect dynamicBoundBox = this->body->getLocalBounds();
+
+  width =  dynamicBoundBox.width;
+  height =  dynamicBoundBox.height;
 
   this->setBoundery();
 }
@@ -46,7 +71,7 @@ template <class T> entity<T>::~entity(){
 
 
 //------------GETS------------
-
+template <class T> float entity<T>::GetRotation(){ return this->body->getRotation(); }
 
 //------------SETS------------
 template <class T> void entity<T>::setBody(T* b){
@@ -62,6 +87,7 @@ template <class T> void entity<T>::setBoundery(){
       boundBox = new sf::FloatRect(this->body->getLocalBounds());        //for testing use
   }
 
+  this->diagonal = boundBox->width + boundBox->height;
   this->bound.setFillColor(sf::Color::Black);
   this->bound.setOutlineColor(sf::Color::Red);
   this->bound.setOutlineThickness(3);
@@ -105,6 +131,38 @@ template <class T> void entity<T>::SetOrigin(const sf::Vector2f &origin){
 
 
 //------------METHODS------------
+template <class T> sf::Vector2f entity<T>::left(){
+  sf::FloatRect bound = this->body->getGlobalBounds();
+  float x = bound.left;
+  float y = bound.top + (this->diagonal/2) - height * sin(2 * this->body->getRotation());
+
+  return sf::Vector2f(x, y);
+}
+
+template <class T> sf::Vector2f entity<T>::right(){
+  sf::FloatRect bound = this->body->getGlobalBounds();
+  float x = bound.left + bound.width;
+  float y = bound.top + (this->diagonal/2) - height * sin(2 * this->body->getRotation());
+
+  return sf::Vector2f(x, y);
+}
+
+template <class T> sf::Vector2f entity<T>::top(){
+  sf::FloatRect bound = this->body->getGlobalBounds();
+  float x = bound.left + (this->diagonal/2) - width * sin(2 * this->body->getRotation());
+  float y = bound.top;
+
+  return sf::Vector2f(x, y);
+}
+
+template <class T> sf::Vector2f entity<T>::bottom(){
+  sf::FloatRect bound = this->body->getGlobalBounds();
+  float x = bound.left + (this->diagonal/2) - width * sin(2 * this->body->getRotation());
+  float y = bound.top + bound.height;
+
+  return sf::Vector2f(x, y);
+}
+
 template <class T> std::string entity<T>::Class(){
   return "entity";
 }

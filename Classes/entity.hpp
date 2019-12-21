@@ -6,12 +6,14 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <exception>
+#include <cmath>
 #include <vector>
 #include "essence.hpp"
 
 template <class T> class entity : public essence<T>{
   protected:
     void setBoundery();
+    float width, height;
 
   public:
     //TODO: add all the constructors of sf::Shape sf::Sprite .. etc
@@ -26,6 +28,7 @@ template <class T> class entity : public essence<T>{
     ~entity();
 
     //----------GETS----------
+    float GetRotation();
 
     //----------SETS----------
     void setBody(T *b);
@@ -43,6 +46,11 @@ template <class T> class entity : public essence<T>{
 
 
     //----------METHODS------------
+    virtual sf::Vector2f left();
+    virtual sf::Vector2f right();
+    virtual sf::Vector2f top();
+    virtual sf::Vector2f bottom();
+
     virtual std::string Class();
 };
 

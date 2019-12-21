@@ -25,9 +25,10 @@ class utility{
     //----------METHODS----------
     //static sf::Vector2f MaxVector(sf::Vector2f* p1, sf::Vector2f* p2);
     //static sf::Vector2f MaxVector(sf::Vector2f* p1, sf::Vector2f* p2);
-    static sf::Vector2f RandVector(int x, int y, int offsetX = 0, int offsetY = 0);
+    static int Proportion(int a, int b, int c = 100);
     static int RandInt(int x, int y = 0);
     static float RandFloat(int x, float y = 0);
+    static sf::Vector2f RandVector(int x, int y, int offsetX = 0, int offsetY = 0);
 };
 
 #endif

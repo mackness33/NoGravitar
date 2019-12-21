@@ -11,6 +11,7 @@
 template <class T> class essence{
   protected:
     sf::RectangleShape bound;       //FOR TESTING ONLY
+    float diagonal;
     T *body;
 
   protected:
@@ -25,12 +26,14 @@ template <class T> class essence{
     //----------GETS----------
     T* getBody();
     sf::RectangleShape* getBound();
+    virtual float getDiagonal();
 
     //----------SETS----------
 
     //----------METHODS------------
     void Draw (sf::RenderWindow* window);
     void DrawTest (sf::RenderWindow* window);
+
     virtual std::string Class();
 };
 

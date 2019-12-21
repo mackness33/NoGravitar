@@ -43,8 +43,13 @@ sf::Vector2f* line::getptrB() { return b; }
 sf::Vector3f line::getCoefficient() { return *coefficient; }
 
 //---------------SETS---------------
+void line::setA(sf::Vector2f pnt) {
+  *a = pnt;
+  width = abs(a->x - b->x);
+  height = abs(a->y - b->y);
+}
+
 void line::setptrA(sf::Vector2f* pnt) {
-  delete a;
   a = pnt;
   width = abs(a->x - b->x);
   height = abs(a->y - b->y);
@@ -72,9 +77,9 @@ checks to be done:
 	-> a1b2 - a2b1 != 0
 */
 
-sf::Vector2f line::intersection(line l){
+sf::Vector2f line::intersect(line l){
   sf::Vector3f secondLine = l.getCoefficient();
-  
+
   //line -> x0*x + y0*y = z0       |     sf::Vector3f(x0, y0, z0)
   if(this->slope != l.getSlope()){
     float x = (coefficient->x * secondLine.y - secondLine.x * coefficient->y) / (coefficient->z * secondLine.y - secondLine.z * coefficient->y);
@@ -84,14 +89,14 @@ sf::Vector2f line::intersection(line l){
     std::cout << "Y: " << y << std::endl;
 
     if(x >= 0 && y >= 0 )
-      if(this->intersection(sf::Vector2f(x, y)))
+      if(this->intersect(sf::Vector2f(x, y)))
         return sf::Vector2f(x, y);
 
   }
   return sf::Vector2f(-1, -1);
 }
 
-bool line::intersection(sf::Vector2f pnt){
+bool line::intersect(sf::Vector2f pnt){
   if(pnt == *a || pnt == *b)
     return true;
 
@@ -107,6 +112,13 @@ bool line::intersection(sf::Vector2f pnt){
   if(y == x && area->contains(pnt))
     return true;
   return false;
+}
+
+
+void line::swap(){
+  sf::Vector2f* temp = a;
+  a = b;
+  b = temp;
 }
 
 std::string line::Class(){

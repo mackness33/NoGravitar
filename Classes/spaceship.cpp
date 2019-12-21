@@ -174,6 +174,7 @@ void spaceship::Draw (sf::RenderWindow* window){
   }*/
 
   body->DrawTest(window);
+  /*
   sf::FloatRect *boundBox = new sf::FloatRect(0, 0, 0, 0);
   if (!!this->body){
       boundBox = new sf::FloatRect(this->GetGlobalBounds());        //for testing use
@@ -186,7 +187,7 @@ void spaceship::Draw (sf::RenderWindow* window){
   this->bound.setOutlineColor(sf::Color::Blue);
   this->bound.setOutlineThickness(3);
   this->bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
-
+*/
   window->draw(bound);
 }
 

@@ -33,15 +33,17 @@ class line{
     sf::Vector3f getCoefficient();
 
     //---------------SETS---------------
+    void setA(sf::Vector2f pnt);
     void setptrA(sf::Vector2f* pnt);
     void setptrB(sf::Vector2f* pnt);
     //void getWidth();
 
     //---------------METHODS---------------
+    void swap();
 
     //return the class of the object
-    sf::Vector2f intersection(line Line);
-    bool intersection(sf::Vector2f point);
+    sf::Vector2f intersect(line Line);
+    bool intersect(sf::Vector2f point);
 
     virtual std::string Class();
 };

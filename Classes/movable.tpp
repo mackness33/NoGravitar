@@ -44,10 +44,6 @@ template <class T> void movable<T>::Scale (const sf::Vector2f &factor){
   entity<T>::bound.move(factor);
 }
 
-template <class T> void movable<T>::left(){
-
-}
-
 template <class T> std::string movable<T>::Class(){
   return "movable";
 }

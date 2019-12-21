@@ -29,9 +29,6 @@ template <class T> class movable : public entity<T>{
     void Scale (float factorX, float factorY);
     void Scale (const sf::Vector2f &factor);
 
-    void left();
-    void top();
-
     virtual std::string Class();
 };
 

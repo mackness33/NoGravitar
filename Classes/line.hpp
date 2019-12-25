@@ -2,7 +2,6 @@
 #define LINE_H
 
 #include "settings.hpp"
-#include "utility.hpp"
 
 //the line go from left to right.
 //A.x will always be < over B.x
@@ -14,6 +13,7 @@ class line{
     float slope;//, offset;
     sf::FloatRect* area;
     sf::Vector3f *coefficient;
+    sf::Vector2f *coefficients;
 
   public:
     //---------------CONSTRUCTORS---------------
@@ -31,6 +31,7 @@ class line{
     sf::Vector2f* getptrA();
     sf::Vector2f* getptrB();
     sf::Vector3f getCoefficient();
+    sf::Vector2f getCoefficients();
 
     //---------------SETS---------------
     void setA(sf::Vector2f pnt);

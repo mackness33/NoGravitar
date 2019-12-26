@@ -6,11 +6,13 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame) : p
 
   Player = spc;
   playground::addAlly(spc);
-  Player->getEntity()->SetPosition(100, 200);
+  Player->getMovable()->SetPosition(100, 200);
   bullets = Player->getBullets();
 
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
+  std::cout << "here is the prob!" << std::endl;
   Ground = new ground(win->getSize().x, win->getSize().y);
+  std::cout << "here Tho!" << std::endl;
   playground::addEnemy(Ground);
 }
 
@@ -115,7 +117,7 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
   sf::Vector2f right = utility::right(**blt);
   sf::Vector2f top = utility::top(**blt);
   sf::Vector2f bottom = utility::bottom(**blt);
-  
+
   Player->deleteBullet(static_cast<bullet*>(**blt));
   *blt = allies.erase(*blt);
 

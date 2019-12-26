@@ -15,6 +15,9 @@ class line{
     sf::Vector3f *coefficient;
     sf::Vector2f *coefficients;
 
+  protected:
+    virtual void setup();
+
   public:
     //---------------CONSTRUCTORS---------------
     line(sf::Vector2f point1 = sf::Vector2f(0, 0), sf::Vector2f point2 = sf::Vector2f(0, 0));
@@ -35,6 +38,7 @@ class line{
 
     //---------------SETS---------------
     void setA(sf::Vector2f pnt);
+    void setB(sf::Vector2f pnt);
     void setptrA(sf::Vector2f* pnt);
     void setptrB(sf::Vector2f* pnt);
     //void getWidth();
@@ -43,8 +47,8 @@ class line{
     void swap();
 
     //return the class of the object
-    sf::Vector2f intersect(line Line);
-    bool intersect(sf::Vector2f point);
+    //sf::Vector2f intersect(line Line);
+    //bool intersect(sf::Vector2f point);
     bool doIntersect(line* Line);
     bool onSegment(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);
     int orientation(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);

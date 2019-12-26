@@ -37,12 +37,6 @@ sf::Vector2f utility::right(drawable* obj){
   float param = 2 * (((int)obj->GetRotation()) % 90) - 90;
   float x = glbBound.left + glbBound.width;
   float y = glbBound.top + (glbBound.height / 2) - (lclBound.height / 2) * -sin(param * PI / 180);
-  std::cout << "glbBound height" << glbBound.height << std::endl;
-  std::cout << "lclBound height" << lclBound.height << std::endl;
-  std::cout << "seno: " << sin(param * PI / 180) << std::endl;
-  std::cout << "mod rotazione: " << (((int)obj->GetRotation()) % 90) << std::endl;
-  std::cout << "interno: " << 2 * (((int)obj->GetRotation()) % 90) - 90 << std::endl;
-  std::cout << "rotazione : " << (int)obj->GetRotation() << std::endl;
   return sf::Vector2f(x, y);
 }
 

@@ -66,7 +66,7 @@ void galaxy::checkCollision (){
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++, j++, cll = false){
       //std::cout << "Enemy: " << j << std::endl;
       if(!!*ally && !!*enemy){
-        if(collisionHandler::checkCollision(*ally, *enemy)){
+        if((*enemy)->intersects(*ally)){
           collision(&ally, &enemy, &changeViewer);
           std::cout << "COLLISION!!" << std::endl;
           cll = true;

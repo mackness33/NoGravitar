@@ -6,7 +6,7 @@
 
 int main(){
   line *L = new line(sf::Vector2f(0, 0), sf::Vector2f(200, 200));
-  line *temp = new line(sf::Vector2f(99, 0), sf::Vector2f(101, 200));
+  line *temp = new line(sf::Vector2f(99, 55), sf::Vector2f(101, 78));
 
   if(L->intersect(sf::Vector2f(50, 50)))
     std::cout << "Intersezione!" << std::endl;

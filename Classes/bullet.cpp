@@ -2,7 +2,7 @@
 
 //---------------CONSTRUCTORS---------------
 bullet::bullet(float s, float d, sf::Vector2f p){
-  body = new movable<sf::CircleShape>(5);
+  body = new movable<sf::CircleShape>(10);
 
   speed = s;
   direction = d * PI / 180.0f;
@@ -51,6 +51,9 @@ void bullet::build(){
   body->getBody()->setFillColor(sf::Color::White);
   //body->getBody()->setSmooth(true);
 }
+
+
+float bullet::GetRotation(){ return this->body->getBody()->getRotation(); }
 
 std::string bullet::Class(){
   return "bullet";

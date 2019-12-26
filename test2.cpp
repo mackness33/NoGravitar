@@ -5,6 +5,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "Classes/ground.hpp"
+#include "Classes/bullet.hpp"
 //how to include an external class
 //#include "object_test.hpp"
 
@@ -12,23 +13,10 @@
 
 int main(){
     sf::RenderWindow window(sf::VideoMode(900, 713), "My entity");
-    int i = 10;
-    int cola = 10;
-    std::string str = "H";
-    char ca = 's';
-    sf::VertexArray vr;
-    std::cout << "window x: " << window.getSize().x << std::endl;
-    std::cout << "window y: " << window.getSize().y << std::endl;
-    std::cout << "typeid: " << typeid(window.getSize().y).name() << std::endl;
-    std::cout << "typeid: " << typeid(i).name() << std::endl;
-    std::cout << "typeid: " << typeid(cola).name() << std::endl;
-    std::cout << "typeid: " << typeid(str).name() << std::endl;
-    std::cout << "typeid: " << typeid(ca).name() << std::endl;
-    std::cout << "typeid: " << typeid(vr).name() << std::endl;
-
-
-
     ground *G = new ground(window.getSize().x, window.getSize().y);
+    bullet *B = new bullet(0, 0, sf::Vector2f(500, 500));
+    //sf::RectangleShape *rect = new sf::RectangleShape(sf::Vector2f(100, 100));
+    //rect->setPosition();
     //how to create an object
     //sf::Texture spaceshipImage;
     //spaceshipImage.loadFromFile("img/spaceship.png", sf::IntRect(0, 0, 0, 0));
@@ -50,6 +38,10 @@ int main(){
 
         //how to draw the object
         G->Draw(&window);
+        B->Draw(&window);
+        //window.draw(*rect);
+
+        std::cout << "Intersection? " << G->intersects(B) << std::endl;
 
         window.display();
     }

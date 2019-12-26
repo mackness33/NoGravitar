@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o ground.o line.o
-		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o planetView.o playground.o ground.o line.o $(LIBS)
+all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o
+		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -56,7 +56,7 @@ settings.o: Classes/settings.hpp Classes/settings.cpp
 spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp Classes/playground.hpp
 		g++ -c Classes/spaceship.cpp $(LIBS)
 
-utility.o: Classes/utility.hpp Classes/utility.cpp
+utility.o: Classes/utility.hpp Classes/utility.cpp Classes/drawable.hpp
 		g++ -c Classes/utility.cpp $(LIBS)
 
 viewer.o: Classes/viewer.hpp Classes/viewer.cpp Classes/drawable.hpp
@@ -79,8 +79,8 @@ test.o: test.cpp Classes/object_test.hpp
 
 
 #If you want you can write it in this Makefile
-test2: test2.o ground.o drawable.o utility.o settings.o line.o
-		g++ -g -Wall -o Test test2.o ground.o drawable.o utility.o settings.o line.o $(LIBS)
+test2: test2.o ground.o drawable.o utility.o settings.o line.o bullet.o
+		g++ -g -Wall -o Test test2.o ground.o drawable.o utility.o settings.o line.o bullet.o $(LIBS)
 
 test2.o: test2.cpp Classes/ground.hpp
 		g++ -c -Wall -pedantic -W test2.cpp $(LIBS)

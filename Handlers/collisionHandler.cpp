@@ -40,8 +40,7 @@ void collisionHandler::checkOutOfBounds(spaceship *spc, viewer* plg){
 }
 
 bool collisionHandler::checkCollision(drawable* ally, drawable* enemy){
-  sf::FloatRect result;
-  bool intersection = ally->GetGlobalBounds().intersects(enemy->GetGlobalBounds(), result);
+  bool intersection = ally->intersects(enemy);
   /*std::cout << "result->left: " << result.left << std::endl;
   std::cout << "result->right: " << result.left + result.width << std::endl;
   std::cout << "result->top: " << result.top << std::endl;

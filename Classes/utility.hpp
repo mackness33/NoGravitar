@@ -6,6 +6,11 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include "drawable.hpp"
+
+#define PI 3.14159265
+
+class drawable;
 
 class utility{
   public:
@@ -29,6 +34,11 @@ class utility{
     static int RandInt(int x, int y = 0);
     static float RandFloat(int x, float y = 0);
     static sf::Vector2f RandVector(int x, int y, int offsetX = 0, int offsetY = 0);
+
+    static sf::Vector2f left(drawable* obj);
+    static sf::Vector2f right(drawable* obj);
+    static sf::Vector2f top(drawable* obj);
+    static sf::Vector2f bottom(drawable* obj);
 };
 
 #endif

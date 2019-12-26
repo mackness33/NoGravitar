@@ -1,5 +1,5 @@
 //------------CONSTRUCTORS------------
-template <class T> essence<T>::essence() { diagonal = -1; }
+template <class T> essence<T>::essence() {}
 
 template <class T> essence<T>::~essence(){
   std::cout << "DELETING ESSENCE" << std::endl;
@@ -11,7 +11,6 @@ template <class T> essence<T>::~essence(){
 //------------GETS------------
 template <class T> T* essence<T>::getBody(){ return body; }
 template <class T> sf::RectangleShape* essence<T>::getBound(){ return &bound; }
-template <class T> float essence<T>::getDiagonal(){ return diagonal; }
 
 
 //------------SETS------------

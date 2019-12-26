@@ -45,6 +45,9 @@ class line{
     //return the class of the object
     sf::Vector2f intersect(line Line);
     bool intersect(sf::Vector2f point);
+    bool doIntersect(line* Line);
+    bool onSegment(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);
+    int orientation(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);
 
     virtual std::string Class();
 };

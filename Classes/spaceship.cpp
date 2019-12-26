@@ -188,7 +188,7 @@ void spaceship::Draw (sf::RenderWindow* window){
   this->bound.setOutlineThickness(3);
   this->bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
 */
-  window->draw(bound);
+window->draw(bound);
 }
 
 //BUILD
@@ -211,6 +211,9 @@ void spaceship::Draw (sf::RenderWindow* window){
 
   //body.rotate(90);
 }*/
+
+float spaceship::GetRotation(){ return this->body->getBody()->getRotation(); }
+
 
 void spaceship::Shoot(){
   bullet *bul = new bullet(spatial_Versor * 1.5f, this->getDrawable()->getRotation(), body->getBody()->getPosition());

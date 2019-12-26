@@ -36,11 +36,12 @@ class ground : public drawable{
     //---------------METHODS---------------
     void Draw (sf::RenderWindow* window);
 
+    virtual bool intersects(drawable* object);
     template <typename T> bool intersects(drawable* object);
-    bool intersectionPoint(sf::Vector2f* pnt, line* sect, bool monotony);
 
     //return the class of the object
     virtual std::string Class();
 };
 
+#include "ground.tpp"
 #endif

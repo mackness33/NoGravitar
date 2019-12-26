@@ -29,6 +29,7 @@ class spaceship : public drawable{
     //It understands if the spaceship wants to go OutOfBOunds
     bool opposite_direction(bool side, float direction);
 
+    virtual float GetRotation();
 
   public:
     //----------CONSTRUCTORS----------

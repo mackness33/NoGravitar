@@ -6,6 +6,12 @@
 #include "shape.hpp"
 
 class drawable{
+  protected:
+    float width, height;
+    float diagonal;
+
+  protected:
+
   public:
     drawable();
 
@@ -21,10 +27,14 @@ class drawable{
     template <typename T> T* getDrawable();
     virtual sf::FloatRect GetLocalBounds();
     virtual sf::FloatRect GetGlobalBounds();
+    virtual float GetRotation();
+    float GetDiagonal();
+
 
     //----------METHODS------------
     virtual void Draw (sf::RenderWindow* window) = 0;
     virtual void Update ();
+    virtual bool intersects(drawable* obj);
 
     virtual std::string Class();
 

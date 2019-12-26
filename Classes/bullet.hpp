@@ -16,6 +16,9 @@ class bullet : public drawable{
     float direction;
     float totalTime;
 
+  protected:
+    virtual float GetRotation();
+
   public:
     //---------------CONSTRUCTORS---------------
     bullet(float s = 12, float d = 0, sf::Vector2f p = sf::Vector2f(0, 0));

@@ -22,6 +22,7 @@ class galaxy : public playground{
 
   protected:
     bool checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos);
+    bool checkPlanetPosition(planetObj planet);
     void inizializePlanets(unsigned int numPlanets);
 
   public:

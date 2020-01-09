@@ -12,24 +12,21 @@ playground::~playground(){
 
 
 //------------GETS------------
-std::list<sf::FloatRect>* playground::getObjectsBounds (std::list<drawable*> objs){
-  std::list<sf::FloatRect>* objectsBounds;
-  sf::FloatRect temp;
+void playground::getObjectsBounds (std::list<drawable*> objs, std::list<sf::FloatRect>* objsBounds){
+  sf::FloatRect *temp = new sf::FloatRect(0, 0, 0, 0);
 
-  //std::cout << "size: " << objs.size() << std::endl;
+  std::cout << "size: " << objs.size() << std::endl;
 
   for (std::list<drawable*>::iterator d = objs.begin(); d != objs.end(); d++){
-    temp = (*d)->GetGlobalBounds();
+    *temp = (*d)->GetGlobalBounds();
+    std::cout << "right: " << temp->left + temp->width << std::endl;
+    std::cout << "left: " << temp->left << std::endl;
+    std::cout << "top: " << temp->top << std::endl;
+    std::cout << "bottom: " << temp->top + temp->height << std::endl;
 
-    objectsBounds->push_front(temp);
-    std::cout << "left: " << temp.left << std::endl;
-    std::cout << "right: " << temp.left + temp.width << std::endl;
-    std::cout << "top: " << temp.top << std::endl;
-    std::cout << "bottom: " << temp.top + temp.height << std::endl;
+    objsBounds->push_front(*temp);
 }
 std::cout << "shit: " << std::endl;
-
-  return objectsBounds;
 }
 
 //------------SETS------------

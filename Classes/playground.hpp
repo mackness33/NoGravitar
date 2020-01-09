@@ -20,7 +20,7 @@ class playground : public viewer{
     ~playground();
 
     //---------------GETS---------------
-    virtual std::list<sf::FloatRect>* getObjectsBounds (std::list<drawable*> objects);
+    virtual void getObjectsBounds (std::list<drawable*> objects, std::list<sf::FloatRect>* objectsBounds);
 
     //---------------METHODS---------------
     virtual void Draw();

@@ -1,31 +1,11 @@
 #include "galaxy.hpp"
 
 //----------CONSTRUCTORS----------
-galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actGame) : playground(win){
-  Player = spc;
-  currentGame = actGame;
+galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actGame) : playground(win), Player(spc), currentGame(actGame){
+  planets = {};
   playground::addAlly(spc);
   bullets = Player->getBullets();
-  planets = {};
-  std::list<sf::FloatRect> posPlanets = {};
-  sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
-
-  for (int i = 0; i < numPlanets; i++){
-    sf::Vector2f position = utility::RandVector(plgBound.x, plgBound.y, 0, win->getSize().y/10);
-    //sf::Vector2f position = utility::RandVector(win->getSize().x, win->getSize().y);
-    //std::cout << "pos x: " << position.x << std::endl;
-    //std::cout << "pos y: " << position.y << std::endl;
-    if(this->checkPlanetPosition(&posPlanets, position)){
-      planetObj *pln = new planetObj(utility::RandInt(20, 30), position);
-      pln->setPlanetView(new planetView(window, Player, currentGame));
-      //pln->getBody()->SetOrigin(pos);
-      planets.push_front(pln);
-      playground::addEnemy(pln);
-      posPlanets.push_front(pln->GetGlobalBounds());
-    }
-    else
-      i--;
-  }
+  this->inizializePlanets(numPlanets);
 }
 
 //----------GETS----------
@@ -39,17 +19,77 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, g
 
 //----------METHODS----------
 bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos){
-  sf::FloatRect newPlanetBound (pos, sf::Vector2f(100, 100));
-  sf::FloatRect planetsIntersection;
+  sf::FloatRect newPlanetBound (pos, sf::Vector2f(200, 200));
+  sf::FloatRect planetsIntersection, playerIntersection;
   int i = 0;
 
+  //if(Player->GetGlobalBounds().intersects(newPlanetBound, playerIntersection))
+    //return false;
+
   for(std::list<sf::FloatRect>::iterator boundPlanet = posPlanets->begin(); boundPlanet != posPlanets->end(); boundPlanet++, i++){
-      //std::cout << "intersects: " << newPlanetBound.intersects(*boundPlanet, planetsIntersection) << std::endl;
-      if(newPlanetBound.intersects(*boundPlanet, planetsIntersection))
-        return false;
+    //std::cout << "newPlanetBound.contains(*boundPlanet, playerIntersection): " << newPlanetBound.contains(*boundPlanet, playerIntersection) << std::endl;
+    //std::cout << "intersects: " << newPlanetBound.intersects(*boundPlanet, planetsIntersection) << std::endl;
+    /*
+    std::cout << "right: " << playerIntersection.left + playerIntersection.width << std::endl;
+    std::cout << "top: " << playerIntersection.top << std::endl;
+    std::cout << "left: " << playerIntersection.left << std::endl;
+    std::cout << "bottom: " << playerIntersection.top + playerIntersection.height << std::endl;
+    std::cout << "newPlanetBound.intersects(*boundPlanet, playerIntersection): " << newPlanetBound.intersects(*boundPlanet, playerIntersection) << std::endl;
+
+    */
+    if(newPlanetBound.intersects(*boundPlanet, planetsIntersection))
+      return false;
   }
 
   return true;
+}
+
+/*
+bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos){
+  sf::FloatRect newPlanetBound (pos, sf::Vector2f(100, 100));
+  sf::FloatRect planetsIntersection, playerIntersection;
+  int i = 0;
+  if(Player->GetGlobalBounds().intersects(*boundPlanet, playerIntersection)){
+    //std::cout << "intersects: " << newPlanetBound.intersects(*boundPlanet, planetsIntersection) << std::endl;
+    std::cout << "right: " << playerIntersection.left + playerIntersection.width << std::endl;
+    std::cout << "top: " << playerIntersection.top << std::endl;
+    std::cout << "left: " << playerIntersection.left << std::endl;
+    std::cout << "bottom: " << playerIntersection.top + playerIntersection.height << std::endl;
+    std::cout << "newPlanetBound.intersects(*boundPlanet, playerIntersection): " << newPlanetBound.intersects(*boundPlanet, playerIntersection) << std::endl;
+    return false;
+  }
+
+  for(std::list<sf::FloatRect>::iterator boundPlanet = posPlanets->begin(); boundPlanet != posPlanets->end(); boundPlanet++, i++){
+    //std::cout << "newPlanetBound.contains(*boundPlanet, playerIntersection): " << newPlanetBound.contains(*boundPlanet, playerIntersection) << std::endl;
+    if(newPlanetBound.intersects(*boundPlanet, planetsIntersection))
+      return false;
+  }
+
+  return true;
+}
+*/
+
+void galaxy::inizializePlanets(unsigned int numPlanets){
+  sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
+  std::list<sf::FloatRect>* posObjects;
+  posObjects = playground::getObjectsBounds(objects);
+
+  for (int i = 0; i < numPlanets; i++){
+    sf::Vector2f position = utility::RandVector(plgBound.x, plgBound.y, 0, window->getSize().y/10);
+    //sf::Vector2f position = utility::RandVector(win->getSize().x, win->getSize().y);
+    //std::cout << "pos x: " << position.x << std::endl;
+    //std::cout << "pos y: " << position.y << std::endl;
+    if(this->checkPlanetPosition(posObjects, position)){
+      planetObj *pln = new planetObj(utility::RandInt(20, 30), position);
+      pln->setPlanetView(new planetView(window, Player, currentGame));
+      //pln->getBody()->SetOrigin(pos);
+      planets.push_front(pln);
+      playground::addEnemy(pln);
+      posObjects->push_front(pln->GetGlobalBounds());
+    }
+    else
+      i--;
+  }
 }
 
 //TODO: Need to delete the object at the end of all the cicles!

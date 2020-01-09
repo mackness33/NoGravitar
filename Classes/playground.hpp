@@ -8,6 +8,7 @@ class playground : public viewer{
   protected:
     std::list<drawable*> allies;
     std::list<drawable*> enemies;
+    std::list<drawable*> objects;
 
   protected:
     void DrawList (std::list<drawable*> objects);
@@ -18,15 +19,19 @@ class playground : public viewer{
 
     ~playground();
 
+    //---------------GETS---------------
+    virtual std::list<sf::FloatRect>* getObjectsBounds (std::list<drawable*> objects);
+
     //---------------METHODS---------------
     virtual void Draw();
 
     virtual void addAlly (drawable* ally);
     virtual void addEnemy (drawable* enemy);
 
+
     virtual void checkCollision ();
 
-    virtual std::string Class(); 
+    virtual std::string Class();
 };
 
 #endif

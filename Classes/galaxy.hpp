@@ -22,6 +22,7 @@ class galaxy : public playground{
 
   protected:
     bool checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos);
+    void inizializePlanets(unsigned int numPlanets);
 
   public:
     //CONSTRUCTORS
@@ -46,7 +47,6 @@ class galaxy : public playground{
     void collision(std::_List_iterator<drawable*>* ally, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
     void collisionBullet(std::_List_iterator<drawable*>* spaceship, std::_List_iterator<drawable*>* enemy);
     void collisionSpaceship(std::_List_iterator<drawable*>* bullet, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
-
     //void collision(bullet* bullet, planetObj* planet);
 
     //void collision(spaceship* spaceship, planetObj* planet);

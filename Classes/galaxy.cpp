@@ -18,7 +18,9 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, g
 
 
 //----------METHODS----------
-bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos){
+
+//CLEAN:
+/*bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos){
   sf::FloatRect planetsIntersection, playerIntersection;
   sf::FloatRect newPlanetBound (pos, sf::Vector2f(300, 300));
   int i = 0;
@@ -38,7 +40,7 @@ bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vecto
     std::cout << "left: " << playerIntersection.left << std::endl;
     std::cout << "bottom: " << playerIntersection.top + playerIntersection.height << std::endl;
 
-    */
+
     if(i == 0){
       std::cout << "newPlanetBound.intersects(*boundPlanet, playerIntersection): " << newPlanetBound.intersects(*boundPlanet, playerIntersection) << std::endl;
       std::cout << "right: " << playerIntersection.left + playerIntersection.width << std::endl;
@@ -55,7 +57,7 @@ bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vecto
 
   return true;
 }
-
+*/
 
 bool galaxy::checkPlanetPosition(planetObj pln){
   for(auto obj = this->objects.begin(); obj != this->objects.end(); obj++)
@@ -74,7 +76,7 @@ void galaxy::inizializePlanets(unsigned int numPlanets){
   planetObj *pln = nullptr;
 
   for (int i = 0; i < numPlanets; i++){
-    sf::Vector2f position = utility::RandVector(plgBound.x, plgBound.y, 0, window->getSize().y/10);
+    sf::Vector2f position = utility::RandVector(plgBound.x - 20, plgBound.y - 20, 10, (window->getSize().y/10) + 10);
     //sf::Vector2f position = utility::RandVector(win->getSize().x, win->getSize().y);
     //std::cout << "pos x: " << position.x << std::endl;
     //std::cout << "pos y: " << position.y << std::endl;

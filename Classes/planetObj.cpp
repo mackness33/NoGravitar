@@ -45,11 +45,10 @@ void planetObj::Draw (sf::RenderWindow* window){
 }
 
 bool planetObj::spawnIntersects(drawable* obj){
-  sf::FloatRect *bounds;
-  *bounds = obj->GetGlobalBounds();
-  sf::FloatRect spawningBounds (sf::Vector2f(bounds->left + 20, bounds->top + 20), sf::Vector2f(bounds->width + 40, bounds->height + 40));
+  sf::FloatRect bounds = obj->GetGlobalBounds();
+  sf::FloatRect spawningBounds (sf::Vector2f(bounds.left - 20, bounds.top - 20), sf::Vector2f(bounds.width + 40, bounds.height + 40));
 
-  return this->GetGlobalBounds().intersects(spawningBounds);
+  return spawningBounds.intersects(this->GetGlobalBounds());
 }
 
 //TODO: randomize the color of the planets

@@ -59,7 +59,7 @@ bool galaxy::checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vecto
 
 bool galaxy::checkPlanetPosition(planetObj pln){
   for(auto obj = this->objects.begin(); obj != this->objects.end(); obj++)
-    if(pln.intersects(*obj))
+    if(pln.spawnIntersects(*obj))
       return false;
 
   return true;

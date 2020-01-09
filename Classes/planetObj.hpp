@@ -41,9 +41,10 @@ class planetObj : public drawable{
 
     //----------METHODS----------
     void Draw (sf::RenderWindow* window);
+    bool spawnIntersects(drawable* obj);
 
     void build();
-    
+
     virtual std::string Class();
 };
 

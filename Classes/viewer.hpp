@@ -11,6 +11,7 @@ class viewer : public drawable{
   public:
     //----------CONSTRUCTORS----------
     viewer(sf::RenderWindow *window, sf::Vector2f size = sf::Vector2f(-1, -1), sf::Vector2f position = sf::Vector2f(-1, -1), sf::Texture* image = nullptr);
+    viewer();
 
     virtual ~viewer();
 

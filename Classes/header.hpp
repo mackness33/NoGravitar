@@ -5,21 +5,21 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "viewer.hpp"
+#include "information.hpp"
 
-class header{
+class viewer;
+
+class header : public viewer{
   private:
-    sf::Text points;
+    sf::Text *points;
     sf::Text title;
     sf::Font font;
     sf::RenderWindow *window;
-    sf::FloatRect *boundingBox;
-    sf::RectangleShape bound;       //FOR TESTING ONLY
-    sf::Vector2f *position;
-    sf::Vector2f *size;
 
   public:
     //----------CONSTRUCTORS----------
-    header(sf::RenderWindow* win);
+    header(sf::RenderWindow *window, sf::Vector2f size = information::HEADER_DEFAULT_SIZE, sf::Vector2f position = information::HEADER_DEFAULT_POSITION, sf::Texture* image = nullptr);
 
     //----------GETS----------
     sf::Text getPoints();
@@ -32,7 +32,7 @@ class header{
     void setFont(sf::Font f);
 
     //---------------METHODS---------------
-    void Draw (/*sf::RenderWindow* window*/);
+    void Draw();
     virtual std::string Class();
 };
 

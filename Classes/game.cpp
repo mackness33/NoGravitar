@@ -15,6 +15,7 @@ game::game(sf::RenderWindow* wnd){
   Playground = Galaxy;
   Player->setPlayground(Galaxy);
 
+  information::inizialize(Window->getSize());
   settings::deltaTime = 10.0f;
   settings::switchTime = 10.0f;
 }
@@ -89,6 +90,8 @@ void game::start (){
 
 
 void game::draw (){
+  std::cout << "HOLLY" << std::endl;
+
   Header->Draw();
   Playground->Draw();
 }

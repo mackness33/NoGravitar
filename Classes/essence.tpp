@@ -26,8 +26,6 @@ template <class T> void essence<T>::Draw (sf::RenderWindow* window){
 template <class T> void essence<T>::DrawTest (sf::RenderWindow* window){
   window->draw(bound);
   window->draw(*body);
-  sf::RectangleShape bound;       //FOR TESTING ONLY
-
 }
 
 template <class T> std::string essence<T>::Class(){

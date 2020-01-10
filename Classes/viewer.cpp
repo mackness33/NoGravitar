@@ -22,6 +22,8 @@ viewer::viewer(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture*
   background->getBound()->setFillColor(sf::Color::Black);
 }
 
+viewer::viewer(){}
+
 viewer::~viewer(){
   std::cout << "DELETING VIEWER" << std::endl;
 }

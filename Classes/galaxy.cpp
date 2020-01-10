@@ -70,9 +70,8 @@ bool galaxy::checkPlanetPosition(planetObj pln){
 
 void galaxy::inizializePlanets(unsigned int numPlanets){
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
-  std::list<sf::FloatRect> *posObjects = new std::list<sf::FloatRect>();
-  unsigned int numObjects = numPlanets + posObjects->size();
-  sf::FloatRect playerIntersection, playerBound = Player->GetGlobalBounds();
+  //std::list<sf::FloatRect> *posObjects = new std::list<sf::FloatRect>();
+  //sf::FloatRect playerIntersection, playerBound = Player->GetGlobalBounds();
   planetObj *pln = nullptr;
 
   for (int i = 0; i < numPlanets; i++){
@@ -80,7 +79,7 @@ void galaxy::inizializePlanets(unsigned int numPlanets){
     //sf::Vector2f position = utility::RandVector(win->getSize().x, win->getSize().y);
     //std::cout << "pos x: " << position.x << std::endl;
     //std::cout << "pos y: " << position.y << std::endl;
-    std::cout << "size: " << posObjects->size() << std::endl;
+    //std::cout << "size: " << posObjects->size() << std::endl;
     pln = new planetObj(utility::RandInt(20, 30), position);
 
     if(this->checkPlanetPosition(*pln)){
@@ -89,7 +88,7 @@ void galaxy::inizializePlanets(unsigned int numPlanets){
       //pln->getBody()->SetOrigin(pos);
       planets.push_front(pln);
       playground::addEnemy(pln);
-      posObjects->push_front(pln->GetGlobalBounds());
+      //posObjects->push_front(pln->GetGlobalBounds());
     }
     else{
       delete pln;

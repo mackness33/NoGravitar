@@ -1,8 +1,16 @@
 #include "header.hpp"
 
-//----------CONSTRUCTORS----------
-header::header(sf::RenderWindow* win){
-  window = win;
+//------------CONSTRUCTORS------------
+header::header(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i){
+  std::cout << "HOLA" << std::endl;
+
+  if(s == sf::Vector2f(-1, -1))
+    s = information::HEADER_DEFAULT_SIZE;
+
+  if(p == sf::Vector2f(-1, -1))
+    p = information::HEADER_DEFAULT_POSITION;
+
+  //header::viewer(w, s, p , i);
 
   // Declare and load a font
   if(!font.loadFromFile("Fonts/Aerovias_Brasil/AeroviasBrasilNF.ttf")){
@@ -12,24 +20,7 @@ header::header(sf::RenderWindow* win){
       std::cout << "Error in load of Cafe Brewery font" << std::endl;
     }
   }
-
-  // Setting bounding box
-  size = new sf::Vector2f(win->getSize().x, win->getSize().y/10);
-  position = new sf::Vector2f(0, 0);
-  boundingBox = new sf::FloatRect(*position, *size);
-  bound.setPosition(*position);
-  bound.setSize(*size);
-  bound.setFillColor(sf::Color(0, 0, 0));
-
-
-  // Setting point text
-  points.setFont(font);
-  points.setString("0");
-  points.setCharacterSize(30);
-  points.setStyle(sf::Text::Regular);
-  points.setFillColor(sf::Color::Green);
-  points.setPosition((size->x-title.getLocalBounds().width)/2, (size->y-title.getLocalBounds().height)/2);
-
+  std::cout << "WHAT?" << std::endl;
 
   // Setting title text
   title.setFont(font);
@@ -37,32 +28,36 @@ header::header(sf::RenderWindow* win){
   title.setCharacterSize(30);
   title.setStyle(sf::Text::Bold);
   title.setFillColor(sf::Color::Green);
-  title.setPosition((size->x-title.getLocalBounds().width)/2, 0);
+  title.setPosition((s.x - title.getLocalBounds().width)/2, 0);
+
+
+  // Setting point text
+  points = new sf::Text();
+  points->setFont(font);
+  points->setString("0");
+  points->setCharacterSize(30);
+  points->setStyle(sf::Text::Regular);
+  points->setFillColor(sf::Color::Green);
+  points->setPosition((s.x - points->getLocalBounds().width)/2, (s.y - points->getLocalBounds().height)/2);
 }
 
-/*spaceship(const spaceship& Player){
-this->spatial_Versor = Player.getSpatialVersor();
-  this->rotation_Versor = Player.getRotationVersor();
-
-  this->build();
-}*/
-
 //----------GETS----------
-sf::Text header::getPoints(){ return this->points;}
+sf::Text header::getPoints(){ return *this->points;}
 sf::Text header::getTitle(){ return this->title;}
 sf::Font header::getFont(){ return font;}
 
 //----------SETS----------
-void header::setPoints(sf::Text p){ this->points = p;}
+void header::setPoints(sf::Text p){ *this->points = p;}
 void header::setTitle(sf::Text t){ this->title = t;}
 void header::setFont(sf::Font f){ this->font = f;}
 
 //----------METHODS----------
 
-void header::Draw (/*sf::RenderWindow* window*/){
-  window->draw(bound);
-  window->draw(points);
-  window->draw(title);
+void header::Draw (){
+  viewer::Draw();
+  this->window->draw(*points);
+  std::cout << "HOLLY23454" << std::endl;
+  this->window->draw(title);
 }
 
 std::string header::Class(){

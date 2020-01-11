@@ -2,7 +2,6 @@
 
 //------------CONSTRUCTORS------------
 header::header(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i){
-  std::cout << "HOLA" << std::endl;
 
   if(s == sf::Vector2f(-1, -1))
     s = information::HEADER_DEFAULT_SIZE;
@@ -20,7 +19,7 @@ header::header(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture*
       std::cout << "Error in load of Cafe Brewery font" << std::endl;
     }
   }
-  std::cout << "WHAT?" << std::endl;
+  std::cout << "?" << std::endl;
 
   // Setting title text
   title.setFont(font);
@@ -39,6 +38,7 @@ header::header(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture*
   points->setStyle(sf::Text::Regular);
   points->setFillColor(sf::Color::Green);
   points->setPosition((s.x - points->getLocalBounds().width)/2, (s.y - points->getLocalBounds().height)/2);
+
 }
 
 //----------GETS----------
@@ -56,7 +56,6 @@ void header::setFont(sf::Font f){ this->font = f;}
 void header::Draw (){
   viewer::Draw();
   this->window->draw(*points);
-  std::cout << "HOLLY23454" << std::endl;
   this->window->draw(title);
 }
 

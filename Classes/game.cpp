@@ -5,8 +5,9 @@ viewer game::*Playground = nullptr;
 //CONSTRUCTORS
 game::game(sf::RenderWindow* wnd){
   spaceshipImage.setSmooth(true);
-
   Window = wnd;
+
+  information::inizialize(Window->getSize());
 
   Player = new spaceship(nullptr, &spaceshipImage);
   Header = new header(Window);
@@ -15,7 +16,6 @@ game::game(sf::RenderWindow* wnd){
   Playground = Galaxy;
   Player->setPlayground(Galaxy);
 
-  information::inizialize(Window->getSize());
   settings::deltaTime = 10.0f;
   settings::switchTime = 10.0f;
 }

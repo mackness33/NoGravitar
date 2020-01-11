@@ -15,7 +15,6 @@ class header : public viewer{
     sf::Text *points;
     sf::Text title;
     sf::Font font;
-    sf::RenderWindow *window;
 
   public:
     //----------CONSTRUCTORS----------

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <exception>
 #include <vector>
+#include "information.hpp"
 
 template <class T> class essence{
   protected:

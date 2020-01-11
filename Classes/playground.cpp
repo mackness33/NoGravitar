@@ -1,7 +1,7 @@
 #include "playground.hpp"
 
 //------------CONSTRUCTORS------------
-playground::playground(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i){
+playground::playground(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i){  
   allies = std::list<drawable*>();
   enemies = std::list<drawable*>();
 }

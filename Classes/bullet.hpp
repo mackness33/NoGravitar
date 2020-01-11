@@ -1,13 +1,12 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#define PI 3.14159265
-
-
 #include "movable.hpp"
 #include "entity.hpp"
 #include "settings.hpp"
 #include "drawable.hpp"
+#include "information.hpp"
+#include "utility.hpp"
 
 class bullet : public drawable{
   protected:
@@ -21,7 +20,7 @@ class bullet : public drawable{
 
   public:
     //---------------CONSTRUCTORS---------------
-    bullet(float s = 12, float d = 0, sf::Vector2f p = sf::Vector2f(0, 0));
+    bullet(float speed = information::BULLET_DEFAULT_SPEED, float direction = 0, sf::Vector2f position = sf::Vector2f(0, 0));
 
     //---------------DESTRUCTORS---------------
     ~bullet();

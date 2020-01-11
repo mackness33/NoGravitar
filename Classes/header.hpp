@@ -12,7 +12,7 @@ class viewer;
 
 class header : public viewer{
   private:
-    sf::Text *points;
+    sf::Text points;
     sf::Text title;
     sf::Font font;
 

@@ -8,8 +8,8 @@ spaceship::spaceship(playground* plg){
   topOOB = false;
   leftOOB = false;
 
-  spatial_Versor = 10;
-  rotation_Versor = 3;
+  speed = information::SPACESHIP_DEFAULT_SPEED;
+  direction = information::SPACESHIP_DEFAULT_SPEED;
 
   bullets = {};
 
@@ -17,14 +17,14 @@ spaceship::spaceship(playground* plg){
   body = new movable<sf::Sprite>(image);
 }
 
-spaceship::spaceship(playground* plg, sf::Texture* img){
+spaceship::spaceship(playground* plg, sf::Texture* img, float spd, float dct){
   xOutOfBound = false;
   yOutOfBound = false;
   topOOB = false;
   leftOOB = false;
 
-  spatial_Versor = 10;
-  rotation_Versor = 3;
+  speed = spd;
+  direction = dct;
 
   bullets = {};
 
@@ -32,8 +32,8 @@ spaceship::spaceship(playground* plg, sf::Texture* img){
   image->loadFromFile("img/spaceship.png");
 
   body = new movable<sf::Sprite>(image);
-  body->SetScale(0.25f, 0.25f);
-  body->SetPosition(80.f, 70.f);
+  //body->SetScale(0.25f, 0.25f);
+  body->SetPosition(information::PLAYER_DEFAULT_POSITION);
   sf::FloatRect bounds = this->GetLocalBounds();
   body->SetOrigin(bounds.width/2, bounds.height/2);
 
@@ -54,8 +54,8 @@ bool spaceship::getXOutOfBounds(){ return xOutOfBound;}
 bool spaceship::getYOutOfBounds(){ return yOutOfBound;}
 bool spaceship::getLeftOutOfBounds(){ return leftOOB;}
 bool spaceship::getTopOutOfBounds(){ return topOOB;}
-float spaceship::getSpatialVersor(){ return spatial_Versor;}
-float spaceship::getRotationVersor(){ return rotation_Versor;}
+float spaceship::getSpatialVersor(){ return speed;}
+float spaceship::getRotationVersor(){ return direction;}
 movable<sf::Sprite>* spaceship::getMovable() { return body; }
 entity<sf::Sprite>* spaceship::getEntity() { return static_cast<entity<sf::Sprite>*> (body); }
 sf::Sprite* spaceship::getDrawable() { return body->getBody(); }
@@ -70,8 +70,8 @@ void spaceship::setXOutOfBounds(bool x){ xOutOfBound = x;}
 void spaceship::setYOutOfBounds(bool y){ yOutOfBound = y;}
 void spaceship::setLeftOutOfBounds(bool l){ leftOOB = l;}
 void spaceship::setTopOutOfBounds(bool t){ topOOB = t;}
-void spaceship::setSpatialVersor(float sv) { spatial_Versor = sv;}
-void spaceship::setRotationVersor(float rv) { rotation_Versor = rv;}
+void spaceship::setSpatialVersor(float s) { speed = s;}
+void spaceship::setRotationVersor(float d) { direction = d;}
 void spaceship::setPlayground(playground* pg) { Playground = pg;}
 //void spaceship::setBody(sf::Sprite* b) { body = b;}
 
@@ -103,19 +103,19 @@ void spaceship::deleteBullets(){
 void spaceship::movement(sf::Keyboard::Key k){
   switch (k) {
     case sf::Keyboard::Left : {                 //LEFT
-      body->Rotate(-rotation_Versor);
+      body->Rotate(-direction);
     };break;
 
     case sf::Keyboard::Right : {                //RIGHT
-      body->Rotate(rotation_Versor);
+      body->Rotate(direction);
     };break;
 
     case sf::Keyboard::Up : {                   //UP
-      fly(spatial_Versor);
+      fly(speed);
     };break;
 
     case sf::Keyboard::Down : {                 //DOWN
-      fly(-spatial_Versor);
+      fly(-speed);
     };break;
 
     default: std::cout << "Not a movementCommand" << std::endl;
@@ -125,11 +125,11 @@ void spaceship::movement(sf::Keyboard::Key k){
 //FLY
 //It handles spaceship's translation in the window
 void spaceship::fly(float module){
-  float direction = this->getDrawable()->getRotation() * PI / 180.0;
-  int sin_module = sin(direction) * module;
-  int cos_module = cos(direction) * module;
-  bool y_opp_dir = opposite_direction(topOOB,  sin(direction) * module);
-  bool x_opp_dir = opposite_direction(leftOOB,  cos(direction) * module);
+  float angle = utility::toRadiant(this->getDrawable()->getRotation());
+  int sin_module = sin(angle) * module;
+  int cos_module = cos(angle) * module;
+  bool y_opp_dir = opposite_direction(topOOB,  sin(angle) * module);
+  bool x_opp_dir = opposite_direction(leftOOB,  cos(angle) * module);
 
   if((yOutOfBound && !y_opp_dir)){
     sin_module = 0;
@@ -147,13 +147,13 @@ void spaceship::fly(float module){
 
 //OPPOSITE_DIRECTION
 //It understand if the spaceship want o go OutOfBOunds
-bool spaceship::opposite_direction(bool side, float direction){
+bool spaceship::opposite_direction(bool side, float angle){
   if(side){
-    if(direction >= 0)
+    if(angle >= 0)
       return true;
   }
   else{
-    if(direction <= 0)
+    if(angle <= 0)
       return true;
   }
 
@@ -216,7 +216,7 @@ float spaceship::GetRotation(){ return this->body->getBody()->getRotation(); }
 
 
 void spaceship::Shoot(){
-  bullet *bul = new bullet(spatial_Versor * 1.5f, this->getDrawable()->getRotation(), body->getBody()->getPosition());
+  bullet *bul = new bullet(speed * 1.25f, this->getDrawable()->getRotation(), body->getBody()->getPosition());
   //std::cout << "real location c: " << bul << std::endl;
   Playground->addAlly(bul);
   bullets.push_front(bul);

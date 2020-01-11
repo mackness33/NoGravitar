@@ -15,7 +15,7 @@ class playground : public viewer{
 
   public:
     //---------------CONSTRUCTORS---------------
-    playground(sf::RenderWindow *window, sf::Vector2f size = sf::Vector2f(-1, -1), sf::Vector2f position = sf::Vector2f(-1, -1), sf::Texture* image = nullptr);
+    playground(sf::RenderWindow *window, sf::Vector2f size = information::PLAYGROUND_DEFAULT_SIZE, sf::Vector2f position = information::PLAYGROUND_DEFAULT_POSITION, sf::Texture* image = nullptr);
 
     ~playground();
 

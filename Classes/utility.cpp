@@ -16,6 +16,8 @@ utility::utility(){
 //void setTexture(sf::Texture t){ this->background.setTexture(t);}
 
 //----------METHODS----------
+float utility::toRadiant(float deg){ return deg * PI / 180.0f; }
+float utility::toDegrees(float rad){ return rad * 180.0f / PI; }
 int utility::Proportion(int a, int b, int c){ return c * b / a; }
 int utility::RandInt(int x, int y){ return rand() % x + y; }
 float utility::RandFloat(int x, float y){ return rand() % x + y; }

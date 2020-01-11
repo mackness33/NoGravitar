@@ -2,10 +2,10 @@
 
 //---------------CONSTRUCTORS---------------
 bullet::bullet(float s, float d, sf::Vector2f p){
-  body = new movable<sf::CircleShape>(10);
+  body = new movable<sf::CircleShape>(information::BULLET_DEFAULT_RADIUS);
 
   speed = s;
-  direction = d * PI / 180.0f;
+  direction = utility::toRadiant(d);
   totalTime = 0;
 
   body->SetPosition(p);

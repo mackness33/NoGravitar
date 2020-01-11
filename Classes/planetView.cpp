@@ -7,11 +7,12 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame) : p
   Player = spc;
   playground::addAlly(spc);
   Player->getMovable()->SetPosition(100, 200);
+
   bullets = Player->getBullets();
 
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   std::cout << "here is the prob!" << std::endl;
-  Ground = new ground(win->getSize().x, win->getSize().y);
+  Ground = new ground(information::MENU_DEFAULT_SIZE.x, information::MENU_DEFAULT_SIZE.y);
   std::cout << "here Tho!" << std::endl;
   playground::addEnemy(Ground);
 }

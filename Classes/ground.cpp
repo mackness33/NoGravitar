@@ -2,19 +2,19 @@
 
 //---------------CONSTRUCTORS---------------
 ground::ground(float w, float h, sf::Color c){
-  int sectionY = h * (settings::MAX_GROUND_HEIGHT - settings::MIN_GROUND_HEIGHT);
-  sf::Vector2f *lastPoint = nullptr, *actualPoint = nullptr;
-  line *L = nullptr;
+  int sectionY = h * (information::MAX_GROUND_HEIGHT - information::MIN_GROUND_HEIGHT);
 
-  numVertex = 6;//utility::RandInt(10, 5);
-  offsetY = settings::MIN_GROUND_HEIGHT;
+  numVertex = utility::RandInt(10, 5);
+  offsetY = information::MIN_GROUND_HEIGHT;
   length = w / (numVertex - 1);
 
+  sf::Vector2f *lastPoint = nullptr, *actualPoint = nullptr;
   lastPoint = new sf::Vector2f(0, (h - utility::RandFloat(sectionY, offsetY)));
 
-  for(int i = 1, lastPos = length; i < numVertex-1; i++, lastPos += length, *lastPoint = *actualPoint){
-    actualPoint = new sf::Vector2f(/*utility::RandInt(length, lastPos)*/ lastPos, h - utility::RandFloat(sectionY, offsetY));
+  line *L = nullptr;
 
+  for(int i = 1, lastPos = length; i < numVertex-1; i++, lastPos += length, *lastPoint = *actualPoint){
+    actualPoint = new sf::Vector2f(lastPos /*utility::RandInt(length, lastPos)*/, h - utility::RandFloat(sectionY, offsetY));
 
     L = new line(*lastPoint, *actualPoint);
 

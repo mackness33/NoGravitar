@@ -5,7 +5,6 @@
 #include <string>
 #include "bullet.hpp"
 #include "playground.hpp"
-#include "utility.hpp"
 
 class spaceship : public drawable{
   private:
@@ -14,7 +13,7 @@ class spaceship : public drawable{
     bool leftOOB;                   //leftOutOfBounds
     bool topOOB;                   //topOutOfBounds
     float speed;
-    float direction;
+    float angular_speed;
     movable<sf::Sprite>* body;
     sf::Texture* image;
     std::list <bullet*> bullets;
@@ -35,7 +34,7 @@ class spaceship : public drawable{
   public:
     //----------CONSTRUCTORS----------
     spaceship(playground* Playground);
-    spaceship(playground* Playground, sf::Texture* image, float speed = information::SPACESHIP_DEFAULT_SPEED, float direction = information::SPACESHIP_DEFAULT_DIRECTION);
+    spaceship(playground* Playground, sf::Texture* image, float spd = information::SPACESHIP_DEFAULT_SPEED, float dir = information::SPACESHIP_DEFAULT_ANGULAR_SPEED);
     //spaceship(const spaceship& Player);
     ~spaceship();
 
@@ -58,8 +57,8 @@ class spaceship : public drawable{
     void setYOutOfBounds(bool y);
     void setLeftOutOfBounds(bool left);
     void setTopOutOfBounds(bool top);
-    void setSpatialVersor(float speed);
-    void setRotationVersor(float direction);
+    void setSpatialVersor(float spatialVersor);
+    void setRotationVersor(float rotationVersor);
     void setBody(sf::Sprite* body);
     void setPlayground(playground* Playground);
     //TODO: setTexture(sf::Texture* t);

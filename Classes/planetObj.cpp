@@ -1,31 +1,22 @@
 #include "planetObj.hpp"
 
 //----------CONSTRUCTORS----------
+planetObj::planetObj(float r, sf::Vector2f p){
+  body = new entity<sf::CircleShape>(r);
+  view = nullptr;
+
+  body->SetPosition(p);
+}
+
 planetObj::~planetObj(){
-  body = new entity<sf::CircleShape>(100);
-  view = nullptr;
-  body->SetPosition(sf::Vector2f(100, 100));
-}
+  std::cout << "DELETING PLANETOBJ" << std::endl;
 
-planetObj::planetObj(float radius){
-  body = new entity<sf::CircleShape>(radius);
-  view = nullptr;
+  //delete body;
+  //body = nullptr;
 
-  body->SetPosition(500, 500);
-}
-
-planetObj::planetObj(sf::Vector2f p){
-  body = new entity<sf::CircleShape>(100);
-  view = nullptr;
-
-  body->SetPosition(p);
-}
-
-planetObj::planetObj(float radius, sf::Vector2f p){
-  body = new entity<sf::CircleShape>(radius);
-  view = nullptr;
-
-  body->SetPosition(p);
+  //if(!view)
+    //delete view;
+  //view = nullptr;
 }
 
 

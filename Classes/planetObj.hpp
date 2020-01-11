@@ -16,13 +16,7 @@ class planetObj : public drawable{
 
   public:
     //----------CONSTRUCTORS----------
-    planetObj();
-
-    planetObj(float radius);
-
-    planetObj(sf::Vector2f position);
-
-    planetObj(float radius, sf::Vector2f position);
+    planetObj(float radius = information::PLANET_DEFAULT_RADIUS, sf::Vector2f position = sf::Vector2f(0, 0));
 
     ~planetObj();
 

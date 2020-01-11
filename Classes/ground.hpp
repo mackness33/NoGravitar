@@ -6,6 +6,7 @@
 #include "utility.hpp"
 #include "drawable.hpp"
 #include "settings.hpp"
+#include "information.hpp"
 
 class ground : public drawable{
   protected:
@@ -20,7 +21,7 @@ class ground : public drawable{
 
   public:
     //---------------CONSTRUCTORS---------------
-    ground(float width, float height, sf::Color color = sf::Color::Green);
+    ground(float width = information::PLAYGROUND_DEFAULT_SIZE.x, float height = information::PLAYGROUND_DEFAULT_SIZE.y, sf::Color color = sf::Color::Green);
 
     //---------------DESTRUCTORS---------------
     ~ground();

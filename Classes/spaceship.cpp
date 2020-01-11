@@ -8,8 +8,8 @@ spaceship::spaceship(playground* plg){
   topOOB = false;
   leftOOB = false;
 
-  speed = information::SPACESHIP_DEFAULT_SPEED;
-  direction = information::SPACESHIP_DEFAULT_SPEED;
+  speed = 10;
+  angular_speed = 3;
 
   bullets = {};
 
@@ -17,14 +17,14 @@ spaceship::spaceship(playground* plg){
   body = new movable<sf::Sprite>(image);
 }
 
-spaceship::spaceship(playground* plg, sf::Texture* img, float spd, float dct){
+spaceship::spaceship(playground* plg, sf::Texture* img, float spd, float dir){
   xOutOfBound = false;
   yOutOfBound = false;
   topOOB = false;
   leftOOB = false;
 
   speed = spd;
-  direction = dct;
+  angular_speed = dir;
 
   bullets = {};
 
@@ -32,7 +32,7 @@ spaceship::spaceship(playground* plg, sf::Texture* img, float spd, float dct){
   image->loadFromFile("img/spaceship.png");
 
   body = new movable<sf::Sprite>(image);
-  //body->SetScale(0.25f, 0.25f);
+  body->SetScale(0.25f, 0.25f);
   body->SetPosition(information::PLAYER_DEFAULT_POSITION);
   sf::FloatRect bounds = this->GetLocalBounds();
   body->SetOrigin(bounds.width/2, bounds.height/2);
@@ -55,7 +55,7 @@ bool spaceship::getYOutOfBounds(){ return yOutOfBound;}
 bool spaceship::getLeftOutOfBounds(){ return leftOOB;}
 bool spaceship::getTopOutOfBounds(){ return topOOB;}
 float spaceship::getSpatialVersor(){ return speed;}
-float spaceship::getRotationVersor(){ return direction;}
+float spaceship::getRotationVersor(){ return angular_speed;}
 movable<sf::Sprite>* spaceship::getMovable() { return body; }
 entity<sf::Sprite>* spaceship::getEntity() { return static_cast<entity<sf::Sprite>*> (body); }
 sf::Sprite* spaceship::getDrawable() { return body->getBody(); }
@@ -70,8 +70,8 @@ void spaceship::setXOutOfBounds(bool x){ xOutOfBound = x;}
 void spaceship::setYOutOfBounds(bool y){ yOutOfBound = y;}
 void spaceship::setLeftOutOfBounds(bool l){ leftOOB = l;}
 void spaceship::setTopOutOfBounds(bool t){ topOOB = t;}
-void spaceship::setSpatialVersor(float s) { speed = s;}
-void spaceship::setRotationVersor(float d) { direction = d;}
+void spaceship::setSpatialVersor(float sv) { speed = sv;}
+void spaceship::setRotationVersor(float rv) { angular_speed = rv;}
 void spaceship::setPlayground(playground* pg) { Playground = pg;}
 //void spaceship::setBody(sf::Sprite* b) { body = b;}
 
@@ -103,11 +103,11 @@ void spaceship::deleteBullets(){
 void spaceship::movement(sf::Keyboard::Key k){
   switch (k) {
     case sf::Keyboard::Left : {                 //LEFT
-      body->Rotate(-direction);
+      body->Rotate(-angular_speed);
     };break;
 
     case sf::Keyboard::Right : {                //RIGHT
-      body->Rotate(direction);
+      body->Rotate(angular_speed);
     };break;
 
     case sf::Keyboard::Up : {                   //UP
@@ -125,7 +125,7 @@ void spaceship::movement(sf::Keyboard::Key k){
 //FLY
 //It handles spaceship's translation in the window
 void spaceship::fly(float module){
-  float angle = utility::toRadiant(this->getDrawable()->getRotation());
+  float angle = this->getDrawable()->getRotation() * PI / 180.0;
   int sin_module = sin(angle) * module;
   int cos_module = cos(angle) * module;
   bool y_opp_dir = opposite_direction(topOOB,  sin(angle) * module);
@@ -216,7 +216,7 @@ float spaceship::GetRotation(){ return this->body->getBody()->getRotation(); }
 
 
 void spaceship::Shoot(){
-  bullet *bul = new bullet(speed * 1.25f, this->getDrawable()->getRotation(), body->getBody()->getPosition());
+  bullet *bul = new bullet(speed * 1.5f, this->getDrawable()->getRotation(), body->getBody()->getPosition());
   //std::cout << "real location c: " << bul << std::endl;
   Playground->addAlly(bul);
   bullets.push_front(bul);

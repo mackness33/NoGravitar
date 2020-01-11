@@ -14,8 +14,7 @@ class settings{
     static float deltaTime;
     static float switchTime;
     static std::vector<sf::Texture*> images;
-    static const float MAX_GROUND_HEIGHT;             //30%
-    static const float MIN_GROUND_HEIGHT;             //30%
+    
 
   public:
     //----------CONSTRUCTORS----------

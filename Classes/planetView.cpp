@@ -9,6 +9,11 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame) : p
   Player->getMovable()->SetPosition(100, 200);
 
   bullets = Player->getBullets();
+  //Not supposed to be here
+  //image = new sf::Texture();
+  //image->loadFromFile("img/spaceship.png");
+  //bunkers = new bunker(image, sf::Vector2f(400, 400));
+  //playground::addEnemy(bunkers);
 
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   std::cout << "here is the prob!" << std::endl;
@@ -149,7 +154,7 @@ void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_L
     }; break;
 
     case 'p': {
-      Player->deleteBullets();     //delete all the bullets
+      //Player->deleteBullets();     //delete all the bullets
       allies.clear();
 
       planetObj *planet = static_cast<planetObj*> (**e);

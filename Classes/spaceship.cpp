@@ -45,7 +45,7 @@ spaceship::spaceship(playground* plg, sf::Texture* img, float spd, float dir){
 spaceship::~spaceship(){
   std::cout << "DELETING SPACESHIP" << std::endl;
 
-  this->deleteBullets();
+  bullets.clear();
 }
 
 
@@ -82,19 +82,6 @@ void spaceship::deleteBullet(bullet* b){
   delete *bul;
   *bul = nullptr;
   bullets.erase(bul);
-}
-
-void spaceship::deleteBullets(){
-  for (std::list<bullet*>::iterator bul = bullets.begin(); bul != bullets.end(); ){
-    //std::cout << "position i: " << i << std::endl;
-    //std::cout << "Does the bullet exist: " << !!bul << std::endl;
-    if(!!*bul){
-      //std::cout << "real location of " << i << "^ bullet: " << bul << std::endl;
-      delete *bul;
-    }
-    *bul = nullptr;
-    bul = bullets.erase(bul);
-  }
 }
 
 //----------METHODS----------
@@ -174,21 +161,6 @@ void spaceship::Draw (sf::RenderWindow* window){
   }*/
 
   body->DrawTest(window);
-  /*
-  sf::FloatRect *boundBox = new sf::FloatRect(0, 0, 0, 0);
-  if (!!this->body){
-      boundBox = new sf::FloatRect(this->GetGlobalBounds());        //for testing use
-  }
-  std::cout << "spaceshiparea left: " << boundBox->left << std::endl;
-  std::cout << "spaceshiparea right: " << boundBox->left + boundBox->width << std::endl;
-  std::cout << "spaceshiparea top: " << boundBox->top << std::endl;
-  std::cout << "spaceshiparea bottom: " << boundBox->top + boundBox->height << std::endl;
-  this->bound.setFillColor(sf::Color::Black);
-  this->bound.setOutlineColor(sf::Color::Blue);
-  this->bound.setOutlineThickness(3);
-  this->bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
-*/
-window->draw(bound);
 }
 
 //BUILD
@@ -215,8 +187,8 @@ window->draw(bound);
 float spaceship::GetRotation(){ return this->body->getBody()->getRotation(); }
 
 
-void spaceship::Shoot(){
-  bullet *bul = new bullet(speed * 1.5f, this->getDrawable()->getRotation(), body->getBody()->getPosition());
+void spaceship::shoot(){
+  bullet *bul = new bullet(information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation(), body->getBody()->getPosition());
   //std::cout << "real location c: " << bul << std::endl;
   Playground->addAlly(bul);
   bullets.push_front(bul);

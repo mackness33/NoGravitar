@@ -18,7 +18,6 @@ class spaceship : public drawable{
     sf::Texture* image;
     std::list <bullet*> bullets;
     playground *Playground;
-    sf::RectangleShape bound;       //FOR TESTING ONLY
 
 
   protected:
@@ -65,7 +64,6 @@ class spaceship : public drawable{
 
     //----------DELETES----------
     void deleteBullet(bullet* bullet);
-    void deleteBullets();
 
     //----------METHODS------------
     //It lets the spaceship moves or rotates based on the key pressed
@@ -76,7 +74,7 @@ class spaceship : public drawable{
 
     void Draw (sf::RenderWindow* window);
 
-    void Shoot();
+    void shoot();
 
     virtual std::string Class();
 };

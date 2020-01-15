@@ -15,7 +15,7 @@ void eventHandler::keyReleasedHandler (sf::Event& e/*vent*/, keyVector* t/*ransl
 void eventHandler::keyPressedHandler (spaceship* S/*paceship*/, sf:: Event& e){
   switch (e.key.code) {                                             //LEFT
     case sf::Keyboard::S : {
-      S->Shoot();
+      S->shoot();
       std::cout << "the key pressed is: " << e.key.code << std::endl;
     };break;
 

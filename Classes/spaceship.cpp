@@ -84,6 +84,19 @@ void spaceship::deleteBullet(bullet* b){
   bullets.erase(bul);
 }
 
+void spaceship::deleteBullets(){
+  for (std::list<bullet*>::iterator bul = bullets.begin(); bul != bullets.end(); ){
+    //std::cout << "position i: " << i << std::endl;
+    //std::cout << "Does the bullet exist: " << !!bul << std::endl;
+    if(!!*bul){
+      //std::cout << "real location of " << i << "^ bullet: " << bul << std::endl;
+      delete *bul;
+    }
+    *bul = nullptr;
+    bul = bullets.erase(bul);
+  }
+}
+
 //----------METHODS----------
 //MOVEMENT
 //It lets the spaceship moves or rotates based on the key pressed

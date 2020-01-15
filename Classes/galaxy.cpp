@@ -210,7 +210,7 @@ void galaxy::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_List_
     }; break;
 
     case 'p': {
-      //Player->deleteBullets();     //delete all the bullets
+      Player->deleteBullets();     //delete all the bullets
       allies.clear();
 
       planetObj *planet = static_cast<planetObj*> (**e);

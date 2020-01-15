@@ -9,17 +9,19 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame) : p
   Player->getMovable()->SetPosition(100, 200);
 
   bullets = Player->getBullets();
-  //Not supposed to be here
-  //image = new sf::Texture();
-  //image->loadFromFile("img/spaceship.png");
-  //bunkers = new bunker(image, sf::Vector2f(400, 400));
-  //playground::addEnemy(bunkers);
+  image = new sf::Texture();
+  image->loadFromFile("img/spaceship.png");
+
+  bunkers = new bunker(image, sf::Vector2f(400, 400));
+
+  std::cout <<"HELLOsista" << std::endl;
 
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   std::cout << "here is the prob!" << std::endl;
   Ground = new ground(information::MENU_DEFAULT_SIZE.x, information::MENU_DEFAULT_SIZE.y);
   std::cout << "here Tho!" << std::endl;
   playground::addEnemy(Ground);
+  playground::addEnemy(bunkers);
 }
 
 //----------GETS----------

@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o information.o
-		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o information.o $(LIBS)
+all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o information.o bunker.o
+		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o information.o bunker.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -19,6 +19,9 @@ eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Classes/gala
 #CLASSES
 bullet.o: Classes/bullet.hpp Classes/bullet.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/settings.hpp
 	g++ -c Classes/bullet.cpp $(LIBS)
+
+bunker.o: Classes/bunker.hpp Classes/bunker.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/settings.hpp
+	g++ -c Classes/bunker.cpp $(LIBS)
 
 drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Classes/entity.hpp Classes/movable.hpp Classes/shape.hpp
 	g++ -c Classes/drawable.cpp $(LIBS)
@@ -88,8 +91,8 @@ test2: test2.o ground.o drawable.o utility.o settings.o line.o bullet.o
 test2.o: test2.cpp Classes/ground.hpp
 		g++ -c -Wall -pedantic -W test2.cpp $(LIBS)
 
-bunker.o: Classes/bunker.hpp Classes/bunker.cpp
-		g++ -c Classes/bunker.cpp $(LIBS)
+#bunker.o: Classes/bunker.hpp Classes/bunker.cpp
+#		g++ -c Classes/bunker.cpp $(LIBS)
 
 
 test3: test3.o line.o

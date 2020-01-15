@@ -2,7 +2,7 @@
 #define PLANETVIEW_H
 
 #include "game.hpp"
-//#include "bunker.hpp"
+#include "bunker.hpp"
 #include "ground.hpp"
 #include "spaceship.hpp"
 #include "playground.hpp"
@@ -14,10 +14,9 @@ class planetView : public playground{
     spaceship *Player;
     ground *Ground;
     std::list<bullet*>* bullets;
-    //BUNKER IS NOT SUPPOSED TO BE HERE
-    ///*std::list<*/bunker *bunkers;//*> bunkers;
-    //sf::Texture *image;
+    /*std::list<*/bunker *bunkers;//*> bunkers;
     game *currentGame;
+    sf::Texture *image;
 
   private:
 

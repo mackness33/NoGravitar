@@ -64,6 +64,7 @@ class spaceship : public drawable{
 
     //----------DELETES----------
     void deleteBullet(bullet* bullet);
+    void deleteBullets();
 
     //----------METHODS------------
     //It lets the spaceship moves or rotates based on the key pressed

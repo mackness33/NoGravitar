@@ -14,7 +14,7 @@ spaceship::spaceship(playground* plg){
   bullets = {};
 
   image->loadFromFile("img/spaceship.png");
-  body = new movable<sf::Sprite>(image);
+  body = new movable<sf::Sprite>(;
 }
 
 spaceship::spaceship(playground* plg, sf::Texture* img, float spd, float dir){

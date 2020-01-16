@@ -4,11 +4,13 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include <experimental/filesystem>
 #include <iostream>
 
 class information{
   protected:
     static sf::Vector2u WINDOW_SIZE;
+    static const void loadImages();
 
   public:
     //----------CONSTRUCTORS----------
@@ -25,6 +27,7 @@ class information{
     static float BULLET_DEFAULT_RADIUS;
     static float BULLET_DEFAULT_DIRECTION;
     static sf::Vector2f PLAYER_DEFAULT_POSITION;
+    static std::vector<sf::Texture*> images;
 
     static const float MAX_GROUND_HEIGHT;             //30%
     static const float MIN_GROUND_HEIGHT;             //30%

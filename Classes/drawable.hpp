@@ -4,6 +4,7 @@
 #include "movable.hpp"
 #include "entity.hpp"
 #include "shape.hpp"
+#include "information.hpp"
 
 class drawable{
   protected:
@@ -23,7 +24,7 @@ class drawable{
     template <typename T> essence<T>* getEssence();
     template <typename T> movable<T>* getMovable();
     template <typename T> entity<T>* getEntity();
-    template <typename T> shape<T>* getLine();
+    template <typename T> shape<T>* getShape();
     template <typename T> T* getDrawable();
     virtual sf::FloatRect GetLocalBounds();
     virtual sf::FloatRect GetGlobalBounds();

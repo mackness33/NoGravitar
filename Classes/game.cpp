@@ -4,12 +4,11 @@ viewer game::*Playground = nullptr;
 
 //CONSTRUCTORS
 game::game(sf::RenderWindow* wnd){
-  spaceshipImage.setSmooth(true);
   Window = wnd;
 
   information::inizialize(Window->getSize());
 
-  Player = new spaceship(nullptr, &spaceshipImage);
+  Player = new spaceship(nullptr);
   Header = new header(Window);
   //Settings = new settings(Window);
   Galaxy = new galaxy(Window, Player, 20, this);
@@ -90,8 +89,6 @@ void game::start (){
 
 
 void game::draw (){
-  std::cout << "HOLLY" << std::endl;
-
   Header->Draw();
   Playground->Draw();
 }

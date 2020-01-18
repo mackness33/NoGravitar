@@ -1,20 +1,17 @@
 #include "bunker.hpp"
 
 //----------CONSTRUCTORS----------
-bunker::bunker(/*playground* plg, */sf::Texture* img, sf::Vector2f p){
+bunker::bunker(/*playground* plg, sf::Texture* img,*/sf::Vector2f p){
   bullets = {};
 
-  image = img;
-
-  image->loadFromFile("img/bunker.png");
-
+  image = information::getImage("bunker");
   body = new movable<sf::Sprite>(image);
   sf::FloatRect bounds = this->GetLocalBounds();
 
   body->getBody()->setColor(sf::Color::White);
 
   body->SetScale(0.25f, 0.25f);
-  body->SetPosition(sf::Vector2f(400, 400));
+  body->SetPosition(p);
   body->SetOrigin(bounds.width/2, bounds.height/2);
 }
 

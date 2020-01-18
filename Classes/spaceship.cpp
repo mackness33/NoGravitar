@@ -2,22 +2,7 @@
 #include "spaceship.hpp"
 
 //----------CONSTRUCTORS----------
-spaceship::spaceship(playground* plg){
-  xOutOfBound = false;
-  yOutOfBound = false;
-  topOOB = false;
-  leftOOB = false;
-
-  speed = 10;
-  angular_speed = 3;
-
-  bullets = {};
-
-  image->loadFromFile("img/spaceship.png");
-  body = new movable<sf::Sprite>(;
-}
-
-spaceship::spaceship(playground* plg, sf::Texture* img, float spd, float dir){
+spaceship::spaceship(playground* plg, float spd, float dir){
   xOutOfBound = false;
   yOutOfBound = false;
   topOOB = false;
@@ -28,8 +13,7 @@ spaceship::spaceship(playground* plg, sf::Texture* img, float spd, float dir){
 
   bullets = {};
 
-  image = img;
-  image->loadFromFile("img/spaceship.png");
+  image = information::getImage("spaceship");
 
   body = new movable<sf::Sprite>(image);
   body->SetScale(0.25f, 0.25f);

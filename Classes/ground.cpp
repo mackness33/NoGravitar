@@ -18,7 +18,7 @@ ground::ground(float w, float h, sf::Color c){
 
     L = new line(*lastPoint, *actualPoint);
 
-    std::cout << "here Bob!" << std::endl;
+    //std::cout << "here Bob!" << std::endl;
     if(i > 1)
       L->setptrA(lines.back()->getptrB());
 

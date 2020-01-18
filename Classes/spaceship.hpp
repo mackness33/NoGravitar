@@ -32,8 +32,7 @@ class spaceship : public drawable{
 
   public:
     //----------CONSTRUCTORS----------
-    spaceship(playground* Playground);
-    spaceship(playground* Playground, sf::Texture* image, float spd = information::SPACESHIP_DEFAULT_SPEED, float dir = information::SPACESHIP_DEFAULT_ANGULAR_SPEED);
+    spaceship(playground* Playground, float spd = information::SPACESHIP_DEFAULT_SPEED, float dir = information::SPACESHIP_DEFAULT_ANGULAR_SPEED);
     //spaceship(const spaceship& Player);
     ~spaceship();
 

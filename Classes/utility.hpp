@@ -36,6 +36,8 @@ class utility{
     static int RandInt(int x, int y = 0);
     static float RandFloat(int x, float y = 0);
     static sf::Vector2f RandVector(int x, int y, int offsetX = 0, int offsetY = 0);
+    
+    static std::string filenameFromPath(std::string path);
 
     static sf::Vector2f left(drawable* obj);
     static sf::Vector2f right(drawable* obj);

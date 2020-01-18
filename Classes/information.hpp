@@ -6,6 +6,13 @@
 #include <SFML/Graphics.hpp>
 #include <experimental/filesystem>
 #include <iostream>
+#include <string>
+#include "utility.hpp"
+
+struct image{
+  sf::Texture *object;
+  std::string name;
+};
 
 class information{
   protected:
@@ -27,12 +34,13 @@ class information{
     static float BULLET_DEFAULT_RADIUS;
     static float BULLET_DEFAULT_DIRECTION;
     static sf::Vector2f PLAYER_DEFAULT_POSITION;
-    static std::vector<sf::Texture*> images;
+    static std::vector<image*> images;
 
     static const float MAX_GROUND_HEIGHT;             //30%
     static const float MIN_GROUND_HEIGHT;             //30%
 
     static const void inizialize(sf::Vector2u windowSize);
+    static sf::Texture* getImage(std::string name);
 
     virtual std::string Class();
 };

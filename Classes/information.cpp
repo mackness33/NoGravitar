@@ -17,7 +17,7 @@ float information::BULLET_DEFAULT_SPEED = 0; // You MUST declare it in a CPP
 
 const float information::MAX_GROUND_HEIGHT = 0.4;             //30%
 const float information::MIN_GROUND_HEIGHT = 0.1;             //30%
-std::vector<sf::Texture*> information::images = {};             //30%
+std::vector<image*> information::images = {};             //30%
 
 //------------METHODS------------
 const void information::inizialize(sf::Vector2u ws){
@@ -44,11 +44,26 @@ const void information::inizialize(sf::Vector2u ws){
 
 const void information::loadImages(){
   std::string path = std::experimental::filesystem::current_path();
+
   for (const auto & entry : std::experimental::filesystem::directory_iterator(path + "/img")){
-    sf::Texture *image = new sf::Texture();
-    if (image->loadFromFile(entry.path()))
-      information::images.push_back(image);
+    image *temp = new image();
+    temp->object = new sf::Texture();
+    temp->name = utility::filenameFromPath(entry.path());
+
+    std::cout << "object name: " << temp->name << std::endl;
+    //sf::Texture *image = new sf::Texture();
+
+    if (temp->object->loadFromFile(entry.path()))
+      information::images.push_back(temp);
   }
+}
+
+sf::Texture* information::getImage(std::string n){
+  for(auto img = images.begin(); img != images.end(); img++)
+    if(n.compare((*img)->name) == 0)
+      return (*img)->object;
+
+  return nullptr;
 }
 
 std::string information::Class(){

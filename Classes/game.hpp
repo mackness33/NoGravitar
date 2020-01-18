@@ -10,8 +10,6 @@
 class galaxy;
 class game{
   protected:
-    /*std::vector<*/sf::Texture spaceshipImage;
-
     sf::RenderWindow *Window;
     spaceship *Player;
     header *Header;

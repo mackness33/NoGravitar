@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o information.o bunker.o
-		g++ -g -Wall -o NoGravitar nograv.o game.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o information.o bunker.o $(LIBS)
+all: nograv.o game.o spaceship.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o
+		g++ -g -Wall -o NoGravitar nograv.o game.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -29,7 +29,7 @@ drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Class
 galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/planetView.hpp Classes/utility.hpp Classes/playground.hpp Classes/game.hpp Handlers/collisionHandler.hpp
 	g++ -c Classes/galaxy.cpp $(LIBS)
 
-game.o: Classes/game.hpp Classes/game.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp
+game.o: Classes/game.hpp Classes/game.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp Classes/spaceship.hpp
 		g++ -c Classes/game.cpp $(LIBS)
 
 ground.o: Classes/ground.hpp Classes/ground.cpp Classes/entity.hpp Classes/shape.hpp Classes/drawable.hpp Classes/utility.hpp Classes/settings.hpp
@@ -38,7 +38,7 @@ ground.o: Classes/ground.hpp Classes/ground.cpp Classes/entity.hpp Classes/shape
 header.o: Classes/header.hpp Classes/header.cpp Classes/viewer.hpp Classes/information.hpp
 		g++ -c Classes/header.cpp $(LIBS)
 
-information.o: Classes/information.hpp Classes/information.cpp
+information.o: Classes/information.hpp Classes/information.cpp Classes/utility.hpp
 		g++ -c Classes/information.cpp $(LIBS)
 
 keyVector.o: Classes/keyVector.hpp Classes/keyVector.cpp
@@ -50,7 +50,7 @@ line.o: Classes/line.hpp Classes/line.cpp
 planetObj.o: Classes/planetObj.hpp Classes/planetObj.cpp Classes/drawable.hpp Classes/planetView.hpp
 		g++ -c Classes/planetObj.cpp $(LIBS)
 
-planetView.o: Classes/planetView.hpp Classes/planetView.cpp Classes/playground.hpp Classes/spaceship.hpp
+planetView.o: Classes/planetView.hpp Classes/planetView.cpp Classes/playground.hpp Classes/spaceship.hpp Classes/bunker.hpp Classes/ground.hpp
 		g++ -c Classes/planetView.cpp $(LIBS)
 
 playground.o: Classes/playground.hpp Classes/playground.cpp Classes/viewer.hpp

@@ -1,10 +1,11 @@
 #include <iostream>
 #include <experimental/filesystem>
+#include <string>
 #include "Classes/line.hpp"
 
 //template class object_test<sf::CircleShape>;
 
-int main(){
+/*int main(){
   line *L = new line(sf::Vector2f(0, 0), sf::Vector2f(200, 200));
   line *temp = new line(sf::Vector2f(99, 55), sf::Vector2f(101, 78));
 
@@ -29,4 +30,23 @@ int main(){
     std::cout << "Error!" << std::endl;
 
   return 0;
+}
+*/
+
+int main()
+{
+    char str[] = "Geeks-for-Geeks";
+
+    // Returns first token
+    char *token = strtok(str, "-");
+
+    // Keep printing tokens while one of the
+    // delimiters present in str[].
+    while (token != NULL)
+    {
+        printf("%s\n", token);
+        token = strtok(NULL, "-");
+    }
+
+    return 0;
 }

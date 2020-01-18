@@ -4,7 +4,6 @@
 galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actGame) : playground(win), Player(spc), currentGame(actGame){
   planets = {};
   playground::addAlly(spc);
-  bullets = Player->getBullets();
   this->inizializePlanets(numPlanets);
 }
 

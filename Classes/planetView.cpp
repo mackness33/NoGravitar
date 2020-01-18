@@ -8,12 +8,10 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame) : p
   playground::addAlly(spc);
   Player->getMovable()->SetPosition(100, 200);
 
-  bullets = Player->getBullets();
-
-  bunkers = new bunker(sf::Vector2f(400, 400));
-
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   Ground = new ground(information::MENU_DEFAULT_SIZE.x, information::MENU_DEFAULT_SIZE.y);
+
+  bunkers = new bunker(sf::Vector2f(400, 400));
 
   playground::addEnemy(Ground);
   playground::addEnemy(bunkers);

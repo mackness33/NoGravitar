@@ -13,7 +13,6 @@ class planetView : public playground{
   private:
     spaceship *Player;
     ground *Ground;
-    std::list<bullet*>* bullets;
     /*std::list<*/bunker *bunkers;//*> bunkers;
     game *currentGame;
     sf::Texture *image;

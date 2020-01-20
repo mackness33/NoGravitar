@@ -43,7 +43,8 @@ ground::~ground(){
 
 
 //---------------GETS---------------
-shape<sf::VertexArray>* ground::getLine() { return body; }
+std::vector<line*> ground::getLines() { return lines; }
+shape<sf::VertexArray>* ground::getShape() { return body; }
 sf::VertexArray* ground::getDrawable() { return body->getBody(); }
 sf::FloatRect ground::GetGlobalBounds() { return body->getBody()->getBounds(); }
 

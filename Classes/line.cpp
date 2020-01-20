@@ -5,19 +5,7 @@ line::line(sf::Vector2f pnt1, sf::Vector2f pnt2){
   a = new sf::Vector2f(pnt1);
   b = new sf::Vector2f(pnt2);
 
-  width = b->x - a->x;
-  height = b->y - a->y;            //cause we're on the third quadrant
-
-  if(width != 0)
-    slope = height / width;
-  else
-    slope = -999999999;
-  //float offset = (a->y - a->x) * slope;
-  //float Q = a->y - (a->x * slope);
-
-
-  height = abs(height);
-  width = abs(width);
+  this->setup();
   //std::cout << "coffx: " << width << std::endl;
   //std::cout << "coffy: " << height << std::endl;
   //std::cout << "offset: " << offset << std::endl;

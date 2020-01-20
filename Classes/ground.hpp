@@ -28,7 +28,8 @@ class ground : public drawable{
 
     //---------------GETS---------------
     essence<sf::VertexArray>* getEssence();
-    shape<sf::VertexArray>* getLine();
+    shape<sf::VertexArray>* getShape();
+    std::vector<line*> getLines();
     sf::VertexArray* getDrawable();
     sf::FloatRect GetGlobalBounds();
 

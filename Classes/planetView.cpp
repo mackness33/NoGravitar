@@ -11,8 +11,15 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame) : p
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   Ground = new ground(information::MENU_DEFAULT_SIZE.x, information::MENU_DEFAULT_SIZE.y);
 
+  std::vector<line*> lines = Ground->getLines();
+
   bunkers = new bunker(sf::Vector2f(400, 400));
 
+  std::cout << "tan(lines[0]->getSlope()): " << tan(lines[0]->getSlope()) << std::endl;
+  std::cout << "sin(lines[0]->getSlope()): " << sin(lines[0]->getSlope()) << std::endl;
+  std::cout << "cos(lines[0]->getSlope()): " << cos(lines[0]->getSlope()) << std::endl;
+  std::cout << "slope: " << lines[0]->getSlope() << std::endl;
+  //bunkers->getEntity()->SetRotation(tan(lines[1]->getSlope()));
   playground::addEnemy(Ground);
   playground::addEnemy(bunkers);
 }

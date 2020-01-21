@@ -36,7 +36,7 @@ line::~line(){
 //---------------GETS---------------ù
 //TODO:
 float line::getWidth() { return width; }
-double line::getSlope() { return slope; }
+long double line::getSlope() { return slope; }
 float line::getHeight() { return height; }
 sf::Vector2f line::getA() { return *a; }
 sf::Vector2f line::getB() { return *b; }
@@ -75,19 +75,18 @@ void line::setptrB(sf::Vector2f* pnt) {
 
 //---------------METHODS---------------
 void line::setup(){
-  width = b->x - a->x;
-  height = b->y - a->y;            //cause we're on the third quadrant
+  long double w = (long double)(b->x - a->x);
+  long double h = (long double)-(b->y - a->y);            //cause we're on the forth quadrant
 
-  if(width != 0)
-    slope = height / width;
+  if(w != 0)
+    slope =  h / w;
   else
-    slope = -999999999;
+    slope = -999999999999999999;
   //float offset = (a->y - a->x) * slope;
   //float Q = a->y - (a->x * slope);
 
-
-  height = abs(height);
-  width = abs(width);
+  height = abs(h);
+  width = abs(w);
 }
 
 // Given three colinear points p, q, r, the function checks if
@@ -148,6 +147,15 @@ bool line::doIntersect(line* l){
   if (orn4 == 0 && onSegment(p, *b, q)) return true;
 
   return false; // Doesn't fall in any of the above cases
+}
+
+sf::Vector2f line::intersection(line l){
+  sf::Vector2f c = l.getA(), d = l.getB();
+
+  float x = ((a->x*b->y - a->y*b->x) * (c.x-d.x) - (a->x-b->x) * (c.x*d.y - c.y*d.x)) / ((a->x-b->x) * (c.y-d.y) - (a->y-b->y) * (c.x-d.x));
+  float y = ((a->x*b->y - a->y*b->x) * (c.y-d.y) - (a->y-b->y) * (c.x*d.y - c.y*d.x)) / ((a->x-b->x) * (c.y-d.y) - (a->y-b->y) * (c.x-d.x));
+
+  return sf::Vector2f(x, y);
 }
 
 

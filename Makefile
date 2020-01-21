@@ -20,7 +20,7 @@ eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Classes/gala
 bullet.o: Classes/bullet.hpp Classes/bullet.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/settings.hpp
 	g++ -c Classes/bullet.cpp $(LIBS)
 
-bunker.o: Classes/bunker.hpp Classes/bunker.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/settings.hpp Classes/line.hpp
+bunker.o: Classes/bunker.hpp Classes/bunker.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/settings.hpp Classes/line.hpp Classes/utility.hpp
 	g++ -c Classes/bunker.cpp $(LIBS)
 
 drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Classes/entity.hpp Classes/movable.hpp Classes/shape.hpp
@@ -50,7 +50,7 @@ line.o: Classes/line.hpp Classes/line.cpp
 planetObj.o: Classes/planetObj.hpp Classes/planetObj.cpp Classes/drawable.hpp Classes/planetView.hpp
 		g++ -c Classes/planetObj.cpp $(LIBS)
 
-planetView.o: Classes/planetView.hpp Classes/planetView.cpp Classes/playground.hpp Classes/spaceship.hpp Classes/bunker.hpp Classes/ground.hpp
+planetView.o: Classes/planetView.hpp Classes/planetView.cpp Classes/playground.hpp Classes/spaceship.hpp Classes/bunker.hpp Classes/ground.hpp Classes/line.hpp
 		g++ -c Classes/planetView.cpp $(LIBS)
 
 playground.o: Classes/playground.hpp Classes/playground.cpp Classes/viewer.hpp

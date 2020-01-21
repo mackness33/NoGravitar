@@ -10,7 +10,7 @@ class line{
   protected:
     sf::Vector2f *a, *b;
     float width, height;
-    double slope;//, offset;
+    long double slope;//, offset;
     sf::FloatRect* area;
     sf::Vector3f *coefficient;
     sf::Vector2f *coefficients;
@@ -27,7 +27,7 @@ class line{
 
     //---------------GETS---------------
     float getWidth();
-    double getSlope();
+    long double getSlope();
     float getHeight();
     sf::Vector2f getA();
     sf::Vector2f getB();
@@ -52,6 +52,7 @@ class line{
     bool doIntersect(line* Line);
     bool onSegment(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);
     int orientation(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);
+    sf::Vector2f intersection(line l);
 
     virtual std::string Class();
 };

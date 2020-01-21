@@ -6,9 +6,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+#include <math.h>
 #include "drawable.hpp"
 
-#define PI 3.14159265
 
 class drawable;
 
@@ -31,7 +31,7 @@ class utility{
     //static sf::Vector2f MaxVector(sf::Vector2f* p1, sf::Vector2f* p2);
     //static sf::Vector2f MaxVector(sf::Vector2f* p1, sf::Vector2f* p2);
     static float toRadiant(float degrees);
-    static double toDegrees(double radiant);
+    static long double toDegrees(long double radiant);
     static int Proportion(int a, int b, int c = 100);
     static int RandInt(int x, int y = 0);
     static float RandFloat(int x, float y = 0);

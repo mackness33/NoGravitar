@@ -7,21 +7,20 @@
 
 class bunker : public drawable{
   private:
-    entity<sf::Sprite>* body;
+    entity<sf::RectangleShape>* body;
     std::list <bullet*> bullets;
     //playground *Playground;
     sf::Texture* image;
 
   public:
     //----------CONSTRUCTORS----------
-    bunker(/*playground* Playground, sf::Texture* image, */sf::Vector2f position = sf::Vector2f(0, 0));
     bunker(/*playground* Playground, sf::Texture* image, */line Line);
 
     ~bunker();
 
     //----------GETS----------
-    entity<sf::Sprite>* getEntity();
-    sf::Sprite* getDrawable();
+    entity<sf::RectangleShape>* getEntity();
+    sf::RectangleShape* getDrawable();
     sf::FloatRect GetLocalBounds();
     sf::FloatRect GetGlobalBounds();
 

@@ -4,7 +4,7 @@
 ground::ground(float w, float h, sf::Color c){
   int sectionY = h * (information::MAX_GROUND_HEIGHT - information::MIN_GROUND_HEIGHT);
 
-  numVertex = utility::RandInt(10, 5);
+  numVertex = utility::RandInt(8, 5);
   offsetY = information::MIN_GROUND_HEIGHT;
   length = w / (numVertex - 1);
 

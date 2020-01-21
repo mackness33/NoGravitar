@@ -1,41 +1,24 @@
 #include "bunker.hpp"
 
 //----------CONSTRUCTORS----------
-bunker::bunker(/*playground* plg, sf::Texture* img,*/sf::Vector2f p){
-  bullets = {};
-  image = information::getImage("bunker");
-
-  body = new movable<sf::Sprite>(image);
-  sf::FloatRect bounds = this->GetLocalBounds();
-
-  body->getBody()->setColor(sf::Color::White);
-
-  body->SetScale(0.25f, 0.25f);
-  body->SetPosition(p);
-  body->SetOrigin(bounds.width/2, bounds.height/2);
-}
-
 bunker::bunker(/*playground* plg, sf::Texture* img,*/line l){
-  double angle = utility::toDegrees(l.getSlope());
+  image = information::getImage("bunker");
+  body = new movable<sf::RectangleShape>(sf::Vector2f(50, 50), sf::Vector2f(400, 400), image);
+
+  long double angle = utility::toDegrees(l.getSlope());
   float maxX = l.getA().x;
   float maxY = std::min(l.getA().y, l.getB().y);
 
   bullets = {};
-  image = information::getImage("bunker");
-  body = new movable<sf::Sprite>(image);
 
+  sf::FloatRect bounds = this->GetLocalBounds();
 
-
-  sf::FloatRect bounds = this->GetGlobalBounds();
-
-  body->getBody()->setColor(sf::Color::White);
-
-  body->SetScale(0.25f, 0.25f);
-  body->SetRotation(angle);
-  //body->SetPosition(sf::Vector2f((l->getWidth()/2), l->getHeight()/2));
-  body->SetPosition(sf::Vector2f(maxX + l.getWidth()/2, maxY + l.getHeight()/2));
   body->SetOrigin(bounds.width/2, bounds.height/2);
+  body->SetRotation(-angle);
+  body->SetPosition(sf::Vector2f((maxX + l.getWidth()/2) - ((bounds.width/2) * sin(l.getSlope())), (maxY + l.getHeight()/2) - ((bounds.height/2) * cos(l.getSlope()))));
+  //body->SetPosition(lines[0]->intersection(line(utility::left(bunkers), utility::bottom(bunkers))));
 }
+
 
 
 bunker::~bunker(){
@@ -46,8 +29,8 @@ bunker::~bunker(){
 
 
 //----------GETS----------
-entity<sf::Sprite>* bunker::getEntity() { return body; }
-sf::Sprite* bunker::getDrawable() { return body->getBody(); }
+entity<sf::RectangleShape>* bunker::getEntity() { return body; }
+sf::RectangleShape* bunker::getDrawable() { return body->getBody(); }
 sf::FloatRect bunker::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
 sf::FloatRect bunker::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
 
@@ -60,7 +43,7 @@ void bunker::Draw (sf::RenderWindow* window){
 
 //TODO: randomize the color of the planets
 void bunker::build(){
-  body->getBody()->setColor(sf::Color::White);
+  //body->getBody()->setColor(sf::Color::White);
 }
 
 void bunker::deleteBullet(bullet* b){

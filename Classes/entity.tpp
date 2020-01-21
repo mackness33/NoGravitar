@@ -12,7 +12,8 @@ template <class T> entity<T>::entity(float r, std::size_t pc){
 }
 
 template <class T> entity<T>::entity(sf::Texture* i){
-  this->body = new sf::Sprite(*i);this->setBoundery();
+  this->body = new sf::Sprite(*i);
+  this->setBoundery();
 }
 
 template <class T> entity<T>::entity(sf::Vector2f s, sf::Vector2f p, sf::Texture* i){
@@ -59,7 +60,7 @@ template <class T> void entity<T>::setBoundery(){
   if (!!this->body){
       boundBox = new sf::FloatRect(this->body->getLocalBounds());        //for testing use
   }
-  
+
   this->bound.setFillColor(sf::Color::Black);
   this->bound.setOutlineColor(sf::Color::Red);
   this->bound.setOutlineThickness(3);

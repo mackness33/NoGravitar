@@ -13,19 +13,8 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame) : p
 
   std::vector<line*> lines = Ground->getLines();
 
-  //bunkers = new bunker(sf::Vector2f(400, 400));
   bunkers = new bunker(*lines[0]);
 
-  std::cout << "tan(lines[0]->getSlope()): " << tan(lines[0]->getSlope()) << std::endl;
-  std::cout << "sin(lines[0]->getSlope()): " << sin(lines[0]->getSlope()) << std::endl;
-  std::cout << "cos(lines[0]->getSlope()): " << cos(lines[0]->getSlope()) << std::endl;
-  std::cout << "SHHH: " << cos(lines[0]->getSlope()) * cos(lines[0]->getSlope()) + sin(lines[0]->getSlope()) * sin(lines[0]->getSlope()) << std::endl;
-  std::cout << "slope: " << lines[0]->getSlope() << std::endl;
-  std::cout << "slope 2: " << utility::toDegrees(lines[0]->getSlope()) << std::endl;
-  std::cout << "tan(lines[0]->getSlope()): " << utility::toDegrees(tan(lines[0]->getSlope())) << std::endl;
-  std::cout << "sin(lines[0]->getSlope()): " << utility::toDegrees(sin(lines[0]->getSlope())) << std::endl;
-  std::cout << "cos(lines[0]->getSlope()): " << utility::toDegrees(cos(lines[0]->getSlope())) << std::endl;
-  //bunkers->getEntity()->SetRotation(tan(lines[1]->getSlope()));
   playground::addEnemy(Ground);
   playground::addEnemy(bunkers);
 }

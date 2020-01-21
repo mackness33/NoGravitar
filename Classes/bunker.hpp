@@ -2,6 +2,7 @@
 #define BUNKER_H
 
 #include "bullet.hpp"
+#include "line.hpp"
 #include "playground.hpp"
 
 class bunker : public drawable{
@@ -14,6 +15,7 @@ class bunker : public drawable{
   public:
     //----------CONSTRUCTORS----------
     bunker(/*playground* Playground, sf::Texture* image, */sf::Vector2f position = sf::Vector2f(0, 0));
+    bunker(/*playground* Playground, sf::Texture* image, */line Line);
 
     ~bunker();
 

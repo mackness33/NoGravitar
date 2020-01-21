@@ -10,7 +10,7 @@ class line{
   protected:
     sf::Vector2f *a, *b;
     float width, height;
-    float slope;//, offset;
+    double slope;//, offset;
     sf::FloatRect* area;
     sf::Vector3f *coefficient;
     sf::Vector2f *coefficients;
@@ -27,7 +27,7 @@ class line{
 
     //---------------GETS---------------
     float getWidth();
-    float getSlope();
+    double getSlope();
     float getHeight();
     sf::Vector2f getA();
     sf::Vector2f getB();

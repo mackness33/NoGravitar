@@ -3,8 +3,8 @@
 //----------CONSTRUCTORS----------
 bunker::bunker(/*playground* plg, sf::Texture* img,*/sf::Vector2f p){
   bullets = {};
-
   image = information::getImage("bunker");
+
   body = new movable<sf::Sprite>(image);
   sf::FloatRect bounds = this->GetLocalBounds();
 
@@ -14,6 +14,29 @@ bunker::bunker(/*playground* plg, sf::Texture* img,*/sf::Vector2f p){
   body->SetPosition(p);
   body->SetOrigin(bounds.width/2, bounds.height/2);
 }
+
+bunker::bunker(/*playground* plg, sf::Texture* img,*/line l){
+  double angle = utility::toDegrees(l.getSlope());
+  float maxX = l.getA().x;
+  float maxY = std::min(l.getA().y, l.getB().y);
+
+  bullets = {};
+  image = information::getImage("bunker");
+  body = new movable<sf::Sprite>(image);
+
+
+
+  sf::FloatRect bounds = this->GetGlobalBounds();
+
+  body->getBody()->setColor(sf::Color::White);
+
+  body->SetScale(0.25f, 0.25f);
+  body->SetRotation(angle);
+  //body->SetPosition(sf::Vector2f((l->getWidth()/2), l->getHeight()/2));
+  body->SetPosition(sf::Vector2f(maxX + l.getWidth()/2, maxY + l.getHeight()/2));
+  body->SetOrigin(bounds.width/2, bounds.height/2);
+}
+
 
 bunker::~bunker(){
   std::cout << "DELETING BUNKER" << std::endl;

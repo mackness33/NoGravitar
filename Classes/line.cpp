@@ -33,9 +33,10 @@ line::~line(){
 }
 
 
-//---------------GETS---------------
+//---------------GETS---------------ù
+//TODO:
 float line::getWidth() { return width; }
-float line::getSlope() { return slope; }
+double line::getSlope() { return slope; }
 float line::getHeight() { return height; }
 sf::Vector2f line::getA() { return *a; }
 sf::Vector2f line::getB() { return *b; }
@@ -151,7 +152,7 @@ bool line::doIntersect(line* l){
 
 
 void line::swap(){
-  sf::Vector2f* temp = a;
+  sf::Vector2f *temp = a;
   a = b;
   b = temp;
 }

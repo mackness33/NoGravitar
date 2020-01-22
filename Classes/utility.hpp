@@ -14,10 +14,6 @@ class drawable;
 
 class utility{
   public:
-    static float deltaTime;
-    static float switchTime;
-
-  public:
     //----------CONSTRUCTORS----------
     utility();
 

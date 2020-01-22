@@ -3,7 +3,6 @@
 
 #include "movable.hpp"
 #include "entity.hpp"
-#include "settings.hpp"
 #include "drawable.hpp"
 #include "information.hpp"
 #include "utility.hpp"
@@ -40,7 +39,7 @@ class bullet : public drawable{
     //update of the object's data for each time that it is draw
     void Update();
 
-    //build all the settings of object's body
+    //build all the information of object's body
     void build();
 
     //return the class of the object

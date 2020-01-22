@@ -186,9 +186,9 @@ float spaceship::GetRotation(){ return this->body->getBody()->getRotation(); }
 
 void spaceship::shoot(){
   bullet *bul = new bullet(information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation(), body->getBody()->getPosition());
-  //std::cout << "real location c: " << bul << std::endl;
-  Playground->addAlly(bul);
   bullets.push_front(bul);
+
+  Playground->addAlly(bul);
 }
 
 std::string spaceship::Class(){

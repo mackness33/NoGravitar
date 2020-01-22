@@ -10,13 +10,12 @@ game::game(sf::RenderWindow* wnd){
 
   Player = new spaceship(nullptr);
   Header = new header(Window);
-  //Settings = new settings(Window);
+  //Settings = new information(Window);
   Galaxy = new galaxy(Window, Player, 20, this);
   Playground = Galaxy;
   Player->setPlayground(Galaxy);
 
-  settings::deltaTime = 10.0f;
-  settings::switchTime = 10.0f;
+  information::DELTA_TIME = 10.0f;
 }
 
 //GETS

@@ -13,7 +13,7 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame) : p
 
   std::vector<line*> lines = Ground->getLines();
 
-  bunkers = new bunker(*lines[0]);
+  bunkers = new bunker(this, *lines[0]);
 
   playground::addEnemy(Ground);
   playground::addEnemy(bunkers);

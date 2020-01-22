@@ -1,8 +1,5 @@
 #include "utility.hpp"
 
-float utility::deltaTime ; // You MUST declare it in a CPP
-float utility::switchTime ; // You MUST declare it in a CPP
-
 //----------CONSTRUCTORS----------
 //probably I don't need it
 utility::utility(){

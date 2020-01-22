@@ -33,6 +33,9 @@ class information{
     static float BULLET_DEFAULT_SPEED;
     static float BULLET_DEFAULT_RADIUS;
     static float BULLET_DEFAULT_DIRECTION;
+    static float DELTA_TIME; // You MUST declare it in a CPP
+    static float SWITCH_TIME; // You MUST declare it in a CPP
+    static float SHOOTER_SWITCH_TIME; // You MUST declare it in a CPP
     static sf::Vector2f PLAYER_DEFAULT_POSITION;
     static std::vector<image*> images;
 

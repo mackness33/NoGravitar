@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o spaceship.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o
-		g++ -g -Wall -o NoGravitar nograv.o game.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o $(LIBS)
+all: nograv.o game.o spaceship.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o
+		g++ -g -Wall -o NoGravitar nograv.o game.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -58,6 +58,10 @@ playground.o: Classes/playground.hpp Classes/playground.cpp Classes/viewer.hpp
 
 settings.o: Classes/settings.hpp Classes/settings.cpp
 		g++ -c Classes/settings.cpp $(LIBS)
+
+
+shooter.o: Classes/shooter.hpp Classes/shooter.cpp Classes/bullet.hpp Classes/information.hpp
+		g++ -c Classes/shooter.cpp $(LIBS)
 
 spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp Classes/playground.hpp
 		g++ -c Classes/spaceship.cpp $(LIBS)

@@ -5,7 +5,6 @@
 #include "shape.hpp"
 #include "utility.hpp"
 #include "drawable.hpp"
-#include "settings.hpp"
 #include "information.hpp"
 
 class ground : public drawable{

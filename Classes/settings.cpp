@@ -1,7 +1,5 @@
 #include "settings.hpp"
 
-float settings::deltaTime; // You MUST declare it in a CPP
-float settings::switchTime; // You MUST declare it in a CPP
 
 //----------CONSTRUCTORS----------
 
@@ -15,5 +13,4 @@ float settings::switchTime; // You MUST declare it in a CPP
 
 //---------------METHODS---------------
 void settings::default_settings(){
-  switchTime = 60;
 }

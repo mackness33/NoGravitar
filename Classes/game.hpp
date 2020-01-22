@@ -5,6 +5,7 @@
 #include "galaxy.hpp"
 #include "keyVector.hpp"
 #include "header.hpp"
+#include "settings.hpp"
 #include "../Handlers/eventHandler.hpp"
 
 class galaxy;

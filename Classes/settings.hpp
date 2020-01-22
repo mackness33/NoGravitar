@@ -11,11 +11,6 @@
 
 class settings{
   public:
-    static float deltaTime;
-    static float switchTime;
-
-
-  public:
     //----------CONSTRUCTORS----------
 
     //----------GETS----------

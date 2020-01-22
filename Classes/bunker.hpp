@@ -1,20 +1,22 @@
 #ifndef BUNKER_H
 #define BUNKER_H
 
+#include "shooter.hpp"
 #include "bullet.hpp"
 #include "line.hpp"
 #include "playground.hpp"
 
-class bunker : public drawable{
+class bunker : public drawable, public shooter{
   private:
     entity<sf::RectangleShape>* body;
     std::list <bullet*> bullets;
-    //playground *Playground;
+    playground *Playground;
     sf::Texture* image;
+    float totalTime;
 
   public:
     //----------CONSTRUCTORS----------
-    bunker(/*playground* Playground, sf::Texture* image, */line Line);
+    bunker(playground* Playground, line Line);
 
     ~bunker();
 
@@ -31,8 +33,10 @@ class bunker : public drawable{
 
     void build();
 
+    //update of the object's data for each time that it is draw
+    void Update();
+
     void shoot();
-    void deleteBullet(bullet* b);
 
     virtual std::string Class();
 };

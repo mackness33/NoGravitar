@@ -38,10 +38,10 @@ void bullet::Draw (sf::RenderWindow* window){
 }
 
 void bullet::Update(){
-  totalTime += settings::deltaTime;
+  totalTime += information::DELTA_TIME;
 
-  if(totalTime >= settings::switchTime){
-    totalTime -= settings::switchTime;
+  if(totalTime >= information::SWITCH_TIME){
+    totalTime -= information::SWITCH_TIME;
     body->Move(cos(direction) * speed, sin(direction) * speed);
     sf::Vector2f pos = body->getBody()->getPosition();
   }

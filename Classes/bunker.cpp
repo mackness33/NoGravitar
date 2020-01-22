@@ -1,7 +1,7 @@
 #include "bunker.hpp"
 
 //----------CONSTRUCTORS----------
-bunker::bunker(/*playground* plg, sf::Texture* img,*/line l){
+bunker::bunker(playground* plg, line l) : Playground(plg){
   image = information::getImage("bunker");
   body = new movable<sf::RectangleShape>(sf::Vector2f(50, 50), sf::Vector2f(400, 400), image);
 
@@ -10,6 +10,7 @@ bunker::bunker(/*playground* plg, sf::Texture* img,*/line l){
   float maxY = std::min(l.getA().y, l.getB().y);
 
   bullets = {};
+  totalTime = 0;
 
   sf::FloatRect bounds = this->GetLocalBounds();
 
@@ -46,18 +47,24 @@ void bunker::build(){
   //body->getBody()->setColor(sf::Color::White);
 }
 
-void bunker::deleteBullet(bullet* b){
-  auto bul = std::find(bullets.begin(), bullets.end(), b);
-  delete *bul;
-  *bul = nullptr;
-  bullets.erase(bul);
+void bunker::Update(){
+  totalTime += information::DELTA_TIME;
+
+  if(totalTime >= information::SHOOTER_SWITCH_TIME){
+    totalTime -= information::SHOOTER_SWITCH_TIME;
+    this->shoot();
+  }
 }
 
 void bunker::shoot(){
-  bullet *bul = new bullet(information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation(), body->getBody()->getPosition());
-  //std::cout << "real location c: " << bul << std::endl;
-  //Playground->addEnemy(bul);
-  bullets.push_front(bul);
+  bullet *bul1 = new bullet(information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation() - 60, body->getBody()->getPosition());
+  bullets.push_front(bul1);
+
+  bullet *bul2 = new bullet(information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation() - 120, body->getBody()->getPosition());
+  bullets.push_front(bul2);
+
+  Playground->addEnemy(bul1);
+  Playground->addEnemy(bul2);
 }
 
 std::string bunker::Class(){

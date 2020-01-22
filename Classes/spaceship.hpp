@@ -5,8 +5,9 @@
 #include <string>
 #include "bullet.hpp"
 #include "playground.hpp"
+#include "shooter.hpp"
 
-class spaceship : public drawable{
+class spaceship : public drawable, public shooter{
   private:
     bool xOutOfBound;                   //XOutOfBounds
     bool yOutOfBound;                   //YOutOfBounds

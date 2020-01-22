@@ -1,7 +1,14 @@
 #ifndef LINE_H
 #define LINE_H
 
-#include "settings.hpp"
+
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <experimental/filesystem>
+#include <cmath>
+#include <vector>
 
 //the line go from left to right.
 //A.x will always be < over B.x

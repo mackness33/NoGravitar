@@ -1,13 +1,16 @@
 #include "playground.hpp"
 
 //------------CONSTRUCTORS------------
-playground::playground(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i){  
+playground::playground(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i){
   allies = std::list<drawable*>();
   enemies = std::list<drawable*>();
+  objects = std::list<drawable*>();
 }
 
 playground::~playground(){
   std::cout << "DELETING PLAYGROUND" << std::endl;
+
+  this->delObjects();
 }
 
 
@@ -41,13 +44,38 @@ void playground::addAlly (drawable* ally){
   allies.push_front(ally);
   objects.push_front(ally);
   std::cout << "Allies size: " << allies.size()  << std::endl;
+  std::cout << "Objects size: " << objects.size() << std::endl;
 }
 
 void playground::addEnemy (drawable* enemy){
   enemies.push_front(enemy);
   objects.push_front(enemy);
   std::cout << "Enemies size: " << enemies.size() << std::endl;
+  std::cout << "Objects size: " << objects.size() << std::endl;
 }
+
+void playground::delObjects (){
+  for (auto drw = allies.begin(); drw != allies.end(); ){
+    if(!!*drw)
+      delete *drw;
+
+    *drw = nullptr;
+    drw = allies.erase(drw);
+  }
+
+  for (auto drw = enemies.begin(); drw != enemies.end(); ){
+    if(!!*drw)
+      delete *drw;
+
+    *drw = nullptr;
+    drw = enemies.erase(drw);
+  }
+
+  objects.clear();
+  allies.clear();
+  enemies.clear();
+}
+
 
 std::string playground::Class(){
   return "playground";

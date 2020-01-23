@@ -9,10 +9,7 @@ class planetView;
 class planetObj : public drawable{
   private:
     entity<sf::CircleShape>* body;
-    //bool life;
     planetView* view;
-    //sf::Vector2f *size;
-    sf::RenderWindow* window;
 
   public:
     //----------CONSTRUCTORS----------

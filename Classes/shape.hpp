@@ -9,6 +9,8 @@ template <class T> class shape : public essence<T>{
     shape();
     shape(int vertexCount, std::vector<line*> vertexPosition, sf::PrimitiveType type = sf::LineStrip);      //VertexArray
 
+    ~shape();
+
     void setBoundery();
     virtual std::string Class();
 };

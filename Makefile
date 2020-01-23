@@ -26,7 +26,7 @@ bunker.o: Classes/bunker.hpp Classes/bunker.cpp Classes/entity.hpp Classes/movab
 drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Classes/entity.hpp Classes/movable.hpp Classes/shape.hpp
 	g++ -c Classes/drawable.cpp $(LIBS)
 
-galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/planetView.hpp Classes/utility.hpp Classes/playground.hpp Classes/game.hpp Handlers/collisionHandler.hpp
+galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/planetView.hpp Classes/utility.hpp Classes/playground.hpp Classes/game.hpp Handlers/collisionHandler.hpp 
 	g++ -c Classes/galaxy.cpp $(LIBS)
 
 game.o: Classes/game.hpp Classes/game.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp Classes/spaceship.hpp
@@ -50,7 +50,7 @@ line.o: Classes/line.hpp Classes/line.cpp
 planetObj.o: Classes/planetObj.hpp Classes/planetObj.cpp Classes/drawable.hpp Classes/planetView.hpp
 		g++ -c Classes/planetObj.cpp $(LIBS)
 
-planetView.o: Classes/planetView.hpp Classes/planetView.cpp Classes/playground.hpp Classes/spaceship.hpp Classes/bunker.hpp Classes/ground.hpp Classes/line.hpp
+planetView.o: Classes/planetView.hpp Classes/planetView.cpp Classes/playground.hpp Classes/spaceship.hpp Classes/bunker.hpp Classes/ground.hpp Classes/line.hpp Classes/galaxy.hpp
 		g++ -c Classes/planetView.cpp $(LIBS)
 
 playground.o: Classes/playground.hpp Classes/playground.cpp Classes/viewer.hpp

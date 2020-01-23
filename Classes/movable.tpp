@@ -19,6 +19,12 @@ template <class T> movable<T>::movable(sf::Vector2f s, sf::Vector2f p, sf::Textu
   bound.setRotation(body.getRotation());
   bound.setScale(body.getScale());
 }*/
+
+
+template <class T> movable<T>::~movable(){
+  std::cout << "DELETING MOVABLE" << std::endl;
+}
+
 template <class T> void movable<T>::Move (float offsetX, float offsetY){
   entity<T>::body->move(offsetX, offsetY);
   entity<T>::bound.move(offsetX, offsetY);

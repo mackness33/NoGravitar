@@ -27,7 +27,7 @@ class playground : public viewer{
 
     virtual void addAlly (drawable* ally);
     virtual void addEnemy (drawable* enemy);
-
+    virtual void delObjects ();
 
     virtual void checkCollision ();
 

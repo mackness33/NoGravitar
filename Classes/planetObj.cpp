@@ -11,12 +11,22 @@ planetObj::planetObj(float r, sf::Vector2f p){
 planetObj::~planetObj(){
   std::cout << "DELETING PLANETOBJ" << std::endl;
 
-  //delete body;
-  //body = nullptr;
 
-  //if(!view)
-    //delete view;
-  //view = nullptr;
+  std::cout << "!view: " << !view << std::endl;
+  std::cout << "!!view: " << !!view << std::endl;
+  if(!!view){
+    std::cout << "View does existed!!!" << std::endl;
+    delete view;
+  }
+  view = nullptr;
+
+  std::cout << "!body: " << !body << std::endl;
+  std::cout << "!!body: " << !!body << std::endl;
+  if(!!body){
+    std::cout << "Body does existed!!!" << std::endl;
+    delete body;
+  }
+  body = nullptr;
 }
 
 

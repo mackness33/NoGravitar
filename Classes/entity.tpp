@@ -40,13 +40,14 @@ template <class T> entity<T>::entity(sf::Vector2f s, sf::Vector2f p, sf::Texture
 
 template <class T> entity<T>::~entity(){
   std::cout << "DELETING ENTITY" << std::endl;
-  delete this->body;
-  this->body = nullptr;
+  //delete this->body;
+  //this->body = nullptr;
 }
 
 
 //------------GETS------------
 template <class T> float entity<T>::GetRotation(){ return this->body->getRotation(); }
+template <class T> sf::Vector2f entity<T>::GetPosition(){ return this->body->getPosition(); }
 
 //------------SETS------------
 template <class T> void entity<T>::setBody(T* b){

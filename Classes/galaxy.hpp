@@ -20,13 +20,18 @@ class galaxy : public playground{
     game *currentGame;
 
   protected:
-    //bool checkPlanetPosition(std::list<sf::FloatRect>* posPlanets, sf::Vector2f pos);
-    bool checkPlanetPosition(planetObj planet);
+    bool checkPlanetPosition(planetObj* planet);
     void inizializePlanets(unsigned int numPlanets);
+    //TODO: create a .tpp and convert collision in template <typename T> void galaxy::collision(T* obj, planetObj* planet){ return nullptr; }
+    void collision(std::_List_iterator<drawable*>* ally, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
+    void collisionBullet(std::_List_iterator<drawable*>* spaceship, std::_List_iterator<drawable*>* enemy);
+    void collisionSpaceship(std::_List_iterator<drawable*>* bullet, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
 
   public:
     //CONSTRUCTORS
     galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actualGame);
+
+    ~galaxy();
 
     //GETS
     //sf::Texture getTexture(){ return this->background.getTexture();}
@@ -39,17 +44,8 @@ class galaxy : public playground{
     //---------------METHODS---------------
     void checkCollision();
 
-    //TODO: create a .tpp and convert collision in template <typename T> void galaxy::collision(T* obj, planetObj* planet){ return nullptr; }
-    //template <typename A, typename E> void collision(A* ally, E* enemy);
-    //template <typename E, typename A> void collision(E* e, A* a, bool* cv);
-    //template <typename E> void collisionBullet(bullet* Bullet, E* e);
-    //template <typename E> void collisionSpaceship(spaceship* Spaceship, E* e, bool* cv);
-    void collision(std::_List_iterator<drawable*>* ally, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
-    void collisionBullet(std::_List_iterator<drawable*>* spaceship, std::_List_iterator<drawable*>* enemy);
-    void collisionSpaceship(std::_List_iterator<drawable*>* bullet, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
-    //void collision(bullet* bullet, planetObj* planet);
+    void delPlanet(planetObj *planet);
 
-    //void collision(spaceship* spaceship, planetObj* planet);
     virtual std::string Class();
 
 };

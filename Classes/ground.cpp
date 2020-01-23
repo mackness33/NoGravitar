@@ -37,6 +37,9 @@ ground::ground(float w, float h, sf::Color c){
 ground::~ground(){
   std::cout << "DELETING GROUND" << std::endl;
 
+  //TODO: deletelines()
+  lines.clear();
+
   delete body;
   body = nullptr;
 }

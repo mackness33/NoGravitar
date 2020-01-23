@@ -20,6 +20,8 @@ template <class T> class movable : public entity<T>{
     movable(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), sf::Texture* image = nullptr);              //RectangleShape
     //movable(std::size_t vertexCount, std::vector<sf::Vector2f*> vertexPosition = {}, sf::PrimitiveType type = sf::LineStrip);      //VertexArray
 
+    ~movable();
+
     //----------METHODS----------
     void Move (float offsetX, float offsetY);
     void Move (const sf::Vector2f &offset);

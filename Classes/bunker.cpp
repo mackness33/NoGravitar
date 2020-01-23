@@ -23,13 +23,14 @@ bunker::bunker(playground* plg, line l) : Playground(plg){
 
 
 bunker::~bunker(){
+  std::cout << "DELETING BUNKER" << std::endl;
   if(!!body)
     delete body;
 
   body = nullptr;
   Playground = nullptr;
   image = nullptr;
-  
+
   this->deleteBullets();
 }
 

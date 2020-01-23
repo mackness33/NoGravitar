@@ -17,7 +17,7 @@ class planetView : public playground{
   private:
     spaceship *Player;
     ground *Ground;
-    /*std::list<*/bunker *bunkers;//*> bunkers;
+    std::list<bunker*> bunkers;
     game *currentGame;
     galaxy *Galaxy;
     planetObj *Planet;
@@ -28,6 +28,7 @@ class planetView : public playground{
     void collision(std::_List_iterator<drawable*>* ally, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
     void collisionBullet(std::_List_iterator<drawable*>* spaceship, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
     void collisionSpaceship(std::_List_iterator<drawable*>* bullet, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
+    void inizializeBunker();
 
   public:
     //----------CONSTRUCTORS----------

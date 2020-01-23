@@ -15,7 +15,8 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame, gal
 
   std::vector<line*> lines = Ground->getLines();
 
-  bunkers = new bunker(this, *lines[0]);
+  bunkers = std::list<bunkers*>();
+  new bunker(this, *lines[0]);
 
   playground::addEnemy(Ground);
   playground::addEnemy(bunkers);
@@ -44,6 +45,26 @@ planetView::~planetView(){
 //void setBackground(sf::Sprite b){ this->background = b;}
 
 //----------METHODS---------------
+void inizializeBunker(){
+  std::vector<line*> lines = Ground->getLines();
+  bool occupied[lines.size()];
+  int numBunker = lines.size() - 4;
+  int pos = 0;
+
+
+  for(int k = 0; k < lines.size(); k++)
+    occupied[k] = false;
+
+  for(auto bnk; i < numBunker;){
+    pos = utility::Rand(lines.size());
+
+    if(!occupied[pos]){
+      bunkers = new bunker(this, *lines[0]);
+    }
+  }
+
+}
+
 //TODO: Need to delete the object at the end of all the cicles!
 //TODO: consider to delete in a good way the mo'fucking pointers
 void planetView::checkCollision (){

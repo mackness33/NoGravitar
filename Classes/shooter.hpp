@@ -9,6 +9,7 @@
 #include <exception>
 #include <list>
 #include "bullet.hpp"
+#include "utility.hpp"
 #include "information.hpp"
 
 class shooter{

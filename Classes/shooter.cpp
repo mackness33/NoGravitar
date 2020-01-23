@@ -13,22 +13,12 @@ shooter::~shooter(){
 
 //------------METHODS------------
 void shooter::deleteBullet(bullet* b){
-  auto bul = std::find(bullets.begin(), bullets.end(), b);
-
-  delete *bul;
-  *bul = nullptr;
-  bullets.erase(bul);
+  delete b;
+  b = nullptr;
+  bullets.remove(b);
 }
 
-void shooter::deleteBullets(){
-  for (auto bul = bullets.begin(); bul != bullets.end(); ){
-    if(!!*bul)
-      delete *bul;
-
-    *bul = nullptr;
-    bul = bullets.erase(bul);
-  }
-}
+void shooter::deleteBullets(){ utility::deleteList(bullets); }
 
 void shooter::shoot(){}
 

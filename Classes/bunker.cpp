@@ -23,18 +23,12 @@ bunker::bunker(playground* plg, line l) : Playground(plg){
 
 
 bunker::~bunker(){
-  std::cout << "DELETING BUNKER" << std::endl;
-
-  std::cout << "!body: " << !body << std::endl;
-  std::cout << "!!body: " << !!body << std::endl;
-  if(!!body){
-    std::cout << "Body does existed!!!" << std::endl;
+  if(!!body)
     delete body;
-  }
+
   body = nullptr;
 
   this->deleteBullets();
-  bullets.clear();
 }
 
 

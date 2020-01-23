@@ -62,10 +62,6 @@ class spaceship : public drawable, public shooter{
     void setPlayground(playground* Playground);
     //TODO: setTexture(sf::Texture* t);
 
-    //----------DELETES----------
-    void deleteBullet(bullet* bullet);
-    void deleteBullets();
-
     //----------METHODS------------
     //It lets the spaceship moves or rotates based on the key pressed
     void movement(sf::Keyboard::Key k);

@@ -13,13 +13,11 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame, gal
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   Ground = new ground(information::MENU_DEFAULT_SIZE.x, information::MENU_DEFAULT_SIZE.y);
 
-  std::vector<line*> lines = Ground->getLines();
+  bunkers = {};
 
-  bunkers = std::list<bunkers*>();
-  new bunker(this, *lines[0]);
+  inizializeBunker();
 
   playground::addEnemy(Ground);
-  playground::addEnemy(bunkers);
 }
 
 planetView::~planetView(){
@@ -27,11 +25,11 @@ planetView::~planetView(){
 
   //delete Ground;
   //delete bunkers;
+  utility::deleteList(bunkers);
 
   Player = nullptr;
   Ground = nullptr;
   Galaxy = nullptr;
-  bunkers = nullptr;
   currentGame = nullptr;
   Planet = nullptr;
   image = nullptr;
@@ -45,21 +43,28 @@ planetView::~planetView(){
 //void setBackground(sf::Sprite b){ this->background = b;}
 
 //----------METHODS---------------
-void inizializeBunker(){
+void planetView::inizializeBunker(){
   std::vector<line*> lines = Ground->getLines();
-  bool occupied[lines.size()];
-  int numBunker = lines.size() - 4;
+  bool occupied[20];
+  int numBunker = lines.size() - 3;
   int pos = 0;
-
+  bunker *tempi = nullptr;
 
   for(int k = 0; k < lines.size(); k++)
     occupied[k] = false;
 
-  for(auto bnk; i < numBunker;){
-    pos = utility::Rand(lines.size());
+  //std::cout << lines.size()
+
+  for(int i = 0; i < numBunker;){
+    pos = utility::RandInt(lines.size());
 
     if(!occupied[pos]){
-      bunkers = new bunker(this, *lines[0]);
+      bunker *temp = new bunker(this, *lines[pos]);
+      bunkers.push_front(temp);
+      playground::addEnemy(temp);
+
+      occupied[pos] = true;
+      i++;
     }
   }
 
@@ -80,15 +85,15 @@ void planetView::checkCollision (){
           intersection = true;
         }
       }
-      if(changeViewer) {break;}
+      if(changeViewer)
+        break;
     }
 
-    if(changeViewer) {
-      //Galaxy->delPlanet(Planet);
+    if(changeViewer)
       break;
-    }
 
-    if(!intersection) {ally++;}
+    if(!intersection)
+      ally++;
   }
 
   if(changeViewer) {
@@ -123,16 +128,26 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
   switch(enemyClass[0]){
     case 'b': {
       if(enemyClass[2] == 'n'){
-        allies.remove(static_cast<drawable*>(Player));
-        objects.remove(static_cast<drawable*>(Player));
-        Player->setPlayground(Galaxy);
-        currentGame->setMainViewer(Galaxy);
+        bunkers.remove(static_cast<bunker*>(**e));
+        std::cout << "Here" << std::endl;
+        *e = enemies.erase(*e);
+        objects.remove(**e);
 
-        *cv = true;
+        if(bunkers.empty()){
+          allies.remove(static_cast<drawable*>(Player));
+          objects.remove(static_cast<drawable*>(Player));
+          Player->setPlayground(Galaxy);
+          currentGame->setMainViewer(Galaxy);
+
+          std::cout << "this to?" << std::endl;
+
+          *cv = true;
+        }
+        std::cout << "Bullet VS. Bunker" << std::endl;
       }
+      else
+        std::cout << "Bullet VS. Bullet" << std::endl;
 
-      std::cout << "Bounce in Ground from Spaceship" << std::endl;
-      std::cout << "deleting a bunker from Bullet" << std::endl;
     }; break;
 
     case 'p': {

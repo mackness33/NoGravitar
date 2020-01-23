@@ -51,6 +51,7 @@ const void information::loadImages(){
     temp->object = new sf::Texture();
     temp->name = utility::filenameFromPath(entry.path());
 
+    std::cout << path << std::endl;
     if (temp->object->loadFromFile(entry.path()))
       information::images.push_back(temp);
   }

@@ -53,8 +53,6 @@ void planetView::inizializeBunker(){
   for(int k = 0; k < lines.size(); k++)
     occupied[k] = false;
 
-  //std::cout << lines.size()
-
   for(int i = 0; i < numBunker;){
     pos = utility::RandInt(lines.size());
 

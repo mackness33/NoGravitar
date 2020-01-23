@@ -18,6 +18,34 @@ game::game(sf::RenderWindow* wnd){
   information::DELTA_TIME = 10.0f;
 }
 
+game::~game(){
+  std::cout << "DELETING GAME" << std::endl;
+
+  if(!!Player)
+    delete Player;
+
+  if(!!Galaxy)
+    delete Galaxy;
+
+  if(!!Header)
+    delete Header;
+
+  if(!!Settings)
+    delete Settings;
+
+  if(!!Playground)
+    delete Playground;
+
+  Window = nullptr;
+  Player = nullptr;
+  Header = nullptr;
+  Settings = nullptr;
+  Galaxy = nullptr;
+  Playground = nullptr;
+
+}
+
+
 //GETS
 //sf::Texture getTexture(){ return this->background.getTexture();}
 //sf::Sprite getBackground(){ return this->background;}

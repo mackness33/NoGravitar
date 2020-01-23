@@ -6,17 +6,15 @@ keyVector::keyVector(sf::Keyboard::Key k/*ey*/, bool t/*ransfomation*/){
   transformation = t;
 }
 
-keyVector::keyVector(){
-  key = sf::Keyboard::Unknown;
-  transformation = false;
-}
-
 //copy constructor
 keyVector::keyVector(const keyVector& V){
   key = V.key;
   transformation = V.transformation;
 }
 
+keyVector::~keyVector(){
+  std::cout << "DELETING KEYVECTOR" << std::endl;
+}
 //----------OPERATORS----------
 keyVector& keyVector::operator= (const keyVector& V){
   key = V.key;

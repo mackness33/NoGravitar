@@ -44,5 +44,4 @@ class ground : public drawable{
     virtual std::string Class();
 };
 
-#include "ground.tpp"
 #endif

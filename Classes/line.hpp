@@ -17,10 +17,7 @@ class line{
   protected:
     sf::Vector2f *a, *b;
     float width, height;
-    long double slope;//, offset;
-    sf::FloatRect* area;
-    sf::Vector3f *coefficient;
-    sf::Vector2f *coefficients;
+    long double slope;
 
   protected:
     virtual void setup();
@@ -40,8 +37,6 @@ class line{
     sf::Vector2f getB();
     sf::Vector2f* getptrA();
     sf::Vector2f* getptrB();
-    sf::Vector3f getCoefficient();
-    sf::Vector2f getCoefficients();
 
     //---------------SETS---------------
     void setA(sf::Vector2f pnt);

@@ -29,6 +29,10 @@ header::header(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture*
   points.setPosition((s.x - points.getLocalBounds().width)/2, (s.y - points.getLocalBounds().height)/2);
 }
 
+header::~header(){
+  std::cout << "DELETING HEADER" << std::endl;
+}
+
 //----------GETS----------
 sf::Text header::getPoints(){ return this->points;}
 sf::Text header::getTitle(){ return this->title;}

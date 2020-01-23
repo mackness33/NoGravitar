@@ -6,6 +6,8 @@ shooter::shooter(){}
 //------------DESTRUCTORS------------
 shooter::~shooter(){
   std::cout << "DELETING SHOOTER" << std::endl;
+
+  this->deleteBullets();
 }
 
 //------------GETS------------

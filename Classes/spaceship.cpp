@@ -29,7 +29,12 @@ spaceship::spaceship(playground* plg, float spd, float dir){
 spaceship::~spaceship(){
   std::cout << "DELETING SPACESHIP" << std::endl;
 
-  bullets.clear();
+  if(!!body)
+    delete body;
+
+  image = nullptr;
+  body = nullptr;
+  Playground = nullptr;
 }
 
 

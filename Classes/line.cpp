@@ -42,8 +42,6 @@ sf::Vector2f line::getA() { return *a; }
 sf::Vector2f line::getB() { return *b; }
 sf::Vector2f* line::getptrA() { return a; }
 sf::Vector2f* line::getptrB() { return b; }
-sf::Vector3f line::getCoefficient() { return *coefficient; }
-sf::Vector2f line::getCoefficients() { return *coefficients; }
 
 //---------------SETS---------------
 void line::setA(sf::Vector2f pnt) {

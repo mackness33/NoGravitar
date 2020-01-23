@@ -13,12 +13,10 @@ class keyVector{
 
   public:
     //----------CONSTRUCTORS----------
-    keyVector(sf::Keyboard::Key k/*ey*/, bool t/*ransfomation*/);
+    keyVector(sf::Keyboard::Key key = sf::Keyboard::Unknown, bool transfomation = false);
+    keyVector(const keyVector& V);                                                              //copy constructor
 
-    keyVector();
-
-    //copy constructor
-    keyVector(const keyVector& V);
+    ~keyVector();
 
     //----------OPERATORS----------
     keyVector& operator=(const keyVector& V);

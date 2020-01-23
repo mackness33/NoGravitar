@@ -15,7 +15,8 @@ bullet::bullet(float s, float d, sf::Vector2f p){
 bullet::~bullet(){
   std::cout << "DELETING BULLET" << std::endl;
 
-  delete body;
+  if(!!body)
+    delete body;
   body = nullptr;
 }
 

@@ -18,6 +18,12 @@ viewer::viewer(){}
 
 viewer::~viewer(){
   std::cout << "DELETING VIEWER" << std::endl;
+
+  //if(!!background)
+    //std::cout << "Viewer exists" << std::endl;
+    //delete background;
+  //background = nullptr;
+  //window = nullptr;
 }
 
 

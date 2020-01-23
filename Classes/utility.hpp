@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cmath>
 #include <list>
+#include <vector>
 #include <math.h>
 #include "drawable.hpp"
 
@@ -34,6 +35,7 @@ class utility{
     static float RandFloat(int x, float y = 0);
     static sf::Vector2f RandVector(int x, int y, int offsetX = 0, int offsetY = 0);
     template <typename T> static void deleteList(std::list<T*>& objects);
+    template <typename T> static void deleteVector(std::vector<T*>& objects);
 
     static std::string filenameFromPath(std::string path);
 

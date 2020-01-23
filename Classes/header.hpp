@@ -19,6 +19,7 @@ class header : public viewer{
   public:
     //----------CONSTRUCTORS----------
     header(sf::RenderWindow *window, sf::Vector2f size = information::HEADER_DEFAULT_SIZE, sf::Vector2f position = information::HEADER_DEFAULT_POSITION, sf::Texture* image = nullptr);
+    ~header();
 
     //----------GETS----------
     sf::Text getPoints();

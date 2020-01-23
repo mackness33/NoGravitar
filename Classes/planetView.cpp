@@ -29,6 +29,7 @@ planetView::~planetView(){
 
   Player = nullptr;
   Ground = nullptr;
+  Galaxy = nullptr;
   bunkers = nullptr;
   currentGame = nullptr;
   Planet = nullptr;

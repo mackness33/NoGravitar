@@ -3,7 +3,8 @@ template <class T> essence<T>::essence() {}
 
 template <class T> essence<T>::~essence(){
   std::cout << "DELETING ESSENCE" << std::endl;
-  delete body;
+  if(!!body)
+    delete body;
   body = nullptr;
 }
 

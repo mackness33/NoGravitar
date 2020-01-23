@@ -27,7 +27,9 @@ bunker::~bunker(){
     delete body;
 
   body = nullptr;
-
+  Playground = nullptr;
+  image = nullptr;
+  
   this->deleteBullets();
 }
 

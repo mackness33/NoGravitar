@@ -10,7 +10,10 @@ playground::playground(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::
 playground::~playground(){
   std::cout << "DELETING PLAYGROUND" << std::endl;
 
-  this->delObjects();
+  utility::deleteList(allies);
+  utility::deleteList(enemies);
+
+  objects.clear();
 }
 
 

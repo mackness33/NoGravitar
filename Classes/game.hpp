@@ -29,6 +29,7 @@ class game{
   public:
     //----------CONSTRUCTORS----------
     game(sf::RenderWindow* window);
+    ~game();
 
     //----------GETS----------
     //sf::Texture getTexture(){ return this->background.getTexture();}

@@ -10,7 +10,7 @@ galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, g
 galaxy::~galaxy(){
   std::cout << "DELETING GALAXY" << std::endl;
 
-  planets.clear();
+  utility::deleteList(planets);
 
   Player = nullptr;
   currentGame = nullptr;

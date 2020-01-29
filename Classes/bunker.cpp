@@ -63,10 +63,11 @@ void bunker::Update(){
 }
 
 void bunker::shoot(){
-  bullet *bul1 = new bullet(information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation() - 60, body->getBody()->getPosition());
+  sf::Vector2f origin = body->getBody()->getPosition() - sf::Vector2f((this->GetLocalBounds().width * -sin(this->GetRotation())) / 2, (this->GetLocalBounds().height * cos(this->GetRotation())) / 2);
+  bullet *bul1 = new bullet(information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation() - 60, origin);
   bullets.push_front(bul1);
 
-  bullet *bul2 = new bullet(information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation() - 120, body->getBody()->getPosition());
+  bullet *bul2 = new bullet(information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation() - 120, origin);
   bullets.push_front(bul2);
 
   Playground->addEnemy(bul1);

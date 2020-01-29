@@ -1,6 +1,7 @@
 #include "ground.hpp"
 
 //---------------CONSTRUCTORS---------------
+//TODO: checks on the line to check on
 ground::ground(float w, float h, sf::Color c){
   int sectionY = h * (information::MAX_GROUND_HEIGHT - information::MIN_GROUND_HEIGHT);
 
@@ -59,39 +60,18 @@ sf::FloatRect ground::GetGlobalBounds() { return body->getBody()->getBounds(); }
 //---------------METHODS---------------
 bool ground::intersects(drawable* obj){
   sf::FloatRect objBound = obj->GetGlobalBounds();
-  bool intersect = false;
-  sf::Vector2f left = utility::left(obj), right = utility::right(obj), top = utility::top(obj), bottom = utility::bottom(obj);
-  line *ptr1 = new line(left, bottom), *ptr2 = new line(right, bottom), *ptr3 = new line(left, top), *ptr4 = new line(right, top);
   int sectLeft = objBound.left / length, sectRight = (objBound.left + objBound.width) / length;     //BUG: Can't be divided with length
+  bool checkLeft = (objBound.left >= 0 && sectLeft >= 0 && sectLeft < lines.size()-1), checkRight = (objBound.left + objBound.width >= 0 && sectRight >= 0 && sectRight < lines.size()-1);
 
-  if(sectLeft != sectRight){
-    //std::cout << "IM IN THE FIRST PART" << std::endl;
-    if(lines[sectRight]->doIntersect(ptr1) || lines[sectRight]->doIntersect(ptr2) || lines[sectRight]->doIntersect(ptr3) || lines[sectRight]->doIntersect(ptr4))
-      return true;
+  if(checkLeft || checkRight){
+    sf::Vector2f left = utility::left(obj), right = utility::right(obj), top = utility::top(obj), bottom = utility::bottom(obj);
+    line *ptr1 = new line(left, bottom), *ptr2 = new line(right, bottom), *ptr3 = new line(left, top), *ptr4 = new line(right, top);
+      if(lines[sectRight]->doIntersect(ptr1) || lines[sectRight]->doIntersect(ptr2) || lines[sectRight]->doIntersect(ptr3) || lines[sectRight]->doIntersect(ptr4))
+        return true;
 
-    if(lines[sectLeft]->doIntersect(ptr1) || lines[sectLeft]->doIntersect(ptr2) || lines[sectLeft]->doIntersect(ptr3) || lines[sectLeft]->doIntersect(ptr4))
-      return true;
-  }
-  else{
-    //std::cout << "IM IN THE SECOND PART" << std::endl;
-    //f::Vector2f point = lines[sectLeft]->doIntersect(ptr);
-    //std::cout << "LEFT intersection: " << std::endl;
-    //std::cout << "LEFT intersection point y in first: " << point.y << std::endl;
-    //std::cout << "LEFT intersection point x in first: " << point.x << std::endl;
-    //if(point != sf::Vector2f(-1, -1))
-
-    //ptr->swap();
-    //ptr->setA(right);
-
-    //sf::Vector2f point = lines[sectRight]->doIntersect(ptr);
-    //std::cout << "RIGHT intersection: " << std::endl;
-    //std::cout << "RIGHT intersection point y in first: " << point.y << std::endl;
-    //std::cout << "RIGHT intersection point x in first: " << point.x << std::endl;
-    //if(point != sf::Vector2f(-1, -1))
-    //if(lines[sectRight]->doIntersect(ptr) || bottom.y >= lines[sectRight]->getA().y)
-      //return true;
-    if(lines[sectRight]->doIntersect(ptr1) || lines[sectRight]->doIntersect(ptr2) || lines[sectRight]->doIntersect(ptr3) || lines[sectRight]->doIntersect(ptr4))
-      return true;
+    if(checkRight && sectLeft != sectRight)
+      if(lines[sectLeft]->doIntersect(ptr1) || lines[sectLeft]->doIntersect(ptr2) || lines[sectLeft]->doIntersect(ptr3) || lines[sectLeft]->doIntersect(ptr4))
+        return true;
   }
 
   return false;

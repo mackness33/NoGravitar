@@ -9,7 +9,7 @@
 class bunker : public drawable, public shooter{
   private:
     entity<sf::RectangleShape>* body;
-    std::list <bullet*> bullets;
+    //std::list <bullet*> bullets;
     playground *Playground;
     sf::Texture* image;
     float totalTime;

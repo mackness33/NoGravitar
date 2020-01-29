@@ -6,6 +6,7 @@
 #include "utility.hpp"
 #include "drawable.hpp"
 #include "information.hpp"
+#include <climits>
 
 class ground : public drawable{
   protected:

@@ -3,33 +3,11 @@
 //---------------CONSTRUCTORS---------------
 //TODO: checks on the line to check on
 ground::ground(float w, float h, sf::Color c){
-  int sectionY = h * (information::MAX_GROUND_HEIGHT - information::MIN_GROUND_HEIGHT);
-
   numVertex = utility::RandInt(8, 5);
   offsetY = information::MIN_GROUND_HEIGHT;
   length = w / (numVertex - 1);
 
-  sf::Vector2f *lastPoint = nullptr, *actualPoint = nullptr;
-  lastPoint = new sf::Vector2f(0, (h - utility::RandFloat(sectionY, offsetY)));
-
-  line *L = nullptr;
-
-  for(int i = 1, lastPos = length; i < numVertex-1; i++, lastPos += length, *lastPoint = *actualPoint){
-    actualPoint = new sf::Vector2f(lastPos /*utility::RandInt(length, lastPos)*/, h - utility::RandFloat(sectionY, offsetY));
-
-    L = new line(*lastPoint, *actualPoint);
-
-    //std::cout << "here Bob!" << std::endl;
-    if(i > 1)
-      L->setptrA(lines.back()->getptrB());
-
-    lines.push_back(L);
-  }
-
-  actualPoint = new sf::Vector2f(w, (h - utility::RandFloat(sectionY, offsetY)));
-  L = new line(*lastPoint, *actualPoint);
-  L->setptrA(lines.back()->getptrB());
-  lines.push_back(L);
+  this->setup(w, h);
 
   body = new shape<sf::VertexArray>(numVertex, lines);
   //std::cout << "FORGING GROUND" << std::endl;
@@ -58,6 +36,30 @@ sf::FloatRect ground::GetGlobalBounds() { return body->getBody()->getBounds(); }
 
 
 //---------------METHODS---------------
+void ground::setup(float w, float h){
+  int sectionY = h * (information::MAX_GROUND_HEIGHT - information::MIN_GROUND_HEIGHT);
+  sf::Vector2f *lastPoint = nullptr, *actualPoint = nullptr;
+  line *L = nullptr;
+
+  lastPoint = new sf::Vector2f(0, (h - utility::RandFloat(sectionY, offsetY)));
+
+  for(int i = 1, lastPos = length; i < numVertex-1; i++, lastPos += length, *lastPoint = *actualPoint){
+    actualPoint = new sf::Vector2f(lastPos /*utility::RandInt(length, lastPos)*/, h - utility::RandFloat(sectionY, offsetY));
+
+    L = new line(*lastPoint, *actualPoint);
+
+    if(i > 1)
+      L->setptrA(lines.back()->getptrB());
+
+    lines.push_back(L);
+  }
+
+  actualPoint = new sf::Vector2f(w, (h - utility::RandFloat(sectionY, offsetY)));
+  L = new line(*lastPoint, *actualPoint);
+  L->setptrA(lines.back()->getptrB());
+  lines.push_back(L);
+}
+
 bool ground::intersects(drawable* obj){
   sf::FloatRect objBound = obj->GetGlobalBounds();
   int sectLeft = objBound.left / length, sectRight = (objBound.left + objBound.width) / length;     //BUG: Can't be divided with length

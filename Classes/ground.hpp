@@ -17,7 +17,7 @@ class ground : public drawable{
     std::vector<line*> lines;
 
   protected:
-    bool getMonotony(int section);          //if f(x(A)) < f(x(B))  -> crescente (true)     ELSE -> decrescente(false)
+    void setup(float width, float height);
 
   public:
     //---------------CONSTRUCTORS---------------

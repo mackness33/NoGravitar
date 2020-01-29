@@ -75,11 +75,10 @@ void planetView::inizializeBunker(){
 //TODO: Need to delete the object at the end of all the cicles!
 //TODO: consider to delete in a good way the mo'fucking pointers
 void planetView::checkCollision (){
-  bool intersection = false, changeViewer = false;
+  bool changeViewer = false;
   planetObj *planet = nullptr;
 
-  for (auto ally = allies.begin(); ally != allies.end();){
-    intersection = false;
+  for (auto ally = allies.begin(); ally != allies.end(); ally++){
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
       if(!!*ally && !!*enemy){
         if((*ally)->intersects(*enemy)){
@@ -94,50 +93,36 @@ void planetView::checkCollision (){
 
     if(changeViewer)
       break;
-
-    if(!intersection || !(*ally)->Class().compare("spaceship"))
-      ally++;
   }
 
   if(changeViewer)
     Galaxy->delPlanet(Planet);
 
-  for (auto neutral = neutrals.begin(); neutral != neutrals.end();){
-    //intersection = false;
+  for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
       if(!!*neutral && !!*enemy){
         if((*enemy)->Class().compare("bunker") == 0)
           {break;}
 
         if ((*neutral)->intersects(*enemy)){
-          std::cout << "In Collision checkin up " << (*enemy)->Class() << std::endl;
-          std::cout << "In Collision checkin up " << (*neutral)->Class() << std::endl;
-          //collision(&neutral, &object, &changeViewer);
           collision(&enemy, false);
           std::cout << "COLLISION NEUTRAL!!" << std::endl;
-      //    intersection = true;
         }
       }
 
     }
-
 
     for (auto ally = allies.begin(); ally != allies.end(); ally++){
       if(!!*neutral && !!*ally){
         if ((*neutral)->intersects(*ally)){
-          std::cout << "In Collision checkin up " << (*ally)->Class() << std::endl;
-          std::cout << "In Collision checkin up " << (*neutral)->Class() << std::endl;
           collision(&ally, true);
           std::cout << "COLLISION NEUTRAL!!" << std::endl;
-      //    intersection = true;
         }
       }
     }
-
-    //if(!intersection)
-      neutral++;
   }
 
+  
 
 }
 

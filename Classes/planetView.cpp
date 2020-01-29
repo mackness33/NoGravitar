@@ -13,11 +13,11 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame, gal
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   Ground = new ground(information::MENU_DEFAULT_SIZE.x, information::MENU_DEFAULT_SIZE.y);
 
-  bunkers = {};
+  bunkers = std::list<bunker*>();
 
   inizializeBunker();
 
-  playground::addEnemy(Ground);
+  playground::addNeutral(Ground);
 }
 
 planetView::~planetView(){
@@ -94,9 +94,30 @@ void planetView::checkCollision (){
       ally++;
   }
 
-  if(changeViewer) {
+  if(changeViewer)
     Galaxy->delPlanet(Planet);
-  }
+
+  /*for (auto neutral = neutrals.begin(); neutral != neutrals.end();){
+    for (auto object = objects.begin(); object != objects.end(); object++, intersection = false){
+      if(!!*neutral && !!*object){
+        if((*object)->intersects(*neutral)){
+          //collision(&neutral, &object, &changeViewer);
+          std::cout << "COLLISION!!" << std::endl;
+          intersection = true;
+        }
+      }
+      if(changeViewer)
+        {break;}
+    }
+
+    if(changeViewer)
+      {break;}
+
+    if(!intersection)
+      neutral++;
+  }*/
+
+
 }
 
 //TODO: first need to check enemies, than allies
@@ -143,8 +164,13 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
         }
         std::cout << "Bullet VS. Bunker" << std::endl;
       }
-      else
+      else{
+        //Player->deleteBullet(static_cast<bullet*>(**e));
+        *e = enemies.erase(*e);
+        objects.remove(**e);
+
         std::cout << "Bullet VS. Bullet" << std::endl;
+      }
 
     }; break;
 

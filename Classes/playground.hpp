@@ -8,6 +8,7 @@ class playground : public viewer{
   protected:
     std::list<drawable*> allies;
     std::list<drawable*> enemies;
+    std::list<drawable*> neutrals;
     std::list<drawable*> objects;
 
   protected:
@@ -27,6 +28,7 @@ class playground : public viewer{
 
     virtual void addAlly (drawable* ally);
     virtual void addEnemy (drawable* enemy);
+    virtual void addNeutral (drawable* neutral);
     virtual void delObjects ();
 
     virtual void checkCollision ();

@@ -4,7 +4,10 @@
 playground::playground(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i){
   allies = std::list<drawable*>();
   enemies = std::list<drawable*>();
+  neutrals = std::list<drawable*>();
   objects = std::list<drawable*>();
+
+  //this->addNeutral(this);
 }
 
 playground::~playground(){
@@ -12,6 +15,7 @@ playground::~playground(){
 
   utility::deleteList(allies);
   utility::deleteList(enemies);
+  utility::deleteList(neutrals);
 
   objects.clear();
 }
@@ -32,6 +36,7 @@ void playground::Draw (){
   viewer::Draw();
   this->DrawList(allies);
   this->DrawList(enemies);
+  this->DrawList(neutrals);
 }
 
 void playground::DrawList (std::list<drawable*> objs){
@@ -57,26 +62,19 @@ void playground::addEnemy (drawable* enemy){
   std::cout << "Objects size: " << objects.size() << std::endl;
 }
 
+void playground::addNeutral (drawable* neutral){
+  neutrals.push_front(neutral);
+  //objects.push_front(neutral);
+  std::cout << "neutrals size: " << neutrals.size() << std::endl;
+  //std::cout << "Objects size: " << objects.size() << std::endl;
+}
+
 void playground::delObjects (){
-  for (auto drw = allies.begin(); drw != allies.end(); ){
-    if(!!*drw)
-      delete *drw;
-
-    *drw = nullptr;
-    drw = allies.erase(drw);
-  }
-
-  for (auto drw = enemies.begin(); drw != enemies.end(); ){
-    if(!!*drw)
-      delete *drw;
-
-    *drw = nullptr;
-    drw = enemies.erase(drw);
-  }
+  utility::deleteList(allies);
+  utility::deleteList(enemies);
+  utility::deleteList(neutrals);
 
   objects.clear();
-  allies.clear();
-  enemies.clear();
 }
 
 

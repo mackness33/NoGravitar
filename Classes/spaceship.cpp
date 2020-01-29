@@ -168,7 +168,7 @@ float spaceship::GetRotation(){ return this->body->getBody()->getRotation(); }
 
 
 void spaceship::shoot(){
-  bullet *bul = new bullet(information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation(), body->getBody()->getPosition());
+  bullet *bul = new bullet(this, information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation(), body->getBody()->getPosition());
   bullets.push_front(bul);
 
   Playground->addAlly(bul);

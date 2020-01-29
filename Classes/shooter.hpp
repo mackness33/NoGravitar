@@ -12,6 +12,8 @@
 #include "utility.hpp"
 #include "information.hpp"
 
+class bullet;
+
 class shooter{
   protected:
     std::list <bullet*> bullets;

@@ -1,15 +1,19 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include "movable.hpp"
 #include "entity.hpp"
 #include "drawable.hpp"
 #include "information.hpp"
+#include "movable.hpp"
+#include "shooter.hpp"
 #include "utility.hpp"
+
+class shooter;
 
 class bullet : public drawable{
   protected:
     movable<sf::CircleShape>* body;
+    shooter *parent;
     float speed;
     float direction;
     float totalTime;
@@ -19,7 +23,7 @@ class bullet : public drawable{
 
   public:
     //---------------CONSTRUCTORS---------------
-    bullet(float speed = information::BULLET_DEFAULT_SPEED, float direction = 0, sf::Vector2f position = sf::Vector2f(0, 0));
+    bullet(shooter *parent, float speed = information::BULLET_DEFAULT_SPEED, float direction = 0, sf::Vector2f position = sf::Vector2f(0, 0));
 
     //---------------DESTRUCTORS---------------
     ~bullet();
@@ -30,6 +34,7 @@ class bullet : public drawable{
     sf::CircleShape* getDrawable();
     sf::FloatRect GetLocalBounds();
     sf::FloatRect GetGlobalBounds();
+    shooter* getShooter();
 
     //---------------SETS---------------
 

@@ -1,8 +1,10 @@
 #include "bullet.hpp"
 
 //---------------CONSTRUCTORS---------------
-bullet::bullet(float s, float d, sf::Vector2f p){
+bullet::bullet(shooter *dad, float s, float d, sf::Vector2f p){
   body = new movable<sf::CircleShape>(information::BULLET_DEFAULT_RADIUS);
+
+  parent = dad;
 
   speed = s;
   direction = utility::toRadiant(d);
@@ -27,6 +29,7 @@ entity<sf::CircleShape>* bullet::getEntity() { return static_cast<entity<sf::Cir
 sf::CircleShape* bullet::getDrawable() { return body->getBody(); }
 sf::FloatRect bullet::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
 sf::FloatRect bullet::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
+shooter* bullet::getShooter() { return parent; }
 
 //---------------SETS---------------
 

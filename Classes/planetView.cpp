@@ -102,8 +102,6 @@ void planetView::checkCollision (){
   if(changeViewer)
     Galaxy->delPlanet(Planet);
 
-  std::cout << "Holy shit" << std::endl;
-
   for (auto neutral = neutrals.begin(); neutral != neutrals.end();){
     //intersection = false;
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
@@ -120,7 +118,6 @@ void planetView::checkCollision (){
         }
       }
 
-      std::cout << "This one probably?" << std::endl;
     }
 
 
@@ -129,13 +126,11 @@ void planetView::checkCollision (){
         if ((*neutral)->intersects(*ally)){
           std::cout << "In Collision checkin up " << (*ally)->Class() << std::endl;
           std::cout << "In Collision checkin up " << (*neutral)->Class() << std::endl;
-          //collision(&neutral, &object, &changeViewer);
+          collision(&ally, true);
           std::cout << "COLLISION NEUTRAL!!" << std::endl;
       //    intersection = true;
         }
       }
-
-      std::cout << "This one probably?" << std::endl;
     }
 
     //if(!intersection)
@@ -143,6 +138,27 @@ void planetView::checkCollision (){
   }
 
 
+}
+
+void planetView::collision(std::_List_iterator<drawable*>* obj, bool ally){
+  std::string objectClass = (**obj)->Class();
+  std::cout << "In Collision checkin up " << objectClass << std::endl;
+
+  switch(objectClass[0]){
+    case 'b': {
+      bullet *blt = static_cast<bullet*>(**obj);
+      shooter *parent = blt->getShooter();
+      parent->deleteBullet(blt);
+      if(ally)
+        *obj = allies.erase(*obj);
+      else
+        *obj = enemies.erase(*obj);
+
+      objects.remove(**obj);
+    }; break;
+    //case 's': { this->collisionSpaceship(&*a, &*e, cv); }; break;
+    default: std::cout << objectClass << "in Objects" << std::endl;
+  }
 }
 
 //TODO: first need to check enemies, than allies

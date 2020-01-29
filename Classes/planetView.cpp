@@ -113,6 +113,7 @@ void planetView::checkCollision (){
           std::cout << "In Collision checkin up " << (*enemy)->Class() << std::endl;
           std::cout << "In Collision checkin up " << (*neutral)->Class() << std::endl;
           //collision(&neutral, &object, &changeViewer);
+          collision(&enemy, false);
           std::cout << "COLLISION NEUTRAL!!" << std::endl;
       //    intersection = true;
         }

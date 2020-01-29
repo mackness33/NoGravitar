@@ -61,7 +61,7 @@ sf::FloatRect ground::GetGlobalBounds() { return body->getBody()->getBounds(); }
 bool ground::intersects(drawable* obj){
   sf::FloatRect objBound = obj->GetGlobalBounds();
   int sectLeft = objBound.left / length, sectRight = (objBound.left + objBound.width) / length;     //BUG: Can't be divided with length
-  bool checkLeft = (objBound.left >= 0 && sectLeft >= 0 && sectLeft < lines.size()-1), checkRight = (objBound.left + objBound.width >= 0 && sectRight >= 0 && sectRight < lines.size()-1);
+  bool checkLeft = (objBound.left >= 0 && sectLeft >= 0 && sectLeft < lines.size()-1), checkRight = (objBound.left + objBound.width >= 0 && sectRight >= 0 && sectRight < lines.size());
 
   if(checkLeft || checkRight){
     sf::Vector2f left = utility::left(obj), right = utility::right(obj), top = utility::top(obj), bottom = utility::bottom(obj);

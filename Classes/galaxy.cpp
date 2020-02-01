@@ -29,7 +29,17 @@ galaxy::~galaxy(){
 
 //----------METHODS----------
 bool galaxy::checkPlanetPosition(planetObj* pln){
-  for(auto obj = this->objects.begin(); obj != this->objects.end(); obj++)
+  bool intersection = true;
+
+  for(auto obj = this->enemies.begin(); obj != this->enemies.end(); obj++)
+    if(pln->spawnIntersects(*obj))
+      return false;
+
+  for(auto obj = this->allies.begin(); obj != this->allies.end(); obj++)
+    if(pln->spawnIntersects(*obj))
+      return false;
+
+  for(auto obj = this->neutrals.begin(); obj != this->neutrals.end(); obj++)
     if(pln->spawnIntersects(*obj))
       return false;
 

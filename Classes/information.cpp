@@ -20,7 +20,8 @@ float information::SHOOTER_SWITCH_TIME = 0.0f; // You MUST declare it in a CPP
 
 const float information::MAX_GROUND_HEIGHT = 0.4;             //30%
 const float information::MIN_GROUND_HEIGHT = 0.1;             //30%
-std::vector<image*> information::images = {};             //30%
+std::vector<file<sf::Texture>*> information::images = {};             //30%
+std::vector<file<sf::Font>*> information::fonts = {};             //30%
 
 //------------METHODS------------
 const void information::inizialize(sf::Vector2u ws){
@@ -40,27 +41,25 @@ const void information::inizialize(sf::Vector2u ws){
   BULLET_DEFAULT_SPEED = SPACESHIP_DEFAULT_SPEED * 1.25;
 
   SHOOTER_SWITCH_TIME = SWITCH_TIME * 20;
-  information::loadImages();
-}
 
-const void information::loadImages(){
   std::string path = std::experimental::filesystem::current_path();
-  image *temp = nullptr;
-  for (const auto & entry : std::experimental::filesystem::directory_iterator(path + "/img")){
-    temp = new image();
-    temp->object = new sf::Texture();
-    temp->name = utility::filenameFromPath(entry.path());
-
-    std::cout << path << std::endl;
-    if (temp->object->loadFromFile(entry.path()))
-      information::images.push_back(temp);
-  }
+  information::loadFiles<sf::Texture>(path + "/font", images);
+  information::loadFiles<sf::Font>(path + "/img", fonts);
 }
+
 
 sf::Texture* information::getImage(std::string n){
   for(auto img = images.begin(); img != images.end(); img++)
     if(n.compare((*img)->name) == 0)
       return (*img)->object;
+
+  return nullptr;
+}
+
+sf::Font* information::getFont(std::string n){
+  for(auto fnt = fonts.begin(); fnt != fonts.end(); fnt++)
+    if(n.compare((*fnt)->name) == 0)
+      return (*fnt)->object;
 
   return nullptr;
 }

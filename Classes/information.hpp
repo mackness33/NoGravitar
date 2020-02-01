@@ -9,15 +9,16 @@
 #include <string>
 #include "utility.hpp"
 
-struct image{
-  sf::Texture *object;
+template <typename T>
+struct file {
+  T *object;
   std::string name;
 };
 
 class information{
   protected:
     static sf::Vector2u WINDOW_SIZE;
-    static const void loadImages();
+    template <typename T> static const void loadFiles(std::string path, std::vector<file<T>*> array);
 
   public:
     //----------CONSTRUCTORS----------
@@ -37,15 +38,19 @@ class information{
     static float SWITCH_TIME; // You MUST declare it in a CPP
     static float SHOOTER_SWITCH_TIME; // You MUST declare it in a CPP
     static sf::Vector2f PLAYER_DEFAULT_POSITION;
-    static std::vector<image*> images;
+    static std::vector<file<sf::Texture>*> images;
+    static std::vector<file<sf::Font>*> fonts;
 
     static const float MAX_GROUND_HEIGHT;             //30%
     static const float MIN_GROUND_HEIGHT;             //30%
 
     static const void inizialize(sf::Vector2u windowSize);
     static sf::Texture* getImage(std::string name);
+    static sf::Font* getFont(std::string name);
 
     virtual std::string Class();
 };
+
+#include "information.tpp"
 
 #endif // ENTITY_H

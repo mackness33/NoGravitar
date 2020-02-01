@@ -23,9 +23,7 @@ class galaxy : public playground{
     bool checkPlanetPosition(planetObj* planet);
     void inizializePlanets(unsigned int numPlanets);
     //TODO: create a .tpp and convert collision in template <typename T> void galaxy::collision(T* obj, planetObj* planet){ return nullptr; }
-    void collision(std::_List_iterator<drawable*>* ally, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
-    void collisionBullet(std::_List_iterator<drawable*>* spaceship, std::_List_iterator<drawable*>* enemy);
-    void collisionSpaceship(std::_List_iterator<drawable*>* bullet, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
+    void collision(std::_List_iterator<drawable*>* ally, std::_List_iterator<drawable*>* enemy);
 
   public:
     //CONSTRUCTORS

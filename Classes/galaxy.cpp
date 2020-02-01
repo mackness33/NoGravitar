@@ -58,7 +58,7 @@ void galaxy::inizializePlanets(unsigned int numPlanets){
     if(this->checkPlanetPosition(pln)){
       pln->setPlanetView(new planetView(window, Player, currentGame, this, pln));
       planets.push_front(pln);
-      playground::addEnemy(pln);
+      playground::addNeutral(pln);
     }
     else{
       delete pln;
@@ -73,92 +73,68 @@ void galaxy::inizializePlanets(unsigned int numPlanets){
 void galaxy::checkCollision (){
   playground::checkCollision();
 
-  bool intersection = false, changeViewer = false;
-  planetObj *planet = nullptr;
-
-  for (auto ally = allies.begin(); ally != allies.end();){
-    for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++, intersection = false){
-      if(!!*ally && !!*enemy){
-        if((*enemy)->intersects(*ally)){
-          collision(&ally, &enemy, &changeViewer);
-          std::cout << "COLLISION!!" << std::endl;
-          intersection = true;
+  for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
+    for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
+      if(!!*neutral && !!*enemy){
+        if ((*neutral)->intersects(*enemy)){
+          collision(&neutral, &enemy);
+          std::cout << "COLLISION NEUTRAL!!" << std::endl;
         }
       }
-      if(changeViewer) {break;}
     }
 
-    if(changeViewer) {break;}
-
-    if(!intersection) {ally++;}
+    for (auto ally = allies.begin(); ally != allies.end(); ally++){
+      if(!!*neutral && !!*ally){
+        if ((*neutral)->intersects(*ally)){
+          collision(&neutral, &ally);
+          std::cout << "COLLISION NEUTRAL!!" << std::endl;
+        }
+      }
+    }
   }
+
 }
 
 
-void galaxy::collision(std::_List_iterator<drawable*>* a, std::_List_iterator<drawable*>* e, bool* cv){
-  std::string allyClass = (**a)->Class();
+void galaxy::collision(std::_List_iterator<drawable*>* ntl, std::_List_iterator<drawable*>* obj){
+  std::string allyClass = (**obj)->Class();
   std::cout << "In Collision" << std::endl;
 
   switch(allyClass[0]){
-    case 'b': { this->collisionBullet(&*a, &*e); }; break;
-    case 's': { this->collisionSpaceship(&*a, &*e, cv); }; break;
-    default: std::cout << allyClass << "in Allies" << std::endl;
-  }
-}
-
-void galaxy::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List_iterator<drawable*>* e){
-  std::cout << "In CollisionBullet" << std::endl;
-  Player->deleteBullet(static_cast<bullet*>(**blt));
-  *blt = allies.erase(*blt);
-
-  std::string enemyClass = (**e)->Class();
-
-  switch(enemyClass[0]){
     case 'b': {
-      std::cout << "deleting a enemy bullet from Bullet" << std::endl;
+      bullet *blt = static_cast<bullet*>(**obj);
+      shooter *parent = blt->getShooter();
+      parent->deleteBullet(blt);
+      *obj = allies.erase(*obj);
+
+      /* FEAT: adding spaceship's enemies
+      if(isAlly)
+        *obj = allies.erase(*obj);
+      else
+        *obj = enemies.erase(*obj);
+      */
     }; break;
-
-    case 'p': {
-      std::cout << "Bounce in Planet" << std::endl;
-    }; break;
-
-    default: std::cout << enemyClass << "in Enemies" << std::endl;
-  }
-}
-
-void galaxy::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_List_iterator<drawable*>* e, bool* cv){
-  std::cout << "In CollisionSpaceship" << std::endl;
-  std::string enemyClass = (**e)->Class();
-
-  switch(enemyClass[0]){
-    case 'b': {
-      std::cout << "deleting a enemy bullet from Spaceship" << std::endl;
-    }; break;
-
-    case 'p': {
+    case 's': {
       Player->deleteBullets();     //delete all the bullets
       allies.clear();
 
       allies.push_front(Player);
 
-      planetObj *planet = static_cast<planetObj*> (**e);
+      planetObj *planet = static_cast<planetObj*> (**ntl);
       Player->setPlayground(planet->getPlanetView());
       Player->getEntity()->SetPosition(sf::Vector2f(100, 200));
       currentGame->setMainViewer(planet->getPlanetView());
 
-      *cv = true;
-
-      std::cout << "Bounce in Ground from Spaceship" << std::endl;
-    }; break;
-
-    default: std::cout << enemyClass << "in Enemies" << std::endl;
+      *obj = allies.end();
+     }; break;
+    default: std::cout << allyClass << "in Allies" << std::endl;
   }
 }
 
 void galaxy::delPlanet(planetObj *planet){
   Player->getEntity()->SetPosition(planet->getEntity()->GetPosition());
 
-  enemies.remove(static_cast<drawable*>(planet));
+  neutrals.remove(static_cast<drawable*>(planet));
   delete planet;
   planet = nullptr;
 }

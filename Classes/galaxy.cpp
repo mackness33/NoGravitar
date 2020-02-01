@@ -3,6 +3,7 @@
 //----------CONSTRUCTORS----------
 galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actGame) : playground(win), Player(spc), currentGame(actGame){
   planets = {};
+  //Player->getEntity()->SetPosition(sf::Vector2f(300, 300));
   playground::addAlly(spc);
   this->inizializePlanets(numPlanets);
 }
@@ -60,6 +61,8 @@ void galaxy::inizializePlanets(unsigned int numPlanets){
 //TODO: Need to delete the object at the end of all the cicles!
 //TODO: consider to delete in a good way the mo'fucking pointers
 void galaxy::checkCollision (){
+  playground::checkCollision();
+
   bool intersection = false, changeViewer = false;
   planetObj *planet = nullptr;
 

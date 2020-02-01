@@ -3,6 +3,7 @@
 
 #include <list>
 #include "viewer.hpp"
+#include "bullet.hpp"
 
 class playground : public viewer{
   protected:
@@ -26,12 +27,14 @@ class playground : public viewer{
     //---------------METHODS---------------
     virtual void Draw();
 
+    virtual void delObjects ();
     virtual void addAlly (drawable* ally);
     virtual void addEnemy (drawable* enemy);
     virtual void addNeutral (drawable* neutral);
-    virtual void delObjects ();
 
+    virtual bool intersects(drawable* obj);
     virtual void checkCollision ();
+    virtual void collision(std::_List_iterator<drawable*>* object, bool isAlly);
 
     virtual std::string Class();
 };

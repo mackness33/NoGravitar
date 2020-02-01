@@ -34,6 +34,9 @@ sf::Vector2f utility::left(drawable *obj){
   float param = 2 * (((int)obj->GetRotation()) % 90) - 90;
   float x = glbBound.left;
   float y = glbBound.top + (glbBound.height / 2) - (lclBound.height / 2) * sin(utility::toRadiant(param));
+  // std::cout << "Class: " << obj->Class() << std::endl;
+  // std::cout << "left x: " << x << std::endl;
+  // std::cout << "left y: " << y << std::endl;
 
   return sf::Vector2f(x, y);
 }
@@ -44,12 +47,14 @@ sf::Vector2f utility::right(drawable* obj){
   float param = 2 * (((int)obj->GetRotation()) % 90) - 90;
   float x = glbBound.left + glbBound.width;
   float y = glbBound.top + (glbBound.height / 2) - (lclBound.height / 2) * -sin(utility::toRadiant(param));
+
   return sf::Vector2f(x, y);
 }
 
 sf::Vector2f utility::top(drawable* obj){
   sf::FloatRect glbBound = obj->GetGlobalBounds();
   sf::FloatRect lclBound = obj->GetLocalBounds();
+
   float param = 2 * (((int)obj->GetRotation()) % 90) - 90;
   float x = glbBound.left + (glbBound.width / 2) - (lclBound.width / 2) * -sin(utility::toRadiant(param));
   float y = glbBound.top;
@@ -60,10 +65,7 @@ sf::Vector2f utility::top(drawable* obj){
 sf::Vector2f utility::bottom(drawable* obj){
   sf::FloatRect glbBound = obj->GetGlobalBounds();
   sf::FloatRect lclBound = obj->GetLocalBounds();
-  //std::cout << "width: " << lclBound.width << std::endl;
-  //std::cout << "sin rot: " << sin(2 * obj->GetRotation()) << std::endl;
-  //std::cout << "adder: " << (glbBound.width - lclBound.width * sin(2 * obj->GetRotation())) / 2 << std::endl;
-  //std::cout << "diagonal: " << (glbBound.width + glbBound.height) << std::endl;
+
   float param = 2 * (((int)obj->GetRotation()) % 90) - 90;
   float x = glbBound.left + (glbBound.width / 2) - (lclBound.width / 2) * sin(utility::toRadiant(param));
   float y = glbBound.top + glbBound.height;

@@ -26,7 +26,7 @@ class planetView : public playground{
 
   private:
     //template <typename E> void collisionSpaceship(spaceship* Spaceship, E* e, bool* cv);
-    void collision(std::_List_iterator<drawable*>* object, bool ally);
+    void collision(std::_List_iterator<drawable*>* object, bool isAlly);
     void collision(std::_List_iterator<drawable*>* ally, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
     void collisionBullet(std::_List_iterator<drawable*>* spaceship, std::_List_iterator<drawable*>* enemy, bool* changeViewer);
     void collisionSpaceship(std::_List_iterator<drawable*>* bullet, std::_List_iterator<drawable*>* enemy, bool* changeViewer);

@@ -75,8 +75,8 @@ void planetView::inizializeBunker(){
 //TODO: Need to delete the object at the end of all the cicles!
 //TODO: consider to delete in a good way the mo'fucking pointers
 void planetView::checkCollision (){
+  playground::checkCollision();
   bool changeViewer = false;
-  planetObj *planet = nullptr;
 
   for (auto ally = allies.begin(); ally != allies.end(); ally++){
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
@@ -84,7 +84,6 @@ void planetView::checkCollision (){
         if((*ally)->intersects(*enemy)){
           collision(&ally, &enemy, &changeViewer);
           std::cout << "COLLISION!!" << std::endl;
-          intersection = true;
         }
       }
       if(changeViewer)
@@ -101,10 +100,7 @@ void planetView::checkCollision (){
   for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
       if(!!*neutral && !!*enemy){
-        if((*enemy)->Class().compare("bunker") == 0)
-          {break;}
-
-        if ((*neutral)->intersects(*enemy)){
+        if ((*neutral)->intersects(*enemy) && (*enemy)->Class().compare("bunker") != 0){
           collision(&enemy, false);
           std::cout << "COLLISION NEUTRAL!!" << std::endl;
         }
@@ -122,11 +118,11 @@ void planetView::checkCollision (){
     }
   }
 
-  
+
 
 }
 
-void planetView::collision(std::_List_iterator<drawable*>* obj, bool ally){
+void planetView::collision(std::_List_iterator<drawable*>* obj, bool isAlly){
   std::string objectClass = (**obj)->Class();
   std::cout << "In Collision checkin up " << objectClass << std::endl;
 
@@ -135,12 +131,11 @@ void planetView::collision(std::_List_iterator<drawable*>* obj, bool ally){
       bullet *blt = static_cast<bullet*>(**obj);
       shooter *parent = blt->getShooter();
       parent->deleteBullet(blt);
-      if(ally)
+
+      if(isAlly)
         *obj = allies.erase(*obj);
       else
         *obj = enemies.erase(*obj);
-
-      objects.remove(**obj);
     }; break;
     //case 's': { this->collisionSpaceship(&*a, &*e, cv); }; break;
     default: std::cout << objectClass << "in Objects" << std::endl;
@@ -169,18 +164,15 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
 
   Player->deleteBullet(static_cast<bullet*>(**blt));
   *blt = allies.erase(*blt);
-  objects.remove(**blt);
 
   switch(enemyClass[0]){
     case 'b': {
       if(enemyClass[2] == 'n'){
         bunkers.remove(static_cast<bunker*>(**e));
         *e = enemies.erase(*e);
-        objects.remove(**e);
 
         if(bunkers.empty()){
           allies.remove(static_cast<drawable*>(Player));
-          objects.remove(static_cast<drawable*>(Player));
           Player->setPlayground(Galaxy);
           currentGame->setMainViewer(Galaxy);
 
@@ -192,7 +184,6 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
       }
       else{
         *e = enemies.erase(*e);
-        objects.remove(**e);
 
         std::cout << "Bullet VS. Bullet" << std::endl;
       }

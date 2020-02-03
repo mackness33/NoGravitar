@@ -5,6 +5,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+
+#include "plainText.hpp"
 #include "viewer.hpp"
 #include "information.hpp"
 
@@ -12,9 +14,8 @@ class viewer;
 
 class header : public viewer{
   private:
-    sf::Text points;
-    sf::Text title;
-    sf::Font *font;
+    plainText* points;
+    plainText* title;
 
   public:
     //----------CONSTRUCTORS----------
@@ -22,14 +23,14 @@ class header : public viewer{
     ~header();
 
     //----------GETS----------
-    sf::Text getPoints();
-    sf::Text getTitle();
-    const sf::Font* getFont();
+    //sf::Text getPoints();
+    //sf::Text getTitle();
+    //const sf::Font* getFont();
 
     //----------SETS----------
-    void setPoints(sf::Text points);
-    void setTitle(sf::Text text);
-    void setFont(sf::Font* font);
+    //void setPoints(sf::Text points);
+    //void setTitle(sf::Text text);
+    //void setFont(sf::Font* font);
 
     //---------------METHODS---------------
     void Draw();

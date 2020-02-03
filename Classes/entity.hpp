@@ -21,8 +21,8 @@ template <class T> class entity : public essence<T>{
     entity(T* b);
     entity(sf::Texture* image);                                                                                       //Sprite
     entity(float radius, std::size_t pointCount = 30);                                                                //CircleShape
+    entity(const sf::Font &font, const std::string &string);                                                          //Text
     entity(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), sf::Texture* image = nullptr);              //RectangleShape
-
 
     ~entity();
 

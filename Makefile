@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o
-		g++ -g -Wall -o NoGravitar nograv.o game.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o $(LIBS)
+all: nograv.o game.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o plainText.o
+		g++ -g -Wall -o NoGravitar nograv.o game.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o plainText.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -56,15 +56,20 @@ planetView.o: Classes/planetView.hpp Classes/planetView.cpp Classes/playground.h
 playground.o: Classes/playground.hpp Classes/playground.cpp Classes/viewer.hpp
 		g++ -c Classes/playground.cpp $(LIBS)
 
+plainText.o: Classes/plainText.hpp Classes/plainText.cpp Classes/text.hpp Classes/entity.hpp Classes/essence.hpp Classes/utility.hpp Classes/information.hpp
+		g++ -c Classes/plainText.cpp $(LIBS)
+
 settings.o: Classes/settings.hpp Classes/settings.cpp
 		g++ -c Classes/settings.cpp $(LIBS)
-
 
 shooter.o: Classes/shooter.hpp Classes/shooter.cpp Classes/bullet.hpp Classes/information.hpp
 		g++ -c Classes/shooter.cpp $(LIBS)
 
 spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp Classes/playground.hpp
 		g++ -c Classes/spaceship.cpp $(LIBS)
+
+text.o: Classes/text.hpp Classes/text.cpp Classes/entity.hpp Classes/essence.hpp
+		g++ -c Classes/text.cpp $(LIBS)
 
 utility.o: Classes/utility.hpp Classes/utility.cpp Classes/drawable.hpp
 		g++ -c Classes/utility.cpp $(LIBS)
@@ -89,8 +94,8 @@ test.o: test.cpp Classes/object_test.hpp
 
 
 #If you want you can write it in this Makefile
-test2: test2.o ground.o drawable.o utility.o settings.o line.o bullet.o
-		g++ -g -Wall -o Test test2.o ground.o drawable.o utility.o settings.o line.o bullet.o $(LIBS)
+test2: test2.o ground.o drawable.o utility.o text.o
+		g++ -g -Wall -o Test test2.o drawable.o utility.o text.o $(LIBS)
 
 test2.o: test2.cpp Classes/ground.hpp
 		g++ -c -Wall -pedantic -W test2.cpp $(LIBS)

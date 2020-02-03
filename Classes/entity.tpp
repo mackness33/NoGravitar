@@ -6,13 +6,18 @@ template <class T> entity<T>::entity(T* b){
   this->setBoundery();
 }
 
+template <class T> entity<T>::entity(sf::Texture* i){
+  this->body = new sf::Sprite(*i);
+  this->setBoundery();
+}
+
 template <class T> entity<T>::entity(float r, std::size_t pc){
   this->body = new sf::CircleShape(r, pc);
   this->setBoundery();
 }
 
-template <class T> entity<T>::entity(sf::Texture* i){
-  this->body = new sf::Sprite(*i);
+template <class T> entity<T>::entity(const sf::Font &f, const std::string &s){
+  this->body = new sf::Text(s, f);
   this->setBoundery();
 }
 

@@ -37,7 +37,7 @@ class utility{
     template <typename T> static void deleteList(std::list<T*>& objects);
     template <typename T> static void deleteVector(std::vector<T*>& objects);
 
-    static std::string filenameFromPath(std::string path);
+    // static std::string filenameFromPath(std::string path);
 
     static sf::Vector2f left(drawable* obj);
     static sf::Vector2f right(drawable* obj);

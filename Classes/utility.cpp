@@ -20,13 +20,13 @@ int utility::RandInt(int x, int y){ return rand() % x + y; }
 float utility::RandFloat(int x, float y){ return rand() % x + y; }
 sf::Vector2f utility::RandVector(int x, int y, int offsetX, int offsetY){ return sf::Vector2f(rand() % x + offsetX, rand() % y + offsetY); }
 
-std::string utility::filenameFromPath(std::string path){
-  std::size_t posSlash = path.find_last_of("/\\");
-  path = path.substr(posSlash+1);
-  std::size_t posDot = path.find_first_of(".");
-
-  return path.substr(0, posDot);
-}
+// std::string utility::filenameFromPath(std::string path){
+//   std::size_t posSlash = path.find_last_of("/\\");
+//   path = path.substr(posSlash+1);
+//   std::size_t posDot = path.find_first_of(".");
+//
+//   return path.substr(0, posDot);
+// }
 
 sf::Vector2f utility::left(drawable *obj){
   sf::FloatRect glbBound = obj->GetGlobalBounds();

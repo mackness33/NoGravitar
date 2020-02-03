@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o spaceship.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o
-		g++ -g -Wall -o NoGravitar nograv.o game.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o $(LIBS)
+all: nograv.o game.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o
+		g++ -g -Wall -o NoGravitar nograv.o game.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -26,7 +26,7 @@ bunker.o: Classes/bunker.hpp Classes/bunker.cpp Classes/entity.hpp Classes/movab
 drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Classes/entity.hpp Classes/movable.hpp Classes/shape.hpp
 	g++ -c Classes/drawable.cpp $(LIBS)
 
-galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/planetView.hpp Classes/utility.hpp Classes/playground.hpp Classes/game.hpp Handlers/collisionHandler.hpp 
+galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/planetView.hpp Classes/utility.hpp Classes/playground.hpp Classes/game.hpp Handlers/collisionHandler.hpp
 	g++ -c Classes/galaxy.cpp $(LIBS)
 
 game.o: Classes/game.hpp Classes/game.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp Classes/spaceship.hpp

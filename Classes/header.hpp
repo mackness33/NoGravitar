@@ -14,7 +14,7 @@ class header : public viewer{
   private:
     sf::Text points;
     sf::Text title;
-    sf::Font font;
+    sf::Font *font;
 
   public:
     //----------CONSTRUCTORS----------
@@ -24,12 +24,12 @@ class header : public viewer{
     //----------GETS----------
     sf::Text getPoints();
     sf::Text getTitle();
-    sf::Font getFont();
+    const sf::Font* getFont();
 
     //----------SETS----------
-    void setPoints(sf::Text p);
-    void setTitle(sf::Text t);
-    void setFont(sf::Font f);
+    void setPoints(sf::Text points);
+    void setTitle(sf::Text text);
+    void setFont(sf::Font* font);
 
     //---------------METHODS---------------
     void Draw();

@@ -43,11 +43,19 @@ const void information::inizialize(sf::Vector2u ws){
   SHOOTER_SWITCH_TIME = SWITCH_TIME * 20;
 
   std::string path = std::experimental::filesystem::current_path();
-  information::loadFiles<sf::Texture>(path + "/font", images);
-  information::loadFiles<sf::Font>(path + "/img", fonts);
+  information::loadFiles<sf::Texture>(path + "/img", images);
+  information::loadFiles<sf::Font>(path + "/font", fonts);
 }
 
+std::string information::filenameFromPath(std::string path){
+  std::size_t posSlash = path.find_last_of("/\\");
+  path = path.substr(posSlash+1);
+  std::size_t posDot = path.find_first_of(".");
 
+  return path.substr(0, posDot);
+}
+
+//FEAT: can be optimazed
 sf::Texture* information::getImage(std::string n){
   for(auto img = images.begin(); img != images.end(); img++)
     if(n.compare((*img)->name) == 0)

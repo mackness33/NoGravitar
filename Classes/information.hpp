@@ -15,10 +15,12 @@ struct file {
   std::string name;
 };
 
+
 class information{
   protected:
     static sf::Vector2u WINDOW_SIZE;
-    template <typename T> static const void loadFiles(std::string path, std::vector<file<T>*> array);
+    template <typename T> static const void loadFiles(std::string path, std::vector<file<T>*> &array);
+    static std::string filenameFromPath(std::string path);
 
   public:
     //----------CONSTRUCTORS----------

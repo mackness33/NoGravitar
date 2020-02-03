@@ -3,16 +3,16 @@
 //------------CONSTRUCTORS------------
 header::header(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i){
   // Declare and load a font
-  if(!font.loadFromFile("Fonts/Aerovias_Brasil/AeroviasBrasilNF.ttf")){
+  if(font = information::getFont("AeroviasBrasil")){
     std::cout << "Error in load of Aerovias Brasil font" << std::endl;
 
-    if(!font.loadFromFile("Fonts/Cafe_Brewery/cafeandbrewery.ttf")){
+    if(font = information::getFont("AeroviasBrasil")){
       std::cout << "Error in load of Cafe Brewery font" << std::endl;
     }
   }
 
   // Setting title text
-  title.setFont(font);
+  title.setFont(*font);
   title.setString("NOGRAVITAR");
   title.setCharacterSize(30);
   title.setStyle(sf::Text::Bold);
@@ -21,7 +21,7 @@ header::header(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture*
 
 
   // Setting point text
-  points.setFont(font);
+  points.setFont(*font);
   points.setString("0");
   points.setCharacterSize(30);
   points.setStyle(sf::Text::Regular);
@@ -36,12 +36,12 @@ header::~header(){
 //----------GETS----------
 sf::Text header::getPoints(){ return this->points;}
 sf::Text header::getTitle(){ return this->title;}
-sf::Font header::getFont(){ return font;}
+const sf::Font* header::getFont(){ return font;}
 
 //----------SETS----------
 void header::setPoints(sf::Text p){ this->points = p;}
 void header::setTitle(sf::Text t){ this->title = t;}
-void header::setFont(sf::Font f){ this->font = f;}
+void header::setFont(sf::Font* f){ *(this->font) = *f;}
 
 //----------METHODS----------
 

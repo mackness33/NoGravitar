@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o scene.o gameplay.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o plainText.o selectionLabel.o
-		g++ -g -Wall -o NoGravitar nograv.o scene.o game.o gameplay.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o plainText.o selectionLabel.o $(LIBS)
+all: nograv.o game.o scene.o gameplay.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o plainText.o selectionLabel.o startView.o
+		g++ -g -Wall -o NoGravitar nograv.o scene.o game.o gameplay.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o plainText.o selectionLabel.o startView.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -50,6 +50,9 @@ keyVector.o: Classes/keyVector.hpp Classes/keyVector.cpp
 line.o: Classes/line.hpp Classes/line.cpp
 		g++ -c Classes/line.cpp $(LIBS)
 
+menu.o: Classes/line.hpp Classes/line.cpp
+		g++ -c Classes/line.cpp $(LIBS)
+
 planetObj.o: Classes/planetObj.hpp Classes/planetObj.cpp Classes/drawable.hpp Classes/planetView.hpp
 		g++ -c Classes/planetObj.cpp $(LIBS)
 
@@ -70,6 +73,9 @@ settings.o: Classes/settings.hpp Classes/settings.cpp
 
 selectionLabel.o: Classes/selectionLabel.hpp Classes/selectionLabel.cpp Classes/plainText.hpp
 		g++ -c Classes/selectionLabel.cpp $(LIBS)
+
+startView.o: Classes/startView.hpp Classes/startView.cpp Classes/selectionLabel.hpp Classes/viewer.hpp
+		g++ -c Classes/startView.cpp $(LIBS)
 
 shooter.o: Classes/shooter.hpp Classes/shooter.cpp Classes/bullet.hpp Classes/information.hpp
 		g++ -c Classes/shooter.cpp $(LIBS)

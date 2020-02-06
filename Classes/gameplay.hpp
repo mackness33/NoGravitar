@@ -7,6 +7,7 @@
 #include "keyVector.hpp"
 #include "header.hpp"
 #include "settings.hpp"
+#include "startView.hpp"
 #include "../Handlers/eventHandler.hpp"
 
 class galaxy;
@@ -15,6 +16,7 @@ class gameplay : public scene{
     spaceship *Player;
     header *Header;
     galaxy *Galaxy;
+    startView *StartView;
     //settings *Settings;
 
     playground *Playground;

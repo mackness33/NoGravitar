@@ -8,7 +8,8 @@ gameplay::gameplay(sf::RenderWindow* wnd) : scene(wnd) {
   Header = new header(Window);
   //Settings = new information(Window);
   Galaxy = new galaxy(Window, Player, 20, this);
-  this->Viewer = Galaxy;
+  StartView = new startView(Window);
+  this->Viewer = StartView;
   Player->setPlayground(Galaxy);
 
   information::DELTA_TIME = 10.0f;

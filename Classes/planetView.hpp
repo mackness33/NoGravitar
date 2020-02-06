@@ -1,7 +1,7 @@
 #ifndef PLANETVIEW_H
 #define PLANETVIEW_H
 
-#include "game.hpp"
+#include "gameplay.hpp"
 #include "bunker.hpp"
 #include "ground.hpp"
 #include "spaceship.hpp"
@@ -10,7 +10,7 @@
 #include "planetObj.hpp"
 #include "shooter.hpp"
 
-class game;
+class gameplay;
 class galaxy;
 class planetObj;
 
@@ -19,7 +19,7 @@ class planetView : public playground{
     spaceship *Player;
     ground *Ground;
     std::list<bunker*> bunkers;
-    game *currentGame;
+    gameplay *currentGame;
     galaxy *Galaxy;
     planetObj *Planet;
     sf::Texture *image;
@@ -34,7 +34,7 @@ class planetView : public playground{
 
   public:
     //----------CONSTRUCTORS----------
-    planetView(sf::RenderWindow* window, spaceship* spaceship, game* actualGame, galaxy* lastGalaxy, planetObj* planet);
+    planetView(sf::RenderWindow* window, spaceship* spaceship, gameplay* actualGame, galaxy* lastGalaxy, planetObj* planet);
 
     ~planetView();
     //----------GETS----------

@@ -1,7 +1,7 @@
 #include "planetView.hpp"
 
 //----------CONSTRUCTORS----------
-planetView::planetView(sf::RenderWindow* win, spaceship* spc, game* actGame, galaxy* glx, planetObj* pln) : playground(win){
+planetView::planetView(sf::RenderWindow* win, spaceship* spc, gameplay* actGame, galaxy* glx, planetObj* pln) : playground(win){
   currentGame = actGame;
   Galaxy = glx;
   Planet = pln;

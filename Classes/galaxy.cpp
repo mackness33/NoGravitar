@@ -1,7 +1,7 @@
 #include "galaxy.hpp"
 
 //----------CONSTRUCTORS----------
-galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actGame) : playground(win), Player(spc), currentGame(actGame){
+galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, gameplay* actGame) : playground(win), Player(spc), currentGame(actGame){
   planets = {};
   //Player->getEntity()->SetPosition(sf::Vector2f(300, 300));
   playground::addAlly(spc);

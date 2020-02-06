@@ -7,17 +7,17 @@
 #include "planetView.hpp"
 #include "utility.hpp"
 #include "playground.hpp"
-#include "game.hpp"
+#include "gameplay.hpp"
 #include "../Handlers/collisionHandler.hpp"
 
-class game;
+class gameplay;
 class planetObj;
 
 class galaxy : public playground{
   protected:
     spaceship *Player;
     std::list<planetObj*> planets;
-    game *currentGame;
+    gameplay *currentGame;
 
   protected:
     bool checkPlanetPosition(planetObj* planet);
@@ -27,7 +27,7 @@ class galaxy : public playground{
 
   public:
     //CONSTRUCTORS
-    galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, game* actualGame);
+    galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, gameplay* actualGame);
 
     ~galaxy();
 

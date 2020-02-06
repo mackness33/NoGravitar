@@ -1,6 +1,6 @@
 #include "eventHandler.hpp"
 
-void eventHandler::keyReleasedHandler (sf::Event& e/*vent*/, keyVector* t/*ranslation*/, keyVector* r/*otation*/){
+void eventHandler::keyReleasedHandler (const sf::Event& e/*vent*/, keyVector* t/*ranslation*/, keyVector* r/*otation*/){
   switch (e.key.code) {
     case sf::Keyboard::Left : { }                                      //LEFT
     case sf::Keyboard::Right : { r->setTransformation(false); };break;            //RIGHT
@@ -12,7 +12,7 @@ void eventHandler::keyReleasedHandler (sf::Event& e/*vent*/, keyVector* t/*ransl
 
 //It handle KeyEvent::KeyPressed
 //It gives information bout transformation of the spaceship
-void eventHandler::keyPressedHandler (spaceship* S/*paceship*/, sf:: Event& e){
+void eventHandler::keyPressedHandler (spaceship* S/*paceship*/, const sf:: Event& e){
   switch (e.key.code) {                                             //LEFT
     case sf::Keyboard::S : {
       S->shoot();
@@ -33,7 +33,7 @@ void eventHandler::keyPressedHandler (spaceship* S/*paceship*/, sf:: Event& e){
 
 //It handle Event::Closed
 //it close the window if pressed 'Q', 'ESC' or close button
-void eventHandler::windowClosedHandler (sf::Event& e/*vent*/, sf::RenderWindow& w/*indow*/){
+void eventHandler::windowClosedHandler (const sf::Event& e/*vent*/, sf::RenderWindow& w/*indow*/){
   // "close requested" event: we close the window
   if (e.type == sf::Event::Closed || (e.type == sf::Event::KeyPressed && (e.key.code == 16 || e.key.code == 36)))
     w.close();

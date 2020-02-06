@@ -1,17 +1,15 @@
 #include "scene.hpp"
 
-viewer scene::*Playground = nullptr;
-
 //CONSTRUCTORS
 scene::scene(sf::RenderWindow* wnd) : Window(wnd), isActive(false), Viewer(nullptr){}
 
 scene::~scene(){
   std::cout << "DELETING SCENE" << std::endl;
 
-  if(!!viewer)
-    delete viewer;
+  if(!!Viewer)
+    delete Viewer;
 
-  viewer = nullptr;
+  Viewer = nullptr;
   Window = nullptr;
 }
 
@@ -27,29 +25,6 @@ scene::~scene(){
 
 //---------------METHODS---------------
 
-void scene::eventHandler(const sf::Event &event){
-  switch (event.type) {
-    //KEYRELEASED
-    case sf::Event::KeyReleased :{
-      eventHandler::keyReleasedHandler(event);
-    };break;
-
-    //KEYPRESSED
-    case sf::Event::KeyPressed :{
-      eventHandler::keyPressedHandler(event);
-    }
-
-    //WINDOWCLOSED
-    case sf::Event::Closed :{
-      eventHandler::windowClosedHandler(event, *Window);
-    };break;
-
-    default :
-      break;
-  }
-}
-
-//----------METHODS----------
 void scene::stop (){ isActive = false; }
 
 void scene::swap (scene* next){
@@ -57,7 +32,6 @@ void scene::swap (scene* next){
   next->start();
 }
 
-//DRAW
 void scene::start (){
   this->isActive = true;
   // run the program as long as the window is open
@@ -72,14 +46,10 @@ void scene::start (){
     }
 
     Window->clear();
-    this->draw();
+    Viewer->Draw();
     Window->display();
 
   }
-}
-
-void scene::setMainViewer(viewer* newViewer){
-  Playground = newViewer;
 }
 
 std::string scene::Class(){

@@ -6,6 +6,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "Classes/game.hpp"
+#include "Classes/gameplay.hpp"
 /*
 Optimization:
   -> struct => bool trasformation, sf::Keyboard::Key k;   DONE
@@ -27,7 +28,7 @@ int main (void){
 
   srand (time(NULL));
 
-  game *currentGame = new game(&window);
+  gameplay *currentGame = new gameplay(&window);
 
   currentGame->start();
 

@@ -6,7 +6,6 @@ plainText::plainText(std::string f, const std::string &s, sf::Vector2f p){
     std::cout << "Error in load of " << f << " font" << std::endl;
 
   body = new text(*font, s);
-  totalTime = 0;
 
   body->SetPosition(p);
 }
@@ -40,16 +39,6 @@ sf::FloatRect plainText::GetGlobalBounds() { return body->getBody()->getGlobalBo
 
 void plainText::Draw (sf::RenderWindow* window){
   body->Draw(window);
-}
-
-void plainText::Update(){
-  totalTime += 1;
-
-  if(totalTime >= information::SWITCH_TIME){
-    totalTime -= information::SWITCH_TIME;
-    //body->Move(cos(direction) * speed, sin(direction) * speed);
-    //sf::Vector2f pos = body->getBody()->getPosition();
-  }
 }
 
 void plainText::build(){

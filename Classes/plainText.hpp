@@ -11,9 +11,6 @@ class plainText : public drawable{
   protected:
     text *body;
     sf::Font *font;
-    sf::Color primary;
-    sf::Color secondary;
-    int totalTime;
 
   public:
     //---------------CONSTRUCTORS---------------
@@ -33,9 +30,6 @@ class plainText : public drawable{
 
     //---------------METHODS---------------
     void Draw (sf::RenderWindow* window);
-
-    //update of the object's data for each time that it is draw
-    void Update();
 
     //build all the information of object's body
     void build();

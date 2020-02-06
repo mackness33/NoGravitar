@@ -17,8 +17,12 @@ header::header(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture*
   points->getText()->SetCharacterSize(30);
   points->getText()->SetStyle(sf::Text::Regular);
   points->getText()->SetFillColor(sf::Color::Green);
-  points->getText()->SetPosition(sf::Vector2f((s.x - points->GetLocalBounds().width)/2, (s.y - points->GetLocalBounds().height)/2));
+  //points->getText()->SetPosition(sf::Vector2f((s.x - points->GetLocalBounds().width)/2, (s.y - points->GetLocalBounds().height)/2));
 
+  sl = new selectionLabel("AeroviasBrasil", "Suck it", sf::Color::Blue, sf::Color::Red);
+  sl->getText()->SetCharacterSize(30);
+  sl->getText()->SetStyle(sf::Text::Regular);
+  sl->getText()->SetPosition(sf::Vector2f((s.x - sl->GetLocalBounds().width)/2, (s.y - sl->GetLocalBounds().height)/2));
 }
 
 header::~header(){
@@ -41,6 +45,7 @@ void header::Draw (){
   viewer::Draw();
   points->Draw(window);
   title->Draw(window);
+  sl->Draw(window);
 }
 
 std::string header::Class(){

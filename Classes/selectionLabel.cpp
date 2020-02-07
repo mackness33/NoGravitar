@@ -2,7 +2,7 @@
 
 //---------------CONSTRUCTORS---------------
 selectionLabel::selectionLabel(std::string f, const std::string &s, sf::Color c1, sf::Color c2, sf::Vector2f p) : plainText(f, s, p), primary(c1), secondary(c2), totalTime(0), isSelected(false) {
-  this->getText()->SetFillColor(primary);
+  this->getText()->SetFillColor(secondary);
 }
 
 selectionLabel::~selectionLabel(){
@@ -13,10 +13,20 @@ selectionLabel::~selectionLabel(){
 //---------------GETS---------------
 
 //---------------SETS---------------
-void selectionLabel::select(bool is){ isSelected = is;}
+void selectionLabel::select(bool is){
+  isSelected = is;
+  this->Reset();
+
+  if(isSelected)
+    this->getText()->SetFillColor(primary);
+  else
+    this->getText()->SetFillColor(secondary);
+}
 
 
 //---------------METHODS---------------
+void selectionLabel::Reset(){ totalTime = 0; }
+
 void selectionLabel::Update(){
   totalTime += 1;
 

@@ -14,6 +14,9 @@ class selectionLabel : public plainText{
     int totalTime;
     bool isSelected;
 
+  protected:
+    void Reset();
+
   public:
     //---------------CONSTRUCTORS---------------
     selectionLabel(std::string font = "CafeBrewery", const std::string &string = "", sf::Color color1 = sf::Color::White, sf::Color color2 = sf::Color::Red, sf::Vector2f position = sf::Vector2f(0, 0));
@@ -26,6 +29,7 @@ class selectionLabel : public plainText{
 
     //---------------METHODS---------------
     void Draw (sf::RenderWindow* window);
+
 
     //update of the object's data for each time that it is draw
     void Update();

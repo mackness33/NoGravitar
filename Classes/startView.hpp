@@ -1,14 +1,15 @@
 #ifndef STARTVIEW_H
 #define STARTVIEW_H
 
-#include <list>
+#include <vector>
 #include "viewer.hpp"
 #include "selectionLabel.hpp"
 #include "bullet.hpp"
 
 class startView : public viewer{
   protected:
-    std::list<selectionLabel*> selectors;
+    std::vector<selectionLabel*> selectors;
+    int selectedIndex;
 
   protected:
     void DrawList (std::list<drawable*> objects);
@@ -25,6 +26,8 @@ class startView : public viewer{
     //---------------METHODS---------------
     virtual void Draw();
     void inizializeSelecters ();
+    void selectNext ();
+    void selectPrev ();
 
     virtual std::string Class();
 };

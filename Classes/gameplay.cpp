@@ -2,8 +2,6 @@
 
 //CONSTRUCTORS
 gameplay::gameplay(sf::RenderWindow* wnd) : scene(wnd) {
-  information::inizialize(Window->getSize());
-
   Player = new spaceship(nullptr);
   Header = new header(Window);
   //Settings = new information(Window);

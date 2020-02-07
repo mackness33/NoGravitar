@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include "Classes/game.hpp"
 #include "Classes/gameplay.hpp"
+#include "Classes/menu.hpp"
 /*
 Optimization:
   -> struct => bool trasformation, sf::Keyboard::Key k;   DONE
@@ -25,10 +26,12 @@ int main (void){
   window.setKeyRepeatEnabled(false);
 
   //settings::loadImages();
+  information::inizialize(window.getSize());
 
   srand (time(NULL));
 
-  gameplay *currentGame = new gameplay(&window);
+  // gameplay *currentGame = new gameplay(&window);
+  menu *currentGame = new menu(&window);
 
   currentGame->start();
 

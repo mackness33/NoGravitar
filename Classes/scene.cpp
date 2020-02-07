@@ -32,26 +32,6 @@ void scene::swap (scene* next){
   next->start();
 }
 
-void scene::start (){
-  this->isActive = true;
-  // run the program as long as the window is open
-  while (this->isActive){
-    if(!isActive)
-      break;
-    // check all the window's events that were triggered since the last iteration of the loop
-    sf::Event event;
-
-    while (Window->waitEvent(event)){
-      this->eventHandler(event);
-    }
-
-    Window->clear();
-    Viewer->Draw();
-    Window->display();
-
-  }
-}
-
 std::string scene::Class(){
   return "scene";
 }

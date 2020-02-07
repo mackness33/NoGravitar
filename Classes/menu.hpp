@@ -1,23 +1,24 @@
-#ifndef SCENE_H
-#define SCENE_H
+#ifndef MENU_H
+#define MENU_H
 
 #include <vector>
+#include "settings.hpp"
+#include "scene.hpp"
+#include "startView.hpp"
 #include "../Handlers/eventHandler.hpp"
-#include "viewer.hpp"
 
-class scene {
+class menu : public scene{
   protected:
-    sf::RenderWindow *Window;
-    viewer *Viewer;
-    bool isActive;
+    startView *view;
 
   protected:
-    virtual void eventHandler(const sf::Event &event) = 0;
+    void eventHandler(const sf::Event &event);
+    void keyPressedHandler(const sf::Event &event);
 
   public:
     //----------CONSTRUCTORS----------
-    scene(sf::RenderWindow* window);
-    ~scene();
+    menu(sf::RenderWindow* window);
+    ~menu();
 
     //----------GETS----------
     //sf::Texture getTexture(){ return this->background.getTexture();}
@@ -28,12 +29,8 @@ class scene {
     //void setBackground(sf::Sprite b){ this->background = b;}
 
     //----------METHODS----------
-    virtual void start () = 0;
-    virtual void stop ();
-    //void pause () = 0;
-    void swap (scene* scene);
-
     //friend void eventHandler::changePlaygroundHandler(); // Friend function
+    virtual void start();
     virtual std::string Class();
 
 };

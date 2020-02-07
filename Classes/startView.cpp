@@ -1,14 +1,15 @@
 #include "startView.hpp"
 
 //------------CONSTRUCTORS------------
-startView::startView(sf::RenderWindow* w/*, sf::Texture* i*/) : viewer(w){
+startView::startView(sf::RenderWindow* w/*, sf::Texture* i*/) : viewer(w), selectedIndex(0){
   this->inizializeSelecters();
+  selectors[selectedIndex]->select(true);
 }
 
 startView::~startView(){
   std::cout << "DELETING STARTVIEW" << std::endl;
 
-  utility::deleteList(selectors);
+  // TODO: utility::deleteList(selectors);
 
   selectors.clear();
 }
@@ -21,7 +22,7 @@ startView::~startView(){
 //------------METHODS------------
 void startView::Draw (){
   viewer::Draw();
-  for (std::list<selectionLabel*>::iterator d = selectors.begin(); d != selectors.end(); d++){
+  for (auto d = selectors.begin(); d != selectors.end(); d++){
     if(!!*d){
       //(*d)->Update();
       (*d)->Draw(this->window);
@@ -32,7 +33,7 @@ void startView::Draw (){
 
 void startView::inizializeSelecters(){
   sf::Vector2u s = window->getSize();
-  
+
   selectionLabel *sl = new selectionLabel("AeroviasBrasil", "Suck it", sf::Color::Blue, sf::Color::Red);
   sl->getText()->SetCharacterSize(30);
   sl->getText()->SetStyle(sf::Text::Regular);
@@ -49,11 +50,10 @@ void startView::inizializeSelecters(){
   fu->getText()->SetCharacterSize(30);
   fu->getText()->SetStyle(sf::Text::Regular);
   fu->getText()->SetPosition(sf::Vector2f((s.x - sl->GetLocalBounds().width)/2, 300));
-  fu->select(true);
 
-  selectors.push_front(sl);
-  selectors.push_front(hs);
-  selectors.push_front(fu);
+  selectors.push_back(sl);
+  selectors.push_back(hs);
+  selectors.push_back(fu);
 }
 
 void startView::DrawList (std::list<drawable*> objs){
@@ -63,6 +63,19 @@ void startView::DrawList (std::list<drawable*> objs){
       (*d)->Draw(this->window);
     }
   }
+}
+
+void startView::selectNext (){
+  selectors[selectedIndex]->select(false);
+  selectedIndex = ++selectedIndex % selectors.size();
+  selectors[selectedIndex]->select(true);
+}
+
+void startView::selectPrev (){
+  selectors[selectedIndex]->select(false);
+  std::cout << "--selIndex" << std::abs(selectedIndex) << std::endl;
+  selectedIndex = (selectedIndex <= 0)? (selectors.size() - 1) : --selectedIndex;
+  selectors[selectedIndex]->select(true);
 }
 
 

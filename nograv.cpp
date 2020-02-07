@@ -1,4 +1,3 @@
-//export NG="/home/mack/University/Programmazione/NoGravitar"
 #include <iostream>
 #include <thread>
 #include <cmath>
@@ -6,13 +5,6 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "Classes/game.hpp"
-#include "Classes/gameplay.hpp"
-#include "Classes/menu.hpp"
-/*
-Optimization:
-  -> struct => bool trasformation, sf::Keyboard::Key k;   DONE
-  -> eventHandler         DONE
-*/
 
 int main (void){
   // Display the list of all the video modes available for fullscreen
@@ -31,7 +23,7 @@ int main (void){
   srand (time(NULL));
 
   // gameplay *currentGame = new gameplay(&window);
-  menu *currentGame = new menu(&window);
+  game *currentGame = new game(&window);
 
   currentGame->start();
 

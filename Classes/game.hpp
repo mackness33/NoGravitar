@@ -2,29 +2,17 @@
 #define GAME_H
 
 #include <vector>
-#include "galaxy.hpp"
-#include "keyVector.hpp"
-#include "header.hpp"
-#include "settings.hpp"
-#include "../Handlers/eventHandler.hpp"
+#include "gameplay.hpp"
+#include "menu.hpp"
 
-class galaxy;
 class game{
   protected:
     sf::RenderWindow *Window;
-    spaceship *Player;
-    header *Header;
-    settings *Settings;
-    galaxy *Galaxy;
-
-    viewer *Playground;
-
-    //classes to handle input commands in smooth trasformations of object
-    keyVector rotation;
-    keyVector translation;
+    scene *mainScene;
+    gameplay *Gameplay;
+    menu *Menu;
 
   protected:
-    void draw ();
 
   public:
     //----------CONSTRUCTORS----------
@@ -32,13 +20,8 @@ class game{
     ~game();
 
     //----------GETS----------
-    //sf::Texture getTexture(){ return this->background.getTexture();}
-    //sf::Sprite getBackground(){ return this->background;}
-
     //----------SETS----------
-    //void setTexture(sf::Texture t){ this->background.setTexture(t);}
-    //void setBackground(sf::Sprite b){ this->background = b;}
-    void setMainViewer(viewer* newViewer);
+    void setMainScene(std::string name);
 
     //----------METHODS----------
     void start ();

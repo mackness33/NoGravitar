@@ -1,7 +1,7 @@
 #include "gameplay.hpp"
 
 //CONSTRUCTORS
-gameplay::gameplay(sf::RenderWindow* wnd) : scene(wnd) {
+gameplay::gameplay(sf::RenderWindow* wnd, const game* g) : scene(wnd, g) {
   Player = new spaceship(nullptr);
   Header = new header(Window);
   //Settings = new information(Window);

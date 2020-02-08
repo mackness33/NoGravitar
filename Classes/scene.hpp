@@ -4,10 +4,14 @@
 #include <vector>
 #include "../Handlers/eventHandler.hpp"
 #include "viewer.hpp"
+#include "game.hpp"
+
+class game;
 
 class scene {
   protected:
     sf::RenderWindow *Window;
+    game *Game;
     viewer *Viewer;
     bool isActive;
 
@@ -16,7 +20,7 @@ class scene {
 
   public:
     //----------CONSTRUCTORS----------
-    scene(sf::RenderWindow* window);
+    scene(sf::RenderWindow* window, const game &Game);
     ~scene();
 
     //----------GETS----------

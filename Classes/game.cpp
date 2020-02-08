@@ -6,8 +6,8 @@ game::game(sf::RenderWindow* wnd){
 
   information::inizialize(Window->getSize());
 
-  Menu = new menu(Window);
-  Gameplay = new gameplay(Window);
+  Menu = new menu(Window, this);
+  Gameplay = new gameplay(Window, this);
 
   mainScene = Menu;
 

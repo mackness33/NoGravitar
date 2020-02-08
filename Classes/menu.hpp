@@ -17,7 +17,7 @@ class menu : public scene{
 
   public:
     //----------CONSTRUCTORS----------
-    menu(sf::RenderWindow* window);
+    menu(sf::RenderWindow* window, const game* g);
     ~menu();
 
     //----------GETS----------

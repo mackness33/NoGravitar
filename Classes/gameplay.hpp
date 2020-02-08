@@ -10,7 +10,9 @@
 #include "startView.hpp"
 #include "../Handlers/eventHandler.hpp"
 
+class game;
 class galaxy;
+
 class gameplay : public scene{
   protected:
     spaceship *Player;
@@ -30,7 +32,7 @@ class gameplay : public scene{
 
   public:
     //----------CONSTRUCTORS----------
-    gameplay(sf::RenderWindow* window);
+    gameplay(sf::RenderWindow* window, const game* g);
     ~gameplay();
 
     //----------GETS----------

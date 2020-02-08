@@ -4,6 +4,7 @@
 #include <vector>
 #include "gameplay.hpp"
 #include "menu.hpp"
+#include "scene.hpp"
 
 class game{
   protected:

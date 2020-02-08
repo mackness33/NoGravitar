@@ -1,7 +1,7 @@
 #include "menu.hpp"
 
 //CONSTRUCTORS
-menu::menu(sf::RenderWindow* wnd) : scene(wnd){
+menu::menu(sf::RenderWindow* wnd, const game* g) : scene(wnd, g){
   view = new startView(Window);
   Viewer = view;
 }
@@ -79,6 +79,10 @@ void menu::keyPressedHandler(const sf::Event &e){
     case sf::Keyboard::Down : {
       view->selectPrev();
       std::cout << "the key pressed is: " << e.key.code << std::endl;
+    };break;
+
+    case sf::Keyboard::Enter : {
+      Game->setMainScene("Gameplay");
     };break;
     //default: std::cout << "the key pressed is: " << e.key.code << std::endl;
   }

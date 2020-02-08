@@ -1,7 +1,7 @@
 #include "menu.hpp"
 
 //CONSTRUCTORS
-menu::menu(sf::RenderWindow* wnd, const game* g) : scene(wnd, g){
+menu::menu(sf::RenderWindow* wnd, game* g) : scene(wnd), Game(g){
   view = new startView(Window);
   Viewer = view;
 }
@@ -27,26 +27,6 @@ menu::~menu(){
 
 
 //---------------METHODS---------------
-
-void menu::start (){
-  // run the program as long as the window is open
-  while (Window->isOpen()){
-    // check all the window's events that were triggered since the last iteration of the loop
-    sf::Event event;
-
-    while (Window->pollEvent(event))
-      this->eventHandler(event);
-
-    Window->clear();
-
-    Viewer->Draw();
-
-    // end the current frame
-    Window->display();
-
-  }
-}
-
 void menu::eventHandler(const sf::Event &event){
   switch (event.type) {
     //KEYRELEASED
@@ -81,8 +61,13 @@ void menu::keyPressedHandler(const sf::Event &e){
       std::cout << "the key pressed is: " << e.key.code << std::endl;
     };break;
 
-    case sf::Keyboard::Enter : {
-      Game->setMainScene("Gameplay");
+    case sf::Keyboard::Return : {
+      std::cout << "value: " << (view->getValue())[0] << std::endl;
+      switch((view->getValue())[0]){
+        // case 's': Game->setMainScene("Gameplay"); break;
+        case 'G': Game->setMainScene("gameplay"); break;
+        default: {}
+      }
     };break;
     //default: std::cout << "the key pressed is: " << e.key.code << std::endl;
   }

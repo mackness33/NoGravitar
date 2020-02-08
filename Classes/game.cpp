@@ -47,7 +47,22 @@ game::~game(){
 
 //DRAW
 void game::start (){
-  mainScene->start();
+  // run the program as long as the window is open
+  while (Window->isOpen()){
+    // check all the window's events that were triggered since the last iteration of the loop
+    sf::Event event;
+
+    while (Window->pollEvent(event))
+      mainScene->eventHandler(event);
+
+    Window->clear();
+
+    mainScene->Draw();
+
+    // end the current frame
+    Window->display();
+
+  }
 }
 
 //TODO: std::string name for scene
@@ -55,10 +70,13 @@ void game::setMainScene(std::string name){
   switch(name[0]){
     case 'm': {
       mainScene = Menu;
+      //this->start();
     }break;
 
     case 'g': {
       mainScene = Gameplay;
+      std::cout << "name: " << name[0] << std::endl;
+      // this->start();
     }break;
 
     default: {};

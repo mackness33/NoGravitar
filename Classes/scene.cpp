@@ -1,7 +1,7 @@
 #include "scene.hpp"
 
 //CONSTRUCTORS
-scene::scene(sf::RenderWindow* wnd, const game* g) : Window(wnd), Game(g), isActive(false), Viewer(nullptr){}
+scene::scene(sf::RenderWindow* wnd) : Window(wnd), isActive(false), Viewer(nullptr){}
 
 scene::~scene(){
   std::cout << "DELETING SCENE" << std::endl;
@@ -24,13 +24,9 @@ scene::~scene(){
 
 
 //---------------METHODS---------------
+void scene::eventHandler(const sf::Event &event){}
 
-void scene::stop (){ isActive = false; }
-
-void scene::swap (scene* next){
-  this->stop();
-  next->start();
-}
+void scene::Draw (){ Viewer->Draw(); }
 
 std::string scene::Class(){
   return "scene";

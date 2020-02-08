@@ -4,20 +4,23 @@
 #include <vector>
 #include "settings.hpp"
 #include "scene.hpp"
+#include "game.hpp"
 #include "startView.hpp"
 #include "../Handlers/eventHandler.hpp"
 
+class game;
+
 class menu : public scene{
   protected:
+    game *Game;
     startView *view;
 
   protected:
-    void eventHandler(const sf::Event &event);
     void keyPressedHandler(const sf::Event &event);
 
   public:
     //----------CONSTRUCTORS----------
-    menu(sf::RenderWindow* window, const game* g);
+    menu(sf::RenderWindow* window, game* g);
     ~menu();
 
     //----------GETS----------
@@ -30,7 +33,7 @@ class menu : public scene{
 
     //----------METHODS----------
     //friend void eventHandler::changePlaygroundHandler(); // Friend function
-    virtual void start();
+    void eventHandler(const sf::Event &event);
     virtual std::string Class();
 
 };

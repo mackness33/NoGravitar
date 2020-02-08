@@ -7,7 +7,6 @@
 #include <iostream>
 
 #include "plainText.hpp"
-#include "selectionLabel.hpp"
 #include "viewer.hpp"
 #include "information.hpp"
 
@@ -17,8 +16,7 @@ class header : public viewer{
   private:
     plainText* points;
     plainText* title;
-    selectionLabel* sl;
-    
+
   public:
     //----------CONSTRUCTORS----------
     header(sf::RenderWindow *window, sf::Vector2f size = information::HEADER_DEFAULT_SIZE, sf::Vector2f position = information::HEADER_DEFAULT_POSITION, sf::Texture* image = nullptr);

@@ -10,6 +10,7 @@ class startView : public viewer{
   protected:
     std::vector<selectionLabel*> selectors;
     int selectedIndex;
+    std::string *value;
 
   protected:
     void DrawList (std::list<drawable*> objects);
@@ -22,6 +23,7 @@ class startView : public viewer{
 
     //---------------GETS---------------
     //virtual void getObjectsBounds (std::list<drawable*> objects, std::list<sf::FloatRect>* objectsBounds);
+    std::string getValue();
 
     //---------------METHODS---------------
     virtual void Draw();

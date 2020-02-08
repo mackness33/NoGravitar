@@ -29,10 +29,10 @@ drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Class
 galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/planetObj.hpp Classes/planetView.hpp Classes/utility.hpp Classes/playground.hpp Classes/game.hpp Handlers/collisionHandler.hpp
 	g++ -c Classes/galaxy.cpp $(LIBS)
 
-game.o: Classes/game.hpp Classes/game.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp Classes/spaceship.hpp
+game.o: Classes/game.hpp Classes/game.cpp Classes/menu.hpp Classes/gameplay.hpp
 		g++ -c Classes/game.cpp $(LIBS)
 
-gameplay.o: Classes/gameplay.hpp Classes/gameplay.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp Classes/spaceship.hpp
+gameplay.o: Classes/gameplay.hpp Classes/gameplay.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp Classes/spaceship.hpp Classes/spaceship.hpp Classes/scene.hpp
 		g++ -c Classes/gameplay.cpp $(LIBS)
 
 ground.o: Classes/ground.hpp Classes/ground.cpp Classes/entity.hpp Classes/shape.hpp Classes/drawable.hpp Classes/utility.hpp Classes/settings.hpp

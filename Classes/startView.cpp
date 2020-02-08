@@ -16,6 +16,7 @@ startView::~startView(){
 
 
 //------------GETS------------
+std::string startView::getValue(){ return selectors[selectedIndex]->getValue(); }
 
 //------------SETS------------
 
@@ -34,19 +35,19 @@ void startView::Draw (){
 void startView::inizializeSelecters(){
   sf::Vector2u s = window->getSize();
 
-  selectionLabel *sl = new selectionLabel("AeroviasBrasil", "Suck it", sf::Color::Blue, sf::Color::Red);
+  selectionLabel *sl = new selectionLabel("AeroviasBrasil", "Gameplay", "Start", sf::Color::Blue, sf::Color::Red);
   sl->getText()->SetCharacterSize(30);
   sl->getText()->SetStyle(sf::Text::Regular);
   sl->getText()->SetPosition(sf::Vector2f((s.x - sl->GetLocalBounds().width)/2, (s.y - sl->GetLocalBounds().height)/2));
 
 
-  selectionLabel *hs = new selectionLabel("AeroviasBrasil", "Holy shit", sf::Color::Green, sf::Color::Red);
+  selectionLabel *hs = new selectionLabel("AeroviasBrasil", "Settings", "Holy shit", sf::Color::Green, sf::Color::Red);
   hs->getText()->SetCharacterSize(30);
   hs->getText()->SetStyle(sf::Text::Regular);
   hs->getText()->SetPosition(sf::Vector2f((s.x - sl->GetLocalBounds().width)/2, 400));
 
 
-  selectionLabel *fu = new selectionLabel("AeroviasBrasil", "Fuck up", sf::Color::Yellow, sf::Color::Red);
+  selectionLabel *fu = new selectionLabel("AeroviasBrasil", "Restart", "Fuck up", sf::Color::Yellow, sf::Color::Red);
   fu->getText()->SetCharacterSize(30);
   fu->getText()->SetStyle(sf::Text::Regular);
   fu->getText()->SetPosition(sf::Vector2f((s.x - sl->GetLocalBounds().width)/2, 300));

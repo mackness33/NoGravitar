@@ -1,6 +1,7 @@
 #ifndef SELECTIONLABEL_H
 #define SELECTIONLABEL_H
 
+#include <string>
 #include "entity.hpp"
 #include "text.hpp"
 #include "drawable.hpp"
@@ -13,18 +14,21 @@ class selectionLabel : public plainText{
     sf::Color secondary;
     int totalTime;
     bool isSelected;
+    std::string value;
 
   protected:
     void Reset();
 
   public:
     //---------------CONSTRUCTORS---------------
-    selectionLabel(std::string font = "CafeBrewery", const std::string &string = "", sf::Color color1 = sf::Color::White, sf::Color color2 = sf::Color::Red, sf::Vector2f position = sf::Vector2f(0, 0));
+    selectionLabel(std::string font = "CafeBrewery", const std::string &val = "", const std::string &string = "", sf::Color color1 = sf::Color::White, sf::Color color2 = sf::Color::Red, sf::Vector2f position = sf::Vector2f(0, 0));
 
     //---------------DESTRUCTORS---------------
     ~selectionLabel();
 
     //---------------GETS---------------
+    std::string getValue();
+
     //---------------SETS---------------
 
     //---------------METHODS---------------

@@ -1,13 +1,13 @@
 #include "gameplay.hpp"
 
 //CONSTRUCTORS
-gameplay::gameplay(sf::RenderWindow* wnd, const game* g) : scene(wnd, g) {
+gameplay::gameplay(sf::RenderWindow* wnd, game* g) : scene(wnd), Game(g) {
   Player = new spaceship(nullptr);
   Header = new header(Window);
   //Settings = new information(Window);
   Galaxy = new galaxy(Window, Player, 20, this);
-  StartView = new startView(Window);
-  this->Viewer = StartView;
+  //StartView = new startView(Window);
+  this->Viewer = Galaxy;
   Player->setPlayground(Galaxy);
 
   information::DELTA_TIME = 10.0f;
@@ -75,44 +75,25 @@ void gameplay::eventHandler(const sf::Event &event){
 }
 
 //DRAW
-void gameplay::start (){
-  // run the program as long as the window is open
-  while (Window->isOpen()){
-    // check all the window's events that were triggered since the last iteration of the loop
-    sf::Event event;
+void gameplay::Draw (){
 
-    while (Window->pollEvent(event))
-      this->eventHandler(event);
+  collisionHandler::checkOutOfBounds(Player, this->Viewer);
 
-    collisionHandler::checkOutOfBounds(Player, this->Viewer);
-
-    //module keys
-    translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //which key has been pressed
-    if(translation.getTransformation())                         //if pressed make a transformation of the object
-      Player->movement(translation.getKey()/*, &spaceshipBoundingBox*/);
+  //module keys
+  translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //which key has been pressed
+  if(translation.getTransformation())                         //if pressed make a transformation of the object
+    Player->movement(translation.getKey()/*, &spaceshipBoundingBox*/);
 
 
-    //direction keys
-    rotation.isUsed(sf::Keyboard::Right, sf::Keyboard::Left);   //which key has been pressed
-    if(rotation.getTransformation())                            //if pressed make a transformation of the object
-      Player->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
+  //direction keys
+  rotation.isUsed(sf::Keyboard::Right, sf::Keyboard::Left);   //which key has been pressed
+  if(rotation.getTransformation())                            //if pressed make a transformation of the object
+    Player->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
 
-    //gameplay::Viewer->checkCollision();
+  //gameplay::Viewer->checkCollision();
 
-    Window->clear();
-
-    this->draw();
-
-    // end the current frame
-    Window->display();
-
-  }
-}
-
-
-void gameplay::draw (){
   Header->Draw();
-  this->Viewer->Draw();
+  scene::Draw();
 }
 
 void gameplay::setMainViewer(viewer* newViewer){

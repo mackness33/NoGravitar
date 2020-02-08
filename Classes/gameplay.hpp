@@ -8,6 +8,8 @@
 #include "header.hpp"
 #include "settings.hpp"
 #include "startView.hpp"
+#include "game.hpp"
+
 #include "../Handlers/eventHandler.hpp"
 
 class game;
@@ -15,10 +17,11 @@ class galaxy;
 
 class gameplay : public scene{
   protected:
+    game *Game;
     spaceship *Player;
     header *Header;
     galaxy *Galaxy;
-    startView *StartView;
+    //startView *StartView;
     //settings *Settings;
 
     playground *Playground;
@@ -27,12 +30,10 @@ class gameplay : public scene{
     keyVector translation;
 
   protected:
-    void draw ();
-    void eventHandler(const sf::Event &event);
 
   public:
     //----------CONSTRUCTORS----------
-    gameplay(sf::RenderWindow* window, const game* g);
+    gameplay(sf::RenderWindow* window, game* g);
     ~gameplay();
 
     //----------GETS----------
@@ -45,7 +46,8 @@ class gameplay : public scene{
     void setMainViewer(viewer* newViewer);
 
     //----------METHODS----------
-    void start ();
+    void Draw ();
+    void eventHandler(const sf::Event &event);
 
     //friend void eventHandler::changePlaygroundHandler(); // Friend function
     virtual std::string Class();

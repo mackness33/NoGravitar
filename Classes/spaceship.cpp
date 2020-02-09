@@ -2,7 +2,7 @@
 #include "spaceship.hpp"
 
 //----------CONSTRUCTORS----------
-spaceship::spaceship(playground* plg, float spd, float dir){
+spaceship::spaceship(playground* plg, float spd, float dir) : life(4){
   xOutOfBound = false;
   yOutOfBound = false;
   topOOB = false;
@@ -51,6 +51,7 @@ sf::Sprite* spaceship::getDrawable() { return body->getBody(); }
 sf::FloatRect spaceship::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
 sf::FloatRect spaceship::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
 std::list<bullet*>* spaceship::getBullets() { return &bullets; }
+playground* spaceship::getPlayground() { return Playground; }
 //TODO: set texture to let the user change the spaceship image
 
 
@@ -65,6 +66,11 @@ void spaceship::setPlayground(playground* pg) { Playground = pg;}
 //void spaceship::setBody(sf::Sprite* b) { body = b;}
 
 //----------METHODS----------
+void spaceship::lostLife(){
+   life--;
+   std::cout << std::endl << std::endl << "HELLO WORLD!!!!" << std::endl << std::endl;
+ }
+
 //MOVEMENT
 //It lets the spaceship moves or rotates based on the key pressed
 void spaceship::movement(sf::Keyboard::Key k){

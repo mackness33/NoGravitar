@@ -43,6 +43,25 @@ planetView::~planetView(){
 //void setBackground(sf::Sprite b){ this->background = b;}
 
 //----------METHODS---------------
+void planetView::restart(){
+  std::cout << std::endl << std::endl << "Guaglio" << std::endl << std::endl;
+  Player->lostLife();
+  Player->getEntity()->SetPosition(sf::Vector2f(200, 200));
+
+  enemies.clear();
+  std::cout << std::endl << std::endl << "Holy!!!!" << std::endl << std::endl;
+  for(auto bnk = bunkers.begin(); bnk != bunkers.end(); bnk++){
+    if(!!(*bnk)){
+      (*bnk)->deleteBullets();
+      enemies.push_front(*bnk);
+    }
+    else
+      std::cout << "It doesn't exist!!" << std::endl;
+  }
+
+  std::cout << std::endl << std::endl << "WE!!!!" << std::endl << std::endl;
+}
+
 void planetView::inizializeBunker(){
   std::vector<line*> lines = Ground->getLines();
   // bunker *temp = new bunker(this, *lines[2]);
@@ -168,6 +187,7 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
   switch(enemyClass[0]){
     case 'b': {
       if(enemyClass[2] == 'n'){
+        (static_cast<bunker*>(**e))->rip();
         bunkers.remove(static_cast<bunker*>(**e));
         *e = enemies.erase(*e);
 

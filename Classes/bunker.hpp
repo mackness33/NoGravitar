@@ -13,6 +13,7 @@ class bunker : public drawable, public shooter{
     playground *Playground;
     sf::Texture* image;
     float totalTime;
+    bool life;
 
   public:
     //----------CONSTRUCTORS----------
@@ -29,6 +30,9 @@ class bunker : public drawable, public shooter{
     //----------SETS----------
 
     //----------METHODS----------
+    bool isAlive();
+    void rip();
+
     void Draw (sf::RenderWindow* window);
 
     void build();

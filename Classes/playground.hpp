@@ -25,6 +25,8 @@ class playground : public viewer{
     virtual void getObjectsBounds (std::list<drawable*> objects, std::list<sf::FloatRect>* objectsBounds);
 
     //---------------METHODS---------------
+    virtual void restart();
+    virtual void Hola();
     virtual void Draw();
 
     virtual void delObjects ();

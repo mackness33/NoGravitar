@@ -30,6 +30,8 @@ class gameplay : public scene{
     keyVector translation;
 
   protected:
+    void keyPressedHandler(const sf::Event &event);
+    void keyReleasedHandler(const sf::Event &event);
 
   public:
     //----------CONSTRUCTORS----------

@@ -30,6 +30,9 @@ void playground::getObjectsBounds (std::list<drawable*> objs, std::list<sf::Floa
 //------------SETS------------
 
 //------------METHODS------------
+void playground::restart(){}
+void playground::Hola(){ std::cout << "Hola " << std::endl;}
+
 bool playground::intersects(drawable* obj){
   sf::FloatRect objGlobalBound = obj->GetGlobalBounds();
   sf::FloatRect plgGlobalBound = this->GetGlobalBounds();

@@ -44,6 +44,9 @@ sf::FloatRect bunker::GetGlobalBounds() { return body->getBody()->getGlobalBound
 //----------SETS----------
 
 //----------METHODS----------
+bool bunker::isAlive (){ return life; }
+void bunker::rip (){ life = false;}
+
 void bunker::Draw (sf::RenderWindow* window){
   body->DrawTest(window);
 }

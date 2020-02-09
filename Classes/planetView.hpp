@@ -44,7 +44,7 @@ class planetView : public playground{
     //----------SETS----------
     //void setTexture(sf::Texture t){ this->background.setTexture(t);}
     //void setBackground(sf::Sprite b){ this->background = b;}
-
+    void restart();
     //----------METHODS----------
     void checkCollision();
 

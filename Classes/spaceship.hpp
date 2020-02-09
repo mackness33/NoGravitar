@@ -15,6 +15,7 @@ class spaceship : public drawable, public shooter{
     bool topOOB;                   //topOutOfBounds
     float speed;
     float angular_speed;
+    int life;
     movable<sf::Sprite>* body;
     sf::Texture* image;
     std::list <bullet*> bullets;
@@ -50,6 +51,7 @@ class spaceship : public drawable, public shooter{
     sf::FloatRect GetLocalBounds();
     sf::FloatRect GetGlobalBounds();
     std::list<bullet*>* getBullets();
+    playground* getPlayground();
 
     //----------SETS----------
     void setXOutOfBounds(bool x);
@@ -65,6 +67,7 @@ class spaceship : public drawable, public shooter{
     //----------METHODS------------
     //It lets the spaceship moves or rotates based on the key pressed
     void movement(sf::Keyboard::Key k);
+    void lostLife();
 
     //It handles spaceship's translation in the window
     void fly(float module);

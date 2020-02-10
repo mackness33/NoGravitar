@@ -6,9 +6,6 @@ scene::scene(sf::RenderWindow* wnd) : Window(wnd), isActive(false), Viewer(nullp
 scene::~scene(){
   std::cout << "DELETING SCENE" << std::endl;
 
-  if(!!Viewer)
-    delete Viewer;
-
   Viewer = nullptr;
   Window = nullptr;
 }

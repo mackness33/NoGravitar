@@ -27,7 +27,9 @@ class game{
     void setMainScene(std::string name);
 
     //----------METHODS----------
+    void inizialize ();
     void start ();
+    void restart ();
 
     //friend void eventHandler::changePlaygroundHandler(); // Friend function
     virtual std::string Class();

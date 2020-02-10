@@ -31,7 +31,7 @@ sf::Text* plainText::getDrawable() { return body->getBody(); }
 sf::FloatRect plainText::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
 sf::FloatRect plainText::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
 
-//---------------SETS-------------font--
+//---------------SETS---------------
 
 
 

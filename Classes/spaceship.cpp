@@ -2,27 +2,12 @@
 #include "spaceship.hpp"
 
 //----------CONSTRUCTORS----------
-spaceship::spaceship(playground* plg, float spd, float dir) : life(4){
-  xOutOfBound = false;
-  yOutOfBound = false;
-  topOOB = false;
-  leftOOB = false;
-
-  speed = spd;
-  angular_speed = dir;
-
-  bullets = {};
-
-  image = information::getImage("spaceship");
-
+spaceship::spaceship(playground* plg, float spd, float dir) : xOutOfBound(false), yOutOfBound(false), topOOB(false), leftOOB(false), speed(spd), angular_speed(dir), bullets({}), image(information::getImage("spaceship")), Playground(plg){
   body = new movable<sf::Sprite>(image);
   body->SetScale(0.25f, 0.25f);
   body->SetPosition(information::PLAYER_DEFAULT_POSITION);
   sf::FloatRect bounds = this->GetLocalBounds();
   body->SetOrigin(bounds.width/2, bounds.height/2);
-
-  Playground = plg;
-  //this->build();
 }
 
 
@@ -66,11 +51,6 @@ void spaceship::setPlayground(playground* pg) { Playground = pg;}
 //void spaceship::setBody(sf::Sprite* b) { body = b;}
 
 //----------METHODS----------
-void spaceship::lostLife(){
-   life--;
-   std::cout << std::endl << std::endl << "HELLO WORLD!!!!" << std::endl << std::endl;
- }
-
 //MOVEMENT
 //It lets the spaceship moves or rotates based on the key pressed
 void spaceship::movement(sf::Keyboard::Key k){

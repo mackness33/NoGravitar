@@ -1,32 +1,20 @@
 #include "game.hpp"
 
 //CONSTRUCTORS
-game::game(sf::RenderWindow* wnd){
-  Window = wnd;
-
-  information::inizialize(Window->getSize());
-
-  Menu = new menu(Window, this);
-  Gameplay = new gameplay(Window, this);
-
-  mainScene = Menu;
-
-  information::DELTA_TIME = 10.0f;
+game::game(sf::RenderWindow* wnd) : Window(wnd){
+  this->inizialize();
 }
 
 game::~game(){
   std::cout << "DELETING GAME" << std::endl;
-
-  if(!!mainScene)
-    delete mainScene;
-
+  
   if(!!Gameplay)
     delete Gameplay;
 
   if(!!Menu)
     delete Menu;
 
-  Window = nullptr;
+  //Window = nullptr;
   mainScene = nullptr;
   Menu = nullptr;
   Gameplay = nullptr;
@@ -43,7 +31,14 @@ game::~game(){
 
 
 //---------------METHODS---------------
+void game::inizialize(){
+  information::inizialize(Window->getSize());
 
+  Menu = new menu(Window, this);
+  Gameplay = new gameplay(Window, this);
+
+  mainScene = Menu;
+}
 
 //DRAW
 void game::start (){
@@ -81,6 +76,14 @@ void game::setMainScene(std::string name){
 
     default: {};
   }
+}
+
+void game::restart(){
+  std::cout << "Imma trhink: " << std::endl;
+  this->~game();
+  std::cout << "Is here dawg: " << std::endl;
+  inizialize();
+  std::cout << "You ain't seeing it: " << std::endl;
 }
 
 std::string game::Class(){

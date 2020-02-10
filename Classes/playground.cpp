@@ -13,9 +13,15 @@ playground::playground(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::
 playground::~playground(){
   std::cout << "DELETING PLAYGROUND" << std::endl;
 
-  utility::deleteList(allies);
-  utility::deleteList(enemies);
-  utility::deleteList(neutrals);
+  //utility::deleteList(allies);
+  allies.clear();
+  std::cout << "Here" << std::endl;
+  enemies.clear();
+  //utility::deleteList(enemies);
+  std::cout << "problem" << std::endl;
+  neutrals.clear();
+  //utility::deleteList(neutrals);
+  std::cout << "dunno" << std::endl;
 
   objects.clear();
 }

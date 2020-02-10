@@ -6,8 +6,9 @@
 #include "bullet.hpp"
 #include "playground.hpp"
 #include "shooter.hpp"
+#include "living.hpp"
 
-class spaceship : public drawable, public shooter{
+class spaceship : public drawable, public shooter, public living{
   private:
     bool xOutOfBound;                   //XOutOfBounds
     bool yOutOfBound;                   //YOutOfBounds
@@ -15,7 +16,6 @@ class spaceship : public drawable, public shooter{
     bool topOOB;                   //topOutOfBounds
     float speed;
     float angular_speed;
-    int life;
     movable<sf::Sprite>* body;
     sf::Texture* image;
     std::list <bullet*> bullets;
@@ -67,7 +67,6 @@ class spaceship : public drawable, public shooter{
     //----------METHODS------------
     //It lets the spaceship moves or rotates based on the key pressed
     void movement(sf::Keyboard::Key k);
-    void lostLife();
 
     //It handles spaceship's translation in the window
     void fly(float module);

@@ -50,6 +50,7 @@ class gameplay : public scene{
     //----------METHODS----------
     void Draw ();
     void eventHandler(const sf::Event &event);
+    void restart();
 
     //friend void eventHandler::changePlaygroundHandler(); // Friend function
     virtual std::string Class();

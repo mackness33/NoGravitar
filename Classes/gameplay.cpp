@@ -10,8 +10,6 @@ gameplay::gameplay(sf::RenderWindow* wnd, game* g) : scene(wnd), Game(g) {
   //StartView = new startView(Window);
   this->Viewer = Galaxy;
   Player->setPlayground(Galaxy);
-
-  information::DELTA_TIME = 10.0f;
 }
 
 gameplay::~gameplay(){
@@ -75,6 +73,7 @@ void gameplay::eventHandler(const sf::Event &event){
   }
 }
 
+void gameplay::restart(){ Game->restart(); }
 void gameplay::keyReleasedHandler(const sf::Event &e){}
 
 void gameplay::keyPressedHandler(const sf::Event &e){

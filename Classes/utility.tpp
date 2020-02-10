@@ -9,6 +9,7 @@ template <typename T> void utility::deleteList(std::list<T*>& objects){
   }
 
   objects.clear();
+  std::cout << "THE END" << std::endl;
 }
 
 template <typename T> void utility::deleteVector(std::vector<T*>& objects){

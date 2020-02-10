@@ -19,7 +19,9 @@ bullet::~bullet(){
 
   if(!!body)
     delete body;
+
   body = nullptr;
+  parent = nullptr;
 }
 
 

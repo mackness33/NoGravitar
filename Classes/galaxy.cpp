@@ -138,6 +138,8 @@ void galaxy::delPlanet(planetObj *planet){
   planets.remove(planet);
   delete planet;
   planet = nullptr;
+
+  currentGame->deathPlanet();
 }
 
 

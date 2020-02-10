@@ -1,5 +1,7 @@
 #include "game.hpp"
 
+unsigned int game::bestScore = 0;
+
 //CONSTRUCTORS
 game::game(sf::RenderWindow* wnd) : Window(wnd){
   information::inizialize(Window->getSize());

@@ -25,6 +25,8 @@ text::~text(){
 }
 
 
+std::string text::GetString (){ this->body->getString(); }
+
 void text::SetFont (const sf::Font &f){ this->body->setFont(f); }
 void text::SetStyle (sf::Uint32	s) { this->body->setStyle(s); }
 void text::SetString (const std::string &s) { this->body->setString(s); }

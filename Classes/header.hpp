@@ -6,7 +6,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "plainText.hpp"
+#include "label.hpp"
+#include "points.hpp"
 #include "viewer.hpp"
 #include "information.hpp"
 
@@ -14,8 +15,9 @@ class viewer;
 
 class header : public viewer{
   private:
-    plainText* points;
-    plainText* title;
+    points* score;
+    label* title;
+    label* bestScore;
 
   public:
     //----------CONSTRUCTORS----------
@@ -23,12 +25,12 @@ class header : public viewer{
     ~header();
 
     //----------GETS----------
-    //sf::Text getPoints();
+    points* getPoints();
+    unsigned int getBest();
     //sf::Text getTitle();
     //const sf::Font* getFont();
 
     //----------SETS----------
-    //void setPoints(sf::Text points);
     //void setTitle(sf::Text text);
     //void setFont(sf::Font* font);
 

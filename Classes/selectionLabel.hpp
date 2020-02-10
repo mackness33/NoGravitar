@@ -5,10 +5,10 @@
 #include "entity.hpp"
 #include "text.hpp"
 #include "drawable.hpp"
-#include "plainText.hpp"
+#include "label.hpp"
 #include "utility.hpp"
 
-class selectionLabel : public plainText{
+class selectionLabel : public label{
   protected:
     sf::Color primary;
     sf::Color secondary;

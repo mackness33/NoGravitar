@@ -1,7 +1,7 @@
 #include "selectionLabel.hpp"
 
 //---------------CONSTRUCTORS---------------
-selectionLabel::selectionLabel(std::string f, const std::string &v, const std::string &s, sf::Color c1, sf::Color c2, sf::Vector2f p) : plainText(f, s, p), value(v), primary(c1), secondary(c2), totalTime(0), isSelected(false) {
+selectionLabel::selectionLabel(std::string f, const std::string &v, const std::string &s, sf::Color c1, sf::Color c2, sf::Vector2f p) : label(f, s, p), value(v), primary(c1), secondary(c2), totalTime(0), isSelected(false) {
   this->getText()->SetFillColor(secondary);
 }
 
@@ -44,7 +44,7 @@ void selectionLabel::Update(){
 void selectionLabel::Draw(sf::RenderWindow* window) {
   if(isSelected)
     this->Update();
-  plainText::Draw(window);
+  label::Draw(window);
 }
 
 void selectionLabel::build(){

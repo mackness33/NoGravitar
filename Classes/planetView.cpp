@@ -198,6 +198,7 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
         bnk->rip();
         bunkers.remove(bnk);
         *e = enemies.erase(*e);
+        currentGame->deathBunker();
 
         if(bunkers.empty()){
           allies.remove(static_cast<drawable*>(Player));
@@ -230,6 +231,7 @@ void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_L
     bnk->rip();
     bunkers.remove(bnk);
     *e = enemies.erase(*e);
+    currentGame->deathBunker();
 
     if(bunkers.empty()){
       allies.remove(static_cast<drawable*>(Player));

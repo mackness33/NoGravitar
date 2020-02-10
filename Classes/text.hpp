@@ -19,6 +19,7 @@ class text : public entity<sf::Text>{
     ~text();
 
     //----------METHODS----------
+    std::string GetString ();
     void SetB ();
     void SetFont (const sf::Font &f);
     void SetStyle (sf::Uint32	style);

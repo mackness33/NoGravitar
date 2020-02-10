@@ -10,6 +10,8 @@ gameplay::gameplay(sf::RenderWindow* wnd, game* g) : scene(wnd), Game(g) {
   //StartView = new startView(Window);
   this->Viewer = Galaxy;
   Player->setPlayground(Galaxy);
+
+  Points = Header->getPoints();
 }
 
 gameplay::~gameplay(){
@@ -73,7 +75,9 @@ void gameplay::eventHandler(const sf::Event &event){
   }
 }
 
-void gameplay::restart(){ Game->restart(); }
+void gameplay::restart(){ game::bestScore = Header->getBest(); Game->restart(); }
+void gameplay::deathBunker(){ Points->deathBunker(); }      //can be optimazed with friend keyword on points for Galaxy
+void gameplay::deathPlanet(){ Points->deathPlanet(); }      //can be optimazed with friend keyword on points for PlanetView
 void gameplay::keyReleasedHandler(const sf::Event &e){}
 
 void gameplay::keyPressedHandler(const sf::Event &e){

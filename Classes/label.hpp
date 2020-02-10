@@ -1,5 +1,5 @@
-#ifndef PLAINTEXT_H
-#define PLAINTEXT_H
+#ifndef LABEL_H
+#define LABEL_H
 
 #include "entity.hpp"
 #include "text.hpp"
@@ -7,19 +7,20 @@
 #include "information.hpp"
 #include "utility.hpp"
 
-class plainText : public drawable{
+class label : public drawable{
   protected:
     text *body;
     sf::Font *font;
 
   public:
     //---------------CONSTRUCTORS---------------
-    plainText(std::string font = "CafeBrewery", const std::string &string = "", sf::Vector2f position = sf::Vector2f(0, 0));
+    label(std::string font = "CafeBrewery", const std::string &string = "", sf::Vector2f position = sf::Vector2f(0, 0));
 
     //---------------DESTRUCTORS---------------
-    ~plainText();
+    ~label();
 
     //---------------GETS---------------
+    std::string getString();
     text* getText();
     sf::Text* getDrawable();
     entity<sf::Text>* getEntity();
@@ -29,6 +30,7 @@ class plainText : public drawable{
     //---------------SETS---------------
 
     //---------------METHODS---------------
+    void setString (const std::string &s);
     void Draw (sf::RenderWindow* window);
 
     //build all the information of object's body

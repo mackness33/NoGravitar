@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o scene.o gameplay.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o plainText.o selectionLabel.o startView.o menu.o living.o
-		g++ -g -Wall -o NoGravitar nograv.o scene.o game.o gameplay.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o plainText.o selectionLabel.o startView.o menu.o living.o $(LIBS)
+all: nograv.o game.o scene.o gameplay.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o
+		g++ -g -Wall -o NoGravitar nograv.o scene.o game.o gameplay.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -38,7 +38,7 @@ gameplay.o: Classes/gameplay.hpp Classes/gameplay.cpp Classes/galaxy.hpp Classes
 ground.o: Classes/ground.hpp Classes/ground.cpp Classes/entity.hpp Classes/shape.hpp Classes/drawable.hpp Classes/utility.hpp Classes/settings.hpp
 		g++ -c Classes/ground.cpp $(LIBS)
 
-header.o: Classes/header.hpp Classes/header.cpp Classes/viewer.hpp Classes/information.hpp
+header.o: Classes/header.hpp Classes/header.cpp Classes/viewer.hpp Classes/information.hpp Classes/label.hpp Classes/points.hpp
 		g++ -c Classes/header.cpp $(LIBS)
 
 information.o: Classes/information.hpp Classes/information.cpp Classes/utility.hpp
@@ -65,8 +65,11 @@ planetView.o: Classes/planetView.hpp Classes/planetView.cpp Classes/playground.h
 playground.o: Classes/playground.hpp Classes/playground.cpp Classes/viewer.hpp
 		g++ -c Classes/playground.cpp $(LIBS)
 
-plainText.o: Classes/plainText.hpp Classes/plainText.cpp Classes/text.hpp Classes/entity.hpp Classes/essence.hpp Classes/utility.hpp Classes/information.hpp
-		g++ -c Classes/plainText.cpp $(LIBS)
+label.o: Classes/label.hpp Classes/label.cpp Classes/text.hpp Classes/entity.hpp Classes/essence.hpp Classes/utility.hpp Classes/information.hpp
+		g++ -c Classes/label.cpp $(LIBS)
+
+points.o: Classes/points.hpp Classes/points.cpp Classes/label.hpp
+		g++ -c Classes/points.cpp $(LIBS)
 
 scene.o: Classes/scene.hpp Classes/scene.cpp Classes/viewer.hpp Classes/playground.hpp
 		g++ -c Classes/scene.cpp $(LIBS)
@@ -74,7 +77,7 @@ scene.o: Classes/scene.hpp Classes/scene.cpp Classes/viewer.hpp Classes/playgrou
 settings.o: Classes/settings.hpp Classes/settings.cpp
 		g++ -c Classes/settings.cpp $(LIBS)
 
-selectionLabel.o: Classes/selectionLabel.hpp Classes/selectionLabel.cpp Classes/plainText.hpp
+selectionLabel.o: Classes/selectionLabel.hpp Classes/selectionLabel.cpp Classes/label.hpp
 		g++ -c Classes/selectionLabel.cpp $(LIBS)
 
 startView.o: Classes/startView.hpp Classes/startView.cpp Classes/selectionLabel.hpp Classes/viewer.hpp

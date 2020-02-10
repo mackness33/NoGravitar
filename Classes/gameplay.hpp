@@ -21,6 +21,7 @@ class gameplay : public scene{
     spaceship *Player;
     header *Header;
     galaxy *Galaxy;
+    points *Points;
     //startView *StartView;
     //settings *Settings;
 
@@ -51,6 +52,8 @@ class gameplay : public scene{
     void Draw ();
     void eventHandler(const sf::Event &event);
     void restart();
+    void deathBunker();
+    void deathPlanet();
 
     //friend void eventHandler::changePlaygroundHandler(); // Friend function
     virtual std::string Class();

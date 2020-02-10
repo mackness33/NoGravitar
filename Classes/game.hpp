@@ -15,6 +15,9 @@ class game{
     gameplay *Gameplay;
     menu *Menu;
 
+  public:
+    static unsigned int bestScore;
+    
   protected:
 
   public:

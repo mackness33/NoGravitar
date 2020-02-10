@@ -1,7 +1,7 @@
 #include "playground.hpp"
 
 //------------CONSTRUCTORS------------
-playground::playground(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i){
+playground::playground(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i), endGame(false){
   allies = std::list<drawable*>();
   enemies = std::list<drawable*>();
   neutrals = std::list<drawable*>();
@@ -56,11 +56,21 @@ bool playground::intersects(drawable* obj){
 
 void playground::Draw (){
   this->checkCollision();
+  std::cout << "eheheh" << std::endl;
+  std::cout << "exists?" << (!!this) << std::endl;
 
-  viewer::Draw();
-  this->DrawList(allies);
-  this->DrawList(enemies);
-  this->DrawList(neutrals);
+  if(!this)
+    return;
+  std::cout << "found ya bich" << std::endl;
+
+  std::cout << "endGame: " << ((endGame) ? "true" : "false") << std::endl;
+  if(!endGame){
+    viewer::Draw();
+    this->DrawList(allies);
+    this->DrawList(enemies);
+    this->DrawList(neutrals);
+  }
+
 }
 
 void playground::DrawList (std::list<drawable*> objs){

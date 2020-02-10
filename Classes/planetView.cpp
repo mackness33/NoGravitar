@@ -1,7 +1,7 @@
 #include "planetView.hpp"
 
 //----------CONSTRUCTORS----------
-planetView::planetView(sf::RenderWindow* win, spaceship* spc, gameplay* actGame, galaxy* glx, planetObj* pln) : playground(win){
+planetView::planetView(sf::RenderWindow* win, spaceship* spc, gameplay* actGame, galaxy* glx, planetObj* pln) : playground(win), restartViewer(true), changeViewer(false){
   currentGame = actGame;
   Galaxy = glx;
   Planet = pln;
@@ -109,37 +109,41 @@ void planetView::checkCollision (){
           std::cout << "COLLISION!!" << std::endl;
         }
       }
+      if(endGame)
+        break;
 
       if(changeViewer){
         Galaxy->delPlanet(Planet);
         return;
       }
-
-      if(restartViewer)
-        return;
     }
     std::cout << "Here it is!!" << std::endl;
 
-    if(changeViewer || restartViewer)
+    if(changeViewer || endGame)
       break;
   }
 
-  for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
-    for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
-      if(!!*neutral && !!*enemy){
-        if ((*neutral)->intersects(*enemy) && (*enemy)->Class().compare("bunker") != 0){
-          collision(&enemy, false);
-          std::cout << "COLLISION NEUTRAL!!" << std::endl;
+  if(endGame)
+    std::cout << "End planetView!!" << std::endl;
+    //currentGame->restart();
+  else{
+    for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
+      for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
+        if(!!*neutral && !!*enemy){
+          if ((*neutral)->intersects(*enemy) && (*enemy)->Class().compare("bunker") != 0){
+            collision(&enemy, false);
+            std::cout << "COLLISION NEUTRAL!!" << std::endl;
+          }
         }
+
       }
 
-    }
-
-    for (auto ally = allies.begin(); ally != allies.end(); ally++){
-      if(!!*neutral && !!*ally){
-        if ((*neutral)->intersects(*ally)){
-          collision(&ally, true);
-          std::cout << "COLLISION NEUTRAL!!" << std::endl;
+      for (auto ally = allies.begin(); ally != allies.end(); ally++){
+        if(!!*neutral && !!*ally){
+          if ((*neutral)->intersects(*ally)){
+            collision(&ally, true);
+            std::cout << "COLLISION NEUTRAL!!" << std::endl;
+          }
         }
       }
     }
@@ -147,6 +151,7 @@ void planetView::checkCollision (){
 
 
   std::cout << "SHIT" << std::endl;
+  std::cout << "endGame: " << ((endGame) ? "true" : "false") << std::endl;
 
 }
 
@@ -239,13 +244,15 @@ void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_L
   switch(enemyClass[0]){
     case 'b': {
       Player->rip();
-      if(!Player->isAlive())
+      if(!Player->isAlive()){
         currentGame->restart();
-      else
+        this->endGame = true;
+      }else
         // this->restart();
         std::cout << "restart this bitch" << std::endl;
 
-        this->restartViewer = true;
+      std::cout << "endGame: " << ((endGame) ? "true" : "false") << std::endl;
+      std::cout << "Holy shit" << std::endl;
     }; break;
 
     case 'p': {

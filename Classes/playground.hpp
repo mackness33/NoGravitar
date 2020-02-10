@@ -11,6 +11,7 @@ class playground : public viewer{
     std::list<drawable*> enemies;
     std::list<drawable*> neutrals;
     std::list<drawable*> objects;
+    bool endGame;
 
   protected:
     void DrawList (std::list<drawable*> objects);

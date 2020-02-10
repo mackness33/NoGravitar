@@ -2,12 +2,13 @@
 
 //CONSTRUCTORS
 game::game(sf::RenderWindow* wnd) : Window(wnd){
+  information::inizialize(Window->getSize());
   this->inizialize();
 }
 
 game::~game(){
   std::cout << "DELETING GAME" << std::endl;
-  
+
   if(!!Gameplay)
     delete Gameplay;
 
@@ -32,8 +33,6 @@ game::~game(){
 
 //---------------METHODS---------------
 void game::inizialize(){
-  information::inizialize(Window->getSize());
-
   Menu = new menu(Window, this);
   Gameplay = new gameplay(Window, this);
 
@@ -52,7 +51,9 @@ void game::start (){
 
     Window->clear();
 
+    std::cout << "bruh " << std::endl;
     mainScene->Draw();
+    std::cout << "gotvha " << std::endl;
 
     // end the current frame
     Window->display();
@@ -84,6 +85,8 @@ void game::restart(){
   std::cout << "Is here dawg: " << std::endl;
   inizialize();
   std::cout << "You ain't seeing it: " << std::endl;
+  setMainScene("menu");
+  std::cout << "DAT " << std::endl;
 }
 
 std::string game::Class(){

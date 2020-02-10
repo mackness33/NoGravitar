@@ -18,7 +18,6 @@ class spaceship : public drawable, public shooter, public living{
     float angular_speed;
     movable<sf::Sprite>* body;
     sf::Texture* image;
-    std::list <bullet*> bullets;
     playground *Playground;
 
 

@@ -54,7 +54,6 @@ void planetView::restart(){
   std::cout << std::endl << std::endl << "Holy!!!!" << std::endl << std::endl;
   for(auto bnk = bunkers.begin(); bnk != bunkers.end(); bnk++){
     std::cout << "It does it exist? " << ((!!(*bnk)) ? "Yes" : "Nope") << std::endl;
-    std::cout << "It does it exist? " << !!(*bnk) << std::endl;
     if(!!(*bnk)){
       (*bnk)->deleteBullets();
       enemies.push_front(*bnk);
@@ -109,7 +108,7 @@ void planetView::checkCollision (){
           std::cout << "COLLISION!!" << std::endl;
         }
       }
-      if(endGame)
+      if(endGame || restartViewer)
         break;
 
       if(changeViewer){
@@ -119,11 +118,11 @@ void planetView::checkCollision (){
     }
     std::cout << "Here it is!!" << std::endl;
 
-    if(changeViewer || endGame)
+    if(changeViewer || endGame || restartViewer)
       break;
   }
 
-  if(endGame)
+  if(endGame || restartViewer)
     std::cout << "End planetView!!" << std::endl;
     //currentGame->restart();
   else{
@@ -196,6 +195,7 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
 
 
   Player->deleteBullet(static_cast<bullet*>(**blt));
+  std::cout << "Bullet VS. Bullet" << std::endl;
   *blt = allies.erase(*blt);
 
   switch(enemyClass[0]){
@@ -218,9 +218,11 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
         std::cout << "Bullet VS. Bunker" << std::endl;
       }
       else{
+        bullet *bll = static_cast<bullet*>(**e);
+        shooter *parent = bll->getShooter();
+        parent->deleteBullet(bll);
         *e = enemies.erase(*e);
 
-        std::cout << "Bullet VS. Bullet" << std::endl;
       }
 
     }; break;
@@ -240,6 +242,7 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
 void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_List_iterator<drawable*>* e){
   std::cout << "In CollisionSpaceship" << std::endl;
   std::string enemyClass = (**e)->Class();
+  std::cout << "In CollisionSpaceship checkin up " << enemyClass << std::endl;
 
   switch(enemyClass[0]){
     case 'b': {
@@ -247,10 +250,11 @@ void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_L
       if(!Player->isAlive()){
         currentGame->restart();
         this->endGame = true;
-      }else
-        // this->restart();
-        std::cout << "restart this bitch" << std::endl;
-
+      }else{
+        this->restart();
+        //std::cout << "restart this bitch" << std::endl;
+        restartViewer = true;
+      }
       std::cout << "endGame: " << ((endGame) ? "true" : "false") << std::endl;
       std::cout << "Holy shit" << std::endl;
     }; break;

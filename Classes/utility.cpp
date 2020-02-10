@@ -3,7 +3,6 @@
 //----------CONSTRUCTORS----------
 //probably I don't need it
 utility::utility(){
-
 }
 
 //----------GETS----------

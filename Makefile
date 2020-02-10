@@ -20,7 +20,7 @@ eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Classes/gala
 bullet.o: Classes/bullet.hpp Classes/bullet.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/settings.hpp
 	g++ -c Classes/bullet.cpp $(LIBS)
 
-bunker.o: Classes/bunker.hpp Classes/bunker.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/settings.hpp Classes/line.hpp Classes/utility.hpp
+bunker.o: Classes/bunker.hpp Classes/bunker.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/settings.hpp Classes/line.hpp Classes/utility.hpp Classes/shooter.hpp
 	g++ -c Classes/bunker.cpp $(LIBS)
 
 drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Classes/entity.hpp Classes/movable.hpp Classes/shape.hpp
@@ -83,7 +83,7 @@ startView.o: Classes/startView.hpp Classes/startView.cpp Classes/selectionLabel.
 shooter.o: Classes/shooter.hpp Classes/shooter.cpp Classes/bullet.hpp Classes/information.hpp
 		g++ -c Classes/shooter.cpp $(LIBS)
 
-spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp Classes/playground.hpp Classes/living.hpp
+spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp Classes/playground.hpp Classes/living.hpp Classes/shooter.hpp
 		g++ -c Classes/spaceship.cpp $(LIBS)
 
 text.o: Classes/text.hpp Classes/text.cpp Classes/entity.hpp Classes/essence.hpp

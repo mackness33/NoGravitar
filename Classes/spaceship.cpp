@@ -2,7 +2,7 @@
 #include "spaceship.hpp"
 
 //----------CONSTRUCTORS----------
-spaceship::spaceship(playground* plg, float spd, float dir) : xOutOfBound(false), yOutOfBound(false), topOOB(false), leftOOB(false), speed(spd), angular_speed(dir), bullets({}), image(information::getImage("spaceship")), Playground(plg){
+spaceship::spaceship(playground* plg, float spd, float dir) : xOutOfBound(false), yOutOfBound(false), topOOB(false), leftOOB(false), speed(spd), angular_speed(dir), image(information::getImage("spaceship")), Playground(plg){
   body = new movable<sf::Sprite>(image);
   body->SetScale(0.25f, 0.25f);
   body->SetPosition(information::PLAYER_DEFAULT_POSITION);

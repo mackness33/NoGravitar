@@ -134,7 +134,10 @@ void galaxy::collision(std::_List_iterator<drawable*>* ntl, std::_List_iterator<
 void galaxy::delPlanet(planetObj *planet){
   Player->getEntity()->SetPosition(planet->getEntity()->GetPosition());
 
-  neutrals.remove(static_cast<drawable*>(planet));
+  auto p =  std::find(neutrals.begin(), neutrals.end(), planet);
+  neutrals.erase(p);
+  planets.remove(planet);
+  std::cout << "deleted, so what happend?" << std::endl;
   delete planet;
   planet = nullptr;
 }

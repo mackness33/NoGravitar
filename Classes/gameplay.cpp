@@ -81,7 +81,6 @@ void gameplay::keyPressedHandler(const sf::Event &e){
   switch (e.key.code) {
     case sf::Keyboard::S : {
       Player->shoot();
-      std::cout << "the key pressed is: " << e.key.code << std::endl;
     };break;
 
     /*case sf::Keyboard::Y : {

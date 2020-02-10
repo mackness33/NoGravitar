@@ -116,7 +116,6 @@ void planetView::checkCollision (){
         return;
       }
     }
-    std::cout << "Here it is!!" << std::endl;
 
     if(changeViewer || endGame || restartViewer)
       break;
@@ -131,7 +130,7 @@ void planetView::checkCollision (){
         if(!!*neutral && !!*enemy){
           if ((*neutral)->intersects(*enemy) && (*enemy)->Class().compare("bunker") != 0){
             collision(&enemy, false);
-            std::cout << "COLLISION NEUTRAL!!" << std::endl;
+            std::cout << "COLLISION NEUTRAL in planetView!!" << std::endl;
           }
         }
 
@@ -141,17 +140,12 @@ void planetView::checkCollision (){
         if(!!*neutral && !!*ally){
           if ((*neutral)->intersects(*ally)){
             collision(&ally, true);
-            std::cout << "COLLISION NEUTRAL!!" << std::endl;
+            std::cout << "COLLISION NEUTRAL in PLANETVIEW!!" << std::endl;
           }
         }
       }
     }
   }
-
-
-  std::cout << "SHIT" << std::endl;
-  std::cout << "endGame: " << ((endGame) ? "true" : "false") << std::endl;
-
 }
 
 void planetView::collision(std::_List_iterator<drawable*>* obj, bool isAlly){
@@ -252,11 +246,8 @@ void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_L
         this->endGame = true;
       }else{
         this->restart();
-        //std::cout << "restart this bitch" << std::endl;
         restartViewer = true;
       }
-      std::cout << "endGame: " << ((endGame) ? "true" : "false") << std::endl;
-      std::cout << "Holy shit" << std::endl;
     }; break;
 
     case 'p': {

@@ -13,16 +13,9 @@ playground::playground(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::
 playground::~playground(){
   std::cout << "DELETING PLAYGROUND" << std::endl;
 
-  //utility::deleteList(allies);
   allies.clear();
-  std::cout << "Here" << std::endl;
   enemies.clear();
-  //utility::deleteList(enemies);
-  std::cout << "problem" << std::endl;
   neutrals.clear();
-  //utility::deleteList(neutrals);
-  std::cout << "dunno" << std::endl;
-
   objects.clear();
 }
 
@@ -56,14 +49,7 @@ bool playground::intersects(drawable* obj){
 
 void playground::Draw (){
   this->checkCollision();
-  std::cout << "eheheh" << std::endl;
-  std::cout << "exists?" << (!!this) << std::endl;
 
-  if(!this)
-    return;
-  std::cout << "found ya bich" << std::endl;
-
-  std::cout << "endGame: " << ((endGame) ? "true" : "false") << std::endl;
   if(!endGame){
     viewer::Draw();
     this->DrawList(allies);

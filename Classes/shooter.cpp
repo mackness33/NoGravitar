@@ -15,12 +15,9 @@ shooter::~shooter(){
 
 //------------METHODS------------
 void shooter::deleteBullet(bullet* b){
-//  auto blt = std::find(bullets.begin(), bullets.end(), b);
   bullets.remove(b);
   delete b;
   b = nullptr;
-
-  std::cout << "bullets: ?!!" << this->bullets.size() << std::endl;
 }
 
 void shooter::deleteBullets(){ utility::deleteList(bullets); }

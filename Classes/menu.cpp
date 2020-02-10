@@ -50,15 +50,14 @@ void menu::eventHandler(const sf::Event &event){
 }
 
 void menu::keyPressedHandler(const sf::Event &e){
+  std::cout << "the key pressed is: " << e.key.code << std::endl;
   switch (e.key.code) {                                             //LEFT
     case sf::Keyboard::Up : {
       view->selectNext();
-      std::cout << "the key pressed is: " << e.key.code << std::endl;
     };break;
 
     case sf::Keyboard::Down : {
       view->selectPrev();
-      std::cout << "the key pressed is: " << e.key.code << std::endl;
     };break;
 
     case sf::Keyboard::Return : {

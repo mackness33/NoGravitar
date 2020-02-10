@@ -78,7 +78,7 @@ void galaxy::checkCollision (){
       if(!!*neutral && !!*enemy){
         if ((*neutral)->intersects(*enemy)){
           collision(&neutral, &enemy);
-          std::cout << "COLLISION NEUTRAL!!" << std::endl;
+          std::cout << "COLLISION NEUTRAL in GALAXY!!" << std::endl;
         }
       }
     }
@@ -87,7 +87,7 @@ void galaxy::checkCollision (){
       if(!!*neutral && !!*ally){
         if ((*neutral)->intersects(*ally)){
           collision(&neutral, &ally);
-          std::cout << "COLLISION NEUTRAL!!" << std::endl;
+          std::cout << "COLLISION NEUTRAL in GALAXY!!" << std::endl;
         }
       }
     }
@@ -134,10 +134,8 @@ void galaxy::collision(std::_List_iterator<drawable*>* ntl, std::_List_iterator<
 void galaxy::delPlanet(planetObj *planet){
   Player->getEntity()->SetPosition(planet->getEntity()->GetPosition());
 
-  auto p =  std::find(neutrals.begin(), neutrals.end(), planet);
-  neutrals.erase(p);
+  neutrals.remove(static_cast<drawable*>(planet));
   planets.remove(planet);
-  std::cout << "deleted, so what happend?" << std::endl;
   delete planet;
   planet = nullptr;
 }

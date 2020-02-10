@@ -51,9 +51,7 @@ void game::start (){
 
     Window->clear();
 
-    std::cout << "bruh " << std::endl;
     mainScene->Draw();
-    std::cout << "gotvha " << std::endl;
 
     // end the current frame
     Window->display();
@@ -71,8 +69,6 @@ void game::setMainScene(std::string name){
 
     case 'g': {
       mainScene = Gameplay;
-      std::cout << "name: " << name[0] << std::endl;
-      // this->start();
     }break;
 
     default: {};
@@ -80,13 +76,8 @@ void game::setMainScene(std::string name){
 }
 
 void game::restart(){
-  std::cout << "Imma trhink: " << std::endl;
   this->~game();
-  std::cout << "Is here dawg: " << std::endl;
   inizialize();
-  std::cout << "You ain't seeing it: " << std::endl;
-  setMainScene("menu");
-  std::cout << "DAT " << std::endl;
 }
 
 std::string game::Class(){

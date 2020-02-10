@@ -78,6 +78,7 @@ void game::setMainScene(std::string name){
 void game::restart(){
   this->~game();
   inizialize();
+  mainScene = Gameplay;
 }
 
 std::string game::Class(){

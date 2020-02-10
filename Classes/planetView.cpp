@@ -1,7 +1,7 @@
 #include "planetView.hpp"
 
 //----------CONSTRUCTORS----------
-planetView::planetView(sf::RenderWindow* win, spaceship* spc, gameplay* actGame, galaxy* glx, planetObj* pln) : playground(win), restartViewer(true), changeViewer(false){
+planetView::planetView(sf::RenderWindow* win, spaceship* spc, gameplay* actGame, galaxy* glx, planetObj* pln) : playground(win), restartViewer(false), changeViewer(false){
   currentGame = actGame;
   Galaxy = glx;
   Planet = pln;
@@ -47,22 +47,15 @@ planetView::~planetView(){
 
 //----------METHODS---------------
 void planetView::restart(){
-  std::cout << std::endl << std::endl << "Guaglio" << std::endl << std::endl;
   Player->getEntity()->SetPosition(sf::Vector2f(200, 200));
 
   enemies.clear();
-  std::cout << std::endl << std::endl << "Holy!!!!" << std::endl << std::endl;
   for(auto bnk = bunkers.begin(); bnk != bunkers.end(); bnk++){
-    std::cout << "It does it exist? " << ((!!(*bnk)) ? "Yes" : "Nope") << std::endl;
     if(!!(*bnk)){
       (*bnk)->deleteBullets();
       enemies.push_front(*bnk);
     }
-    else
-      std::cout << "It doesn't exist!!" << std::endl;
   }
-
-  std::cout << std::endl << std::endl << "WE!!!!" << std::endl << std::endl;
 }
 
 void planetView::inizializeBunker(){
@@ -108,41 +101,36 @@ void planetView::checkCollision (){
           std::cout << "COLLISION!!" << std::endl;
         }
       }
-      if(endGame || restartViewer)
-        break;
-
       if(changeViewer){
         Galaxy->delPlanet(Planet);
         return;
       }
-    }
 
-    if(changeViewer || endGame || restartViewer)
-      break;
+      if(endGame || restartViewer)
+        return;
+    }
   }
 
-  if(endGame || restartViewer)
-    std::cout << "End planetView!!" << std::endl;
-    //currentGame->restart();
-  else{
-    for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
-      for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
-        if(!!*neutral && !!*enemy){
-          if ((*neutral)->intersects(*enemy) && (*enemy)->Class().compare("bunker") != 0){
-            collision(&enemy, false);
-            std::cout << "COLLISION NEUTRAL in planetView!!" << std::endl;
-          }
+  for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
+    for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
+      if(!!*neutral && !!*enemy){
+        if ((*neutral)->intersects(*enemy) && (*enemy)->Class().compare("bunker") != 0){
+          collision(&enemy, false);
+          std::cout << "COLLISION NEUTRAL in planetView!!" << std::endl;
         }
-
       }
 
-      for (auto ally = allies.begin(); ally != allies.end(); ally++){
-        if(!!*neutral && !!*ally){
-          if ((*neutral)->intersects(*ally)){
-            collision(&ally, true);
-            std::cout << "COLLISION NEUTRAL in PLANETVIEW!!" << std::endl;
-          }
+    }
+
+    for (auto ally = allies.begin(); ally != allies.end(); ally++){
+      if(!!*neutral && !!*ally){
+        if ((*neutral)->intersects(*ally)){
+          collision(&ally, true);
+          std::cout << "COLLISION NEUTRAL in PLANETVIEW!!" << std::endl;
         }
+
+        if(endGame || restartViewer)
+          return;
       }
     }
   }
@@ -163,7 +151,19 @@ void planetView::collision(std::_List_iterator<drawable*>* obj, bool isAlly){
       else
         *obj = enemies.erase(*obj);
     }; break;
-    //case 's': { this->collisionSpaceship(&*a, &*e, cv); }; break;
+
+    case 's': {
+      Player->rip();
+      if(!Player->isAlive()){
+        currentGame->restart();
+        this->endGame = true;
+      }
+      else{
+        this->restart();
+        restartViewer = true;
+      }
+    }; break;
+
     default: std::cout << objectClass << "in Objects" << std::endl;
   }
 }
@@ -189,7 +189,6 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
 
 
   Player->deleteBullet(static_cast<bullet*>(**blt));
-  std::cout << "Bullet VS. Bullet" << std::endl;
   *blt = allies.erase(*blt);
 
   switch(enemyClass[0]){
@@ -205,28 +204,16 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
           Player->setPlayground(Galaxy);
           currentGame->setMainViewer(Galaxy);
 
-          std::cout << "this to?" << std::endl;
-
           this->changeViewer = true;
         }
-        std::cout << "Bullet VS. Bunker" << std::endl;
       }
       else{
         bullet *bll = static_cast<bullet*>(**e);
         shooter *parent = bll->getShooter();
         parent->deleteBullet(bll);
         *e = enemies.erase(*e);
-
       }
 
-    }; break;
-
-    case 'p': {
-      std::cout << "Bounce in Planet" << std::endl;
-    }; break;
-
-    case 'g': {
-      std::cout << "COLLISION WITH GROUND" << std::endl;
     }; break;
 
     default: std::cout << enemyClass << "in Enemies" << std::endl;
@@ -238,30 +225,29 @@ void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_L
   std::string enemyClass = (**e)->Class();
   std::cout << "In CollisionSpaceship checkin up " << enemyClass << std::endl;
 
-  switch(enemyClass[0]){
-    case 'b': {
-      Player->rip();
-      if(!Player->isAlive()){
-        currentGame->restart();
-        this->endGame = true;
-      }else{
-        this->restart();
-        restartViewer = true;
-      }
-    }; break;
+  if(enemyClass.compare("bunker") == 0){
+    bunker *bnk = static_cast<bunker*>(**e);
+    bnk->rip();
+    bunkers.remove(bnk);
+    *e = enemies.erase(*e);
 
-    case 'p': {
+    if(bunkers.empty()){
+      allies.remove(static_cast<drawable*>(Player));
+      Player->setPlayground(Galaxy);
+      currentGame->setMainViewer(Galaxy);
 
-      std::cout << "DUNNO" << std::endl;
-    }; break;
+      this->changeViewer = true;
+    }
+    std::cout << "Spaceship VS. Bunker" << std::endl;
+  }
 
-
-    case 'g': {
-
-      std::cout << "Bounce in Ground from Spaceship" << std::endl;
-    }; break;
-
-    default: std::cout << enemyClass << "in Enemies" << std::endl;
+  Player->rip();
+  if(!Player->isAlive()){
+    currentGame->restart();
+    this->endGame = true;
+  }else{
+    this->restart();
+    restartViewer = true;
   }
 }
 

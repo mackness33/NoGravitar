@@ -16,7 +16,7 @@ class spaceship : public drawable, public shooter, public living{
     bool topOOB;                   //topOutOfBounds
     float speed;
     float angular_speed;
-    movable<sf::Sprite>* body;
+    movable<sf::RectangleShape>* body;
     sf::Texture* image;
     playground *Playground;
 
@@ -44,9 +44,9 @@ class spaceship : public drawable, public shooter, public living{
     bool getTopOutOfBounds();
     float getSpatialVersor();
     float getRotationVersor();
-    movable<sf::Sprite>* getMovable();
-    entity<sf::Sprite>* getEntity();
-    sf::Sprite* getDrawable();
+    movable<sf::RectangleShape>* getMovable();
+    entity<sf::RectangleShape>* getEntity();
+    sf::RectangleShape* getDrawable();
     sf::FloatRect GetLocalBounds();
     sf::FloatRect GetGlobalBounds();
     std::list<bullet*>* getBullets();
@@ -59,7 +59,7 @@ class spaceship : public drawable, public shooter, public living{
     void setTopOutOfBounds(bool top);
     void setSpatialVersor(float spatialVersor);
     void setRotationVersor(float rotationVersor);
-    void setBody(sf::Sprite* body);
+    void setBody(sf::RectangleShape* body);
     void setPlayground(playground* Playground);
     //TODO: setTexture(sf::Texture* t);
 

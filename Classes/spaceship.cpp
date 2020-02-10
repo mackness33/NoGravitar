@@ -3,8 +3,8 @@
 
 //----------CONSTRUCTORS----------
 spaceship::spaceship(playground* plg, float spd, float dir) : xOutOfBound(false), yOutOfBound(false), topOOB(false), leftOOB(false), speed(spd), angular_speed(dir), image(information::getImage("spaceship")), Playground(plg){
-  body = new movable<sf::Sprite>(image);
-  body->SetScale(0.25f, 0.25f);
+  body = new movable<sf::RectangleShape>(sf::Vector2f(64, 64), sf::Vector2f(0, 0), image);
+  //body->SetScale(0.25f, 0.25f);
   body->SetPosition(information::PLAYER_DEFAULT_POSITION);
   sf::FloatRect bounds = this->GetLocalBounds();
   body->SetOrigin(bounds.width/2, bounds.height/2);
@@ -30,9 +30,9 @@ bool spaceship::getLeftOutOfBounds(){ return leftOOB;}
 bool spaceship::getTopOutOfBounds(){ return topOOB;}
 float spaceship::getSpatialVersor(){ return speed;}
 float spaceship::getRotationVersor(){ return angular_speed;}
-movable<sf::Sprite>* spaceship::getMovable() { return body; }
-entity<sf::Sprite>* spaceship::getEntity() { return static_cast<entity<sf::Sprite>*> (body); }
-sf::Sprite* spaceship::getDrawable() { return body->getBody(); }
+movable<sf::RectangleShape>* spaceship::getMovable() { return body; }
+entity<sf::RectangleShape>* spaceship::getEntity() { return static_cast<entity<sf::RectangleShape>*> (body); }
+sf::RectangleShape* spaceship::getDrawable() { return body->getBody(); }
 sf::FloatRect spaceship::GetLocalBounds() { return body->getBody()->getLocalBounds(); }
 sf::FloatRect spaceship::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
 std::list<bullet*>* spaceship::getBullets() { return &bullets; }

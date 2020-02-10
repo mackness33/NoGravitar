@@ -127,7 +127,7 @@ void playground::collision(std::_List_iterator<drawable*>* obj, bool ally){
 void playground::checkCollision (){
   for (auto ally = allies.begin(); ally != allies.end(); ally++){
     if(!!*ally){
-      if(this->intersects(*ally)){
+      if(this->intersects(*ally) && (*ally)->Class().compare("spaceship") != 0){
         collision(&ally, true);
         std::cout << "COLLISION with Playground!!" << std::endl;
       }

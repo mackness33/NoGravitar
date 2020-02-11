@@ -39,8 +39,7 @@ class ground : public drawable{
     void Draw (sf::RenderWindow* window);
 
     virtual bool intersects(drawable* object);
-    template <typename T> bool intersects(drawable* object);
-
+    
     //return the class of the object
     virtual std::string Class();
 };

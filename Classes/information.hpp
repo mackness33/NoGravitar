@@ -30,6 +30,8 @@ class information{
     static sf::Vector2f HEADER_DEFAULT_POSITION;
     static sf::Vector2f PLAYGROUND_DEFAULT_SIZE;
     static sf::Vector2f PLAYGROUND_DEFAULT_POSITION;
+    static sf::Vector2f PLAYER_DEFAULT_POSITION;
+    static sf::Vector2f PLAYER_DEFAULT_SIZE;
     static float SPACESHIP_DEFAULT_SPEED;
     static float SPACESHIP_DEFAULT_ANGULAR_SPEED;
     static float PLANET_DEFAULT_RADIUS;
@@ -39,7 +41,6 @@ class information{
     static float DELTA_TIME; // You MUST declare it in a CPP
     static float SWITCH_TIME; // You MUST declare it in a CPP
     static float SHOOTER_SWITCH_TIME; // You MUST declare it in a CPP
-    static sf::Vector2f PLAYER_DEFAULT_POSITION;
     static std::vector<file<sf::Texture>*> images;
     static std::vector<file<sf::Font>*> fonts;
 

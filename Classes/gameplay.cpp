@@ -92,6 +92,16 @@ void gameplay::keyPressedHandler(const sf::Event &e){
       Player->shoot();
     };break;
 
+    case sf::Keyboard::BackSpace : {
+      Player->shoot();
+    };break;
+
+
+    case sf::Keyboard::Space : {
+      Player->shoot();
+    };break;
+
+
     /*case sf::Keyboard::Y : {
       //(static_cast<planetView*>(Playground))->restart();
     };break;

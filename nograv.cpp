@@ -14,7 +14,7 @@ int main (void){
   sf::RenderWindow window(sf::VideoMode(modes[mod_num].width, modes[mod_num].height, modes[mod_num].bitsPerPixel), "NoGravitar");
 
   //TODO: make a function that it makes it automaticaly
-  window.setFramerateLimit(20);
+  window.setFramerateLimit(45);
   window.setKeyRepeatEnabled(false);
 
   //settings::loadImages();

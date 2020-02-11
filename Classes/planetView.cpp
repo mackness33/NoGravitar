@@ -101,7 +101,8 @@ void planetView::checkCollision (){
           std::cout << "COLLISION!!" << std::endl;
         }
       }
-      if(changeViewer){
+
+      if(changeViewer && !endGame){
         Galaxy->delPlanet(Planet);
         return;
       }

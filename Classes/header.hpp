@@ -16,8 +16,8 @@ class viewer;
 class header : public viewer{
   private:
     points* score;
+    points* bestScore;
     label* title;
-    label* bestScore;
 
   public:
     //----------CONSTRUCTORS----------

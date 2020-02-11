@@ -26,6 +26,7 @@ label::~label(){
 
 //---------------GETS---------------
 std::string label::getString() { return body->GetString(); }
+int label::getInt() { return std::stoi(body->GetString()); }
 text* label::getText() { return body; }
 entity<sf::Text>* label::getEntity() { return static_cast<entity<sf::Text>*> (body); }
 sf::Text* label::getDrawable() { return body->getBody(); }

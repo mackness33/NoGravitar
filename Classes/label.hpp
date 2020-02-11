@@ -20,6 +20,7 @@ class label : public drawable{
     ~label();
 
     //---------------GETS---------------
+    int getInt();
     std::string getString();
     text* getText();
     sf::Text* getDrawable();

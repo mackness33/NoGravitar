@@ -9,7 +9,7 @@ class living{
 
   public:
     //---------------CONSTRUCTORS---------------
-    living(int lifes = 5);
+    living(int lifes = 2);
 
     //---------------DESTRUCTORS---------------
     ~living();

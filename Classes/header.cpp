@@ -20,7 +20,7 @@ header::header(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture*
   score->getText()->SetPosition(sf::Vector2f((s.x - score->GetLocalBounds().width)/2, (s.y - score->GetLocalBounds().height)/2));
 
 
-  bestScore = new label("AeroviasBrasil", std::to_string(game::bestScore));
+  bestScore = new points("AeroviasBrasil", game::bestScore);
   bestScore->getText()->SetCharacterSize(30);
   bestScore->getText()->SetStyle(sf::Text::Bold);
   bestScore->getText()->SetFillColor(sf::Color::Green);
@@ -37,7 +37,14 @@ points* header::getPoints(){ return this->score;}
 //const sf::Font* header::getFont(){ return font;}
 
 //----------SETS----------
-unsigned int header::getBest(){ return 300;}//(bestScore->getString().compare(score->getString()) >= 0) ? std::stoi(bestScore->getString()) : std::stoi(score->getString()); }
+unsigned int header::getBest(){
+  std::cout << "Trovato! " << std::endl;
+  int bs = bestScore->getPoints();
+  std::cout << "Eccolo! " << std::endl;
+  int s = score->getPoints();
+  std::cout << "Bea! " << std::endl;
+  return ((bs >= s) ? bs : s);
+}
 //void header::setTitle(sf::Text t){ this->title = t;}
 //void header::setFont(sf::Font* f){ *(this->font) = *f;}
 

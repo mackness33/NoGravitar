@@ -79,6 +79,7 @@ void galaxy::checkCollision (){
         if ((*neutral)->intersects(*enemy)){
           collision(&neutral, &enemy);
           std::cout << "COLLISION NEUTRAL in GALAXY!!" << std::endl;
+          std::cout << "Enemies Tho'!!" << std::endl;
         }
       }
     }
@@ -88,6 +89,7 @@ void galaxy::checkCollision (){
         if ((*neutral)->intersects(*ally)){
           collision(&neutral, &ally);
           std::cout << "COLLISION NEUTRAL in GALAXY!!" << std::endl;
+          std::cout << " Tho'!!" << std::endl;
         }
       }
     }

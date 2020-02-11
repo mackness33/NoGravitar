@@ -2,12 +2,12 @@
 #include "spaceship.hpp"
 
 //----------CONSTRUCTORS----------
-spaceship::spaceship(playground* plg, float spd, float dir) : xOutOfBound(false), yOutOfBound(false), topOOB(false), leftOOB(false), speed(spd), angular_speed(dir), image(information::getImage("spaceship")), Playground(plg){
-  body = new movable<sf::RectangleShape>(sf::Vector2f(64, 64), sf::Vector2f(0, 0), image);
+spaceship::spaceship(playground* plg, float spd, float dir) : xOutOfBound(false), yOutOfBound(false), topOOB(false), leftOOB(false), speed(spd), angular_speed(dir), image(information::getImage("spaceship")), Playground(plg), tb(false){
+  body = new movable<sf::RectangleShape>(information::PLAYER_DEFAULT_SIZE, information::PLAYER_DEFAULT_POSITION, image);
   //body->SetScale(0.25f, 0.25f);
-  body->SetPosition(information::PLAYER_DEFAULT_POSITION);
   sf::FloatRect bounds = this->GetLocalBounds();
   body->SetOrigin(bounds.width/2, bounds.height/2);
+  TractorBeam = new tractorBeam();
 }
 
 
@@ -94,7 +94,7 @@ void spaceship::fly(float module){
     std::cout << "XOutOfBounds!!!" << std::endl;
   }
 
-  body->Move(cos_module, sin_module);
+  this->Move(sf::Vector2f(cos_module, sin_module));
 }
 
 
@@ -114,18 +114,8 @@ bool spaceship::opposite_direction(bool side, float angle){
 }
 
 void spaceship::Draw (sf::RenderWindow* window){
-  /*bullet *bul;
-  for (std::list<bullet*>::iterator b = bullets.begin(); b != bullets.end(); b++){
-    //std::cout << "position i: " << i << std::endl;
-    bul = *b;
-    //std::cout << "Does the bullet exist: " << !!bul << std::endl;
-    if(!!bul){
-      //std::cout << "real location of " << i << "^ bullet: " << bul << std::endl;
-      bul->Update();
-      bul->Draw(window);
-    }
-  }*/
-
+  if(tb)
+    TractorBeam->Draw(window);
   body->DrawTest(window);
 }
 
@@ -151,7 +141,21 @@ void spaceship::Draw (sf::RenderWindow* window){
 }*/
 
 float spaceship::GetRotation(){ return this->body->getBody()->getRotation(); }
+void spaceship::setTractorPosition(){
+  sf::Vector2f p = body->GetPosition();
+  TractorBeam->getEntity()->SetPosition(sf::Vector2f(p.x - (information::TRACTORBEAM_DEFAULT_SIZE.x - information::PLAYER_DEFAULT_SIZE.x)/2, p.y));
+}
 
+
+void spaceship::Move(sf::Vector2f pos){
+  body->Move(pos);
+  TractorBeam->getMovable()->Move(pos);
+}
+
+void spaceship::SetPosition(sf::Vector2f pos){
+  body->SetPosition(pos);
+  TractorBeam->getMovable()->SetPosition(sf::Vector2f(pos.x - (information::TRACTORBEAM_DEFAULT_SIZE.x - information::PLAYER_DEFAULT_SIZE.x)/2, pos.y));
+}
 
 void spaceship::shoot(){
   bullet *bul = new bullet(this, information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation(), body->getBody()->getPosition());
@@ -159,6 +163,8 @@ void spaceship::shoot(){
 
   Playground->addAlly(bul);
 }
+
+void spaceship::attract(){ tb = !tb; }
 
 std::string spaceship::Class(){
   return "spaceship";

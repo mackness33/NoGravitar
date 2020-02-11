@@ -124,7 +124,7 @@ void galaxy::collision(std::_List_iterator<drawable*>* ntl, std::_List_iterator<
 
       planetObj *planet = static_cast<planetObj*> (**ntl);
       Player->setPlayground(planet->getPlanetView());
-      Player->getEntity()->SetPosition(sf::Vector2f(100, 200));
+      Player->SetPosition(information::PLAYER_DEFAULT_POSITION);
       currentGame->setMainViewer(planet->getPlanetView());
 
       *obj = allies.end();
@@ -134,7 +134,7 @@ void galaxy::collision(std::_List_iterator<drawable*>* ntl, std::_List_iterator<
 }
 
 void galaxy::delPlanet(planetObj *planet){
-  Player->getEntity()->SetPosition(planet->getEntity()->GetPosition());
+  Player->SetPosition(planet->getEntity()->GetPosition());
 
   neutrals.remove(static_cast<drawable*>(planet));
   planets.remove(planet);

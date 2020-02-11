@@ -32,6 +32,7 @@ class information{
     static sf::Vector2f PLAYGROUND_DEFAULT_POSITION;
     static sf::Vector2f PLAYER_DEFAULT_POSITION;
     static sf::Vector2f PLAYER_DEFAULT_SIZE;
+    static sf::Vector2f TRACTORBEAM_DEFAULT_SIZE;
     static float SPACESHIP_DEFAULT_SPEED;
     static float SPACESHIP_DEFAULT_ANGULAR_SPEED;
     static float PLANET_DEFAULT_RADIUS;

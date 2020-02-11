@@ -7,8 +7,9 @@ sf::Vector2f information::HEADER_DEFAULT_SIZE = sf::Vector2f(0, 0); // You MUST 
 sf::Vector2f information::HEADER_DEFAULT_POSITION = sf::Vector2f(0, 0); // You MUST declare it in a CPP
 sf::Vector2f information::PLAYGROUND_DEFAULT_SIZE = sf::Vector2f(0, 0); // You MUST declare it in a CPP
 sf::Vector2f information::PLAYGROUND_DEFAULT_POSITION = sf::Vector2f(0, 0); // You MUST declare it in a CPP
-sf::Vector2f information::PLAYER_DEFAULT_POSITION = sf::Vector2f(80.f, 70.f); // You MUST declare it in a CPP
+sf::Vector2f information::PLAYER_DEFAULT_POSITION = sf::Vector2f(100.f, 200.f); // You MUST declare it in a CPP
 sf::Vector2f information::PLAYER_DEFAULT_SIZE = sf::Vector2f(64, 64); // You MUST declare it in a CPP
+sf::Vector2f information::TRACTORBEAM_DEFAULT_SIZE = sf::Vector2f(30, 30); // You MUST declare it in a CPP
 float information::SPACESHIP_DEFAULT_ANGULAR_SPEED = 6; // You MUST declare it in a CPP
 float information::SPACESHIP_DEFAULT_SPEED = 10; // You MUST declare it in a CPP
 float information::PLANET_DEFAULT_RADIUS = 50; // You MUST declare it in a CPP
@@ -40,6 +41,7 @@ const void information::inizialize(sf::Vector2u ws){
 
   //TODO: BULLET_DEFAULT_RADIUS = 5;
   BULLET_DEFAULT_SPEED = SPACESHIP_DEFAULT_SPEED * 1.25;
+  TRACTORBEAM_DEFAULT_SIZE += PLAYER_DEFAULT_SIZE ;
 
   SHOOTER_SWITCH_TIME = SWITCH_TIME * 20;
 

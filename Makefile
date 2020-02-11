@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o scene.o gameplay.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o
-		g++ -g -Wall -o NoGravitar nograv.o scene.o game.o gameplay.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o $(LIBS)
+all: nograv.o game.o scene.o gameplay.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o tractorBeam.o
+		g++ -g -Wall -o NoGravitar nograv.o scene.o game.o gameplay.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o tractorBeam.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -86,11 +86,14 @@ startView.o: Classes/startView.hpp Classes/startView.cpp Classes/selectionLabel.
 shooter.o: Classes/shooter.hpp Classes/shooter.cpp Classes/bullet.hpp Classes/information.hpp
 		g++ -c Classes/shooter.cpp $(LIBS)
 
-spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp Classes/playground.hpp Classes/living.hpp Classes/shooter.hpp
+spaceship.o: Classes/spaceship.hpp Classes/spaceship.cpp Classes/bullet.hpp Classes/playground.hpp Classes/living.hpp Classes/shooter.hpp Classes/tractorBeam.hpp
 		g++ -c Classes/spaceship.cpp $(LIBS)
 
 text.o: Classes/text.hpp Classes/text.cpp Classes/entity.hpp Classes/essence.hpp
 		g++ -c Classes/text.cpp $(LIBS)
+
+tractorBeam.o: Classes/tractorBeam.hpp Classes/tractorBeam.cpp Classes/shape.hpp Classes/essence.hpp
+		g++ -c Classes/tractorBeam.cpp $(LIBS)
 
 utility.o: Classes/utility.hpp Classes/utility.cpp Classes/drawable.hpp
 		g++ -c Classes/utility.cpp $(LIBS)

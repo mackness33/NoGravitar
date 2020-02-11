@@ -4,12 +4,15 @@
 gameplay::gameplay(sf::RenderWindow* wnd, game* g) : scene(wnd), Game(g) {
   Player = new spaceship(nullptr);
   Header = new header(Window);
+  std::cout << "Brust" << std::endl;
   //Playground = new playground(Window);
   //Settings = new information(Window);
   Galaxy = new galaxy(Window, Player, 20, this);
   //StartView = new startView(Window);
   this->Viewer = Galaxy;
+  
   Player->setPlayground(Galaxy);
+  Player->setTractorPosition();
 
   Points = Header->getPoints();
 }
@@ -88,34 +91,15 @@ void gameplay::keyReleasedHandler(const sf::Event &e){}
 void gameplay::keyPressedHandler(const sf::Event &e){
   std::cout << "the key pressed is: " << e.key.code << std::endl;
   switch (e.key.code) {
-    case sf::Keyboard::S : {
-      Player->shoot();
-    };break;
-
-    case sf::Keyboard::BackSpace : {
-      Player->shoot();
-    };break;
-
-
     case sf::Keyboard::Space : {
       Player->shoot();
     };break;
 
-
-    /*case sf::Keyboard::Y : {
-      //(static_cast<planetView*>(Playground))->restart();
+    case sf::Keyboard::Z : {
+      Player->attract();
     };break;
-*/
-    case sf::Keyboard::X : {
-      std::cout << "Hi, I am X: " << std::endl;
-      // std::cout << "CLASS: " << Playground->Class() << std::endl;
-      std::cout << "CLASS: " << !!Playground << std::endl;
-      //Playground->restart();
-      (Player->getPlayground())->restart();
-    }
 
     default: {}
-
   }
     //default: std::cout << "the key pressed is: " << e.key.code << std::endl;
   /*

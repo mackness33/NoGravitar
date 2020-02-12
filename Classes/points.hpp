@@ -1,7 +1,7 @@
 #ifndef POINTS_H
 #define POINTS_H
 
-#include<iostream>
+#include <iostream>
 #include "label.hpp"
 
 class points : public label{
@@ -20,8 +20,8 @@ class points : public label{
     //---------------SETS---------------
 
     //---------------METHODS---------------
-    void deathBunker();
-    void deathPlanet();
+    virtual void deathBunker();
+    virtual void deathPlanet();
     void reset();
 
     //return the class of the object

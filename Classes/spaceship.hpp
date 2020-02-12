@@ -15,7 +15,6 @@ class spaceship : public drawable, public shooter, public living{
     bool yOutOfBound;                   //YOutOfBounds
     bool leftOOB;                   //leftOutOfBounds
     bool topOOB;                   //topOutOfBounds
-    bool tb;                   //topOutOfBounds
     float speed;
     float angular_speed;
     movable<sf::RectangleShape>* body;
@@ -40,6 +39,7 @@ class spaceship : public drawable, public shooter, public living{
     //spaceship(const spaceship& Player);
     ~spaceship();
 
+    bool tb;                   //topOutOfBounds
     //----------GETS----------
     bool getXOutOfBounds();
     bool getYOutOfBounds();
@@ -54,6 +54,7 @@ class spaceship : public drawable, public shooter, public living{
     sf::FloatRect GetGlobalBounds();
     std::list<bullet*>* getBullets();
     playground* getPlayground();
+    tractorBeam* getTractorBeam();
 
     //----------SETS----------
     void setXOutOfBounds(bool x);

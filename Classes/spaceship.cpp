@@ -37,6 +37,7 @@ sf::FloatRect spaceship::GetLocalBounds() { return body->getBody()->getLocalBoun
 sf::FloatRect spaceship::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
 std::list<bullet*>* spaceship::getBullets() { return &bullets; }
 playground* spaceship::getPlayground() { return Playground; }
+tractorBeam* spaceship::getTractorBeam(){ return TractorBeam;}
 //TODO: set texture to let the user change the spaceship image
 
 
@@ -146,6 +147,11 @@ void spaceship::setTractorPosition(){
   TractorBeam->getEntity()->SetPosition(sf::Vector2f(p.x - (information::TRACTORBEAM_DEFAULT_SIZE.x - information::PLAYER_DEFAULT_SIZE.x)/2, p.y));
 }
 
+// void spaceship::attractFuels(std::list){
+//   for(auto f = fuels.begin(); f != f.end(); i++)
+//     if(f->intersects(trb))
+//       currentGame->deathBunker();
+// }
 
 void spaceship::Move(sf::Vector2f pos){
   body->Move(pos);

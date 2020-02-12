@@ -132,7 +132,7 @@ void planetView::checkCollision (){
   for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
       if(!!*neutral && !!*enemy){
-        if ((*neutral)->intersects(*enemy) && (*enemy)->Class().compare("bunker") != 0){
+        if ((*neutral)->intersects(*enemy) && (*enemy)->Class().compare("bunker") != 0 && (*enemy)->Class().compare("fuel") != 0){
           collision(&enemy, false);
           std::cout << "COLLISION NEUTRAL in planetView!!" << std::endl;
         }
@@ -151,6 +151,14 @@ void planetView::checkCollision (){
           return;
       }
     }
+  }
+
+  if(Player->tb){
+    tractorBeam *trb = Player->getTractorBeam();
+
+    for(auto f = fuels.begin(); f != fuels.end(); f++)
+      if((*f)->intersects(trb))
+        currentGame->deathBunker();
   }
 }
 

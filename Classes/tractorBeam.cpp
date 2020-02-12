@@ -3,18 +3,12 @@
 //---------------CONSTRUCTORS---------------
 //TODO: checks on the line to check on
 tractorBeam::tractorBeam(sf::Vector2f p, sf::Vector2f s){
-
-  body = new movable<sf::RectangleShape>(s, p, information::getImage("tractorbeam"));
-
-  // if(o != sf::Vector2f(-1, -1))
-  //   std::cout << "no origin";
-  //   //body.SetOrigin(o);
+  image = information::getImage("tractorbeam");
+  body = new movable<sf::RectangleShape>(s, p, image);
 }
 
 tractorBeam::~tractorBeam(){
   std::cout << "DELETING TRACTORBEAM" << std::endl;
-
-  utility::deleteVector(lines);
 
   if(!!body)
     delete body;

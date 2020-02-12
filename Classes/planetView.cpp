@@ -14,6 +14,7 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, gameplay* actGame,
   Ground = new ground(information::MENU_DEFAULT_SIZE.x, information::MENU_DEFAULT_SIZE.y);
 
   bunkers = std::list<bunker*>();
+  fuels = std::list<fuel*>();
 
   inizializeBunker();
 
@@ -65,9 +66,12 @@ void planetView::inizializeBunker(){
   // playground::addEnemy(temp);
 
   bool occupied[20];
+  //TODO
   int numBunker = lines.size() - 3;
+  int numFuel = 2;
   int pos = 0;
-  bunker *tempi = nullptr;
+  bunker *tempBunker = nullptr;
+  fuel *tempFuel = nullptr;
 
   for(int k = 0; k < lines.size(); k++)
     occupied[k] = false;
@@ -76,9 +80,22 @@ void planetView::inizializeBunker(){
     pos = utility::RandInt(lines.size());
 
     if(!occupied[pos]){
-      bunker *temp = new bunker(this, *lines[pos]);
-      bunkers.push_front(temp);
-      playground::addEnemy(temp);
+      tempBunker = new bunker(this, *lines[pos]);
+      bunkers.push_front(tempBunker);
+      playground::addEnemy(tempBunker);
+
+      occupied[pos] = true;
+      i++;
+    }
+  }
+
+  for(int i = 0; i < numFuel;){
+    pos = utility::RandInt(lines.size());
+
+    if(!occupied[pos]){
+      tempFuel = new fuel(*lines[pos]);
+      fuels.push_front(tempFuel);
+      playground::addAlly(tempFuel);
 
       occupied[pos] = true;
       i++;

@@ -3,6 +3,7 @@
 sf::Vector2u information::WINDOW_SIZE; // You MUST declare it in a CPP
 sf::Vector2f information::MENU_DEFAULT_SIZE = sf::Vector2f(0, 0); // You MUST declare it in a CPP
 sf::Vector2f information::MENU_DEFAULT_POSITION = sf::Vector2f(0, 0); // You MUST declare it in a CPP
+sf::Vector2f information::FUEL_DEFAULT_SIZE = sf::Vector2f(30, 30); // You MUST declare it in a CPP
 sf::Vector2f information::HEADER_DEFAULT_SIZE = sf::Vector2f(0, 0); // You MUST declare it in a CPP
 sf::Vector2f information::HEADER_DEFAULT_POSITION = sf::Vector2f(0, 0); // You MUST declare it in a CPP
 sf::Vector2f information::PLAYGROUND_DEFAULT_SIZE = sf::Vector2f(0, 0); // You MUST declare it in a CPP

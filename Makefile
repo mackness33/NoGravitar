@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o scene.o gameplay.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o tractorBeam.o
-		g++ -g -Wall -o NoGravitar nograv.o scene.o game.o gameplay.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o tractorBeam.o $(LIBS)
+all: nograv.o game.o scene.o gameplay.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o tractorBeam.o fuel.o
+		g++ -g -Wall -o NoGravitar nograv.o scene.o game.o gameplay.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o tractorBeam.o fuel.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -31,6 +31,9 @@ galaxy.o: Classes/galaxy.hpp Classes/galaxy.cpp Classes/spaceship.hpp Classes/pl
 
 game.o: Classes/game.hpp Classes/game.cpp Classes/menu.hpp Classes/gameplay.hpp
 		g++ -c Classes/game.cpp $(LIBS)
+
+fuel.o: Classes/fuel.hpp Classes/fuel.cpp Classes/drawable.hpp Classes/entity.hpp Classes/essence.hpp
+		g++ -c Classes/fuel.cpp $(LIBS)
 
 gameplay.o: Classes/gameplay.hpp Classes/gameplay.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp Classes/spaceship.hpp Classes/spaceship.hpp Classes/scene.hpp
 		g++ -c Classes/gameplay.cpp $(LIBS)

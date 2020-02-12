@@ -26,6 +26,7 @@ class information{
     //----------CONSTRUCTORS----------
     static sf::Vector2f MENU_DEFAULT_SIZE;
     static sf::Vector2f MENU_DEFAULT_POSITION;
+    static sf::Vector2f FUEL_DEFAULT_SIZE;
     static sf::Vector2f HEADER_DEFAULT_SIZE;
     static sf::Vector2f HEADER_DEFAULT_POSITION;
     static sf::Vector2f PLAYGROUND_DEFAULT_SIZE;

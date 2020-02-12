@@ -9,6 +9,7 @@
 #include "galaxy.hpp"
 #include "planetObj.hpp"
 #include "shooter.hpp"
+#include "fuel.hpp"
 
 class gameplay;
 class galaxy;
@@ -19,6 +20,7 @@ class planetView : public playground{
     spaceship *Player;
     ground *Ground;
     std::list<bunker*> bunkers;
+    std::list<fuel*> fuels;
     gameplay *currentGame;
     galaxy *Galaxy;
     planetObj *Planet;

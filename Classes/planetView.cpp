@@ -153,7 +153,7 @@ void planetView::checkCollision (){
     }
   }
 
-  if(Player->tb){
+  if(information::TRACTORBEAM_IS_ACTIVE){
     tractorBeam *trb = Player->getTractorBeam();
 
     for(auto f = fuels.begin(); f != fuels.end(); f++){

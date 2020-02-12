@@ -1,8 +1,9 @@
 #define PI 3.14159265
 #include "spaceship.hpp"
+#include "../Handlers/collisionHandler.hpp"
 
 //----------CONSTRUCTORS----------
-spaceship::spaceship(playground* plg, float spd, float dir) : xOutOfBound(false), yOutOfBound(false), topOOB(false), leftOOB(false), speed(spd), angular_speed(dir), image(information::getImage("spaceship")), Playground(plg), tb(false){
+spaceship::spaceship(playground* plg, float spd, float dir) : xOutOfBound(false), yOutOfBound(false), topOOB(false), leftOOB(false), speed(spd), angular_speed(dir), image(information::getImage("spaceship")), Playground(plg), attract(false){
   body = new movable<sf::RectangleShape>(information::PLAYER_DEFAULT_SIZE, information::PLAYER_DEFAULT_POSITION, image);
   //body->SetScale(0.25f, 0.25f);
   sf::FloatRect bounds = this->GetLocalBounds();
@@ -49,6 +50,8 @@ void spaceship::setTopOutOfBounds(bool t){ topOOB = t;}
 void spaceship::setSpatialVersor(float sv) { speed = sv;}
 void spaceship::setRotationVersor(float rv) { angular_speed = rv;}
 void spaceship::setPlayground(playground* pg) { Playground = pg;}
+void spaceship::setTranslation(bool t) { translation.setTransformation(t);}
+void spaceship::setRotation(bool r) { rotation.setTransformation(r);}
 //void spaceship::setBody(sf::Sprite* b) { body = b;}
 
 //----------METHODS----------
@@ -115,8 +118,25 @@ bool spaceship::opposite_direction(bool side, float angle){
 }
 
 void spaceship::Draw (sf::RenderWindow* window){
-  if(tb)
+
+  collisionHandler::checkOutOfBounds(this, Playground);
+
+  //module keys
+  translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //which key has been pressed
+  if(translation.getTransformation())                         //if pressed make a transformation of the object
+    this->movement(translation.getKey()/*, &spaceshipBoundingBox*/);
+
+
+  //direction keys
+  rotation.isUsed(sf::Keyboard::Right, sf::Keyboard::Left);   //which key has been pressed
+  if(rotation.getTransformation())                            //if pressed make a transformation of the object
+    this->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
+
+  //gameplay::Viewer->checkCollision();
+
+  if(information::TRACTORBEAM_IS_ACTIVE)
     TractorBeam->Draw(window);
+
   body->DrawTest(window);
 }
 
@@ -142,6 +162,9 @@ void spaceship::Draw (sf::RenderWindow* window){
 }*/
 
 float spaceship::GetRotation(){ return this->body->getBody()->getRotation(); }
+
+bool spaceship::isAttracting(){ return attract; }
+
 void spaceship::setTractorPosition(){
   sf::Vector2f p = body->GetPosition();
   TractorBeam->getEntity()->SetPosition(sf::Vector2f(p.x - (information::TRACTORBEAM_DEFAULT_SIZE.x - information::PLAYER_DEFAULT_SIZE.x)/2, p.y));
@@ -170,7 +193,7 @@ void spaceship::shoot(){
   Playground->addAlly(bul);
 }
 
-void spaceship::attract(){ tb = !tb; information::TRACTORBEAM_IS_ACTIVE = tb; }
+void spaceship::pull(){ information::TRACTORBEAM_IS_ACTIVE = false; }
 
 std::string spaceship::Class(){
   return "spaceship";

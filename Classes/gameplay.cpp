@@ -61,7 +61,7 @@ void gameplay::eventHandler(const sf::Event &event){
   switch (event.type) {
     //KEYRELEASED
     case sf::Event::KeyReleased :{
-      eventHandler::keyReleasedHandler(event, &translation, &rotation);
+      this->keyReleasedHandler(event);
     };break;
 
     //KEYPRESSED
@@ -89,7 +89,17 @@ void gameplay::restart(){
 void gameplay::deathBunker(){ Points->deathBunker(); }      //can be optimazed with friend keyword on points for Galaxy
 void gameplay::deathPlanet(){ Points->deathPlanet(); }      //can be optimazed with friend keyword on points for PlanetView
 void gameplay::addFuel(){ FuelLabel->addFuel(); }      //can be optimazed with friend keyword on points for PlanetView
-void gameplay::keyReleasedHandler(const sf::Event &e){}
+
+void gameplay::keyReleasedHandler(const sf::Event &e){
+  switch (e.key.code) {
+    case sf::Keyboard::Left : { }                                      //LEFT
+    case sf::Keyboard::Right : { Player->setRotation(false); };break;            //RIGHT
+    case sf::Keyboard::Up : { }                                        //UP
+    case sf::Keyboard::Down : { Player->setTranslation(false); };break;            //DOWN
+    case sf::Keyboard::Z : { information::TRACTORBEAM_IS_ACTIVE = false; };break;            //DOWN
+    default: break;
+  }
+}
 
 void gameplay::keyPressedHandler(const sf::Event &e){
   std::cout << "the key pressed is: " << e.key.code << std::endl;
@@ -99,7 +109,7 @@ void gameplay::keyPressedHandler(const sf::Event &e){
     };break;
 
     case sf::Keyboard::Z : {
-      Player->attract();
+      information::TRACTORBEAM_IS_ACTIVE = true;
     };break;
 
     default: {}
@@ -116,22 +126,6 @@ void gameplay::keyPressedHandler(const sf::Event &e){
 
 //DRAW
 void gameplay::Draw (){
-
-  collisionHandler::checkOutOfBounds(Player, this->Viewer);
-
-  //module keys
-  translation.isUsed(sf::Keyboard::Up, sf::Keyboard::Down);   //which key has been pressed
-  if(translation.getTransformation())                         //if pressed make a transformation of the object
-    Player->movement(translation.getKey()/*, &spaceshipBoundingBox*/);
-
-
-  //direction keys
-  rotation.isUsed(sf::Keyboard::Right, sf::Keyboard::Left);   //which key has been pressed
-  if(rotation.getTransformation())                            //if pressed make a transformation of the object
-    Player->movement(rotation.getKey()/*, &spaceshipBoundingBox*/);
-
-  //gameplay::Viewer->checkCollision();
-
   Header->Draw();
   scene::Draw();
 }

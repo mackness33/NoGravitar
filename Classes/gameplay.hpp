@@ -30,8 +30,6 @@ class gameplay : public scene{
 
     playground *Playground;
     //classes to handle input commands in smooth trasformations of object
-    keyVector rotation;
-    keyVector translation;
 
   protected:
     void keyPressedHandler(const sf::Event &event);

@@ -8,6 +8,7 @@
 #include "shooter.hpp"
 #include "living.hpp"
 #include "tractorBeam.hpp"
+#include "keyVector.hpp"
 
 class spaceship : public drawable, public shooter, public living{
   private:
@@ -15,13 +16,16 @@ class spaceship : public drawable, public shooter, public living{
     bool yOutOfBound;                   //YOutOfBounds
     bool leftOOB;                   //leftOutOfBounds
     bool topOOB;                   //topOutOfBounds
+    bool attract;
     float speed;
     float angular_speed;
     movable<sf::RectangleShape>* body;
     tractorBeam *TractorBeam;
     sf::Texture *image;
     playground *Playground;
-
+    keyVector rotation;
+    keyVector translation;
+//    keyVector attraction;
 
   protected:
     //It build up the spaceship shape
@@ -39,7 +43,6 @@ class spaceship : public drawable, public shooter, public living{
     //spaceship(const spaceship& Player);
     ~spaceship();
 
-    bool tb;                   //topOutOfBounds
     //----------GETS----------
     bool getXOutOfBounds();
     bool getYOutOfBounds();
@@ -65,6 +68,10 @@ class spaceship : public drawable, public shooter, public living{
     void setRotationVersor(float rotationVersor);
     void setBody(sf::RectangleShape* body);
     void setPlayground(playground* Playground);
+    void setRotation(bool rotation);
+    void setTranslation(bool traslation);
+    void setAttraction(bool attraction);
+    bool isAttracting();
     //TODO: setTexture(sf::Texture* t);
 
     //----------METHODS------------
@@ -80,7 +87,7 @@ class spaceship : public drawable, public shooter, public living{
     void Draw (sf::RenderWindow* window);
 
     void shoot();
-    void attract();
+    void pull();
 
     virtual std::string Class();
 };

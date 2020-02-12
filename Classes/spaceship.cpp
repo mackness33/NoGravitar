@@ -170,7 +170,7 @@ void spaceship::shoot(){
   Playground->addAlly(bul);
 }
 
-void spaceship::attract(){ tb = !tb; }
+void spaceship::attract(){ tb = !tb; information::TRACTORBEAM_IS_ACTIVE = tb; }
 
 std::string spaceship::Class(){
   return "spaceship";

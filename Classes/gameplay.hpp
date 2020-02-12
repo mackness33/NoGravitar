@@ -9,11 +9,13 @@
 #include "settings.hpp"
 #include "startView.hpp"
 #include "game.hpp"
+#include "fuelLabel.hpp"
 
 #include "../Handlers/eventHandler.hpp"
 
 class game;
 class galaxy;
+class header;
 
 class gameplay : public scene{
   protected:
@@ -22,6 +24,7 @@ class gameplay : public scene{
     header *Header;
     galaxy *Galaxy;
     points *Points;
+    fuelLabel *FuelLabel;
     //startView *StartView;
     //settings *Settings;
 
@@ -54,6 +57,7 @@ class gameplay : public scene{
     void restart();
     void deathBunker();
     void deathPlanet();
+    void addFuel();
 
     //friend void eventHandler::changePlaygroundHandler(); // Friend function
     virtual std::string Class();

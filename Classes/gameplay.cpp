@@ -3,18 +3,19 @@
 //CONSTRUCTORS
 gameplay::gameplay(sf::RenderWindow* wnd, game* g) : scene(wnd), Game(g) {
   Player = new spaceship(nullptr);
-  Header = new header(Window);
+  Header = new header(Window, this);
   std::cout << "Brust" << std::endl;
   //Playground = new playground(Window);
   //Settings = new information(Window);
   Galaxy = new galaxy(Window, Player, 20, this);
   //StartView = new startView(Window);
   this->Viewer = Galaxy;
-  
+
   Player->setPlayground(Galaxy);
   Player->setTractorPosition();
 
   Points = Header->getPoints();
+  FuelLabel = Header->getFuels();
 }
 
 gameplay::~gameplay(){
@@ -84,8 +85,10 @@ void gameplay::restart(){
   std::cout << "Magari! " << std::endl;
   Game->restart();
 }
+
 void gameplay::deathBunker(){ Points->deathBunker(); }      //can be optimazed with friend keyword on points for Galaxy
 void gameplay::deathPlanet(){ Points->deathPlanet(); }      //can be optimazed with friend keyword on points for PlanetView
+void gameplay::addFuel(){ FuelLabel->addFuel(); }      //can be optimazed with friend keyword on points for PlanetView
 void gameplay::keyReleasedHandler(const sf::Event &e){}
 
 void gameplay::keyPressedHandler(const sf::Event &e){

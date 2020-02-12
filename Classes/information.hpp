@@ -34,6 +34,7 @@ class information{
     static sf::Vector2f PLAYER_DEFAULT_POSITION;
     static sf::Vector2f PLAYER_DEFAULT_SIZE;
     static sf::Vector2f TRACTORBEAM_DEFAULT_SIZE;
+    static bool TRACTORBEAM_IS_ACTIVE;
     static float SPACESHIP_DEFAULT_SPEED;
     static float SPACESHIP_DEFAULT_ANGULAR_SPEED;
     static float PLANET_DEFAULT_RADIUS;
@@ -43,6 +44,7 @@ class information{
     static float DELTA_TIME; // You MUST declare it in a CPP
     static float SWITCH_TIME; // You MUST declare it in a CPP
     static float SHOOTER_SWITCH_TIME; // You MUST declare it in a CPP
+    static int FUELS_DEFAULT_CAPACITY;
     static std::vector<file<sf::Texture>*> images;
     static std::vector<file<sf::Font>*> fonts;
 

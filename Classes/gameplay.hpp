@@ -22,9 +22,10 @@ class gameplay : public scene{
     game *Game;
     spaceship *Player;
     header *Header;
-    galaxy *Galaxy;
+    std::vector<galaxy*> galaxies;
     points *Points;
     fuelLabel *FuelLabel;
+    std::vector<galaxy*>::iterator activeGalaxy;
     //startView *StartView;
     //settings *Settings;
 
@@ -56,6 +57,8 @@ class gameplay : public scene{
     void deathBunker();
     void deathPlanet();
     void addFuel();
+    void next();
+    void prev();
 
     //friend void eventHandler::changePlaygroundHandler(); // Friend function
     virtual std::string Class();

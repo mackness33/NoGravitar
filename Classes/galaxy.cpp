@@ -51,7 +51,7 @@ void galaxy::inizializePlanets(unsigned int numPlanets){
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   planetObj *pln = nullptr;
 
-  for (int i = 0; i < numPlanets; i++){
+  for (int i = 0; i < 1; i++){
     sf::Vector2f position = utility::RandVector(plgBound.x - 20, plgBound.y - 20, 10, (window->getSize().y/10) + 10);
     pln = new planetObj(utility::RandInt(20, 30), position);
 
@@ -142,6 +142,9 @@ void galaxy::delPlanet(planetObj *planet){
   planet = nullptr;
 
   currentGame->deathPlanet();
+  std::cout << std::endl << std::endl << planets.size() << std::endl << std::endl;
+  if(planets.size() == 0)
+    currentGame->next();
 }
 
 

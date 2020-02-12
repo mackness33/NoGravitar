@@ -7,11 +7,16 @@ gameplay::gameplay(sf::RenderWindow* wnd, game* g) : scene(wnd), Game(g) {
   std::cout << "Brust" << std::endl;
   //Playground = new playground(Window);
   //Settings = new information(Window);
-  Galaxy = new galaxy(Window, Player, 20, this);
-  //StartView = new startView(Window);
-  this->Viewer = Galaxy;
+  galaxies = {};
+  for(int i = 0; i < information::GALAXY_DEFAULT_QUANTITY; i++)
+    galaxies.push_back(new galaxy(Window, Player, 20, this));
 
-  Player->setPlayground(Galaxy);
+  activeGalaxy = galaxies.begin();
+  // Galaxy = new galaxy(Window, Player, 20, this);
+  //StartView = new startView(Window);
+  this->Viewer = *activeGalaxy;
+
+  Player->setPlayground(*activeGalaxy);
   Player->setTractorPosition();
 
   Points = Header->getPoints();
@@ -24,8 +29,10 @@ gameplay::~gameplay(){
   if(!!Player)
     delete Player;
 
-  if(!!Galaxy)
-    delete Galaxy;
+  utility::deleteVector(galaxies);
+
+  //if(!!actualGalaxy)
+    //delete Galaxy;
 
   if(!!Header)
     delete Header;
@@ -39,9 +46,9 @@ gameplay::~gameplay(){
   Window = nullptr;
   Player = nullptr;
   Header = nullptr;
-  //Settings = nullptr;
-  Galaxy = nullptr;
-  //Viewer = nullptr;
+  *activeGalaxy = nullptr;
+  // Viewer = nullptr;
+  // Settings = nullptr;
 
 }
 
@@ -84,6 +91,17 @@ void gameplay::restart(){
   game::bestScore = Header->getBest();
   std::cout << "Magari! " << std::endl;
   Game->restart();
+}
+
+void gameplay::next(){
+  std::cout << "Boh vediamo! " << std::endl;
+  this->Viewer = *(++activeGalaxy);
+  // std::cout << "Hola: " << std::distance(galaxies.begin(), activeGalaxy) << std::endl;
+}
+
+void gameplay::prev(){
+  std::cout << " Holy! " << std::endl;
+  this->Viewer = *(--activeGalaxy);
 }
 
 void gameplay::deathBunker(){ Points->deathBunker(); }      //can be optimazed with friend keyword on points for Galaxy

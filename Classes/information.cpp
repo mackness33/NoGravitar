@@ -22,6 +22,7 @@ float information::SWITCH_TIME = 10.0f; // You MUST declare it in a CPP
 float information::SHOOTER_SWITCH_TIME = 0.0f; // You MUST declare it in a CPP
 bool information::TRACTORBEAM_IS_ACTIVE = false;
 int information::FUELS_DEFAULT_CAPACITY = 5000;
+int information::GALAXY_DEFAULT_QUANTITY = 4;
 
 const float information::MAX_GROUND_HEIGHT = 0.4;             //30%
 const float information::MIN_GROUND_HEIGHT = 0.1;             //30%

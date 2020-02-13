@@ -43,6 +43,7 @@ const void information::inizialize(sf::Vector2u ws){
   BULLET_DEFAULT_SPEED = SPACESHIP_DEFAULT_SPEED * 1.25;
   TRACTORBEAM_DEFAULT_SIZE += PLAYER_DEFAULT_SIZE ;
 
+  PLAYER_DEFAULT_POSITION = sf::Vector2f(PLAYGROUND_DEFAULT_SIZE.x/2, PLAYGROUND_DEFAULT_SIZE.y/2); // You MUST declare it in a CPP
   SHOOTER_SWITCH_TIME = SWITCH_TIME * 20;
 
   std::string path = std::experimental::filesystem::current_path();

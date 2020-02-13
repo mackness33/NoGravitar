@@ -44,6 +44,8 @@ class galaxy : public playground{
 
     void delPlanet(planetObj *planet);
 
+    void next();
+    void prev();
     virtual std::string Class();
 
 };

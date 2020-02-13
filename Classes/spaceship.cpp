@@ -90,11 +90,20 @@ void spaceship::fly(float module){
 
   if((yOutOfBound && !y_opp_dir)){
     sin_module = 0;
+    // if(topOOB && Playground->Class().compare("planetView"))
+    //   Playground->back();
     std::cout << "YOutOfBounds!!!" << std::endl;
   }
 
   if((xOutOfBound && !x_opp_dir)){
     cos_module = 0;
+    if(Playground->Class().compare("planetView")){
+      if(leftOOB)
+        Playground->prev();
+      else
+        Playground->next();
+    }
+
     std::cout << "XOutOfBounds!!!" << std::endl;
   }
 
@@ -194,6 +203,59 @@ void spaceship::shoot(){
 }
 
 void spaceship::pull(){ information::TRACTORBEAM_IS_ACTIVE = false; }
+
+//It let the spaceship move or rotate based on the key pressed
+void spaceship::checkOutOfBounds(){
+  // get the bounding box of the entity
+  sf::FloatRect bbSpaceship = this->GetGlobalBounds();     //bb => BoundBox
+  sf::FloatRect bbPlayground = Playground->GetGlobalBounds();
+
+  // check collision with another box (like the bounding box of another entity)
+  bbPlayground.intersects(bbSpaceship, bbSpaceship);
+
+  //TODO: make methods to organize checkOutOfBounds spaceship
+  //Y OUT OF BOUNDS
+  //this->checkSide(sf::Vector2f(bbSpaceship.left, bbSpaceship.width), sf::Vector2f(bbPlayground.left, bbPlayground.width), &leftOOB, &xOutOfBound);
+  //this->checkSide(sf::Vector2f(bbSpaceship.top, bbSpaceship.height), sf::Vector2f(bbPlayground.top, bbPlayground.height), &topOOB, &yOutOfBound);
+  // if(checkSide(bbSpaceship.top + bbSpaceship.height, bbPlayground.top + bbPlayground.height) || checkSide(bbSpaceship.top, bbPlayground.top)){
+  //   this->setYOutOfBounds(true);
+  //
+  //   if(checkSide(bbSpaceship.top, bbPlayground.top))
+  //     this->setTopOutOfBounds(true);
+  //   else
+  //     this->setTopOutOfBounds(false);
+  //
+  // }
+  // else
+  //   this->setYOutOfBounds(false);
+  //
+  // //X OUT OF BOUNDS
+  // if(checkSide(bbSpaceship.left + bbSpaceship.width, bbPlayground.left + bbPlayground.width) || checkSide(bbSpaceship.left, bbPlayground.left)){
+  //   this->setXOutOfBounds(true);
+  //
+  //   if(checkSide(bbSpaceship.left, bbPlayground.left))
+  //     this->setLeftOutOfBounds(true);
+  //   else
+  //     this->setLeftOutOfBounds(false);
+  //
+  // }
+  // else
+  //   this->setXOutOfBounds(false);
+
+}
+
+void spaceship::checkSide(sf::Vector2f spcSide, sf::Vector2f plgSide, bool *sizeOOB, bool *coordinatesOOB){
+  if((spcSide.x + spcSide.y == plgSide.x + plgSide.y) || (spcSide.x == plgSide.x)){
+    *coordinatesOOB = true;
+
+    if(spcSide.x == plgSide.x)
+      *sizeOOB = true;
+    else
+      *sizeOOB = false;
+  }
+  else
+    *coordinatesOOB = false;
+}
 
 std::string spaceship::Class(){
   return "spaceship";

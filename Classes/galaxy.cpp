@@ -134,7 +134,10 @@ void galaxy::collision(std::_List_iterator<drawable*>* ntl, std::_List_iterator<
 }
 
 void galaxy::delPlanet(planetObj *planet){
-  Player->SetPosition(planet->getEntity()->GetPosition());
+  sf::Vector2f position = planet->getEntity()->GetPosition();
+  sf::FloatRect bounds = planet->GetLocalBounds();
+
+  Player->SetPosition(position - sf::Vector2f(bounds.width/2, bounds.height/2));
 
   neutrals.remove(static_cast<drawable*>(planet));
   planets.remove(planet);
@@ -145,8 +148,12 @@ void galaxy::delPlanet(planetObj *planet){
   std::cout << std::endl << std::endl << planets.size() << std::endl << std::endl;
   if(planets.size() == 0)
     currentGame->next();
+  else
+    Player->setPlayground(this);
 }
 
+void galaxy::next(){ currentGame->next(); }
+void galaxy::prev(){ currentGame->prev(); }
 
 std::string galaxy::Class(){
   return "galaxy";

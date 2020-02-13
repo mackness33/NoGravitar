@@ -29,6 +29,9 @@ class playground : public viewer{
     virtual void restart();
     virtual void Hola();
     virtual void Draw();
+    virtual void next();
+    virtual void prev();
+    virtual void back();
 
     virtual void delObjects ();
     virtual void addAlly (drawable* ally);

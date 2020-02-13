@@ -97,6 +97,10 @@ void playground::delObjects (){
   objects.clear();
 }
 
+void playground::next(){}
+void playground::prev(){}
+void playground::back(){}
+// void playground::brotha(){}
 
 std::string playground::Class(){
   return "playground";

@@ -85,6 +85,9 @@ class spaceship : public drawable, public shooter, public living{
     void fly(float module);
 
     void Draw (sf::RenderWindow* window);
+    // bool checkSide(float side1, float side2);
+    void checkSide(sf::Vector2f spcSide, sf::Vector2f plgSide, bool *sizeOOB, bool *coordinatesOOB);
+    void checkOutOfBounds();
 
     void shoot();
     void pull();

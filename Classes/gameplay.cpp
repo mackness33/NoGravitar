@@ -94,14 +94,22 @@ void gameplay::restart(){
 }
 
 void gameplay::next(){
-  std::cout << "Boh vediamo! " << std::endl;
-  this->Viewer = *(++activeGalaxy);
+  std::cout << "Boh vediamo! " << std::distance(activeGalaxy, galaxies.end()) << std::endl;
+  if(std::distance(activeGalaxy, galaxies.end()) > 1){
+    this->Viewer = *(++activeGalaxy);
+    this->Player->SetPosition(information::PLAYER_DEFAULT_POSITION);
+    this->Player->setPlayground(*activeGalaxy);
+  }
   // std::cout << "Hola: " << std::distance(galaxies.begin(), activeGalaxy) << std::endl;
 }
 
 void gameplay::prev(){
   std::cout << " Holy! " << std::endl;
-  this->Viewer = *(--activeGalaxy);
+  if(activeGalaxy != galaxies.begin()){
+    this->Viewer = *(--activeGalaxy);
+    this->Player->SetPosition(information::PLAYER_DEFAULT_POSITION);
+    this->Player->setPlayground(*activeGalaxy);
+  }
 }
 
 void gameplay::deathBunker(){ Points->deathBunker(); }      //can be optimazed with friend keyword on points for Galaxy

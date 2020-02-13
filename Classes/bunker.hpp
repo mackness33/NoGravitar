@@ -4,20 +4,21 @@
 #include "shooter.hpp"
 #include "bullet.hpp"
 #include "line.hpp"
+#include "living.hpp"
 #include "playground.hpp"
 
-class bunker : public drawable, public shooter{
+class bunker : public drawable, public shooter, public living{
   private:
     entity<sf::RectangleShape>* body;
     //std::list <bullet*> bullets;
     playground *Playground;
     sf::Texture* image;
     float totalTime;
-    bool life;
+    int BulletsxShooting;
 
   public:
     //----------CONSTRUCTORS----------
-    bunker(playground* Playground, line Line);
+    bunker(playground* Playground, line Line, bool triple = false);
 
     ~bunker();
 
@@ -30,8 +31,8 @@ class bunker : public drawable, public shooter{
     //----------SETS----------
 
     //----------METHODS----------
-    bool isAlive();
-    void rip();
+    // bool isAlive();
+    // void rip();
 
     void Draw (sf::RenderWindow* window);
 

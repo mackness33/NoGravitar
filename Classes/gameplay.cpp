@@ -9,7 +9,7 @@ gameplay::gameplay(sf::RenderWindow* wnd, game* g) : scene(wnd), Game(g) {
   //Settings = new information(Window);
   galaxies = {};
   for(int i = 0; i < information::GALAXY_DEFAULT_QUANTITY; i++)
-    galaxies.push_back(new galaxy(Window, Player, 20, this));
+    galaxies.push_back(new galaxy(Window, Player, i, this));
 
   activeGalaxy = galaxies.begin();
   // Galaxy = new galaxy(Window, Player, 20, this);

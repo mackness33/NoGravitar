@@ -1,11 +1,11 @@
 #include "galaxy.hpp"
 
 //----------CONSTRUCTORS----------
-galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, gameplay* actGame) : playground(win), Player(spc), Gameplay(actGame), conquer(false){
+galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int galaxyLevel, gameplay* actGame) : playground(win), Player(spc), Gameplay(actGame), conquer(false), level(galaxyLevel){
   planets = {};
   //Player->getEntity()->SetPosition(sf::Vector2f(300, 300));
   playground::addAlly(spc);
-  this->inizializePlanets(numPlanets);
+  this->inizializePlanets();
 }
 
 galaxy::~galaxy(){
@@ -47,11 +47,11 @@ bool galaxy::checkPlanetPosition(planetObj* pln){
 }
 
 
-void galaxy::inizializePlanets(unsigned int numPlanets){
+void galaxy::inizializePlanets(){
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   planetObj *pln = nullptr;
 
-  for (int i = 0; i < 1; i++){
+  for (int i = 0; i < information::GALAXY_DEFAULT_PLANETS; i++){
     sf::Vector2f position = utility::RandVector(plgBound.x - 20, plgBound.y - 20, 10, (window->getSize().y/10) + 10);
     pln = new planetObj(utility::RandInt(20, 30), position);
 
@@ -70,6 +70,7 @@ void galaxy::inizializePlanets(unsigned int numPlanets){
 
 //TODO: Need to delete the object at the end of all the cicles!
 //TODO: consider to delete in a good way the mo'fucking pointers
+int galaxy::getLevel (){ return level; }
 void galaxy::checkCollision (){
   playground::checkCollision();
 

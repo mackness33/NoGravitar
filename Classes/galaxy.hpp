@@ -18,17 +18,18 @@ class galaxy : public playground{
     spaceship *Player;
     std::list<planetObj*> planets;
     gameplay *Gameplay;
+    int level;
     bool conquer;
 
   protected:
     bool checkPlanetPosition(planetObj* planet);
-    void inizializePlanets(unsigned int numPlanets);
+    void inizializePlanets();
     //TODO: create a .tpp and convert collision in template <typename T> void galaxy::collision(T* obj, planetObj* planet){ return nullptr; }
     void collision(std::_List_iterator<drawable*>* ally, std::_List_iterator<drawable*>* enemy);
 
   public:
     //CONSTRUCTORS
-    galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, gameplay* actualGame);
+    galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int galaxyLevel, gameplay* actualGame);
 
     ~galaxy();
 
@@ -42,6 +43,7 @@ class galaxy : public playground{
 
     //---------------METHODS---------------
     void checkCollision();
+    int getLevel();
 
     bool isConquer();
     void delPlanet(planetObj *planet);

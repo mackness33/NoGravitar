@@ -29,6 +29,7 @@ template <class T> class entity : public essence<T>{
     //----------GETS----------
     float GetRotation();
     sf::Vector2f GetPosition();
+    sf::Vector2f GetOrigin();
 
     //----------SETS----------
     void setBody(T *b);

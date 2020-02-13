@@ -1,7 +1,7 @@
 #include "bunker.hpp"
 
 //----------CONSTRUCTORS----------
-bunker::bunker(playground* plg, line l) : Playground(plg){
+bunker::bunker(playground* plg, line l, bool triple) : Playground(plg), living(1), BulletsxShooting(2){
   image = information::getImage("bunker2");
   body = new movable<sf::RectangleShape>(sf::Vector2f(50, 50), sf::Vector2f(400, 400), image);
 
@@ -11,6 +11,9 @@ bunker::bunker(playground* plg, line l) : Playground(plg){
 
   bullets = {};
   totalTime = 0;
+
+  if(triple)
+    BulletsxShooting++;
 
   sf::FloatRect bounds = this->GetLocalBounds();
 
@@ -44,8 +47,8 @@ sf::FloatRect bunker::GetGlobalBounds() { return body->getBody()->getGlobalBound
 //----------SETS----------
 
 //----------METHODS----------
-bool bunker::isAlive (){ return life; }
-void bunker::rip (){ life = false;}
+// bool bunker::isAlive (){ return life; }
+// void bunker::rip (){ life = false;}
 
 void bunker::Draw (sf::RenderWindow* window){
   body->DrawTest(window);
@@ -66,15 +69,22 @@ void bunker::Update(){
 }
 
 void bunker::shoot(){
-  sf::Vector2f origin = body->getBody()->getPosition() - sf::Vector2f((this->GetLocalBounds().width * -sin(this->GetRotation())) / 2, (this->GetLocalBounds().height * cos(this->GetRotation())) / 2);
-  bullet *bul1 = new bullet(this, information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation() - 60, origin);
-  bullets.push_front(bul1);
+  // sf::FloatRect bounds = this->GetLocalBounds();
+  // sf::Vector2f origin = this->GetPosition();
+  // sf::Vector2f origin = body->getBody()->getPosition() - sf::Vector2f((this->GetLocalBounds().width * -sin(this->GetRotation())) / 2, (this->GetLocalBounds().height * cos(this->GetRotation())) / 2);
 
-  bullet *bul2 = new bullet(this, information::BULLET_DEFAULT_SPEED, this->getDrawable()->getRotation() - 120, origin);
-  bullets.push_front(bul2);
+  int range = 160/BulletsxShooting;
+  bullet *bul = nullptr;
+  for(int i = 0, angle = 160; i < BulletsxShooting; i++, angle -= range){
+    bul = new bullet(this, information::BULLET_DEFAULT_SPEED, utility::RandFloat(range, this->getDrawable()->getRotation() - angle), body->GetPosition());// sf::Vector2f(bounds);
+    bullets.push_front(bul);
+    Playground->addEnemy(bul);
+  }
 
-  Playground->addEnemy(bul1);
-  Playground->addEnemy(bul2);
+  // bullet *bul2 = new bullet(this, information::BULLET_DEFAULT_SPEED, utility::RandFloat(60, this->getDrawable()->getRotation() - 90), body->GetPosition());
+  // bullets.push_front(bul2);
+  //
+  // Playground->addEnemy(bul2);
 }
 
 std::string bunker::Class(){

@@ -55,6 +55,7 @@ template <class T> entity<T>::~entity(){
 //------------GETS------------
 template <class T> float entity<T>::GetRotation(){ return this->body->getRotation(); }
 template <class T> sf::Vector2f entity<T>::GetPosition(){ return this->body->getPosition(); }
+template <class T> sf::Vector2f entity<T>::GetOrigin(){ return this->body->getOrigin(); }
 
 //------------SETS------------
 template <class T> void entity<T>::setBody(T* b){

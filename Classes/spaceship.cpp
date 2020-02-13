@@ -90,19 +90,19 @@ void spaceship::fly(float module){
 
   if((yOutOfBound && !y_opp_dir)){
     sin_module = 0;
-    // if(topOOB && Playground->Class().compare("planetView"))
-    //   Playground->back();
+    std::cout << "Playground class: " << Playground->Class() << std::endl;
+    if(topOOB && Playground->Class().compare("planetView") == 0)
+      Playground->back();
     std::cout << "YOutOfBounds!!!" << std::endl;
   }
 
   if((xOutOfBound && !x_opp_dir)){
     cos_module = 0;
-    if(Playground->Class().compare("planetView")){
+    if(Playground->Class().compare("galaxy") == 0)
       if(leftOOB)
         Playground->prev();
       else
         Playground->next();
-    }
 
     std::cout << "XOutOfBounds!!!" << std::endl;
   }

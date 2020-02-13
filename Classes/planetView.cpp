@@ -8,7 +8,6 @@ planetView::planetView(sf::RenderWindow* win, spaceship* spc, gameplay* actGame,
   Player = spc;
 
   playground::addAlly(spc);
-  Player->SetPosition(information::PLAYER_DEFAULT_POSITION);
 
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   Ground = new ground(information::MENU_DEFAULT_SIZE.x, information::MENU_DEFAULT_SIZE.y);
@@ -281,6 +280,15 @@ void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_L
     this->restart();
     restartViewer = true;
   }
+}
+
+void planetView::back(){
+  Player->SetPosition(information::PLAYER_DEFAULT_POSITION);
+  Player->setPlayground(Galaxy);
+  Gameplay->setMainViewer(Galaxy);
+
+  this->changeViewer = true;
+  this->restart();
 }
 
 std::string planetView::Class(){

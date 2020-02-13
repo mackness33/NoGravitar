@@ -97,6 +97,7 @@ void gameplay::next(){
   std::cout << "Boh vediamo! " << std::distance(activeGalaxy, galaxies.end()) << std::endl;
   if(std::distance(activeGalaxy, galaxies.end()) > 1){
     this->Viewer = *(++activeGalaxy);
+    // this->Player->SetPosition(sf::Vector2f(0, this->Player->GetPosition().y));
     this->Player->SetPosition(information::PLAYER_DEFAULT_POSITION);
     this->Player->setPlayground(*activeGalaxy);
   }

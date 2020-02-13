@@ -150,18 +150,18 @@ void gameplay::keyPressedHandler(const sf::Event &e){
   */
 }
 
-// void gameplay::Win (){
-//   if(FuelLabel->getFuels() <= 50)
-//     this->restart();
-//   else{
-//     Header->Draw();
-//     scene::Draw();
-//   }
-// }
+bool gameplay::Win (){
+  for(auto glx = galaxies.begin(); glx != galaxies.end(); glx++)
+    if(!(*glx)->isConquer())
+      return false;
+
+  std::cout << "YOU WON!!! Nice game" << std::endl << std::endl;
+  return true;
+}
 
 //DRAW
 void gameplay::Draw (){
-  if(FuelLabel->getFuels() <= 50)
+  if(FuelLabel->getFuels() <= 1 || this->Win())
     this->restart();
   else{
     Header->Draw();

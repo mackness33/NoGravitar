@@ -18,6 +18,7 @@ class galaxy : public playground{
     spaceship *Player;
     std::list<planetObj*> planets;
     gameplay *Gameplay;
+    bool conquer;
 
   protected:
     bool checkPlanetPosition(planetObj* planet);
@@ -42,6 +43,7 @@ class galaxy : public playground{
     //---------------METHODS---------------
     void checkCollision();
 
+    bool isConquer();
     void delPlanet(planetObj *planet);
 
     void next();

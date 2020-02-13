@@ -58,6 +58,7 @@ class gameplay : public scene{
     void addFuel();
     void next();
     void prev();
+    bool Win();
 
     //friend void eventHandler::changePlaygroundHandler(); // Friend function
     virtual std::string Class();

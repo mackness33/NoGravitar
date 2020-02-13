@@ -1,7 +1,7 @@
 #include "galaxy.hpp"
 
 //----------CONSTRUCTORS----------
-galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, gameplay* actGame) : playground(win), Player(spc), Gameplay(actGame){
+galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, gameplay* actGame) : playground(win), Player(spc), Gameplay(actGame), conquer(false){
   planets = {};
   //Player->getEntity()->SetPosition(sf::Vector2f(300, 300));
   playground::addAlly(spc);
@@ -132,6 +132,7 @@ void galaxy::collision(std::_List_iterator<drawable*>* ntl, std::_List_iterator<
   }
 }
 
+bool galaxy::isConquer() { return conquer; }
 void galaxy::delPlanet(planetObj *planet){
   sf::Vector2f position = planet->getEntity()->GetPosition();
   sf::FloatRect bounds = planet->GetLocalBounds();
@@ -144,9 +145,10 @@ void galaxy::delPlanet(planetObj *planet){
   planet = nullptr;
 
   Gameplay->deathPlanet();
-  std::cout << std::endl << std::endl << planets.size() << std::endl << std::endl;
-  if(planets.size() == 0)
+  if(planets.size() == 0){
+    conquer = true;
     Gameplay->next();
+  }
   else
     Player->setPlayground(this);
 }

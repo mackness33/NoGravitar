@@ -1,24 +1,26 @@
 #include "bunker.hpp"
 
 //----------CONSTRUCTORS----------
-bunker::bunker(playground* plg, line l, bool triple) : Playground(plg), living(1), BulletsxShooting(2){
-  image = information::getImage("bunker2");
+bunker::bunker(playground* plg, line l, bool triple) : Playground(plg), living(1), BulletsxShooting(2), image(information::getImage("bunker")){
+  if(triple){
+    image = information::getImage("bunker2");
+    BulletsxShooting++;
+  }
+
   body = new movable<sf::RectangleShape>(sf::Vector2f(50, 50), sf::Vector2f(400, 400), image);
 
-  long double angle = utility::toDegrees(l.getSlope());
+  // long double angle = ;
   float maxX = l.getA().x;
   float maxY = std::min(l.getA().y, l.getB().y);
 
   bullets = {};
   totalTime = 0;
 
-  if(triple)
-    BulletsxShooting++;
 
   sf::FloatRect bounds = this->GetLocalBounds();
 
   body->SetOrigin(bounds.width/2, bounds.height/2);
-  body->SetRotation(-angle);
+  body->SetRotation(-utility::toDegrees(l.getSlope()));
   body->SetPosition(sf::Vector2f((maxX + l.getWidth()/2) - ((bounds.width/2) * sin(l.getSlope())), (maxY + l.getHeight()/2) - ((bounds.height/2) * cos(l.getSlope()))));
   //body->SetPosition(lines[0]->intersection(line(utility::left(bunkers), utility::bottom(bunkers))));
 }

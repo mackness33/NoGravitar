@@ -10,11 +10,12 @@ class fuel : public drawable{
   protected:
     entity<sf::RectangleShape>* body;
     sf::Texture *image;
+    int value;
 
   protected:
   public:
     //---------------CONSTRUCTORS---------------
-    fuel(line l);
+    fuel(line l, bool special);
 
     //---------------DESTRUCTORS---------------
     ~fuel();
@@ -25,6 +26,7 @@ class fuel : public drawable{
     sf::RectangleShape* getDrawable();
     sf::FloatRect GetLocalBounds();
     sf::FloatRect GetGlobalBounds();
+    int getValue();
 
     //---------------SETS---------------
 

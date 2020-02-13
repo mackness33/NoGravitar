@@ -13,7 +13,7 @@ unsigned int fuelLabel::getFuels() { return totalFuel; }
 
 //---------------METHODS---------------
 void fuelLabel::reset() { body->SetString(std::to_string(totalFuel = information::FUELS_DEFAULT_CAPACITY)); }
-void fuelLabel::addFuel() { totalFuel += 300; this->setString(std::to_string(totalFuel)); }
+void fuelLabel::addFuel(int value) { totalFuel += value; this->setString(std::to_string(totalFuel)); }
 void fuelLabel::Update() { totalFuel = (!information::TRACTORBEAM_IS_ACTIVE) ? --totalFuel : (totalFuel - 20); this->setString(std::to_string(totalFuel)); }
 void fuelLabel::Draw(sf::RenderWindow *window) { this->Update(); label::Draw(window); }
 

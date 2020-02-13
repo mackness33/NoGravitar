@@ -93,7 +93,7 @@ void planetView::inizializeBunker(){
     pos = utility::RandInt(lines.size());
 
     if(!occupied[pos]){
-      tempFuel = new fuel(*lines[pos]);
+      tempFuel = new fuel(*lines[pos], !!(utility::RandInt(500) % 4));
       fuels.push_front(tempFuel);
       playground::addAlly(tempFuel);
 
@@ -158,9 +158,9 @@ void planetView::checkCollision (){
 
     for(auto f = fuels.begin(); f != fuels.end(); f++){
       if((*f)->intersects(trb)){
+        Gameplay->addFuel((*f)->getValue());
         allies.remove(static_cast<drawable*>(*f));
         f = fuels.erase(f);
-        Gameplay->addFuel();
       }
     }
   }

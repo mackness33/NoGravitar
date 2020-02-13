@@ -45,6 +45,7 @@ class information{
     static float SWITCH_TIME; // You MUST declare it in a CPP
     static float SHOOTER_SWITCH_TIME; // You MUST declare it in a CPP
     static int FUELS_DEFAULT_CAPACITY;
+    static int FUELS_DEFAULT_VALUE;
     static int GALAXY_DEFAULT_QUANTITY;
     static int GALAXY_DEFAULT_PLANETS;
     static std::vector<file<sf::Texture>*> images;

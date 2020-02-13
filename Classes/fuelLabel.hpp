@@ -19,7 +19,7 @@ class fuelLabel : public label{
     unsigned int getFuels();
     //---------------SETS---------------
     //---------------METHODS---------------
-    void addFuel();
+    void addFuel(int fuels);
     void reset();
     void Draw(sf::RenderWindow *window);
     void Update();

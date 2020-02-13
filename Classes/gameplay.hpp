@@ -55,7 +55,7 @@ class gameplay : public scene{
     void restart();
     void deathBunker();
     void deathPlanet();
-    void addFuel();
+    void addFuel(int fuels);
     void next();
     void prev();
     bool Win();

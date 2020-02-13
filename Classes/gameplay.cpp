@@ -115,7 +115,7 @@ void gameplay::prev(){
 
 void gameplay::deathBunker(){ Points->deathBunker(); }      //can be optimazed with friend keyword on points for Galaxy
 void gameplay::deathPlanet(){ Points->deathPlanet(); }      //can be optimazed with friend keyword on points for PlanetView
-void gameplay::addFuel(){ FuelLabel->addFuel(); }      //can be optimazed with friend keyword on points for PlanetView
+void gameplay::addFuel(int fuels){ FuelLabel->addFuel(fuels); }      //can be optimazed with friend keyword on points for PlanetView
 
 void gameplay::keyReleasedHandler(const sf::Event &e){
   switch (e.key.code) {

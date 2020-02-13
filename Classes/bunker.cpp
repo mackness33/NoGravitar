@@ -2,7 +2,7 @@
 
 //----------CONSTRUCTORS----------
 bunker::bunker(playground* plg, line l) : Playground(plg){
-  image = information::getImage("bunker");
+  image = information::getImage("bunker2");
   body = new movable<sf::RectangleShape>(sf::Vector2f(50, 50), sf::Vector2f(400, 400), image);
 
   long double angle = utility::toDegrees(l.getSlope());

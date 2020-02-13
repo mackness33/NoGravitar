@@ -15,7 +15,6 @@
 
 class game;
 class galaxy;
-class header;
 
 class gameplay : public scene{
   protected:

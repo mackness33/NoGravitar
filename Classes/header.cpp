@@ -2,7 +2,7 @@
 #include "game.hpp"
 
 //------------CONSTRUCTORS------------
-header::header(sf::RenderWindow* w, gameplay *actualGame, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i), Game(actualGame){
+header::header(sf::RenderWindow* w, sf::Vector2f s, sf::Vector2f p, sf::Texture* i) : viewer(w, s, p , i){
   // Setting title text
   //TODO: set for text's direct methods for modifiers of strings
   title = new label("AeroviasBrasil", "NOGRAVITAR");

@@ -2,7 +2,7 @@
 
 //----------CONSTRUCTORS----------
 planetView::planetView(sf::RenderWindow* win, spaceship* spc, gameplay* actGame, galaxy* glx, planetObj* pln) : playground(win), restartViewer(false), changeViewer(false){
-  currentGame = actGame;
+  Gameplay = actGame;
   Galaxy = glx;
   Planet = pln;
   Player = spc;
@@ -34,7 +34,7 @@ planetView::~planetView(){
   Ground = nullptr;
   Player = nullptr;
   Galaxy = nullptr;
-  currentGame = nullptr;
+  Gameplay = nullptr;
   Planet = nullptr;
   image = nullptr;
 }
@@ -160,7 +160,7 @@ void planetView::checkCollision (){
       if((*f)->intersects(trb)){
         allies.remove(static_cast<drawable*>(*f));
         f = fuels.erase(f);
-        currentGame->addFuel();
+        Gameplay->addFuel();
       }
     }
   }
@@ -185,7 +185,7 @@ void planetView::collision(std::_List_iterator<drawable*>* obj, bool isAlly){
     case 's': {
       Player->rip();
       if(!Player->isAlive()){
-        currentGame->restart();
+        Gameplay->restart();
         this->endGame = true;
       }
       else{
@@ -228,12 +228,12 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
         bnk->rip();
         bunkers.remove(bnk);
         *e = enemies.erase(*e);
-        currentGame->deathBunker();
+        Gameplay->deathBunker();
 
         if(bunkers.empty()){
           allies.remove(static_cast<drawable*>(Player));
           Player->setPlayground(Galaxy);
-          currentGame->setMainViewer(Galaxy);
+          Gameplay->setMainViewer(Galaxy);
 
           this->changeViewer = true;
         }
@@ -261,12 +261,12 @@ void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_L
     bnk->rip();
     bunkers.remove(bnk);
     *e = enemies.erase(*e);
-    currentGame->deathBunker();
+    Gameplay->deathBunker();
 
     if(bunkers.empty()){
       allies.remove(static_cast<drawable*>(Player));
       Player->setPlayground(Galaxy);
-      currentGame->setMainViewer(Galaxy);
+      Gameplay->setMainViewer(Galaxy);
 
       this->changeViewer = true;
     }
@@ -275,7 +275,7 @@ void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_L
 
   Player->rip();
   if(!Player->isAlive()){
-    currentGame->restart();
+    Gameplay->restart();
     this->endGame = true;
   }else{
     this->restart();

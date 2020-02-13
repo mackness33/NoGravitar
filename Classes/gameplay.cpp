@@ -3,7 +3,7 @@
 //CONSTRUCTORS
 gameplay::gameplay(sf::RenderWindow* wnd, game* g) : scene(wnd), Game(g) {
   Player = new spaceship(nullptr);
-  Header = new header(Window, this);
+  Header = new header(Window);
   std::cout << "Brust" << std::endl;
   //Playground = new playground(Window);
   //Settings = new information(Window);
@@ -59,7 +59,7 @@ gameplay::~gameplay(){
 
 //SETS
 //void setTexture(sf::Texture t){ this->background.setTexture(t);}
-//void setBackground(sf::Sprite b){ this->background = b;}
+//void setBackground(sf::Sprite b){ this->bacckground = b;}
 
 
 //---------------METHODS---------------
@@ -150,10 +150,23 @@ void gameplay::keyPressedHandler(const sf::Event &e){
   */
 }
 
+// void gameplay::Win (){
+//   if(FuelLabel->getFuels() <= 50)
+//     this->restart();
+//   else{
+//     Header->Draw();
+//     scene::Draw();
+//   }
+// }
+
 //DRAW
 void gameplay::Draw (){
-  Header->Draw();
-  scene::Draw();
+  if(FuelLabel->getFuels() <= 50)
+    this->restart();
+  else{
+    Header->Draw();
+    scene::Draw();
+  }
 }
 
 void gameplay::setMainViewer(viewer* newViewer){

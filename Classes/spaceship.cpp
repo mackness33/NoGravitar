@@ -182,7 +182,7 @@ void spaceship::setTractorPosition(){
 // void spaceship::attractFuels(std::list){
 //   for(auto f = fuels.begin(); f != f.end(); i++)
 //     if(f->intersects(trb))
-//       currentGame->deathBunker();
+//       Gameplay->deathBunker();
 // }
 
 void spaceship::Move(sf::Vector2f pos){

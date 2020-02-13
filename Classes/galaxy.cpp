@@ -1,7 +1,7 @@
 #include "galaxy.hpp"
 
 //----------CONSTRUCTORS----------
-galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, gameplay* actGame) : playground(win), Player(spc), currentGame(actGame){
+galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int numPlanets, gameplay* actGame) : playground(win), Player(spc), Gameplay(actGame){
   planets = {};
   //Player->getEntity()->SetPosition(sf::Vector2f(300, 300));
   playground::addAlly(spc);
@@ -14,7 +14,7 @@ galaxy::~galaxy(){
   utility::deleteList(planets);
 
   Player = nullptr;
-  currentGame = nullptr;
+  Gameplay = nullptr;
 }
 
 
@@ -56,7 +56,7 @@ void galaxy::inizializePlanets(unsigned int numPlanets){
     pln = new planetObj(utility::RandInt(20, 30), position);
 
     if(this->checkPlanetPosition(pln)){
-      pln->setPlanetView(new planetView(window, Player, currentGame, this, pln));
+      pln->setPlanetView(new planetView(window, Player, Gameplay, this, pln));
       planets.push_front(pln);
       playground::addNeutral(pln);
     }
@@ -94,7 +94,6 @@ void galaxy::checkCollision (){
       }
     }
   }
-
 }
 
 
@@ -125,7 +124,7 @@ void galaxy::collision(std::_List_iterator<drawable*>* ntl, std::_List_iterator<
       planetObj *planet = static_cast<planetObj*> (**ntl);
       Player->setPlayground(planet->getPlanetView());
       Player->SetPosition(information::PLAYER_DEFAULT_POSITION);
-      currentGame->setMainViewer(planet->getPlanetView());
+      Gameplay->setMainViewer(planet->getPlanetView());
 
       *obj = allies.end();
      }; break;
@@ -144,16 +143,16 @@ void galaxy::delPlanet(planetObj *planet){
   delete planet;
   planet = nullptr;
 
-  currentGame->deathPlanet();
+  Gameplay->deathPlanet();
   std::cout << std::endl << std::endl << planets.size() << std::endl << std::endl;
   if(planets.size() == 0)
-    currentGame->next();
+    Gameplay->next();
   else
     Player->setPlayground(this);
 }
 
-void galaxy::next(){ currentGame->next(); }
-void galaxy::prev(){ currentGame->prev(); }
+void galaxy::next(){ Gameplay->next(); }
+void galaxy::prev(){ Gameplay->prev(); }
 
 std::string galaxy::Class(){
   return "galaxy";

@@ -21,7 +21,7 @@ class planetView : public playground{
     ground *Ground;
     std::list<bunker*> bunkers;
     std::list<fuel*> fuels;
-    gameplay *currentGame;
+    gameplay *Gameplay;
     galaxy *Galaxy;
     planetObj *Planet;
     sf::Texture *image;

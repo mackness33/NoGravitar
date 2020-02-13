@@ -17,7 +17,7 @@ class galaxy : public playground{
   protected:
     spaceship *Player;
     std::list<planetObj*> planets;
-    gameplay *currentGame;
+    gameplay *Gameplay;
 
   protected:
     bool checkPlanetPosition(planetObj* planet);

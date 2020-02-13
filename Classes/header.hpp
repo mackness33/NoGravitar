@@ -10,15 +10,12 @@
 #include "points.hpp"
 #include "viewer.hpp"
 #include "information.hpp"
-#include "gameplay.hpp"
 #include "fuelLabel.hpp"
 
 class viewer;
-class gameplay;
 
 class header : public viewer{
   private:
-    gameplay *Game;
     fuelLabel *FuelLabel;
     points *score;
     points *bestScore;
@@ -26,7 +23,7 @@ class header : public viewer{
 
   public:
     //----------CONSTRUCTORS----------
-    header(sf::RenderWindow *window, gameplay *actualGame, sf::Vector2f size = information::HEADER_DEFAULT_SIZE, sf::Vector2f position = information::HEADER_DEFAULT_POSITION, sf::Texture* image = nullptr);
+    header(sf::RenderWindow *window, sf::Vector2f size = information::HEADER_DEFAULT_SIZE, sf::Vector2f position = information::HEADER_DEFAULT_POSITION, sf::Texture* image = nullptr);
     ~header();
 
     //----------GETS----------

@@ -50,6 +50,7 @@ bool playground::intersects(drawable* obj){
 void playground::Draw (){
   this->checkCollision();
 
+  //std::cout << "endGame!! " << endGame << std::endl;
   if(!endGame){
     viewer::Draw();
     this->DrawList(allies);

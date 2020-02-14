@@ -107,8 +107,9 @@ void planetView::inizializeBunker(){
 //TODO: Need to delete the object at the end of all the cicles!
 //TODO: consider to delete in a good way the mo'fucking pointers
 void planetView::checkCollision (){
+  std::cout << "Enter!! " << !!background << std::endl;
   playground::checkCollision();
-  changeViewer = false, restartViewer = false;
+  changeViewer = false, restartViewer = false, this->endGame = false;
 
   for (auto ally = allies.begin(); ally != allies.end(); ally++){
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
@@ -128,6 +129,7 @@ void planetView::checkCollision (){
         return;
     }
   }
+  std::cout << "engGame in check2: " << this->endGame << std::endl;
 
   for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
@@ -152,6 +154,7 @@ void planetView::checkCollision (){
       }
     }
   }
+  std::cout << "engGame in check3: " << this->endGame << std::endl;
 
   if(information::TRACTORBEAM_IS_ACTIVE){
     tractorBeam *trb = Player->getTractorBeam();
@@ -164,12 +167,13 @@ void planetView::checkCollision (){
       }
     }
   }
+  std::cout << "engGame in check4: " << this->endGame << std::endl;
 }
 
 void planetView::collision(std::_List_iterator<drawable*>* obj, bool isAlly){
   std::string objectClass = (**obj)->Class();
-  std::cout << "In Collision checkin up " << objectClass << std::endl;
 
+  std::cout << "In Collision checkin up " << objectClass << std::endl;
   switch(objectClass[0]){
     case 'b': {
       bullet *blt = static_cast<bullet*>(**obj);
@@ -186,6 +190,7 @@ void planetView::collision(std::_List_iterator<drawable*>* obj, bool isAlly){
       Player->rip();
       if(!Player->isAlive()){
         Gameplay->restart();
+        std::cout << "Hola chicoooo " << std::endl;
         this->endGame = true;
       }
       else{
@@ -276,6 +281,7 @@ void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_L
   Player->rip();
   if(!Player->isAlive()){
     Gameplay->restart();
+    std::cout << "Hola Vamonooooos "  << std::endl;
     this->endGame = true;
   }else{
     this->restart();

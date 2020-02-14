@@ -17,24 +17,26 @@ class game{
 
   public:
     static unsigned int bestScore;
-    
-  protected:
 
   public:
     //----------CONSTRUCTORS----------
     game(sf::RenderWindow* window);
     ~game();
 
-    //----------GETS----------
     //----------SETS----------
     void setMainScene(std::string name);
 
     //----------METHODS----------
+    //inizialize the game
     void inizialize ();
+
+    //start the game
     void start ();
+
+    //restart the game
     void restart ();
 
-    //friend void eventHandler::changePlaygroundHandler(); // Friend function
+
     virtual std::string Class();
 
 };

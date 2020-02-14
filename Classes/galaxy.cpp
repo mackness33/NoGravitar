@@ -74,6 +74,7 @@ int galaxy::getLevel (){ return level; }
 void galaxy::checkCollision (){
   playground::checkCollision();
 
+  int i = 0;
   for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
       if(!!*neutral && !!*enemy){
@@ -85,9 +86,12 @@ void galaxy::checkCollision (){
       }
     }
 
-    for (auto ally = allies.begin(); ally != allies.end(); ally++){
+    std::cout << "planet num: " << i << std::endl;
+    for (auto ally = allies.begin(); ally != allies.end(); ally++, i++){
+      std::cout << "Class: " << (*ally)->Class() << std::endl;
       if(!!*neutral && !!*ally){
         if ((*neutral)->intersects(*ally)){
+
           collision(&neutral, &ally);
           std::cout << "COLLISION NEUTRAL in GALAXY!!" << std::endl;
           std::cout << " Tho'!!" << std::endl;
@@ -125,7 +129,9 @@ void galaxy::collision(std::_List_iterator<drawable*>* ntl, std::_List_iterator<
       planetObj *planet = static_cast<planetObj*> (**ntl);
       Player->setPlayground(planet->getPlanetView());
       Player->SetPosition(information::PLAYER_DEFAULT_POSITION);
-      Gameplay->setMainViewer(planet->getPlanetView());
+      std::cout << "Does it exists? " << !!(planet->getPlanetView()) << std::endl;
+      if(!!(planet->getPlanetView()))
+        Gameplay->setMainViewer(planet->getPlanetView());
 
       *obj = allies.end();
      }; break;

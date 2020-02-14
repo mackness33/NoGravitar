@@ -1,29 +1,20 @@
 #include "bullet.hpp"
 
 //---------------CONSTRUCTORS---------------
-bullet::bullet(shooter *dad, float s, float d, sf::Vector2f p){
+bullet::bullet(shooter *dad, float s, float d, sf::Vector2f p, sf::Color c) : parent(dad), direction(utility::toRadiant(d)), totalTime(0), speed(s){
   body = new movable<sf::CircleShape>(information::BULLET_DEFAULT_RADIUS);
 
-  parent = dad;
-
-  speed = s;
-  direction = utility::toRadiant(d);
-  totalTime = 0;
-
   body->SetPosition(p);
-  this->build();
+  body->getBody()->setFillColor(c);
 }
 
 bullet::~bullet(){
-  std::cout << "DELETING BULLET" << std::endl;
-
   if(!!body)
     delete body;
 
   body = nullptr;
   parent = nullptr;
 }
-
 
 //---------------GETS---------------
 movable<sf::CircleShape>* bullet::getMovable() { return body; }
@@ -33,15 +24,9 @@ sf::FloatRect bullet::GetLocalBounds() { return body->getBody()->getLocalBounds(
 sf::FloatRect bullet::GetGlobalBounds() { return body->getBody()->getGlobalBounds(); }
 shooter* bullet::getShooter() { return parent; }
 
-//---------------SETS---------------
-
-
 
 //---------------METHODS---------------
-
-void bullet::Draw (sf::RenderWindow* window){
-  body->DrawTest(window);
-}
+void bullet::Draw (sf::RenderWindow* window){ body->Draw(window); }
 
 void bullet::Update(){
   totalTime += information::DELTA_TIME;
@@ -52,12 +37,6 @@ void bullet::Update(){
     sf::Vector2f pos = body->getBody()->getPosition();
   }
 }
-
-void bullet::build(){
-  body->getBody()->setFillColor(sf::Color::White);
-  //body->getBody()->setSmooth(true);
-}
-
 
 float bullet::GetRotation(){ return this->body->getBody()->getRotation(); }
 

@@ -1,6 +1,7 @@
 #ifndef BULLET_H
 #define BULLET_H
 
+#include "essence.hpp"
 #include "entity.hpp"
 #include "drawable.hpp"
 #include "information.hpp"
@@ -23,7 +24,7 @@ class bullet : public drawable{
 
   public:
     //---------------CONSTRUCTORS---------------
-    bullet(shooter *parent, float speed = information::BULLET_DEFAULT_SPEED, float direction = 0, sf::Vector2f position = sf::Vector2f(0, 0));
+    bullet(shooter *parent, float speed = information::BULLET_DEFAULT_SPEED, float direction = 0, sf::Vector2f position = sf::Vector2f(0, 0), sf::Color color = sf::Color::White);
 
     //---------------DESTRUCTORS---------------
     ~bullet();
@@ -36,16 +37,12 @@ class bullet : public drawable{
     sf::FloatRect GetGlobalBounds();
     shooter* getShooter();
 
-    //---------------SETS---------------
-
     //---------------METHODS---------------
+    //draws the object's body
     void Draw (sf::RenderWindow* window);
 
     //update of the object's data for each time that it is draw
     void Update();
-
-    //build all the information of object's body
-    void build();
 
     //return the class of the object
     virtual std::string Class();

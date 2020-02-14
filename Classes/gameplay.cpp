@@ -171,7 +171,9 @@ void gameplay::Draw (){
 }
 
 void gameplay::setMainViewer(viewer* newViewer){
+  std::cout << "Does it exists? " << !!newViewer << std::endl;
   this->Viewer = newViewer;
+  std::cout << "Does it exists? " << !!this->Viewer << std::endl;
 }
 
 std::string gameplay::Class(){

@@ -10,7 +10,6 @@
 class bunker : public drawable, public shooter, public living{
   private:
     entity<sf::RectangleShape>* body;
-    //std::list <bullet*> bullets;
     playground *Playground;
     sf::Texture* image;
     float totalTime;
@@ -31,12 +30,7 @@ class bunker : public drawable, public shooter, public living{
     //----------SETS----------
 
     //----------METHODS----------
-    // bool isAlive();
-    // void rip();
-
     void Draw (sf::RenderWindow* window);
-
-    void build();
 
     //update of the object's data for each time that it is draw
     void Update();

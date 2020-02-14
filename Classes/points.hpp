@@ -17,12 +17,11 @@ class points : public label{
 
     //---------------GETS---------------
     unsigned int getPoints();
-    //---------------SETS---------------
 
     //---------------METHODS---------------
-    virtual void deathBunker();
-    virtual void deathPlanet();
-    void reset();
+    virtual void deathBunker();       //add points tot point for this event
+    virtual void deathPlanet();       //add points tot point for this event
+    void reset();                     //reset of the value
 
     //return the class of the object
     virtual std::string Class();

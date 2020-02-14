@@ -3,9 +3,7 @@
 //---------------CONSTRUCTORS---------------
 points::points(std::string f, unsigned int ip, sf::Vector2f p) : label(f, std::to_string(ip), p), totalPoint(ip) {}
 
-points::~points(){
-  std::cout << "DELETING POINTS" << std::endl;
-}
+points::~points(){}
 
 
 //---------------GETS---------------

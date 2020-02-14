@@ -23,7 +23,7 @@ void menu::eventHandler(const sf::Event &event){
 
     //WINDOWCLOSED
     case sf::Event::Closed :{
-      eventHandler::windowClosedHandler(event, *Window);
+      this->windowClosedHandler(event);
     };break;
 
     default :
@@ -42,7 +42,7 @@ void menu::keyPressedHandler(const sf::Event &e){
     };break;
 
     case sf::Keyboard::Return : {
-      //switch to understand in which view to go next. The value is the name of the next Scene or View to go next 
+      //switch to understand in which view to go next. The value is the name of the next Scene or View to go next
       switch((view->getValue())[0]){
         case 'G': Game->setMainScene("gameplay"); break;
         default: {}

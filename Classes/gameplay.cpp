@@ -59,7 +59,7 @@ void gameplay::eventHandler(const sf::Event &event){
 
     //WINDOWCLOSED
     case sf::Event::Closed :{
-      eventHandler::windowClosedHandler(event, *Window);
+      this->windowClosedHandler(event);
     };break;
 
     default :

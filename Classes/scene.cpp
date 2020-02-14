@@ -1,29 +1,25 @@
 #include "scene.hpp"
 
-//CONSTRUCTORS
+//---------------CONSTRUCTORS---------------
 scene::scene(sf::RenderWindow* wnd) : Window(wnd), isActive(false), Viewer(nullptr){}
 
 scene::~scene(){
-  std::cout << "DELETING SCENE" << std::endl;
-
   Viewer = nullptr;
   Window = nullptr;
 }
-
-
-//GETS
-//sf::Texture getTexture(){ return this->background.getTexture();}
-//sf::Sprite getBackground(){ return this->background;}
-
-//SETS
-//void setTexture(sf::Texture t){ this->background.setTexture(t);}
-//void setBackground(sf::Sprite b){ this->background = b;}
-
 
 //---------------METHODS---------------
 void scene::eventHandler(const sf::Event &event){}
 
 void scene::Draw (){ Viewer->Draw(); }
+
+//It handle Event::Closed
+//it close the window if pressed 'Q', 'ESC' or close button
+void scene::windowClosedHandler (const sf::Event& e){
+  // "close requested" event: we close the window
+  if (e.type == sf::Event::Closed || (e.type == sf::Event::KeyPressed && (e.key.code == 16 || e.key.code == 36)))
+    Window->close();
+}
 
 std::string scene::Class(){
   return "scene";

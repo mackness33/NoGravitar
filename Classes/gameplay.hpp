@@ -12,8 +12,6 @@
 #include "spaceship.hpp"
 #include "startView.hpp"
 
-#include "../Handlers/eventHandler.hpp"
-
 class game;
 class galaxy;
 

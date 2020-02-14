@@ -2,7 +2,6 @@
 #define SCENE_H
 
 #include <vector>
-#include "../Handlers/eventHandler.hpp"
 #include "viewer.hpp"
 
 class scene {
@@ -17,21 +16,14 @@ class scene {
     //----------CONSTRUCTORS----------
     scene(sf::RenderWindow* window);
     ~scene();
-    virtual void eventHandler(const sf::Event &event);
-
-    //----------GETS----------
-    //sf::Texture getTexture(){ return this->background.getTexture();}
-    //sf::Sprite getBackground(){ return this->background;}
-
-    //----------SETS----------
-    //void setTexture(sf::Texture t){ this->background.setTexture(t);}
-    //void setBackground(sf::Sprite b){ this->background = b;}
 
     //----------METHODS----------
-    virtual void Draw ();
-    void swap (scene* scene);
+    void windowClosedHandler (const sf::Event& event);
 
-    //friend void eventHandler::changePlaygroundHandler(); // Friend function
+    //main (general) event handler
+    virtual void eventHandler(const sf::Event &event);
+    virtual void Draw ();                               //basic draw for a scene
+
     virtual std::string Class();
 
 };

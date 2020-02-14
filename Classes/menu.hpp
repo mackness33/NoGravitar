@@ -4,7 +4,6 @@
 #include "scene.hpp"
 #include "game.hpp"
 #include "startView.hpp"
-#include "../Handlers/eventHandler.hpp"
 
 class game;
 

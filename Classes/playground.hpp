@@ -2,19 +2,20 @@
 #define PLAYGROUND_H
 
 #include <list>
+#include "entity.hpp"
+#include "essence.hpp"
+#include "drawable.hpp"
 #include "viewer.hpp"
-#include "bullet.hpp"
 
 class playground : public viewer{
   protected:
     std::list<drawable*> allies;
     std::list<drawable*> enemies;
     std::list<drawable*> neutrals;
-    std::list<drawable*> objects;
     bool endGame;
 
   protected:
-    void DrawList (std::list<drawable*> objects);
+    void DrawList (std::list<drawable*> objects);     //draw of a list of objects
 
   public:
     //---------------CONSTRUCTORS---------------
@@ -22,26 +23,22 @@ class playground : public viewer{
 
     ~playground();
 
-    //---------------GETS---------------
-    virtual void getObjectsBounds (std::list<drawable*> objects, std::list<sf::FloatRect>* objectsBounds);
-
     //---------------METHODS---------------
-    virtual void restart();
-    virtual void Hola();
-    virtual void Draw();
-    virtual void next();
-    virtual void prev();
-    virtual void back();
+    virtual void restart();                     //restart of the view
+    virtual void Draw();                        //draw of the object's
+    virtual void next();                        //go to the next view
+    virtual void prev();                        //go to the previous view
+    virtual void back();                        //go back to the last view
 
-    virtual void delObjects ();
-    virtual void addAlly (drawable* ally);
-    virtual void addEnemy (drawable* enemy);
-    virtual void addNeutral (drawable* neutral);
+    virtual void addAlly (drawable* ally);      //add a drawable to allies
+    virtual void addEnemy (drawable* enemy);    //add a drawable to enemies
+    virtual void addNeutral (drawable* neutral);//add a drawable to neutrals
 
-    virtual bool intersects(drawable* obj);
-    virtual void checkCollision ();
-    virtual void collision(std::_List_iterator<drawable*>* object, bool isAlly);
+    virtual bool intersects(drawable* obj);     //handle the intersection between the playground and the drawable in input
+    virtual void checkCollision ();             //checks of collision between the various objects
+    virtual void collision(std::_List_iterator<drawable*>* object, bool isAlly);    //handle of collision
 
+    //return the class of the object
     virtual std::string Class();
 };
 

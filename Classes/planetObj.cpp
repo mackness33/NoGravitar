@@ -9,8 +9,6 @@ planetObj::planetObj(float r, sf::Vector2f p){
 }
 
 planetObj::~planetObj(){
-  std::cout << "DELETING PLANETOBJ" << std::endl;
-
   if(!!view)
     delete view;
 
@@ -34,7 +32,7 @@ void planetObj::setPlanetView(planetView* newView){ view = newView; }
 
 //----------METHODS----------
 void planetObj::Draw (sf::RenderWindow* window){
-  body->DrawTest(window);
+  body->Draw(window);
 }
 
 bool planetObj::spawnIntersects(drawable* obj){

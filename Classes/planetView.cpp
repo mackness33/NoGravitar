@@ -1,30 +1,19 @@
 #include "planetView.hpp"
 
 //----------CONSTRUCTORS----------
-planetView::planetView(sf::RenderWindow* win, spaceship* spc, gameplay* actGame, galaxy* glx, planetObj* pln) : playground(win), restartViewer(false), changeViewer(false){
-  Gameplay = actGame;
-  Galaxy = glx;
-  Planet = pln;
-  Player = spc;
-
-  playground::addAlly(spc);
+planetView::planetView(sf::RenderWindow* win, spaceship* spc, gameplay* actGame, galaxy* glx, planetObj* pln) :
+            playground(win), restartViewer(false), changeViewer(false), Galaxy(glx), Gameplay(actGame), Planet(pln), Player(spc), bunkers(std::list<bunker*>()), fuels(std::list<fuel*>()){
 
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   Ground = new ground(information::MENU_DEFAULT_SIZE.x, information::MENU_DEFAULT_SIZE.y);
 
-  bunkers = std::list<bunker*>();
-  fuels = std::list<fuel*>();
-
   inizializeBunker();
 
+  playground::addAlly(spc);
   playground::addNeutral(Ground);
 }
 
 planetView::~planetView(){
-  std::cout << "DELETING PLANETVIEW" << std::endl;
-
-  //delete Ground;
-  //delete bunkers;
   if(!!Ground)
     delete Ground;
 
@@ -37,13 +26,6 @@ planetView::~planetView(){
   Planet = nullptr;
   image = nullptr;
 }
-//----------GETS----------
-//sf::Texture getTexture(){ return this->background.getTexture();}
-//sf::Sprite getBackground(){ return this->background;}
-
-//----------SETS----------
-//void setTexture(sf::Texture t){ this->background.setTexture(t);}
-//void setBackground(sf::Sprite b){ this->background = b;}
 
 //----------METHODS---------------
 void planetView::restart(){
@@ -60,12 +42,7 @@ void planetView::restart(){
 
 void planetView::inizializeBunker(){
   std::vector<line*> lines = Ground->getLines();
-  // bunker *temp = new bunker(this, *lines[2]);
-  // bunkers.push_front(temp);
-  // playground::addEnemy(temp);
-
-  bool occupied[20];
-  //TODO
+  bool occupied[20];                              //its needed to check which lines are already occupy
   int numBunker = utility::RandInt(2,1);
   int numFuel = 1;
   int pos = 0;
@@ -73,9 +50,11 @@ void planetView::inizializeBunker(){
   bunker *tempBunker = nullptr;
   fuel *tempFuel = nullptr;
 
+  //setting all the bool to false
   for(int k = 0; k < lines.size(); k++)
     occupied[k] = false;
 
+  //create bunkers and put it on top of a line
   for(int i = 0; i < numBunker;){
     pos = utility::RandInt(lines.size());
 
@@ -89,6 +68,7 @@ void planetView::inizializeBunker(){
     }
   }
 
+  //Same with fuels
   for(int i = 0; i < numFuel;){
     pos = utility::RandInt(lines.size());
 
@@ -104,56 +84,42 @@ void planetView::inizializeBunker(){
 
 }
 
-//TODO: Need to delete the object at the end of all the cicles!
-//TODO: consider to delete in a good way the mo'fucking pointers
 void planetView::checkCollision (){
   playground::checkCollision();
   changeViewer = false, restartViewer = false, this->endGame = false;
 
   for (auto ally = allies.begin(); ally != allies.end(); ally++){
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
-      if(!!*ally && !!*enemy){
-        if((*ally)->intersects(*enemy)){
+      if(!!*ally && !!*enemy)
+        if((*ally)->intersects(*enemy))
           collision(&ally, &enemy);
-        }
-      }
 
-      if(changeViewer && !endGame){
+      if(changeViewer && !endGame)
         Galaxy->delPlanet(Planet);
-        return;
-      }
 
-      if(endGame || restartViewer)
+      if(endGame || restartViewer || changeViewer)
         return;
     }
   }
-  std::cout << "engGame in check2: " << this->endGame << std::endl;
 
   for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
-    for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
-      if(!!*neutral && !!*enemy  && (*enemy)->Class().compare("bunker") != 0){
-        if ((*neutral)->intersects(*enemy)){
+    for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++)
+      if(!!*neutral && !!*enemy  && (*enemy)->Class().compare("bunker") != 0)
+        if ((*neutral)->intersects(*enemy))
           collision(&enemy, false);
-          std::cout << "COLLISION NEUTRAL in planetView!!" << std::endl;
-        }
-      }
-
-    }
 
     for (auto ally = allies.begin(); ally != allies.end(); ally++){
       if(!!*neutral && !!*ally && (*ally)->Class().compare("fuel") != 0){
-        if ((*neutral)->intersects(*ally)){
+        if ((*neutral)->intersects(*ally))
           collision(&ally, true);
-          std::cout << "COLLISION NEUTRAL in PLANETVIEW!!" << std::endl;
-        }
 
         if(endGame || restartViewer)
           return;
       }
     }
   }
-  std::cout << "engGame in check3: " << this->endGame << std::endl;
 
+  //if tractor beam is enable check whether it hits a fuel
   if(information::TRACTORBEAM_IS_ACTIVE){
     tractorBeam *trb = Player->getTractorBeam();
 
@@ -165,13 +131,11 @@ void planetView::checkCollision (){
       }
     }
   }
-  std::cout << "engGame in check4: " << this->endGame << std::endl;
 }
 
 void planetView::collision(std::_List_iterator<drawable*>* obj, bool isAlly){
   std::string objectClass = (**obj)->Class();
 
-  std::cout << "In Collision checkin up " << objectClass << std::endl;
   switch(objectClass[0]){
     case 'b': {
       bullet *blt = static_cast<bullet*>(**obj);
@@ -186,9 +150,9 @@ void planetView::collision(std::_List_iterator<drawable*>* obj, bool isAlly){
 
     case 's': {
       Player->rip();
+
       if(!Player->isAlive()){
         Gameplay->restart();
-        std::cout << "Hola chicoooo " << std::endl;
         this->endGame = true;
       }
       else{
@@ -197,42 +161,40 @@ void planetView::collision(std::_List_iterator<drawable*>* obj, bool isAlly){
       }
     }; break;
 
-    default: std::cout << objectClass << "in Objects" << std::endl;
+    default: ;
   }
 }
 
-//TODO: first need to check enemies, than allies
 void planetView::collision(std::_List_iterator<drawable*>* a, std::_List_iterator<drawable*>* e){
   std::string allyClass = (**a)->Class();
-  std::cout << "In Collision checkin up " << allyClass << std::endl;
 
+  //based on the type of the ally handle the collision
   switch(allyClass[0]){
     case 'b': { this->collisionBullet(&*a, &*e); }; break;
     case 's': { this->collisionSpaceship(&*a, &*e); }; break;
-    default: std::cout << allyClass << "in Allies" << std::endl;
+    default: ;
   }
 }
 
 void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List_iterator<drawable*>* e){
-
   std::string enemyClass = (**e)->Class();
   std::string bulletClass = (**blt)->Class();
-  std::cout << "In CollisionBullet checkin up " << enemyClass << std::endl;
-  std::cout << "In CollisionBullet checkin up " << bulletClass << std::endl;
 
-
+  //deleting bullet
   Player->deleteBullet(static_cast<bullet*>(**blt));
   *blt = allies.erase(*blt);
 
   switch(enemyClass[0]){
     case 'b': {
-      if(enemyClass[2] == 'n'){
+      if(enemyClass[2] == 'n'){                             //if the enemy is a buNker else is a bullet
+        //deleting bunker
         bunker *bnk = static_cast<bunker*>(**e);
         bnk->rip();
         bunkers.remove(bnk);
         *e = enemies.erase(*e);
         Gameplay->deathBunker();
 
+        //changing the Viewer in case all the bunkers died
         if(bunkers.empty()){
           allies.remove(static_cast<drawable*>(Player));
           Player->setPlayground(Galaxy);
@@ -241,7 +203,8 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
           this->changeViewer = true;
         }
       }
-      else{
+      else{                                                 //is a bullet
+        //simply deleting the bullet
         bullet *bll = static_cast<bullet*>(**e);
         shooter *parent = bll->getShooter();
         parent->deleteBullet(bll);
@@ -250,22 +213,22 @@ void planetView::collisionBullet(std::_List_iterator<drawable*>* blt, std::_List
 
     }; break;
 
-    default: std::cout << enemyClass << "in Enemies" << std::endl;
+    default: ;
   }
 }
 
 void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_List_iterator<drawable*>* e){
-  std::cout << "In CollisionSpaceship" << std::endl;
   std::string enemyClass = (**e)->Class();
-  std::cout << "In CollisionSpaceship checkin up " << enemyClass << std::endl;
 
   if(enemyClass.compare("bunker") == 0){
+    //deleting the bunker
     bunker *bnk = static_cast<bunker*>(**e);
     bnk->rip();
     bunkers.remove(bnk);
     *e = enemies.erase(*e);
     Gameplay->deathBunker();
 
+    //go back to Galaxy if all the bunkers are dead
     if(bunkers.empty()){
       allies.remove(static_cast<drawable*>(Player));
       Player->setPlayground(Galaxy);
@@ -273,13 +236,13 @@ void planetView::collisionSpaceship(std::_List_iterator<drawable*>* spc, std::_L
 
       this->changeViewer = true;
     }
-    std::cout << "Spaceship VS. Bunker" << std::endl;
   }
 
-  Player->rip();
+  Player->rip();                          //player losing a life
+
+  //restarting the game if spaceship has lost all his lifes else restarting only the view
   if(!Player->isAlive()){
     Gameplay->restart();
-    std::cout << "Hola Vamonooooos "  << std::endl;
     this->endGame = true;
   }else{
     this->restart();

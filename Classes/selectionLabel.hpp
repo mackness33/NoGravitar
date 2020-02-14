@@ -2,11 +2,11 @@
 #define SELECTIONLABEL_H
 
 #include <string>
-#include "entity.hpp"
-#include "text.hpp"
 #include "drawable.hpp"
+#include "entity.hpp"
+#include "essence.hpp"
 #include "label.hpp"
-#include "utility.hpp"
+#include "text.hpp"
 
 class selectionLabel : public label{
   protected:
@@ -17,7 +17,7 @@ class selectionLabel : public label{
     std::string value;
 
   protected:
-    void Reset();
+    void Reset();                       //reset totalTime to 0. This way it stop blinking
 
   public:
     //---------------CONSTRUCTORS---------------
@@ -29,8 +29,6 @@ class selectionLabel : public label{
     //---------------GETS---------------
     std::string getValue();
 
-    //---------------SETS---------------
-
     //---------------METHODS---------------
     void Draw (sf::RenderWindow* window);
 
@@ -38,9 +36,7 @@ class selectionLabel : public label{
     //update of the object's data for each time that it is draw
     void Update();
 
-    //build all the information of object's body
-    void build();
-    void select(bool is);
+    void select(bool is);                 //decide whethere this label is selected or not
 
     //return the class of the object
     virtual std::string Class();

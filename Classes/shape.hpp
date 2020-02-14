@@ -6,12 +6,14 @@
 
 template <class T> class shape : public essence<T>{
   public:
+    //---------------CONSTRUCTORS---------------
     shape();
     shape(int vertexCount, std::vector<line*> vertexPosition, sf::PrimitiveType type = sf::LineStrip);      //VertexArray
 
     ~shape();
 
-    void setBoundery();
+    //---------------METHODS---------------
+    //return the class of the object
     virtual std::string Class();
 };
 

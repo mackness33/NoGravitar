@@ -1,8 +1,8 @@
 LIBS = -lsfml-window -lsfml-system -lsfml-graphics -lstdc++fs
 
 # build an executable named windows from windows.c
-all: nograv.o game.o scene.o gameplay.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o tractorBeam.o fuel.o fuelLabel.o
-		g++ -g -Wall -o NoGravitar nograv.o scene.o game.o gameplay.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o settings.o planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o tractorBeam.o fuel.o fuelLabel.o $(LIBS)
+all: nograv.o game.o scene.o gameplay.o spaceship.o utility.o information.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o planetObj.o utility.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o tractorBeam.o fuel.o fuelLabel.o
+		g++ -g -Wall -o NoGravitar nograv.o scene.o game.o gameplay.o utility.o information.o spaceship.o header.o galaxy.o keyVector.o collisionHandler.o eventHandler.o bullet.o  planetObj.o viewer.o drawable.o line.o planetView.o playground.o ground.o bunker.o shooter.o text.o label.o selectionLabel.o startView.o menu.o living.o points.o tractorBeam.o fuel.o fuelLabel.o $(LIBS)
 
 nograv.o: nograv.cpp
 		g++ -c nograv.cpp $(LIBS)
@@ -17,10 +17,10 @@ eventHandler.o: Handlers/eventHandler.hpp Handlers/eventHandler.cpp Classes/gala
 
 
 #CLASSES
-bullet.o: Classes/bullet.hpp Classes/bullet.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/settings.hpp
+bullet.o: Classes/bullet.hpp Classes/bullet.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp
 	g++ -c Classes/bullet.cpp $(LIBS)
 
-bunker.o: Classes/bunker.hpp Classes/bunker.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/settings.hpp Classes/line.hpp Classes/utility.hpp Classes/shooter.hpp
+bunker.o: Classes/bunker.hpp Classes/bunker.cpp Classes/entity.hpp Classes/movable.hpp Classes/drawable.hpp Classes/line.hpp Classes/utility.hpp Classes/shooter.hpp
 	g++ -c Classes/bunker.cpp $(LIBS)
 
 drawable.o: Classes/drawable.hpp Classes/drawable.cpp Classes/drawable.tpp Classes/entity.hpp Classes/movable.hpp Classes/shape.hpp
@@ -41,7 +41,7 @@ fuelLabel.o: Classes/fuelLabel.hpp Classes/fuelLabel.cpp Classes/label.hpp Class
 gameplay.o: Classes/gameplay.hpp Classes/gameplay.cpp Classes/galaxy.hpp Classes/keyVector.hpp Classes/header.hpp Handlers/eventHandler.hpp Classes/spaceship.hpp Classes/spaceship.hpp Classes/scene.hpp
 		g++ -c Classes/gameplay.cpp $(LIBS)
 
-ground.o: Classes/ground.hpp Classes/ground.cpp Classes/entity.hpp Classes/shape.hpp Classes/drawable.hpp Classes/utility.hpp Classes/settings.hpp
+ground.o: Classes/ground.hpp Classes/ground.cpp Classes/entity.hpp Classes/shape.hpp Classes/drawable.hpp Classes/utility.hpp 
 		g++ -c Classes/ground.cpp $(LIBS)
 
 header.o: Classes/header.hpp Classes/header.cpp Classes/viewer.hpp Classes/information.hpp Classes/label.hpp Classes/points.hpp
@@ -80,9 +80,6 @@ points.o: Classes/points.hpp Classes/points.cpp Classes/label.hpp
 scene.o: Classes/scene.hpp Classes/scene.cpp Classes/viewer.hpp Classes/playground.hpp
 		g++ -c Classes/scene.cpp $(LIBS)
 
-settings.o: Classes/settings.hpp Classes/settings.cpp
-		g++ -c Classes/settings.cpp $(LIBS)
-
 selectionLabel.o: Classes/selectionLabel.hpp Classes/selectionLabel.cpp Classes/label.hpp
 		g++ -c Classes/selectionLabel.cpp $(LIBS)
 
@@ -110,39 +107,3 @@ viewer.o: Classes/viewer.hpp Classes/viewer.cpp Classes/drawable.hpp
 #CLEANER
 clean:
 	  $(RM) *.o
-
-
-
-
-#Your makefile should be like this:
-
-test: test.o Classes/object_test.hpp
-		g++ -g -Wall -o Test test.o $(LIBS)
-
-test.o: test.cpp Classes/object_test.hpp
-		g++ -c test.cpp $(LIBS)
-
-
-#If you want you can write it in this Makefile
-test2: test2.o ground.o drawable.o utility.o text.o
-		g++ -g -Wall -o Test test2.o drawable.o utility.o text.o $(LIBS)
-
-test2.o: test2.cpp Classes/ground.hpp
-		g++ -c -Wall -pedantic -W test2.cpp $(LIBS)
-
-#bunker.o: Classes/bunker.hpp Classes/bunker.cpp
-#		g++ -c Classes/bunker.cpp $(LIBS)
-
-
-test3: test3.o line.o
-		g++ -g -Wall -o Test test3.o line.o $(LIBS)
-
-test3.o: test3.cpp Classes/line.hpp
-		g++ -c test3.cpp $(LIBS)
-		#BASE
-
-object_test.o: object_test.hpp object_test.cpp Classes/viewer.hpp
-		g++ -c -c -Wall -pedantic -W object_test.cpp $(LIBS)
-
-entity.o: Classes/entity.hpp Classes/entity.cpp
-		g++ -c Classes/entity.cpp $(LIBS)

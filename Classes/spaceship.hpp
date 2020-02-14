@@ -4,11 +4,14 @@
 #include <list>
 #include <string>
 #include "bullet.hpp"
+#include "entity.hpp"
+#include "essence.hpp"
+#include "keyVector.hpp"
+#include "living.hpp"
+#include "movable.hpp"
 #include "playground.hpp"
 #include "shooter.hpp"
-#include "living.hpp"
 #include "tractorBeam.hpp"
-#include "keyVector.hpp"
 
 class spaceship : public drawable, public shooter, public living{
   private:
@@ -25,7 +28,6 @@ class spaceship : public drawable, public shooter, public living{
     playground *Playground;
     keyVector rotation;
     keyVector translation;
-//    keyVector attraction;
 
   protected:
     //It build up the spaceship shape
@@ -40,7 +42,7 @@ class spaceship : public drawable, public shooter, public living{
   public:
     //----------CONSTRUCTORS----------
     spaceship(playground* Playground, float spd = information::SPACESHIP_DEFAULT_SPEED, float dir = information::SPACESHIP_DEFAULT_ANGULAR_SPEED);
-    //spaceship(const spaceship& Player);
+
     ~spaceship();
 
     //----------GETS----------
@@ -71,26 +73,29 @@ class spaceship : public drawable, public shooter, public living{
     void setRotation(bool rotation);
     void setTranslation(bool traslation);
     void setAttraction(bool attraction);
-    bool isAttracting();
-    //TODO: setTexture(sf::Texture* t);
+    void SetPosition(sf::Vector2f pos);
 
     //----------METHODS------------
     //It lets the spaceship moves or rotates based on the key pressed
     void movement(sf::Keyboard::Key k);
+
+    //set the position of the tractor beam
     void setTractorPosition();
 
-    void SetPosition(sf::Vector2f pos);
+    bool isAttracting();                        //return true if the tractor beam is enable. false otherwise
 
     //It handles spaceship's translation in the window
     void fly(float module);
 
+    //Draw the objects
     void Draw (sf::RenderWindow* window);
-    // bool checkSide(float side1, float side2);
+
+    //check the side of the spaceship and understand if is colliding with the playground
     void checkSide(sf::Vector2f spcSide, sf::Vector2f plgSide, bool *sizeOOB, bool *coordinatesOOB);
     void checkOutOfBounds();
 
-    void shoot();
-    void pull();
+    void shoot();       //shoots a bullet
+    void pull();                  //disable the tractor beam
 
     virtual std::string Class();
 };

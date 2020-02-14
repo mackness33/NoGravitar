@@ -54,17 +54,19 @@ void ground::setup(float w, float h){
 bool ground::intersects(drawable* obj){
   sf::FloatRect objBound = obj->GetGlobalBounds();
   int sectLeft = objBound.left / length, sectRight = (objBound.left + objBound.width) / length;
-  sf::Vector2f left = utility::left(obj), right = utility::right(obj), top = utility::top(obj), bottom = utility::bottom(obj);
-  line *ptr1 = new line(left, bottom), *ptr2 = new line(right, bottom), *ptr3 = new line(left, top), *ptr4 = new line(right, top);
+  bool checkLeft = (objBound.left >= 0 && sectLeft >= 0 && sectLeft < lines.size()-1), checkRight = (objBound.left + objBound.width >= 0 && sectRight >= 0 && sectRight < lines.size());
 
-  //check intersection with the line in object's right side
-  if(lines[sectRight]->doIntersect(ptr1) || lines[sectRight]->doIntersect(ptr2) || lines[sectRight]->doIntersect(ptr3) || lines[sectRight]->doIntersect(ptr4))
-    return true;
+  //check whether it is inside of the playground
+  if(checkLeft || checkRight){
+    sf::Vector2f left = utility::left(obj), right = utility::right(obj), top = utility::top(obj), bottom = utility::bottom(obj);
+    line *ptr1 = new line(left, bottom), *ptr2 = new line(right, bottom), *ptr3 = new line(left, top), *ptr4 = new line(right, top);
+      if(lines[sectRight]->doIntersect(ptr1) || lines[sectRight]->doIntersect(ptr2) || lines[sectRight]->doIntersect(ptr3) || lines[sectRight]->doIntersect(ptr4))
+        return true;
 
-  //check intersection with the line in object's left side
-  if(sectLeft != sectRight)
-    if(lines[sectLeft]->doIntersect(ptr1) || lines[sectLeft]->doIntersect(ptr2) || lines[sectLeft]->doIntersect(ptr3) || lines[sectLeft]->doIntersect(ptr4))
-      return true;
+    if(checkRight && sectLeft != sectRight)
+      if(lines[sectLeft]->doIntersect(ptr1) || lines[sectLeft]->doIntersect(ptr2) || lines[sectLeft]->doIntersect(ptr3) || lines[sectLeft]->doIntersect(ptr4))
+        return true;
+  }
 
   return false;
 }

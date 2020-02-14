@@ -1,17 +1,11 @@
 #include "shooter.hpp"
+#include "utility.hpp"
 
 //------------CONSTRUCTORS------------
 shooter::shooter(){}
 
 //------------DESTRUCTORS------------
-shooter::~shooter(){
-  std::cout << "DELETING SHOOTER" << std::endl;
-
-  this->deleteBullets();
-}
-
-//------------GETS------------
-
+shooter::~shooter(){ this->deleteBullets(); }
 
 //------------METHODS------------
 void shooter::deleteBullet(bullet* b){

@@ -9,9 +9,6 @@
 #include <exception>
 #include <list>
 #include "bullet.hpp"
-#include "utility.hpp"
-#include "information.hpp"
-
 class bullet;
 
 class shooter{
@@ -23,18 +20,13 @@ class shooter{
 
     virtual ~shooter();
 
-    //----------GETS----------
-
-
     //----------METHODS------------
-    virtual void deleteBullet(bullet* bullet);
-    virtual void deleteBullets();
+    virtual void deleteBullet(bullet* bullet);            //deletes a bullet
+    virtual void deleteBullets();                         //delets all the bullets
     virtual void shoot() = 0;
 
     virtual std::string Class();
 
 };
-
-//#include "shooter.tpp"
 
 #endif // SHOOTER_H

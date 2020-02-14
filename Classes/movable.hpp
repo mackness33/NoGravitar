@@ -2,23 +2,18 @@
 #define MOVABLE_H
 
 #include <vector>
+#include "essence.hpp"
 #include "entity.hpp"
-
-/*
-  BUG: change body into sprites
-*/
 
 template <class T> class movable : public entity<T>{
 
   public:
     //----------CONSTRUCTORS----------
-    //TODO: add all the constructors of sf::Shape sf::Sprite .. etc
     movable();
     movable(T* b);
     movable(sf::Texture* image);                                                                                       //Sprite
     movable(float radius, std::size_t pointCount = 30);                                                                //CircleShape
     movable(sf::Vector2f size, sf::Vector2f position = sf::Vector2f(0, 0), sf::Texture* image = nullptr);              //RectangleShape
-    //movable(std::size_t vertexCount, std::vector<sf::Vector2f*> vertexPosition = {}, sf::PrimitiveType type = sf::LineStrip);      //VertexArray
 
     ~movable();
 
@@ -31,6 +26,7 @@ template <class T> class movable : public entity<T>{
     void Scale (float factorX, float factorY);
     void Scale (const sf::Vector2f &factor);
 
+    //return the class of the object
     virtual std::string Class();
 };
 

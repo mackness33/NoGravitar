@@ -1,8 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <vector>
-#include "settings.hpp"
 #include "scene.hpp"
 #include "game.hpp"
 #include "startView.hpp"
@@ -16,6 +14,7 @@ class menu : public scene{
     startView *view;
 
   protected:
+    //event handlers
     void keyPressedHandler(const sf::Event &event);
 
   public:
@@ -23,17 +22,10 @@ class menu : public scene{
     menu(sf::RenderWindow* window, game* g);
     ~menu();
 
-    //----------GETS----------
-    //sf::Texture getTexture(){ return this->background.getTexture();}
-    //sf::Sprite getBackground(){ return this->background;}
-
-    //----------SETS----------
-    //void setTexture(sf::Texture t){ this->background.setTexture(t);}
-    //void setBackground(sf::Sprite b){ this->background = b;}
-
     //----------METHODS----------
-    //friend void eventHandler::changePlaygroundHandler(); // Friend function
+    //main (general) event handler
     void eventHandler(const sf::Event &event);
+    //return the class of the object
     virtual std::string Class();
 
 };

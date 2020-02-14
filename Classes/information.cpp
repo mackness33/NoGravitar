@@ -11,6 +11,7 @@ sf::Vector2f information::PLAYGROUND_DEFAULT_POSITION = sf::Vector2f(0, 0); // Y
 sf::Vector2f information::PLAYER_DEFAULT_POSITION = sf::Vector2f(100.f, 200.f); // You MUST declare it in a CPP
 sf::Vector2f information::PLAYER_DEFAULT_SIZE = sf::Vector2f(64, 64); // You MUST declare it in a CPP
 sf::Vector2f information::TRACTORBEAM_DEFAULT_SIZE = sf::Vector2f(30, 30); // You MUST declare it in a CPP
+sf::Vector2f information::BUNKER_DEFAULT_SIZE = sf::Vector2f(50, 50); // You MUST declare it in a CPP
 float information::SPACESHIP_DEFAULT_ANGULAR_SPEED = 6; // You MUST declare it in a CPP
 float information::SPACESHIP_DEFAULT_SPEED = 10; // You MUST declare it in a CPP
 float information::PLANET_DEFAULT_RADIUS = 50; // You MUST declare it in a CPP
@@ -25,6 +26,8 @@ int information::FUELS_DEFAULT_CAPACITY = 5000;
 int information::FUELS_DEFAULT_VALUE = 500;
 int information::GALAXY_DEFAULT_QUANTITY = 4;
 int information::GALAXY_DEFAULT_PLANETS = 5;
+int information::BUNKER_DEFAULT_LIFES = 1;
+int information::BUNKER_DEFAULT_BULLETSXSHOOTING = 2;
 
 const float information::MAX_GROUND_HEIGHT = 0.4;             //30%
 const float information::MIN_GROUND_HEIGHT = 0.1;             //30%

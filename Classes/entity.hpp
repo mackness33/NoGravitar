@@ -5,6 +5,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+
 #include "essence.hpp"
 
 //this class handle static objects

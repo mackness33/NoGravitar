@@ -5,8 +5,6 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <exception>
-#include <vector>
 
 //this class is the essence of the every drawable object
 //at first it was created for testing porposes

@@ -1,4 +1,5 @@
 #include "bullet.hpp"
+#include "utility.hpp"
 
 //---------------CONSTRUCTORS---------------
 bullet::bullet(shooter *dad, float s, float d, sf::Vector2f p, sf::Color c) : parent(dad), direction(utility::toRadiant(d)), totalTime(0), speed(s){

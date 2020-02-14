@@ -7,7 +7,6 @@
 #include "information.hpp"
 #include "movable.hpp"
 #include "shooter.hpp"
-#include "utility.hpp"
 
 class shooter;
 

@@ -1,13 +1,15 @@
 #include "bunker.hpp"
+#include "information.hpp"
+#include "utility.hpp"
 
 //----------CONSTRUCTORS----------
-bunker::bunker(playground* plg, line l, bool type) : Playground(plg), living(1), BulletsxShooting(2), image(information::getImage("bunker")), totalTime(0){
+bunker::bunker(playground* plg, line l, bool type) : Playground(plg), living(information::BUNKER_DEFAULT_LIFES), BulletsxShooting(information::BUNKER_DEFAULT_BULLETSXSHOOTING), image(information::getImage("bunker")), totalTime(0){
   if(type){                                       //type is a bool to understand the type of the bunker
     image = information::getImage("bunker2");
     BulletsxShooting++;     //number of bullets to shoot
   }
 
-  body = new movable<sf::RectangleShape>(sf::Vector2f(50, 50), sf::Vector2f(400, 400), image);
+  body = new movable<sf::RectangleShape>(information::BUNKER_DEFAULT_SIZE, sf::Vector2f(-1, -1), image);
 
   this->inizialization(l);
 }
@@ -61,7 +63,7 @@ void bunker::inizialization(line l){
 
 
 void bunker::shoot(){
-  int range = 160/BulletsxShooting;
+  int range = 160/BulletsxShooting;     //max angle of bullets direction
   bullet *bul = nullptr;
 
   for(int i = 0, angle = 160; i < BulletsxShooting; i++, angle -= range){

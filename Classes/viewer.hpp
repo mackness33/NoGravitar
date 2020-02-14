@@ -2,6 +2,7 @@
 #define VIEWER_H
 
 #include "drawable.hpp"
+#include "information.hpp"
 
 class viewer : public drawable{
   protected:

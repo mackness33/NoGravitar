@@ -2,9 +2,9 @@
 #define DRAWABLE_H
 
 #include "movable.hpp"
+#include "essence.hpp"
 #include "entity.hpp"
 #include "shape.hpp"
-#include "information.hpp"
 
 class drawable{
   protected:

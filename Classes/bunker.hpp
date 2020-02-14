@@ -1,11 +1,13 @@
 #ifndef BUNKER_H
 #define BUNKER_H
 
-#include "shooter.hpp"
 #include "bullet.hpp"
+#include "entity.hpp"
+#include "essence.hpp"
 #include "line.hpp"
 #include "living.hpp"
 #include "playground.hpp"
+#include "shooter.hpp"
 
 class bunker : public drawable, public shooter, public living{
   private:

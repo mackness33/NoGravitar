@@ -1,10 +1,10 @@
 #ifndef FUEL_H
 #define FUEL_H
 
-#include "line.hpp"
-#include "utility.hpp"
 #include "drawable.hpp"
-#include "information.hpp"
+#include "entity.hpp"
+#include "essence.hpp"
+#include "line.hpp"
 
 class fuel : public drawable{
   protected:
@@ -12,10 +12,9 @@ class fuel : public drawable{
     sf::Texture *image;
     int value;
 
-  protected:
   public:
     //---------------CONSTRUCTORS---------------
-    fuel(line l, bool special);
+    fuel(line l, bool special = false);
 
     //---------------DESTRUCTORS---------------
     ~fuel();
@@ -31,6 +30,7 @@ class fuel : public drawable{
     //---------------SETS---------------
 
     //---------------METHODS---------------
+    //draws the object's body
     void Draw (sf::RenderWindow* window);
 
     //return the class of the object

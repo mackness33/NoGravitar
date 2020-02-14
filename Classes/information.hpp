@@ -34,6 +34,7 @@ class information{
     static sf::Vector2f PLAYER_DEFAULT_POSITION;
     static sf::Vector2f PLAYER_DEFAULT_SIZE;
     static sf::Vector2f TRACTORBEAM_DEFAULT_SIZE;
+    static sf::Vector2f BUNKER_DEFAULT_SIZE;
     static bool TRACTORBEAM_IS_ACTIVE;
     static float SPACESHIP_DEFAULT_SPEED;
     static float SPACESHIP_DEFAULT_ANGULAR_SPEED;
@@ -48,6 +49,8 @@ class information{
     static int FUELS_DEFAULT_VALUE;
     static int GALAXY_DEFAULT_QUANTITY;
     static int GALAXY_DEFAULT_PLANETS;
+    static int BUNKER_DEFAULT_LIFES;
+    static int BUNKER_DEFAULT_BULLETSXSHOOTING;
     static std::vector<file<sf::Texture>*> images;
     static std::vector<file<sf::Font>*> fonts;
 

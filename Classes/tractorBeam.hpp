@@ -32,6 +32,7 @@ class tractorBeam : public drawable{
     //---------------SETS---------------
 
     //---------------METHODS---------------
+    //draw the object
     void Draw (sf::RenderWindow* window);
 
     //return the class of the object

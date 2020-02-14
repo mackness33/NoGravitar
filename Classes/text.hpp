@@ -3,23 +3,21 @@
 
 #include <vector>
 #include "entity.hpp"
-
-/*
-  BUG: change body into sprites
-*/
+#include "essence.hpp"
 
 class text : public entity<sf::Text>{
 
   public:
     //----------CONSTRUCTORS----------
-    //TODO: add all the constructors of sf::Shape sf::Sprite .. etc
     text();
     text(const sf::Font &font, const std::string &string);                //Text
 
     ~text();
 
-    //----------METHODS----------
+    //----------GETS----------
     std::string GetString ();
+
+    //----------SETS----------
     void SetB ();
     void SetFont (const sf::Font &f);
     void SetStyle (sf::Uint32	style);
@@ -29,8 +27,9 @@ class text : public entity<sf::Text>{
     void SetCharacterSize (unsigned int size);
     void SetOutlineThickness (float thickness);
 
+    //----------METHODS----------
+    //return the class of the object
     virtual std::string Class();
 };
 
-//#include "text.tpp"
 #endif // text_H

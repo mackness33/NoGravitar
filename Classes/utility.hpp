@@ -16,18 +16,6 @@ class drawable;
 
 class utility{
   public:
-    //----------CONSTRUCTORS----------
-    utility();
-
-    //----------GETS----------
-    //sf::Texture getTexture(){ return this->background.getTexture();}
-
-    //----------SETS----------
-    //void setTexture(sf::Texture t){ this->background.setTexture(t);}
-
-    //----------METHODS----------
-    //static sf::Vector2f MaxVector(sf::Vector2f* p1, sf::Vector2f* p2);
-    //static sf::Vector2f MaxVector(sf::Vector2f* p1, sf::Vector2f* p2);
     static float toRadiant(float degrees);
     static long double toDegrees(long double radiant);
     static int Proportion(int a, int b, int c = 100);
@@ -37,8 +25,7 @@ class utility{
     template <typename T> static void deleteList(std::list<T*>& objects);
     template <typename T> static void deleteVector(std::vector<T*>& objects);
 
-    // static std::string filenameFromPath(std::string path);
-
+    //they return the farthest side point of the objects
     static sf::Vector2f left(drawable* obj);
     static sf::Vector2f right(drawable* obj);
     static sf::Vector2f top(drawable* obj);

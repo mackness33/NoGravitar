@@ -9,27 +9,24 @@
 class startView : public viewer{
   protected:
     std::vector<selectionLabel*> selectors;
-    int selectedIndex;
+    selectionLabel *title;
     std::string *value;
-
-  protected:
-    void DrawList (std::list<drawable*> objects);
+    int selectedIndex;
 
   public:
     //---------------CONSTRUCTORS---------------
-    startView(sf::RenderWindow *window/*, sf::Texture* image = nullptr*/);
+    startView(sf::RenderWindow *window);
 
     ~startView();
 
     //---------------GETS---------------
-    //virtual void getObjectsBounds (std::list<drawable*> objects, std::list<sf::FloatRect>* objectsBounds);
     std::string getValue();
 
     //---------------METHODS---------------
     virtual void Draw();
-    void inizializeSelecters ();
-    void selectNext ();
-    void selectPrev ();
+    void inizializeSelecters ();                                //it inizialize the selecters
+    void selectNext ();                                         //select the next label
+    void selectPrev ();                                         //select the previous label
 
     virtual std::string Class();
 };

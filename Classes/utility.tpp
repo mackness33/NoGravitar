@@ -22,4 +22,3 @@ template <typename T> void utility::deleteVector(std::vector<T*>& objects){
 
   objects.clear();
 }
-//------------METHOD------------

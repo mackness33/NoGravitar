@@ -23,12 +23,14 @@ class viewer : public drawable{
     sf::FloatRect GetGlobalBounds();
 
     //----------SETS----------
-    void setBackground(sf::Texture* texture);
+    //Still on texting
+    void setBackground(sf::Texture* texture);       //set the background with a texture
 
     //----------METHODS------------
-    void Draw (sf::RenderWindow* window);
+    void Draw (sf::RenderWindow* window);           //draw of the background
     virtual void Draw ();
 
+    //return the class of the object
     virtual std::string Class();
 };
 

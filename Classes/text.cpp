@@ -3,26 +3,9 @@
 //------------CONSTRUCTORS------------
 text::text() : entity<sf::Text>::entity() {}
 text::text(const sf::Font &f, const std::string &s) : entity<sf::Text>::entity(f, s) {}
-//template <class T> text<T>::text(std::size_t vertexCount, std::vector<sf::Vector2f*> vertexPosition, sf::PrimitiveType type) : entity<T>::entity(vertexCount, vertexPosition, type){}      //VertexArray
-
-/*template <class T> text<T>::text(sf::RenderWindow* w){
-  window = w;
-  body = new sf::CircleShape();
-  body->setRadius(10);
-  body->setFillColor(sf::Color::Red);
-  //boundBox = new sf::FloatRect(0, 0, 0, 0);        //for testing use
-  boundBox = new sf::FloatRect(body->getLocalBounds());        //for testing use
-  bound.setSize(sf::Vector2f(boundBox->width, boundBox->height));
-  bound.setOrigin(body.getOrigin());
-  bound.setPosition(body.getPosition());
-  bound.setRotation(body.getRotation());
-  bound.setScale(body.getScale());
-}*/
 
 
-text::~text(){
-  std::cout << "DELETING TEXT" << std::endl;
-}
+text::~text(){}
 
 
 std::string text::GetString (){ this->body->getString(); }

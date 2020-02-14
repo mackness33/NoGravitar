@@ -24,6 +24,7 @@ class information{
 
   public:
     //----------CONSTRUCTORS----------
+    // You MUST declare it in a CPP
     static sf::Vector2f MENU_DEFAULT_SIZE;
     static sf::Vector2f MENU_DEFAULT_POSITION;
     static sf::Vector2f FUEL_DEFAULT_SIZE;
@@ -42,9 +43,11 @@ class information{
     static float BULLET_DEFAULT_SPEED;
     static float BULLET_DEFAULT_RADIUS;
     static float BULLET_DEFAULT_DIRECTION;
-    static float DELTA_TIME; // You MUST declare it in a CPP
-    static float SWITCH_TIME; // You MUST declare it in a CPP
-    static float SHOOTER_SWITCH_TIME; // You MUST declare it in a CPP
+    static float SHOOTER_SWITCH_TIME;
+    static float DELTA_TIME;
+    static float SWITCH_TIME;
+    static int GROUND_RAND_VERTEX;
+    static int GROUND_MIN_NUM_VERTEX;
     static int FUELS_DEFAULT_CAPACITY;
     static int FUELS_DEFAULT_VALUE;
     static int GALAXY_DEFAULT_QUANTITY;

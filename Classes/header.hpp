@@ -17,8 +17,11 @@ class viewer;
 class header : public viewer{
   private:
     fuelLabel *FuelLabel;
+    label *lblFuelLabel;
     points *score;
+    label *lblScore;
     points *bestScore;
+    label *lblBestScore;
     label *title;
 
   public:
@@ -30,15 +33,11 @@ class header : public viewer{
     points* getPoints();
     fuelLabel* getFuels();
     unsigned int getBest();
-    //sf::Text getTitle();
-    //const sf::Font* getFont();
-
-    //----------SETS----------
-    //void setTitle(sf::Text text);
-    //void setFont(sf::Font* font);
 
     //---------------METHODS---------------
+    //Draw the objects
     void Draw();
+    //return the class of the object
     virtual std::string Class();
 };
 

@@ -1,68 +1,49 @@
 #include "gameplay.hpp"
 
 //CONSTRUCTORS
-gameplay::gameplay(sf::RenderWindow* wnd, game* g) : scene(wnd), Game(g) {
+gameplay::gameplay(sf::RenderWindow* wnd, game* g) : scene(wnd), Game(g), galaxies(std::vector<galaxy*>()){
   Player = new spaceship(nullptr);
   Header = new header(Window);
-  std::cout << "Brust" << std::endl;
-  //Playground = new playground(Window);
-  //Settings = new information(Window);
-  galaxies = {};
+
   for(int i = 0; i < information::GALAXY_DEFAULT_QUANTITY; i++)
     galaxies.push_back(new galaxy(Window, Player, i, this));
 
+  //set the actual viewer to the first galaxy
   activeGalaxy = galaxies.begin();
-  // Galaxy = new galaxy(Window, Player, 20, this);
-  //StartView = new startView(Window);
   this->Viewer = *activeGalaxy;
 
   Player->setPlayground(*activeGalaxy);
-  Player->setTractorPosition();
+  Player->setTractorPosition();       //need to set the tractor position here, otherwise the tractor will be shift a bit to the right of the spaceship
 
+  //get the game information from the header
   Points = Header->getPoints();
   FuelLabel = Header->getFuels();
 }
 
 gameplay::~gameplay(){
-  std::cout << "DELETING GAMEPLAY" << std::endl;
-
   if(!!Player)
     delete Player;
 
   utility::deleteVector(galaxies);
 
-  //if(!!actualGalaxy)
-    //delete Galaxy;
-
   if(!!Header)
     delete Header;
-
-  //if(!!Settings)
-    //delete Settings;
-
-  //if(!!Viewer)
-    //delete Viewer;
 
   Window = nullptr;
   Player = nullptr;
   Header = nullptr;
+  FuelLabel = nullptr;
+  Points = nullptr;
   *activeGalaxy = nullptr;
-  // Viewer = nullptr;
-  // Settings = nullptr;
-
 }
 
-
-//GETS
-//sf::Texture getTexture(){ return this->background.getTexture();}
-//sf::Sprite getBackground(){ return this->background;}
-
-//SETS
-//void setTexture(sf::Texture t){ this->background.setTexture(t);}
-//void setBackground(sf::Sprite b){ this->bacckground = b;}
-
+//---------------SETS---------------
+void gameplay::setMainViewer(viewer* newViewer){ this->Viewer = newViewer; }
 
 //---------------METHODS---------------
+void gameplay::deathBunker(){ Points->deathBunker(); }
+void gameplay::deathPlanet(){ Points->deathPlanet(); }
+void gameplay::addFuel(int fuels){ FuelLabel->addFuel(fuels); }
 
 void gameplay::eventHandler(const sf::Event &event){
   switch (event.type) {
@@ -87,25 +68,19 @@ void gameplay::eventHandler(const sf::Event &event){
 }
 
 void gameplay::restart(){
-  std::cout << "Boh vediamo! " << std::endl;
   game::bestScore = Header->getBest();
-  std::cout << "Magari! " << std::endl;
   Game->restart();
 }
 
 void gameplay::next(){
-  std::cout << "Boh vediamo! " << std::distance(activeGalaxy, galaxies.end()) << std::endl;
   if(std::distance(activeGalaxy, galaxies.end()) > 1){
     this->Viewer = *(++activeGalaxy);
-    // this->Player->SetPosition(sf::Vector2f(0, this->Player->GetPosition().y));
     this->Player->SetPosition(information::PLAYER_DEFAULT_POSITION);
     this->Player->setPlayground(*activeGalaxy);
   }
-  // std::cout << "Hola: " << std::distance(galaxies.begin(), activeGalaxy) << std::endl;
 }
 
 void gameplay::prev(){
-  std::cout << " Holy! " << std::endl;
   if(activeGalaxy != galaxies.begin()){
     this->Viewer = *(--activeGalaxy);
     this->Player->SetPosition(information::PLAYER_DEFAULT_POSITION);
@@ -113,56 +88,39 @@ void gameplay::prev(){
   }
 }
 
-void gameplay::deathBunker(){ Points->deathBunker(); }      //can be optimazed with friend keyword on points for Galaxy
-void gameplay::deathPlanet(){ Points->deathPlanet(); }      //can be optimazed with friend keyword on points for PlanetView
-void gameplay::addFuel(int fuels){ FuelLabel->addFuel(fuels); }      //can be optimazed with friend keyword on points for PlanetView
-
 void gameplay::keyReleasedHandler(const sf::Event &e){
   switch (e.key.code) {
-    case sf::Keyboard::Left : { }                                      //LEFT
-    case sf::Keyboard::Right : { Player->setRotation(false); };break;            //RIGHT
-    case sf::Keyboard::Up : { }                                        //UP
-    case sf::Keyboard::Down : { Player->setTranslation(false); };break;            //DOWN
-    case sf::Keyboard::Z : { information::TRACTORBEAM_IS_ACTIVE = false; };break;            //DOWN
-    default: break;
+    case sf::Keyboard::Left : { }                                                             //LEFT
+    case sf::Keyboard::Right : { Player->setRotation(false); };break;                         //RIGHT
+    case sf::Keyboard::Up : { }                                                               //UP
+    case sf::Keyboard::Down : { Player->setTranslation(false); };break;                       //DOWN
+    case sf::Keyboard::Z : { information::TRACTORBEAM_IS_ACTIVE = false; };break;             //Z
+    default: ;
   }
 }
 
+//arrows keys are not present because they are handle directly by the spaceship
 void gameplay::keyPressedHandler(const sf::Event &e){
-  std::cout << "the key pressed is: " << e.key.code << std::endl;
   switch (e.key.code) {
-    case sf::Keyboard::Space : {
-      Player->shoot();
-    };break;
+    case sf::Keyboard::Space : { Player->shoot(); };break;                                    //SPACE
 
-    case sf::Keyboard::Z : {
-      information::TRACTORBEAM_IS_ACTIVE = true;
-    };break;
+    case sf::Keyboard::Z : { information::TRACTORBEAM_IS_ACTIVE = true; };break;              //Z
 
-    default: {}
+    default: ;
   }
-    //default: std::cout << "the key pressed is: " << e.key.code << std::endl;
-  /*
-  std::cout << "the key pressed is: " << event.key.code << std::endl;
-  std::cout << "control:" << event.key.control << std::endl;
-  std::cout << "alt:" << event.key.alt << std::endl;
-  std::cout << "shift:" << event.key.shift << std::endl;
-  std::cout << "system:" << event.key.system << std::endl;
-  */
 }
 
+//if every galaxy is conquer than return true else false
 bool gameplay::Win (){
   for(auto glx = galaxies.begin(); glx != galaxies.end(); glx++)
     if(!(*glx)->isConquer())
       return false;
 
-  std::cout << "YOU WON!!! Nice game" << std::endl << std::endl;
   return true;
 }
 
-//DRAW
 void gameplay::Draw (){
-  if(FuelLabel->getFuels() <= 1 || this->Win())
+  if(FuelLabel->getFuels() <= 1 || this->Win())             // check whether there's still fuel
     this->restart();
   else{
     Header->Draw();
@@ -170,11 +128,6 @@ void gameplay::Draw (){
   }
 }
 
-void gameplay::setMainViewer(viewer* newViewer){
-  std::cout << "Does it exists? " << !!newViewer << std::endl;
-  this->Viewer = newViewer;
-  std::cout << "Does it exists? " << !!this->Viewer << std::endl;
-}
 
 std::string gameplay::Class(){
   return "gameplay";

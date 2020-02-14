@@ -2,14 +2,15 @@
 #define GAMEPLAY_H
 
 #include <vector>
-#include "scene.hpp"
-#include "galaxy.hpp"
-#include "keyVector.hpp"
-#include "header.hpp"
-#include "settings.hpp"
-#include "startView.hpp"
 #include "game.hpp"
 #include "fuelLabel.hpp"
+#include "galaxy.hpp"
+#include "header.hpp"
+#include "keyVector.hpp"
+#include "points.hpp"
+#include "scene.hpp"
+#include "spaceship.hpp"
+#include "startView.hpp"
 
 #include "../Handlers/eventHandler.hpp"
 
@@ -25,42 +26,44 @@ class gameplay : public scene{
     points *Points;
     fuelLabel *FuelLabel;
     std::vector<galaxy*>::iterator activeGalaxy;
-    //startView *StartView;
-    //settings *Settings;
-
-    playground *Playground;
-    //classes to handle input commands in smooth trasformations of object
 
   protected:
+    //event handlers
     void keyPressedHandler(const sf::Event &event);
     void keyReleasedHandler(const sf::Event &event);
 
   public:
     //----------CONSTRUCTORS----------
     gameplay(sf::RenderWindow* window, game* g);
+
     ~gameplay();
 
-    //----------GETS----------
-    //sf::Texture getTexture(){ return this->background.getTexture();}
-    //sf::Sprite getBackground(){ return this->background;}
-
     //----------SETS----------
-    //void setTexture(sf::Texture t){ this->background.setTexture(t);}
-    //void setBackground(sf::Sprite b){ this->background = b;}
     void setMainViewer(viewer* newViewer);
 
     //----------METHODS----------
-    void Draw ();
+    //main (general) event handler
     void eventHandler(const sf::Event &event);
-    void restart();
-    void deathBunker();
-    void deathPlanet();
-    void addFuel(int fuels);
-    void next();
-    void prev();
-    bool Win();
 
-    //friend void eventHandler::changePlaygroundHandler(); // Friend function
+    //restart of the game
+    void restart();
+
+    //add points for the death of a bunker
+    void deathBunker();
+
+    //add points for the conquer of a planet
+    void deathPlanet();
+
+    //add fuel to the spaaceship
+    void addFuel(int fuels);
+
+    void next();                      //go to the next galaxy
+    void prev();                      //go to the previous galaxy
+
+    bool Win();                       //checks wheter the player won
+    void Draw ();                     //Draw the objects
+
+    //return the class of the object
     virtual std::string Class();
 
 };

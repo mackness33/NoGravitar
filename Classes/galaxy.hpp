@@ -2,13 +2,11 @@
 #define GALAXY_H
 
 #include <list>
-#include "spaceship.hpp"
-#include "planetObj.hpp"
-#include "planetView.hpp"
-#include "utility.hpp"
-#include "playground.hpp"
+
 #include "gameplay.hpp"
-#include "../Handlers/collisionHandler.hpp"
+#include "planetObj.hpp"
+#include "playground.hpp"
+#include "spaceship.hpp"
 
 class gameplay;
 class planetObj;
@@ -22,37 +20,40 @@ class galaxy : public playground{
     bool conquer;
 
   protected:
+    //check if the position of the planet is not on the same of another object
     bool checkPlanetPosition(planetObj* planet);
-    void inizializePlanets();
-    //TODO: create a .tpp and convert collision in template <typename T> void galaxy::collision(T* obj, planetObj* planet){ return nullptr; }
+
+    //inizialization of the planets
+    void inizializationPlanets();
+
+    //handle the collision between aliies and enemies
     void collision(std::_List_iterator<drawable*>* ally, std::_List_iterator<drawable*>* enemy);
 
   public:
-    //CONSTRUCTORS
+    //---------------CONSTRUCTORS---------------
     galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int galaxyLevel, gameplay* actualGame);
 
     ~galaxy();
 
-    //GETS
-    //sf::Texture getTexture(){ return this->background.getTexture();}
-    //sf::Sprite getBackground(){ return this->background;}
-
-    //SETS
-    //void setTexture(sf::Texture t){ this->background.setTexture(t);}
-    //void setBackground(sf::Sprite b){ this->background = b;}
+    //---------------GETS---------------
+    int getLevel();                           //return the level of the galaxy
 
     //---------------METHODS---------------
+    //overriding of the playground method
+    //checks whether there's a collision
     void checkCollision();
-    int getLevel();
 
+    //return true if every planets has been conquer
     bool isConquer();
+    //it handle the deletion of the object
     void delPlanet(planetObj *planet);
 
-    void next();
-    void prev();
+    void next();                            //go tho the next Galaxy
+    void prev();                            //go tho the previous Galaxy
+
+    //return the class of the object
     virtual std::string Class();
 
 };
 
-//#include "galaxy.tpp"
 #endif

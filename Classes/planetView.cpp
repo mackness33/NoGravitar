@@ -131,8 +131,8 @@ void planetView::checkCollision (){
 
   for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
     for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
-      if(!!*neutral && !!*enemy){
-        if ((*neutral)->intersects(*enemy) && (*enemy)->Class().compare("bunker") != 0){
+      if(!!*neutral && !!*enemy  && (*enemy)->Class().compare("bunker") != 0){
+        if ((*neutral)->intersects(*enemy)){
           collision(&enemy, false);
           std::cout << "COLLISION NEUTRAL in planetView!!" << std::endl;
         }
@@ -141,8 +141,8 @@ void planetView::checkCollision (){
     }
 
     for (auto ally = allies.begin(); ally != allies.end(); ally++){
-      if(!!*neutral && !!*ally){
-        if ((*neutral)->intersects(*ally) && (*ally)->Class().compare("fuel") != 0){
+      if(!!*neutral && !!*ally && (*ally)->Class().compare("fuel") != 0){
+        if ((*neutral)->intersects(*ally)){
           collision(&ally, true);
           std::cout << "COLLISION NEUTRAL in PLANETVIEW!!" << std::endl;
         }

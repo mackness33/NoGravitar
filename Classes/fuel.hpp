@@ -27,8 +27,6 @@ class fuel : public drawable{
     sf::FloatRect GetGlobalBounds();
     int getValue();
 
-    //---------------SETS---------------
-
     //---------------METHODS---------------
     //draws the object's body
     void Draw (sf::RenderWindow* window);

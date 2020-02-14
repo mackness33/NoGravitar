@@ -2,36 +2,31 @@
 
 unsigned int game::bestScore = 0;
 
-//CONSTRUCTORS
-game::game(sf::RenderWindow* wnd) : Window(wnd){
-  information::inizialize(Window->getSize());
-  this->inizialize();
-}
+//----------CONSTRUCTORS----------
+game::game(sf::RenderWindow* wnd) : Window(wnd){ this->inizialize(); }
 
 game::~game(){
-  std::cout << "DELETING GAME" << std::endl;
-
   if(!!Gameplay)
     delete Gameplay;
 
   if(!!Menu)
     delete Menu;
 
-  //Window = nullptr;
   mainScene = nullptr;
   Menu = nullptr;
   Gameplay = nullptr;
 }
 
+//----------SETS----------
+void game::setMainScene(std::string name){
+  switch(name[0]){
+    case 'm': { mainScene = Menu; }break;
 
-//GETS
-//sf::Texture getTexture(){ return this->background.getTexture();}
-//sf::Sprite getBackground(){ return this->background;}
+    case 'g': { mainScene = Gameplay; }break;
 
-//SETS
-//void setTexture(sf::Texture t){ this->background.setTexture(t);}
-//void setBackground(sf::Sprite b){ this->background = b;}
-
+    default: ;
+  }
+}
 
 //---------------METHODS---------------
 void game::inizialize(){
@@ -41,7 +36,6 @@ void game::inizialize(){
   mainScene = Menu;
 }
 
-//DRAW
 void game::start (){
   // run the program as long as the window is open
   while (Window->isOpen()){
@@ -61,21 +55,6 @@ void game::start (){
   }
 }
 
-//TODO: std::string name for scene
-void game::setMainScene(std::string name){
-  switch(name[0]){
-    case 'm': {
-      mainScene = Menu;
-      //this->start();
-    }break;
-
-    case 'g': {
-      mainScene = Gameplay;
-    }break;
-
-    default: {};
-  }
-}
 
 void game::restart(){
   this->~game();

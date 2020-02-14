@@ -1,16 +1,14 @@
 #include "galaxy.hpp"
+#include "utility.hpp"
+#include "planetView.hpp"
 
 //----------CONSTRUCTORS----------
-galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int galaxyLevel, gameplay* actGame) : playground(win), Player(spc), Gameplay(actGame), conquer(false), level(galaxyLevel){
-  planets = {};
-  //Player->getEntity()->SetPosition(sf::Vector2f(300, 300));
+galaxy::galaxy(sf::RenderWindow* win, spaceship* spc, unsigned int galaxyLevel, gameplay* actGame) : playground(win), Player(spc), Gameplay(actGame), conquer(false), level(galaxyLevel), planets(std::list<planetObj*>()){
   playground::addAlly(spc);
-  this->inizializePlanets();
+  this->inizializationPlanets();
 }
 
 galaxy::~galaxy(){
-  std::cout << "DELETING GALAXY" << std::endl;
-
   utility::deleteList(planets);
 
   Player = nullptr;
@@ -19,18 +17,14 @@ galaxy::~galaxy(){
 
 
 //----------GETS----------
-//sf::Texture getTexture(){ return this->background.getTexture();}
-//sf::Sprite getBackground(){ return this->background;}
-
-//----------SETS----------
-//void setTexture(sf::Texture t){ this->background.setTexture(t);}
-//void setBackground(sf::Sprite b){ this->background = b;}
+int galaxy::getLevel (){ return level; }
 
 
 //----------METHODS----------
 bool galaxy::checkPlanetPosition(planetObj* pln){
   bool intersection = true;
 
+  //checkin position for each type of object
   for(auto obj = this->enemies.begin(); obj != this->enemies.end(); obj++)
     if(pln->spawnIntersects(*obj))
       return false;
@@ -47,7 +41,7 @@ bool galaxy::checkPlanetPosition(planetObj* pln){
 }
 
 
-void galaxy::inizializePlanets(){
+void galaxy::inizializationPlanets(){
   sf::Vector2f plgBound = viewer::getDrawable()->getSize() - sf::Vector2f(100, 100);
   planetObj *pln = nullptr;
 
@@ -55,6 +49,7 @@ void galaxy::inizializePlanets(){
     sf::Vector2f position = utility::RandVector(plgBound.x - 20, plgBound.y - 20, 10, (window->getSize().y/10) + 10);
     pln = new planetObj(utility::RandInt(20, 30), position);
 
+    //if the position is OK create the view add to the neutrals else delete it and create another one
     if(this->checkPlanetPosition(pln)){
       pln->setPlanetView(new planetView(window, Player, Gameplay, this, pln));
       planets.push_front(pln);
@@ -68,90 +63,75 @@ void galaxy::inizializePlanets(){
   }
 }
 
-//TODO: Need to delete the object at the end of all the cicles!
-//TODO: consider to delete in a good way the mo'fucking pointers
-int galaxy::getLevel (){ return level; }
+
 void galaxy::checkCollision (){
+  this->endGame = false;                        //necessary because sometimes it changed to true not letting the object being draw
   playground::checkCollision();
 
-  int i = 0;
+  //check the neutrals collision
   for (auto neutral = neutrals.begin(); neutral != neutrals.end(); neutral++){
-    for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++){
-      if(!!*neutral && !!*enemy){
-        if ((*neutral)->intersects(*enemy)){
+
+    for (auto enemy = enemies.begin(); enemy != enemies.end(); enemy++)
+      if(!!*neutral && !!*enemy)
+        if ((*neutral)->intersects(*enemy))
           collision(&neutral, &enemy);
-          std::cout << "COLLISION NEUTRAL in GALAXY!!" << std::endl;
-          std::cout << "Enemies Tho'!!" << std::endl;
-        }
-      }
-    }
 
-    std::cout << "planet num: " << i << std::endl;
-    for (auto ally = allies.begin(); ally != allies.end(); ally++, i++){
-      std::cout << "Class: " << (*ally)->Class() << std::endl;
-      if(!!*neutral && !!*ally){
-        if ((*neutral)->intersects(*ally)){
-
+    for (auto ally = allies.begin(); ally != allies.end(); ally++)
+      if(!!*neutral && !!*ally)
+        if ((*neutral)->intersects(*ally))
           collision(&neutral, &ally);
-          std::cout << "COLLISION NEUTRAL in GALAXY!!" << std::endl;
-          std::cout << " Tho'!!" << std::endl;
-        }
-      }
-    }
+
   }
 }
 
-
+//collision handling of neutral vs ally/enemy
+//it has its own method since the consequences comes only for the ally/enemy
 void galaxy::collision(std::_List_iterator<drawable*>* ntl, std::_List_iterator<drawable*>* obj){
-  std::string allyClass = (**obj)->Class();
-  std::cout << "In Collision" << std::endl;
-
-  switch(allyClass[0]){
-    case 'b': {
+  std::string objectClass = (**obj)->Class();
+  switch(objectClass[0]){
+    case 'b': {                                               //handling bullets case
       bullet *blt = static_cast<bullet*>(**obj);
       shooter *parent = blt->getShooter();
       parent->deleteBullet(blt);
       *obj = allies.erase(*obj);
-
-      /* FEAT: adding spaceship's enemies
-      if(isAlly)
-        *obj = allies.erase(*obj);
-      else
-        *obj = enemies.erase(*obj);
-      */
     }; break;
-    case 's': {
-      Player->deleteBullets();     //delete all the bullets
+
+    case 's': {                                               //handling spaceship case
+      Player->deleteBullets();                                //delete all the bullets
       allies.clear();
 
       allies.push_front(Player);
 
+      //entering in the planets
       planetObj *planet = static_cast<planetObj*> (**ntl);
       Player->setPlayground(planet->getPlanetView());
       Player->SetPosition(information::PLAYER_DEFAULT_POSITION);
-      std::cout << "Does it exists? " << !!(planet->getPlanetView()) << std::endl;
-      if(!!(planet->getPlanetView()))
-        Gameplay->setMainViewer(planet->getPlanetView());
+      Gameplay->setMainViewer(planet->getPlanetView());
 
       *obj = allies.end();
      }; break;
-    default: std::cout << allyClass << "in Allies" << std::endl;
+
+    default: ;
   }
 }
 
 bool galaxy::isConquer() { return conquer; }
+
 void galaxy::delPlanet(planetObj *planet){
   sf::Vector2f position = planet->getEntity()->GetPosition();
   sf::FloatRect bounds = planet->GetLocalBounds();
 
   Player->SetPosition(position - sf::Vector2f(bounds.width/2, bounds.height/2));
 
+  //delete of the conquer planet
   neutrals.remove(static_cast<drawable*>(planet));
   planets.remove(planet);
   delete planet;
   planet = nullptr;
 
-  Gameplay->deathPlanet();
+  Gameplay->deathPlanet();            //adding points to the game
+
+  //go to the next galaxy if conqueerd
   if(planets.size() == 0){
     conquer = true;
     Gameplay->next();

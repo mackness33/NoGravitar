@@ -10,9 +10,7 @@ drawable::drawable(){
 }
 
 //------------DESTRUCTORS------------
-drawable::~drawable(){
-  std::cout << "DELETING DRAWABLE" << std::endl;
-}
+drawable::~drawable() {}
 
 //------------GETS------------
 sf::FloatRect drawable::GetLocalBounds(){ return sf::FloatRect(0, 0, 0, 0); }

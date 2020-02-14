@@ -8,6 +8,8 @@
 #include <exception>
 #include <vector>
 
+//this class is the essence of the every drawable object
+//at first it was created for testing porposes
 template <class T> class essence{
   protected:
     sf::RectangleShape bound;       //FOR TESTING ONLY
@@ -21,12 +23,9 @@ template <class T> class essence{
     essence();
     ~essence();
 
-
     //----------GETS----------
     T* getBody();
     sf::RectangleShape* getBound();
-
-    //----------SETS----------
 
     //----------METHODS------------
     void Draw (sf::RenderWindow* window);

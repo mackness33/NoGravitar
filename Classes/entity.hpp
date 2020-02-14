@@ -5,17 +5,14 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <exception>
-#include <cmath>
-#include <vector>
 #include "essence.hpp"
 
+//this class handle static objects
 template <class T> class entity : public essence<T>{
   protected:
     void setBoundery();
 
   public:
-    //TODO: add all the constructors of sf::Shape sf::Sprite .. etc
     //----------CONSTRUCTORS----------
     entity();
     entity(T* b);

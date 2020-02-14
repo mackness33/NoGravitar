@@ -19,9 +19,6 @@ class bullet : public drawable{
     float direction;
     float totalTime;
 
-  protected:
-    virtual float GetRotation();
-
   public:
     //---------------CONSTRUCTORS---------------
     bullet(shooter *parent, float speed = information::BULLET_DEFAULT_SPEED, float direction = 0, sf::Vector2f position = sf::Vector2f(0, 0), sf::Color color = sf::Color::White);

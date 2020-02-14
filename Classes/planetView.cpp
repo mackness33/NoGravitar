@@ -107,7 +107,6 @@ void planetView::inizializeBunker(){
 //TODO: Need to delete the object at the end of all the cicles!
 //TODO: consider to delete in a good way the mo'fucking pointers
 void planetView::checkCollision (){
-  std::cout << "Enter!! " << !!background << std::endl;
   playground::checkCollision();
   changeViewer = false, restartViewer = false, this->endGame = false;
 
@@ -116,7 +115,6 @@ void planetView::checkCollision (){
       if(!!*ally && !!*enemy){
         if((*ally)->intersects(*enemy)){
           collision(&ally, &enemy);
-          std::cout << "COLLISION!!" << std::endl;
         }
       }
 

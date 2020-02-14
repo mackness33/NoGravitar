@@ -28,17 +28,16 @@ shooter* bullet::getShooter() { return parent; }
 //---------------METHODS---------------
 void bullet::Draw (sf::RenderWindow* window){ body->Draw(window); }
 
+//the use of DELTA_TIME is a way to count time
+//thanks to this method we can let the bullet move in a visible way
 void bullet::Update(){
   totalTime += information::DELTA_TIME;
 
   if(totalTime >= information::SWITCH_TIME){
     totalTime -= information::SWITCH_TIME;
     body->Move(cos(direction) * speed, sin(direction) * speed);
-    sf::Vector2f pos = body->getBody()->getPosition();
   }
 }
-
-float bullet::GetRotation(){ return this->body->getBody()->getRotation(); }
 
 std::string bullet::Class(){
   return "bullet";

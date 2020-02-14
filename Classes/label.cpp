@@ -11,8 +11,6 @@ label::label(std::string f, const std::string &s, sf::Vector2f p){
 }
 
 label::~label(){
-  std::cout << "DELETING LABEL" << std::endl;
-
   if(!!body)
     delete body;
 
@@ -40,14 +38,8 @@ void label::setString (const std::string &s){
 
 
 //---------------METHODS---------------
-
 void label::Draw (sf::RenderWindow* window){
   body->Draw(window);
-}
-
-void label::build(){
-//  body->getBody()->setFillColor(sf::Color::White);
-  //body->getBody()->setSmooth(true);
 }
 
 std::string label::Class(){

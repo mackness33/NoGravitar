@@ -14,12 +14,9 @@ class living{
     //---------------DESTRUCTORS---------------
     ~living();
 
-    //---------------GETS---------------
-    bool isAlive();
-    //---------------SETS---------------
-
     //---------------METHODS---------------
-    void rip();
+    bool isAlive();                           //return true if lifes > 0 otherwise false
+    void rip();                               //losing a life
 
     //return the class of the object
     virtual std::string Class();

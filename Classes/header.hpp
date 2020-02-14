@@ -6,11 +6,13 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+#include "essence.hpp"
+#include "entity.hpp"
 #include "label.hpp"
+#include "fuelLabel.hpp"
+#include "information.hpp"
 #include "points.hpp"
 #include "viewer.hpp"
-#include "information.hpp"
-#include "fuelLabel.hpp"
 
 class viewer;
 

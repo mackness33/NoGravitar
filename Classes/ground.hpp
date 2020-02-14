@@ -1,6 +1,7 @@
 #ifndef GROUND_H
 #define GROUND_H
 
+#include "essence.hpp"
 #include "drawable.hpp"
 #include "information.hpp"
 #include "line.hpp"

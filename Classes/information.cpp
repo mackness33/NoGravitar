@@ -30,10 +30,10 @@ int information::GROUND_MIN_NUM_VERTEX = 5;
 int information::GALAXY_DEFAULT_QUANTITY = 4;
 int information::GALAXY_DEFAULT_PLANETS = 5;
 
-const float information::MAX_GROUND_HEIGHT = 0.4;             //30%
-const float information::MIN_GROUND_HEIGHT = 0.1;             //30%
-std::vector<file<sf::Texture>*> information::images = {};             //30%
-std::vector<file<sf::Font>*> information::fonts = {};             //30%
+const float information::MAX_GROUND_HEIGHT = 0.4;
+const float information::MIN_GROUND_HEIGHT = 0.1;
+std::vector<file<sf::Texture>*> information::images = {};
+std::vector<file<sf::Font>*> information::fonts = {};
 
 //------------METHODS------------
 const void information::inizialize(sf::Vector2u ws){

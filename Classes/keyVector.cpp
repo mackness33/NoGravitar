@@ -1,7 +1,7 @@
 #include "keyVector.hpp"
 
 //----------CONSTRUCTORS----------
-keyVector::keyVector(sf::Keyboard::Key k/*ey*/, bool t/*ransfomation*/){
+keyVector::keyVector(sf::Keyboard::Key k, bool t){
   key = k;
   transformation = t;
 }
@@ -12,9 +12,8 @@ keyVector::keyVector(const keyVector& V){
   transformation = V.transformation;
 }
 
-keyVector::~keyVector(){
-  std::cout << "DELETING KEYVECTOR" << std::endl;
-}
+keyVector::~keyVector(){}
+
 //----------OPERATORS----------
 keyVector& keyVector::operator= (const keyVector& V){
   key = V.key;

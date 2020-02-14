@@ -1,6 +1,7 @@
 #ifndef LABEL_H
 #define LABEL_H
 
+#include "essence.hpp"
 #include "entity.hpp"
 #include "text.hpp"
 #include "drawable.hpp"
@@ -20,7 +21,7 @@ class label : public drawable{
     ~label();
 
     //---------------GETS---------------
-    int getInt();
+    int getInt();                       //return the string as a intager
     std::string getString();
     text* getText();
     sf::Text* getDrawable();
@@ -29,13 +30,11 @@ class label : public drawable{
     sf::FloatRect GetGlobalBounds();
 
     //---------------SETS---------------
+    void setString (const std::string &s);
 
     //---------------METHODS---------------
-    void setString (const std::string &s);
+    //Draw the objects
     void Draw (sf::RenderWindow* window);
-
-    //build all the information of object's body
-    void build();
 
     //return the class of the object
     virtual std::string Class();

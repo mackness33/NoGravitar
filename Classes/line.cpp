@@ -6,35 +6,12 @@ line::line(sf::Vector2f pnt1, sf::Vector2f pnt2){
   b = new sf::Vector2f(pnt2);
 
   this->setup();
-  //std::cout << "coffx: " << width << std::endl;
-  //std::cout << "coffy: " << height << std::endl;
-  //std::cout << "offset: " << offset << std::endl;
-  //std::cout << "Q: " << Q << std::endl;
-  //std::cout << "slope: " << slope << std::endl;
-  //coefficient = new sf::Vector3f(height, width, offset);
-  //coefficients = new sf::Vector2f(slope, Q);
-
-  //int min_ordinate = b->y;
-  //if(a->y < b->y)
-    //min_ordinate = a->y;
-
-
-  //std::cout << "NOT ERROR "  << std::endl;
-
-  //area = new sf::FloatRect(sf::Vector2f(a->x, min_ordinate), sf::Vector2f(width, height));
-
-
 }
 
-line::~line(){
-  std::cout << "DELETING LINE" << std::endl;
-
-  a = nullptr, b = nullptr;
-}
+line::~line(){ a = nullptr, b = nullptr; }
 
 
-//---------------GETS---------------ù
-//TODO:
+//---------------GETS---------------
 float line::getWidth() { return width; }
 long double line::getSlope() { return slope; }
 float line::getHeight() { return height; }
@@ -44,30 +21,13 @@ sf::Vector2f* line::getptrA() { return a; }
 sf::Vector2f* line::getptrB() { return b; }
 
 //---------------SETS---------------
-void line::setA(sf::Vector2f pnt) {
-  *a = pnt;
+void line::setA(sf::Vector2f pnt) { *a = pnt; setup(); }
 
-  setup();
-}
+void line::setB(sf::Vector2f pnt) {*b = pnt; setup(); }
 
-void line::setB(sf::Vector2f pnt) {
-  *b = pnt;
+void line::setptrA(sf::Vector2f* pnt) {a = pnt; setup(); }
 
-  setup();
-}
-
-void line::setptrA(sf::Vector2f* pnt) {
-  a = pnt;
-
-  setup();
-}
-
-void line::setptrB(sf::Vector2f* pnt) {
-  delete b;
-  b = pnt;
-
-  setup();
-}
+void line::setptrB(sf::Vector2f* pnt) { delete b; b = pnt; setup(); }
 
 
 
@@ -80,8 +40,6 @@ void line::setup(){
     slope =  h / w;
   else
     slope = -999999999999999999;
-  //float offset = (a->y - a->x) * slope;
-  //float Q = a->y - (a->x * slope);
 
   height = abs(h);
   width = abs(w);
@@ -145,15 +103,6 @@ bool line::doIntersect(line* l){
   if (orn4 == 0 && onSegment(p, *b, q)) return true;
 
   return false; // Doesn't fall in any of the above cases
-}
-
-sf::Vector2f line::intersection(line l){
-  sf::Vector2f c = l.getA(), d = l.getB();
-
-  float x = ((a->x*b->y - a->y*b->x) * (c.x-d.x) - (a->x-b->x) * (c.x*d.y - c.y*d.x)) / ((a->x-b->x) * (c.y-d.y) - (a->y-b->y) * (c.x-d.x));
-  float y = ((a->x*b->y - a->y*b->x) * (c.y-d.y) - (a->y-b->y) * (c.x*d.y - c.y*d.x)) / ((a->x-b->x) * (c.y-d.y) - (a->y-b->y) * (c.x-d.x));
-
-  return sf::Vector2f(x, y);
 }
 
 

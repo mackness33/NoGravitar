@@ -43,18 +43,14 @@ class line{
     void setB(sf::Vector2f pnt);
     void setptrA(sf::Vector2f* pnt);
     void setptrB(sf::Vector2f* pnt);
-    //void getWidth();
 
     //---------------METHODS---------------
     void swap();
 
-    //return the class of the object
-    //sf::Vector2f intersect(line Line);
-    //bool intersect(sf::Vector2f point);
+    //these three methods have been copy from the site:
     bool doIntersect(line* Line);
     bool onSegment(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);
     int orientation(sf::Vector2f p, sf::Vector2f q, sf::Vector2f r);
-    sf::Vector2f intersection(line l);
 
     virtual std::string Class();
 };

@@ -8,7 +8,6 @@ template <typename T> const void information::loadFiles(std::string path, std::v
     temp->object = new T();
     temp->name = information::filenameFromPath(entry.path());
 
-    std::cout << temp->name << std::endl;
     if (temp->object->loadFromFile(entry.path()))
       array.push_back(temp);
 

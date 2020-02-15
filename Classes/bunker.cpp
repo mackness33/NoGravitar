@@ -34,7 +34,7 @@ sf::FloatRect bunker::GetGlobalBounds() { return body->getBody()->getGlobalBound
 
 //----------METHODS----------
 void bunker::Draw (sf::RenderWindow* window){
-  body->DrawTest(window);
+  body->Draw(window);
 }
 
 //delta and switch time help to calculate the time between the shootes

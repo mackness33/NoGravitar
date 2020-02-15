@@ -1,45 +1,44 @@
 # Gravitar
-Prova2
-=======
+The game is a replication of the game Gravitar fo Atari but without gravity.
 
-# How to use MarkDown
+## Installation
+First install the framework SFML if you don't have it already
+> sudo apt-get install libsfml-dev
 
-Heading
-=======
+Than Download the zip file and uncompress it.
+Then go inside of the directory.
+To compile the game write
+> make all
 
-## Sub-heading
-
-Paragraphs are separated
-by a blank line.
-
-Two spaces at the end of a line  
-produces a line break.
-
-Text attributes _italic_,
-**bold**, `monospace`.
-
-Horizontal rule:
+Then you can play the game by
+>./NoGravitar
 
 ---
 
-Bullet list:
+## Commands
+Keys:
+  * Arrow Right: clockwise rotation
+  * Arrow Left: counterclockwise rotation
+  * Arrow Up: go forward
+  * Arrow Down: go backward
+  * Space : shoot
+  * Z : activate Tractor Beam
+  * Q : quit the game
 
-  * apples
-  * oranges
-  * pears
+## Points
+  1.  Hit a Bunker: 250 points
+  2.  Conquer a Planet: 2000 points
 
-Numbered list:
+## Fuel
+  1. Red: 300 units
+  2. Red and Yellow: 600 units
 
-  1. wash
-  2. rinse
-  3. repeat
+## Notes
+Once you press start you can't go back to the menu. To do so you need to quit the game and the restart it.
 
-A [link][example].
+---
 
-  [example]: http://example.com
-
-![Image](Icon-pictures.png "icon")
-
-> Markdown uses email-style > characters for blockquoting.
-
-Inline <abbr title="Hypertext Markup Language">HTML</abbr> is supported.
+Software done by:
+NAME SURNAME: David Mack
+MATRICOLA: 0000881062
+EMAIL: david.mack@studio.unibo.it

@@ -38,6 +38,6 @@ sf::FloatRect fuel::GetGlobalBounds() { return body->getBody()->getGlobalBounds(
 int fuel::getValue() { return value; }
 
 //---------------METHODS---------------
-void fuel::Draw (sf::RenderWindow* window){ body->DrawTest(window); }
+void fuel::Draw (sf::RenderWindow* window){ body->Draw(window); }
 
 std::string fuel::Class(){ return "fuel"; }
